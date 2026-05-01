@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "education_agents"
+version = "0.0.1"
+description = "Diagnostic assessment copilot: facet-aligned MC item generation and verification."
+requires-python = ">=3.11"
+dependencies = [
+    "litellm>=1.50",
+    "pydantic>=2.7",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
