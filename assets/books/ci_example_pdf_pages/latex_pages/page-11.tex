@@ -1,0 +1,56 @@
+and, if this is not an integer, we round up to the next integer.
+
+A similar derivation for calculation of sample size for estimation of the population mean $\mu$ at level $(1 - \alpha)$ with margin of error $E$ is given by:
+\[
+n = \frac{z_{\alpha/2}^2 \sigma^2}{E^2}
+\]
+and, if this is not an integer, rounding up to the next integer. This formula can be used only if we know the population standard deviation, $\sigma$. Although it is unlikely we will know $\sigma$ when the population mean itself is not known, we may be able to determine $\sigma$ from an earlier similar study or from a pilot study/simulation.
+
+\begin{center}\rule{\linewidth}{0.4pt}\end{center}
+
+\noindent\textbf{EXAMPLE 5.5.5}
+
+A dendritic tree is a branched formation that originates from a nerve cell. To study brain development, researchers want to examine the brain tissues from adult guinea pigs. How many cells must the researchers select (randomly) so as to be 95\% sure that the sample mean is within 3.4 cells of the population mean? Assume that a previous study has shown $\sigma = 10$ cells.
+
+\noindent\textit{Solution}
+
+A 95\% confidence corresponds to $\alpha = 0.05$. Thus, from the normal table, $z_{\alpha/2} = z_{0.025} = 1.96$. Given that $E = 3.4$ and $\sigma = 10$, and using the sample size formula, the required sample size is
+\[
+n = \frac{z_{\alpha/2}^2 \sigma^2}{E^2} = \frac{(1.96)^2 (10)^2}{(3.4)^2} = 33.232.
+\]
+
+Thus, take $n = 34$.
+
+\begin{center}\rule{\linewidth}{0.4pt}\end{center}
+
+\noindent\textbf{EXAMPLE 5.5.6}
+
+Suppose that a local TV station in a city wants to conduct a survey to estimate support for the president's policies on the economy within 3\% error with 95\% confidence.
+\begin{enumerate}
+    \item[(a)] How many people should the station survey if they have no information on the support level?
+    \item[(b)] Suppose they know an initial estimate that 70\% of the people in the city support the economic policies of the president. How many people should the station survey?
+\end{enumerate}
+
+\noindent\textit{Solution}
+
+Here $\alpha = 0.05$, and thus $z_{\alpha/2} = 1.96$. Also, $d = 0.03$.
+\begin{enumerate}
+    \item[(a)] With no information on $p$, we use the sample size formula:
+    \[
+    n = \frac{z_{\alpha/2}^2}{4d^2} = \frac{(1.96)^2}{4(0.03)^2} = 1067.1.
+    \]
+    Hence, the TV station must survey 1068 people.
+    \item[(b)] Because $\hat{p} = 0.7$: the required sample size is calculated from:
+    \[
+    n = \frac{z_{\alpha/2}^2 \hat{p}(1 - \hat{p})}{d^2}
+    \]
+    \[
+    = \frac{(1.96)^2 (0.70)(0.30)}{(0.03)^2} = 896.37.
+    \]
+\end{enumerate}
+
+Thus, the TV station must survey at least 897 people.
+
+\begin{center}\rule{\linewidth}{0.4pt}\end{center}
+
+In practice, we should realize that one of the key factors of a good design is not sample size by itself; it is getting representative samples. Even if we have a very large sample size, if the sample is not representative of our target

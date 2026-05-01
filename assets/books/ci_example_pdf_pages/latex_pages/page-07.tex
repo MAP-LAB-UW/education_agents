@@ -1,0 +1,56 @@
+\begin{enumerate}
+    \item[\textbf{(b)}] Suppose that the number of raisins in a bowl of a particular brand of cereal is observed to be 25. Assuming that the number of raisins in a bowl is Poisson distributed, estimate the expected number of raisins per bowl with a 90\% CI.
+    \item[\textbf{(c)}] How many bowls of cereal need to be sampled to estimate the expected number of raisins per bowl with a standard error of less than 0.2?
+\end{enumerate}
+
+\begin{itemize}
+    \item[\textbf{5.4.9.}] Let $X_1, \ldots, X_n$ be a random sample from an $N(\mu, \sigma^2)$.
+    \begin{itemize}
+        \item[\textbf{(a)}] Construct a $(1 - \alpha)100\%$ CI for $\mu$ when the value of $\sigma^2$ is known.
+        \item[\textbf{(b)}] Construct a $(1 - \alpha)100\%$ CI for $\mu$ when the value of $\sigma^2$ is unknown.
+    \end{itemize}
+    \item[\textbf{5.4.10.}] Let $X_1, \ldots, X_n$ be a random sample from an $N(\mu_1, \sigma^2)$ population and $Y_1, \ldots, Y_m$ be an independent random sample from an $N(\mu_2, \sigma^2)$ population where $\sigma^2$ is assumed to be known. Construct a $(1 - \alpha)100\%$ CI based on $(\mu_1 - \mu_2)$. Interpret its meaning.
+    \item[\textbf{5.4.11.}] Let $X_1, \ldots, X_n$ be a random sample from a uniform distribution on $[\theta, \theta + 1]$. Find a 99\% CI for $\theta$, using an appropriate pivot.
+\end{itemize}
+
+\section{One-sample confidence intervals}
+
+In this section, we will find CIs for the one-sample case for both large- and small-sample situations.
+
+\subsection{Large-sample confidence intervals}
+
+If the sample size is large, then by the CLT, certain sampling distributions can be assumed to be approximately normal. That is, if $\theta$ is an unknown parameter (such as $\mu$, $p$, $\mu_1 - \mu_2$, $p_1 - p_2$), then for large samples, by the CLT, the $z$-transform:
+\[
+z = \frac{\widehat{\theta} - \theta}{\sigma_{\widehat{\theta}}}
+\]
+possesses an approximately standard normal distribution, where $\widehat{\theta}$ is the MLE of $\theta$ and $\sigma_{\widehat{\theta}}$ is its standard deviation. Then as in Example 5.4.1, the pivotal method can be used to obtain the CI for the parameter $\theta$. For $\theta = \mu$, $n \geq 30$ will be considered large; for the binomial parameter $p$, $n$ is considered large if $np$ and $n(1 - p)$ are both greater than 5. Note that these numbers are only a rule of thumb.
+
+\begin{center}
+\fbox{\begin{minipage}{0.92\textwidth}
+\textbf{Procedure to calculate large-sample confidence interval for $\theta$}
+\begin{enumerate}
+    \item Find an estimator (such as the MLE) of $\theta$, say $\widehat{\theta}$.
+    \item Obtain the standard error, $\sigma_{\widehat{\theta}}$ of $\widehat{\theta}$.
+    \item Find the $z$-transform $z = \left(\widehat{\theta} - \theta\right)/\sigma_{\widehat{\theta}}$. Then $z$ has an approximately standard normal distribution.
+    \item Using the normal table, find two tail values $-z_{\alpha/2}$ and $z_{\alpha/2}$.
+    \item An approximate $(1 - \alpha)100\%$ CI for $\theta$ is $\left(\widehat{\theta} - z_{\alpha/2}\sigma_{\widehat{\theta}}, \, \widehat{\theta} + z_{\alpha/2}\sigma_{\widehat{\theta}}\right)$, that is,
+    \[
+    P\left(\widehat{\theta} - z_{\alpha/2}\sigma_{\widehat{\theta}} \leq \theta \leq \widehat{\theta} + z_{\alpha/2}\sigma_{\widehat{\theta}}\right) = 1 - \alpha.
+    \]
+    \item \textbf{Conclusion:} We are $(1 - \alpha)100\%$ confident that the true parameter $\theta$ lies in the interval $\left(\widehat{\theta} - z_{\alpha/2}\sigma_{\widehat{\theta}}, \, \widehat{\theta} + z_{\alpha/2}\sigma_{\widehat{\theta}}\right)$.
+\end{enumerate}
+\end{minipage}}
+\end{center}
+
+\medskip
+
+\noindent\textbf{EXAMPLE 5.5.1}
+
+Let $\widehat{\theta}$ be a statistic that is \textit{normally} distributed with mean $\theta$ and standard deviation $\sigma_{\widehat{\theta}}$, where $\sigma$ is assumed to be known. Find a CI for $\theta$ that possesses a confidence coefficient equal to $1 - \alpha$.
+
+\noindent\textbf{Solution}
+
+\textit{The $z$-transform of $\widehat{\theta}$ is:}
+\[
+Z = \frac{\widehat{\theta} - \theta}{\sigma_{\widehat{\theta}}}
+\]

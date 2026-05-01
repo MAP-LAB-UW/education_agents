@@ -1,0 +1,92 @@
+{
+  "figures": [
+    {
+      "label": "5.5",
+      "page": 4,
+      "caption": "FIGURE 5.5\nProbability density of the pivot.",
+      "bbox": [
+        222.81199645996094,
+        514.8790283203125,
+        386.91363525390625,
+        663.8963012695312
+      ],
+      "image": "pdf_pages/figures/fig_5_5.png",
+      "captioned": true
+    },
+    {
+      "label": "page5_fig1",
+      "page": 5,
+      "caption": "",
+      "bbox": [
+        222.75599670410156,
+        283.75787353515625,
+        386.2560119628906,
+        402.1180114746094
+      ],
+      "image": "pdf_pages/figures/fig_page5_fig1.png",
+      "captioned": false
+    },
+    {
+      "label": "page12_fig1",
+      "page": 12,
+      "caption": "",
+      "bbox": [
+        55.79499816894531,
+        374.2400207519531,
+        553.93701171875,
+        492.4820251464844
+      ],
+      "image": "pdf_pages/figures/fig_page12_fig1.png",
+      "captioned": false
+    },
+    {
+      "label": "page13_fig1",
+      "page": 13,
+      "caption": "",
+      "bbox": [
+        188.28201293945312,
+        548.1240234375,
+        400.0710144042969,
+        699.9230346679688
+      ],
+      "image": "pdf_pages/figures/fig_page13_fig1.png",
+      "captioned": false
+    },
+    {
+      "label": "5.6",
+      "page": 19,
+      "caption": "FIGURE 5.6\nChi-square density with equal area on both sides of the con\ufb01dence interval.",
+      "bbox": [
+        154.27099609375,
+        489.9210205078125,
+        460.03985595703125,
+        626.3082885742188
+      ],
+      "image": "pdf_pages/figures/fig_5_6.png",
+      "captioned": true
+    }
+  ],
+  "references": {
+    "5.4": [
+      "page-03.tex",
+      "page-04.tex"
+    ],
+    "5.5": [
+      "page-04.tex"
+    ]
+  },
+  "matched": [
+    "5.5"
+  ],
+  "figures_without_refs": [
+    "5.6"
+  ],
+  "refs_without_figures": [
+    "5.4"
+  ],
+  "uncaptioned_clusters": [
+    "page5_fig1",
+    "page12_fig1",
+    "page13_fig1"
+  ]
+}

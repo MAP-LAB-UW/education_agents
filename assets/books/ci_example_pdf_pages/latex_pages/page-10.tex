@@ -1,0 +1,42 @@
+\subsubsection*{5.5.2.1 Margin of error and sample size}
+
+In real-world problems, the estimates of the proportion $p$ are usually accompanied by a margin of error, rather than a CI. For example, in the news media, especially leading up to election time, we hear statements such as ``The CNN/USA Today/Gallup poll of 818 registered voters taken on June 27--30 showed that if the election were held now, the president would beat his challenger 52\% to 40\%, with 8\% undecided. The poll had a margin of error of plus or minus 4 percentage points.'' What is this ``margin of error''? According to the American Statistical Association, the margin of error is a common summary of sampling error that quantifies uncertainty about a survey result. Thus, the margin of error is nothing but a CI. The number quoted in the foregoing statement is half the maximum width of a 95\% CI, expressed as a percentage.
+
+Let $b$ be the width of a 95\% CI for the true proportion, $p$. Let $\hat{p} = x/n$ be an estimate for $p$ where $x$ is the number of successes in $n$ trials. Then,
+\[
+b = \frac{x}{n} + 1.96\sqrt{\frac{(x/n)(1-(x/n))}{n}} - \left(\frac{x}{n} - 1.96\sqrt{\frac{(x/n)(1-(x/n))}{n}}\right)
+\]
+\[
+= 3.92\sqrt{\frac{(x/n)(1-(x/n))}{n}} \leq 3.92\sqrt{\frac{1}{4n}},
+\]
+because $(x/n)(1-(x/n)) = \hat{p}(1-\hat{p}) \leq \frac{1}{4}$.
+
+Thus, the margin of error associated with $\hat{p} = (x/n)$ is 100$d$\%, where:
+\[
+d = \frac{\max b}{2} = \frac{3.92\sqrt{\frac{1}{4n}}}{2} = \frac{1.96}{2\sqrt{n}}.
+\]
+
+From the foregoing derivation, it is clear that we can compute the margin of error for other values of $\alpha$ by replacing 1.96 with the corresponding value of $z_{\alpha/2}$.
+
+A quick look at the formula for the CI for proportions reveals that a larger sample would yield a shorter interval (assuming other things being equal) and hence, a more precise estimate of $p$. The larger sample is costlier in terms of time, resources, and money, whereas samples that are too small may result in inaccurate inferences. Then, it becomes beneficial for finding out the minimum sample size required (thus less costly) to achieve a prescribed degree of precision (usually, the minimum degree of precision acceptable). We have seen that the large-sample $(1-\alpha)100\%$ CI for $p$ is:
+\[
+\hat{p} - z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} < p < \hat{p} + z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.
+\]
+
+Rewriting it, we have:
+\[
+|\hat{p} - p| \leq z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} = \frac{z_{\alpha/2}}{\sqrt{n}}\sqrt{\hat{p}(1-\hat{p})},
+\]
+which shows that, with probability $(1-\alpha)$, the estimate $\hat{p}$ is within $z_{\alpha/2}\sqrt{\hat{p}(1-\hat{p})/n}$ units of $p$. Because $\hat{p}(1-\hat{p}) \leq 1/4$, for all values of $\hat{p}$, we can write the foregoing inequality as:
+\[
+|\hat{p} - p| \leq \frac{z_{\alpha/2}}{\sqrt{n}}\sqrt{\frac{1}{4}} = \frac{z_{\alpha/2}}{2\sqrt{n}}.
+\]
+
+If we wish to estimate $p$ at level $(1-\alpha)$ to within $d$ units of its true value, that is $|\hat{p} - p| \leq d$, the sample size must satisfy the condition $(z_{\alpha/2}/(2\sqrt{n})) \leq d$, or
+\[
+n \geq \frac{z_{\alpha/2}^2}{4d^2}.
+\]
+
+Thus, to estimate $p$ at level $(1-\alpha)$ to within $d$ units of its true value, take the minimal sample size as $n = z_{\alpha/2}^2/(4d^2)$, and if this is not an integer, round up to the next integer.
+
+Sometimes, we may have an initial estimate $\hat{p}$ of the parameter $p$ from a similar process or from a pilot study or simulation. In this case, we can use the following formula to compute the minimum required size of the sample to estimate $p$, at level $(1-\alpha)$, to within $d$ units:

@@ -1,0 +1,61 @@
+\[
+\left(\bar{x} - t_{\alpha/2,v} \frac{s}{\sqrt{n}} + t_{\alpha/2,v} \frac{s}{\sqrt{n}}\right)
+\]
+\[
+= \left(5.883 - 2.571 \left(\frac{1.959}{\sqrt{6}}\right), 5.883 + 2.571 \left(\frac{1.959}{\sqrt{6}}\right)\right)
+\]
+\[
+= (3.827, 7.939).
+\]
+
+\textit{This can be interpreted as that we are 95\% confident that the true mean $\mu$ will be between 3.827 and 7.939.}
+
+\vspace{1em}
+\hrule
+\vspace{0.5em}
+
+\textbf{EXAMPLE 5.5.8}
+
+The scores of a random sample of 16 people who took the TOEFL (Test of English as a Foreign Language) had a mean of 540 and a standard deviation of 50. Construct a 95\% CI for the population mean $\mu$ of the TOEFL score, assuming that the scores are normally distributed.
+
+\textbf{Solution}
+
+\textit{Because $n = 16$ is small, using Theorem 5.5.1 with degrees of freedom 15, a 95\% CI for $\mu$ is:}
+\[
+\bar{x} \pm t_{0.025, 15} \frac{s}{\sqrt{n}} = 540 \pm 2.131 \left(\frac{50}{\sqrt{16}}\right).
+\]
+
+\textit{So the 95\% CI for the population mean $\mu$ of the TOEFL scores is (513.36, 566.64).}
+
+\vspace{1em}
+
+A Dobson unit is the most basic measure used in ozone research. The unit is named after G.M.B. Dobson, one of the first scientists to investigate atmospheric ozone (between 1920 and 1960). He designed the Dobson spectrometer, the standard instrument used to measure ozone from the ground. The data in Example 5.5.9 represent the total ozone levels at randomly selected points on the Earth (represented by the pair (latitude, longitude)) on a particular day.
+
+\vspace{1em}
+
+\textbf{EXAMPLE 5.5.9}
+
+The following data represent the total ozone levels measured in Dobson units at randomly selected locations on the Earth on a particular day:
+
+\begin{center}
+\begin{tabular}{cccccc}
+269 & 286 & 354 & 256 & 303 \\
+295 & 259 & 274 & 249 & 273 & 254 \\
+\end{tabular}
+\end{center}
+
+Can we say that the data are approximately normally distributed? Construct a 95\% CI for the population mean $\mu$ of ozone levels on this day.
+
+\textbf{Solution}
+
+\textit{The following is the probability plot of these data created using Minitab.}
+
+\begin{center}
+\fbox{\parbox{0.8\textwidth}{\centering
+\textbf{Normal probability plot for ozone data}\\[0.5em]
+\textit{[Probability plot showing percent on y-axis (logarithmic scale from 1 to 99) versus data values on x-axis (ranging from approximately 200 to 400). Data points are plotted along a fitted line with 95\% confidence bands shown as dashed curves on either side.]}\\[0.5em]
+ML Estimates\\
+Mean: 280.667\\
+StDev: 32.0086
+}}
+\end{center}

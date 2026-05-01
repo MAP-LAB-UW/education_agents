@@ -1,0 +1,32 @@
+\section*{Statistical estimation}
+
+A statement of the type $P(\bar{x} - (1.96/\sqrt{n}) \leq \mu \leq \bar{x} + (1.96/\sqrt{n})) = 0.95$, where $\bar{x}$ is the observed sample mean, is misleading. Once we calculate this interval using a particular sample, then either this interval contains the true mean $\mu$ or not, and hence, the probability will be either 0 or 1. Thus, the correct interpretation of CI for the population mean is that if samples of the same size, $n$, are drawn repeatedly from a population, and a CI is calculated from each sample, then 95\% of these intervals should contain the population mean. This is often stated as ``We are 95\% confident that the true mean is in the interval $(\bar{X} - z_{\alpha/2}(\sigma/\sqrt{n}),\ \bar{X} + z_{\alpha/2}(\sigma/\sqrt{n}))$.'' This concept of CI is attributed to Neyman.
+
+We can follow the accompanying procedure to find a CI for the parameter $\theta$.
+
+\begin{figure}[h]
+\centering
+\fbox{\parbox{0.8\textwidth}{\centering \textit{[Histogram/density plot showing the 95\% confidence intervals for $\mu$]}}}
+\caption*{\textbf{FIGURE 5.4} The 95\% confidence intervals for $\mu$.}
+\end{figure}
+
+\begin{tcolorbox}[title=\textbf{Procedure to find a confidence interval for $\theta$ using the pivot}]
+\begin{enumerate}
+    \item Find an estimator $\hat{\theta}$ of $\theta$, usually the MLE of $\theta$ works.
+    \item Find a function of $\theta$ and $\hat{\theta}$, $p(\theta, \hat{\theta})$ (pivot), such that the probability distribution of $p(\theta, \hat{\theta})$ does not depend on $\theta$.
+    \item Find $a$ and $b$ such that $P\!\left(a \leq p(\theta, \hat{\theta}) \leq b\right) = 1 - \alpha$. Choose $a$ and $b$ such that $P\!\left(p(\theta, \hat{\theta}) \leq a\right) = \alpha/2$ and
+    \begin{equation*}
+        P\!\left(p(\theta, \hat{\theta}) \geq b\right) = \alpha/2
+    \end{equation*}
+    (see Fig.~5.5) where the shaded area in each side is $\alpha/2$.
+    \item Now, transform the pivot CI to a CI for the parameter $\theta$. That is, work with the inequality in step 3 and rewrite it as $P(L \leq \theta \leq U) = 1 - \alpha$, where $L$ is the lower confidence limit and $U$ is the upper confidence limit.
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{figure}[h]
+\centering
+\fbox{\parbox{0.6\textwidth}{\centering \textit{[Bell-shaped probability density curve of the pivot with shaded tails]}}}
+\caption*{\textbf{FIGURE 5.5} Probability density of the pivot.}
+\end{figure}
+
+The following example is given to show that the success of finding a pivotal quantity depends on our ability to find the right transformation of the statistic and its distribution so that the transformed variable is a pivot.

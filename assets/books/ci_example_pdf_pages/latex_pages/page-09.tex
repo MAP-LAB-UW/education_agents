@@ -1,0 +1,49 @@
+\textbf{EXAMPLE 5.5.3}
+
+Fifteen vehicles were observed at random for their speeds in mph) on a highway with speed limit posted as 70 mph, and it was found that their average speed was 73.3 mph. Suppose that from past experience we can assume that vehicle speeds are normally distributed with $\sigma = 3.2$. Construct a 95\% CI for the true mean speed $\mu$, of the vehicles on this highway. Interpret the result.
+
+\textbf{Solution}
+
+Because the population is given to be normal with standard deviation $\sigma = 3.2$, sample-size need not be large, given $\bar{x} = 73.3$ and $n = 3.2$. Here, $n = 15$, and $\alpha = 0.10$. Thus, $z_{\alpha/2} = z_{0.025} = 1.645$. Hence, a 90\% CI for $\mu$ is given by:
+
+\[
+73.3 - 1.645 \frac{3.2}{\sqrt{15}} < \mu < 73.3 + 1.645 \frac{3.2}{\sqrt{15}}
+\]
+
+or
+
+\[
+71.681 < \mu < 74.919.
+\]
+
+\textit{Interpretation: We are 90\% confident that the true mean speed $\mu$ of the vehicles on this highway is between 71.681 and 74.919 mph.}
+
+\section*{5.5.2 Confidence interval for proportion, \textit{p}}
+
+Consider a binomial distribution with parameter $p$. Let $X$ be the number of successes in $n$ trials. Then the MLE $\hat{p}$ of $p$ is $\hat{p} = X/n$. It can be shown, using the procedure outlined at the beginning of this section, that an approximate large-sample $(1-\alpha)100\%$ CI for $p$ is:
+
+\[
+\left( \hat{p} - z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}, \hat{p} + z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \right).
+\]
+
+That is,
+
+\[
+P\left( \hat{p} - z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} < p < \hat{p} + z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \right) = 1 - \alpha.
+\]
+
+A natural question is, ``How do we determine that the sample size we have is sufficient for the normal approximation that is used in the foregoing formula?'' There are various rules of thumb that are used to determine the adequacy of the sample size for normal approximation. Some of the popular rules are that $np$ and $n(1-p)$ should be greater than 10, or that $\hat{p} \pm 2\sqrt{\hat{p}(1-\hat{p})/n}$ should be contained in the interval $(0,1)$, or $np(1-p) \geq 10$, etc. All of these rules perform poorly when $p$ is nearer to 0 or 1. There have been many works on coverage analysis for CIs. We refer to a paper by Lee et al., for more details on this topic. For simplicity of calculations, we will use the rule that $np$ and $n(1-p)$ are both greater than 5.
+
+\textbf{EXAMPLE 5.5.4}
+
+An auto manufacturer gives a bumper-to-bumper warranty for 3 years or 36,000 miles for its new vehicles. In a random sample of 60 of its vehicles, 20 of them needed five or more major warranty repairs within the warranty period. Estimate the true proportion of vehicles from this manufacturer that need five or more major repairs during the warranty period, with confidence coefficient 0.95. Interpret.
+
+\textbf{Solution}
+
+\textit{Here we need to find a 95\% CI for the true proportion, p. Here, $\hat{p} = 20/60 = 1/3$. For $\alpha = 0.05$, $z_{\alpha/2} = z_{0.025} = 1.96$. Hence, a 95\% CI for p is:}
+
+\[
+\hat{p} \pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} = \frac{1}{3} \pm 1.96 \sqrt{\frac{\left(\frac{1}{3}\right)\left(\frac{2}{3}\right)}{60}}
+\]
+
+\textit{which gives the CI as (0.21405, 0.45262). That is, we are 95\% confident that the true proportion of vehicles from this manufacturer that need five or more major repairs during the warranty period will lie in the interval (0.21405, 0.45262).}

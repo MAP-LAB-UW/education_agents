@@ -1,0 +1,58 @@
+\textbf{EXAMPLE 5.4.3}
+
+Suppose the random sample $X_1, \ldots, X_n$ has $U(0, \theta)$ distribution. Construct a 90\% CI for $\theta$ and interpret. Identify the upper and lower confidence limits.
+
+\textbf{Solution}
+
+\textit{From Example 5.3.4, we know that:}
+\[
+U = \max_{1 \leq i \leq n} X_i
+\]
+\textit{is the MLE of $\theta$. The random variable $U$ has the pdf:}
+\[
+f_U(u) = nu^{n-1}/\theta^n, \quad 0 \leq u \leq \theta.
+\]
+
+\quad \textit{This is not independent of the parameter $\theta$. Let $Y = U/\theta$, then (using the Jacobians described in Chapter 3) the pdf of $Y$ is given by:}
+\[
+f_Y(y) = ny^{n-1}, \quad 0 \leq y \leq 1.
+\]
+
+\quad \textit{Hence, $Y$ satisfies the two characteristics of the pivotal quantity. Thus, $Y = U/\theta$ is a pivot. Now, we have to find $a$ and $b$ such that:}
+\[
+p\!\left(a \leq \frac{U}{\theta} \leq b\right) = 0.90.
+\]
+
+\begin{center}
+\textit{[Plot: Pdf of $Y$ on $[0,1]$ with shaded tails of area 0.05 each]}
+\end{center}
+
+\quad \textit{To find $a$ and $b$ we use the cdf of $Y$, $F_Y(y) = y^n$, $0 \leq y \leq 1$, as follows:}
+
+\begin{center}
+\textit{[Plot: Cdf $F_Y(y) = y^n$ with horizontal lines at 0.05 and 0.95 indicating $a$ and $b$]}
+\end{center}
+
+\[
+F_Y(a) = 0.05 \quad \text{and} \quad F_Y(b) = 0.95,
+\]
+
+\textit{which implies that:}
+\[
+a^n = 0.05 \quad \text{and} \quad b^n = 0.95
+\]
+
+\textit{resulting in:}
+\[
+a = \sqrt[n]{0.05} \quad \text{and} \quad b = \sqrt[n]{0.95}.
+\]
+
+\quad Write:
+\[
+P\!\left(\sqrt[n]{0.05} < \frac{U}{\theta} < \sqrt[n]{0.95}\right) = 0.90.
+\]
+
+\textit{Solving, the 90\% CI for $\theta$ is:}
+\[
+\left(\frac{U}{\sqrt[n]{0.95}}, \frac{U}{\sqrt[n]{0.05}}\right)
+\]

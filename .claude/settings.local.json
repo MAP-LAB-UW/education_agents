@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x /gscratch/argon/kahuja/work/repos/slop-analysis/scripts/run_appraisal_annotate.sh)",
+      "WebFetch(domain:ai.google.dev)",
+      "WebFetch(domain:platform.openai.com)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:cookbook.openai.com)",
+      "WebFetch(domain:developers.openai.com)",
+      "Bash(chmod +x /mmfs1/gscratch/argon/kahuja/work/repos/slop-analysis/scripts/run_appraisal_pvr.sh)",
+      "Bash(ls -lh /mmfs1/gscratch/argon/kahuja/work/repos/slop-analysis/outputs/appraisal/eval/*.json)",
+      "Bash(python3 -m json.tool)",
+      "Bash(ls /mmfs1/gscratch/argon/kahuja/work/repos/slop-analysis/outputs/appraisal/*.jsonl)",
+      "Bash(python3 -c \"import json,sys; d=json.loads\\(sys.stdin.readline\\(\\)\\); print\\(json.dumps\\({k:d[k] for k in [''''excerpt_index'''']}, indent=2\\)\\); a=d[''''appraisal_annotations''''][0]; print\\(''''annotator_id:'''', a[''''annotator_id'''']\\); print\\(''''n_attitudes:'''', len\\(a[''''attitudes'''']\\)\\); print\\(''''first_attitude:'''', json.dumps\\(a[''''attitudes''''][0], indent=2\\)\\)\")",
+      "Bash(python3 -c \":*)",
+      "Bash(conda run:*)"
+    ]
+  }
+}

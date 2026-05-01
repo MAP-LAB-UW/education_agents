@@ -1,0 +1,49 @@
+\subsection{Small-sample confidence intervals for $\mu$}
+
+Now we will consider the problem of finding a CI for the true mean $\mu$ of a normal population when the variance $\sigma^2$ is unknown and obtaining a large sample is either impossible or impractical. Let $X_1, \ldots, X_n$ be a random sample from a normal population. We know that:
+\[
+T = \frac{\dfrac{\sqrt{n}\,(\overline{X} - \mu)}{\sigma}}{\sqrt{(n-1)S^2/[\sigma^2(n-1)]}} = \frac{\overline{X} - \mu}{S/\sqrt{n}}
+\]
+
+has a $t$ distribution with $(n-1)$ degrees of freedom, irrespective of the value of $\sigma^2$. Thus, $(\overline{X} - \mu)/(S/\sqrt{n})$ can be used as a pivot. Hence, for a small ($n < 30$) and $\sigma^2$ unknown, we have the following result.
+
+\begin{theorem}[5.5.1]
+If $\overline{X}$ and $S$ are the sample mean and the sample standard deviation of a random sample of size $n$ from a normal population, then
+\[
+\overline{X} - t_{\alpha/2,n-1}\,\frac{S}{\sqrt{n}} < \mu < \overline{X} + t_{\alpha/2,n-1}\,\frac{S}{\sqrt{n}}
+\]
+is a $(1 - \alpha)100\%$ CI for the population mean $\mu$.
+\end{theorem}
+
+Note that if the confidence coefficient, $1 - \alpha$, and $\overline{X}$ and $S$ remain the same, the confidence range $CR = \hat{\theta}_U - \hat{\theta}_L$ decreases as the sample size $n$ increases, which means that we are closing in on the true parameter value of $\theta$.
+
+One can use the following procedure to find the CI for the mean when a small sample is from an approximately normal distribution.
+
+\begin{tcolorbox}[title=Procedure to find small-sample confidence interval for $\mu$]
+\begin{enumerate}
+    \item Calculate the values of $\overline{X}$ and $S$ from the sample $X_1, \ldots, X_n$.
+    \item Using the $t$ table, select two tail values, $-t_{\alpha/2}$ and $t_{\alpha/2}$.
+    \item The $(1 - \alpha)100\%$ CI for $\mu$ is:
+    \[
+    \left( \overline{X} - t_{\alpha/2,n-1}\,\frac{S}{\sqrt{n}},\ \overline{X} + t_{\alpha/2,n-1}\,\frac{S}{\sqrt{n}} \right)
+    \]
+    that is, $P\!\left( \overline{X} - t_{\alpha/2,n-1}\,\dfrac{S}{\sqrt{n}} \leq \mu \leq \overline{X} + t_{\alpha/2,n-1}\,\dfrac{S}{\sqrt{n}} \right) = 1 - \alpha$.
+    \item \textbf{Conclusion:} We are $(1 - \alpha)100\%$ confident that the true parameter $\mu$ lies in the interval $\left( \overline{X} - t_{\alpha/2,n-1}(S/\sqrt{n}),\ \overline{X} + t_{\alpha/2,n-1}(S/\sqrt{n}) \right)$.
+    \item \textbf{Assumption:} The population is normal.
+\end{enumerate}
+\end{tcolorbox}
+
+In practice, the first step in the previous procedure should include a test of normality (see Project 4C). A built-in test of normality is available in most of the statistical software packages. In Example 5.5.9, we show how this step is utilized. Even when the data fail the normality test, most statistical software will produce a CI based on normality or give an error report. We should understand that generally such answers are meaningless. In those cases, nonparametric methods (Chapter 12) such as the Wilcoxon rank sum method or bootstrap method (Chapter 13) may be more appropriate. For more discussion, refer to Section 14.4.1.
+
+\begin{example}[5.5.7]
+The following is a random data set from a normal population:
+\[
+7.2 \quad 5.7 \quad 4.9 \quad 6.2 \quad 8.5 \quad 2.8
+\]
+
+Construct a 95\% CI for the population mean $\mu$. Interpret.
+
+\textbf{Solution}
+
+The first step is to calculate mean and standard deviation of the sample. We compute as the mean $\overline{x} = 5.883$ and as standard deviation, $s = 1.959$. For 5 degrees of freedom, and for $\alpha = 0.05$, from the $t$ table, $t_{0.025} = 2.571$. Hence, a 95\% CI for $\mu$ is:
+\end{example}

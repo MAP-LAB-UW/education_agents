@@ -1,0 +1,45 @@
+or
+\[
+P\left(\frac{U}{\sqrt{0.95}} \leq \theta \leq \frac{U}{\sqrt{0.05}}\right) = 0.90.
+\]
+
+Thus, the lower confidence limit is $U/\sqrt{0.95}$ and the upper confidence limit is $U/\sqrt{0.05}$, and the 90\% CI is $(U/\sqrt{0.95},\ U/\sqrt{0.05})$.
+
+We can interpret this in the following manner. In a large number of trials in which repeated samples are taken from a population with uniform pdf with parameter $\theta$, approximately 90\% of the intervals will contain $\theta$. For instance, if we observed $n = 20$ values from a uniform distribution with the maximum observed value being 15, then a 90\% CI for $\theta$ is $(15.04, 17.42)$. Thus, we are 90\% confident that these data came from a uniform distribution upper limit falling somewhere in this interval.
+
+It is important to note that the pivotal method may not be applicable in all situations. For example, in the binomial case, to find a CI for $p$, there is no quantity that satisfies the two conditions of a pivot. However, if the sample size is large, then the $z$-score of sample proportion can be used as a pivot with approximate standard normal distribution. From the practical point of view, there is the practical necessity that the distribution of the pivotal quantity make it easy to compute the probabilities. In cases where the pivotal method does not work, we may need to use other techniques such as the method based on sampling distributions (see Project 4A). A proper discussion of these methods is beyond the level of this book.
+
+\section*{EXERCISES 5.4}
+
+\begin{enumerate}
+    \item[\textbf{5.4.1.}] \begin{enumerate}
+        \item[\textbf{(a)}] Suppose we construct a 99\% CI. What are we 99\% confident about?
+        \item[\textbf{(b)}] Which of these CIs is wider, 90\% or 99\%?
+        \item[\textbf{(c)}] In computing a CI, when do you use the $t$ distribution and when do you use $z$, with normal approximation?
+        \item[\textbf{(d)}] How does the sample size affect the width of a CI?
+    \end{enumerate}
+    \item[\textbf{5.4.2.}] Suppose $X$ is a random sample of size $n = 1$ from a uniform distribution defined on the interval $(0, \theta)$. Construct a 98\% CI for $\theta$ and interpret.
+    \item[\textbf{5.4.3.}] Consider the probability statement:
+    \[
+    P\left(-2.81 \leq Z = \frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \leq 2.75\right) = \alpha.
+    \]
+    where $\overline{X}$ is the mean of a random sample of size $n$ from an $N(\mu, \sigma^2)$ distribution with known $\sigma^2$.
+    \begin{enumerate}
+        \item[\textbf{(a)}] Find $\alpha$.
+        \item[\textbf{(b)}] Use this statement to find a CI for $\mu$.
+        \item[\textbf{(c)}] What is the confidence level of this CI?
+        \item[\textbf{(d)}] Find a symmetric CI for $\mu$.
+    \end{enumerate}
+    \item[\textbf{5.4.4.}] A random sample of size 50 from a particular brand of 16-oz tea packets produced a mean weight of 15.65 oz. Assume that the weights of these brands of tea packets are normally distributed with standard deviation of 0.59 oz. Find a 95\% CI for the true mean $\mu$.
+    \item[\textbf{5.4.5.}] Let $X_1, \ldots, X_n$ be a random sample from an $N(\mu, \sigma^2)$, where the value of $\sigma^2$ is unknown.
+    \begin{enumerate}
+        \item[\textbf{(a)}] Construct a $(1 - \alpha)100\%$ CI for $\sigma^2$, choosing an appropriate pivot. Interpret its meaning.
+        \item[\textbf{(b)}] Suppose a random sample from a normal distribution gives the following summary statistics: $n = 21$, $\overline{x} = 44.3$, and $s = 3.96$. Using (a), find a 90\% CI for $\sigma^2$. Interpret its meaning.
+    \end{enumerate}
+    \item[\textbf{5.4.6.}] Let $X_1, \ldots, X_n$ be a random sample from a gamma distribution with $\alpha = 2$ and unknown $\beta$. Construct a 95\% CI for $\beta$.
+    \item[\textbf{5.4.7.}] Let $X_1, \ldots, X_n$ be a random sample from an exponential distribution with pdf $f(x) = (1/\theta)e^{-x/\theta}$, $\theta > 0$, $x > 0$. Construct a 95\% CI for $\theta$ and interpret. (Hint: Recall that $\sum_{i=1}^{n} X_i$ has a gamma distribution with $\alpha = n$, $\beta = \theta$.)
+    \item[\textbf{5.4.8.}] Let $X_1, \ldots, X_n$ be a random sample from a Poisson distribution with parameter $\lambda$.
+    \begin{enumerate}
+        \item[\textbf{(a)}] Construct a 90\% CI for $\lambda$.
+    \end{enumerate}
+\end{enumerate}

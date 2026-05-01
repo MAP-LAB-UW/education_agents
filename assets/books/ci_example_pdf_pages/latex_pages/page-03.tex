@@ -1,0 +1,46 @@
+However, if $\hat{\theta}$ is the sample mean $\bar{X}$ or sample variance $S^2$, we could find a pivotal quantity with known sampling distributions. Suppose $p(\hat{\theta}, \theta)$ is a pivotal quantity with known probability distribution that is independent of $\theta$. (Usually, the probability distribution of the pivotal quantity will be standard normal, $t$, $\chi^2$, or $F$ distribution.) The following are some of the standard pivotal quantities. If the sample $X_1, \ldots, X_n$ is from $N(\mu, \sigma^2)$:
+
+With $\mu$ unknown and $\sigma$ known, let $\bar{X}$ be the sample mean. Then the pivot is $(\bar{X} - \mu)/(\sigma/\sqrt{n})$, which has an $N(0, 1)$ distribution (see comments after Corollary 4.2.2).
+
+With $\mu$ unknown and $\sigma$ unknown, the pivot is $(\bar{X} - \mu)/(S/\sqrt{n})$, which has a $t$ distribution with $(n-1)$ degrees of freedom (see Theorem 4.2.9). If $n$ is large, using CLT, the distribution of the pivot is approximately $N(0, 1)$.
+
+If $\sigma^2$ is unknown, then the pivot is $(n-1)S^2/\sigma^2$, which has a $\chi^2$ distribution with $(n-1)$ degrees of freedom (see Theorem 4.2.8).
+
+The following examples illustrate the pivotal method.
+
+\begin{example}[5.4.2]
+Suppose we have a random sample $X_1, \ldots, X_n$ from $N(\mu, 1)$. Construct a 95\% CI for $\mu$.
+
+\textbf{Solution}
+
+Here the confidence coefficient is 0.95. We know that the MLE of $\mu$ is $\bar{X}$, which has an $N(\mu, 1/n)$ distribution. Note that this distribution depends on the unknown value of $\mu$, and hence, $\bar{X}$ cannot be a pivot. However, taking the $z$-transform of $\bar{X}$ we obtain the pivotal quantity as:
+\[
+Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} = \frac{\bar{X} - \mu}{1/\sqrt{n}},
+\]
+which has an $N(0, 1)$ distribution that is a function of the sample measurements and does not depend on $\mu$. Hence, this $Z$ can be taken as a pivot $p(\hat{\theta}, \theta)$. Now to find $a$ and $b$ such that $P(a \leq Z) = p(\hat{\theta}, \theta) \leq b) = 0.95$. One such choice is to find the value of $a$ such that $P(-a \leq Z \leq a) = 0.95$. From the normal table,
+\[
+P(-z_{0.025} \leq Z \leq z_{0.025}) = 0.95,
+\]
+where $z_{0.025}$ represents the value of $z$ with tail area 0.025. This implies $a = z_{0.025} = 1.96$. Hence,
+\[
+P(-1.96 \leq Z \leq 1.96) = 0.95,
+\]
+or, using the definition of $Z$ and solving for $\mu$, we obtain:
+\[
+P\left(\bar{X} - \frac{1.96}{\sqrt{n}} \leq \mu \leq \bar{X} + \frac{1.96}{\sqrt{n}}\right) = 0.95.
+\]
+Hence, a 95\% CI for $\mu$ is $(\bar{X} - (1.96/\sqrt{n}), \bar{X} + (1.96/\sqrt{n}))$. Thus, the lower confidence limit L is $\bar{X} - (1.96/\sqrt{n})$ and the upper confidence limit U is $\bar{X} + (1.96/\sqrt{n})$.
+\end{example}
+
+From the derivation of Example 5.4.1, it follows that
+\[
+P\left(|\bar{X} - \mu| < z_{\alpha/2} \frac{\sigma}{\sqrt{n}}\right) = 1 - \alpha.
+\]
+
+Thus, for a normal population with known variance $\sigma^2$, if $\bar{X}$ is used as an estimator of the true mean $\mu$, the probability that the error will be less than $z_{\alpha/2} \sigma/\sqrt{n}$ is $1 - \alpha$. It is important to note that there is some arbitrariness in choosing a CI for a given $\alpha$. Any of the several pivotals for $\theta$ that could be used. Also, it is not necessary to allocate equal probability to the two tails of the distribution; however, doing so may result in the shortest length CI for a given confidence coefficient.
+
+When we make the statement of the form:
+\[
+P\left(\bar{X} - \frac{1.96}{\sqrt{n}} \leq \bar{X} + \frac{1.96}{\sqrt{n}}\right) = 0.95;
+\]
+we mean that, in an infinite series of trials in which repeated samples of size $n$ are drawn from the same population and 95\% CIs for $\mu$ are calculated by the same method for each of the samples, the proportion of intervals that actually include $\mu$ will be 0.95. Fig. 5.4 illustrates this idea, where the vertical line represents the position of true mean $\mu$ and each of the horizontal lines represents a 95\% CI of the sample, and 20 samples of size $n$ are taken.

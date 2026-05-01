@@ -1,0 +1,40 @@
+\section*{5.6 A confidence interval for the population variance}
+
+In this section we derive a CI for the population variance $\sigma^2$ based on the chi-square distribution ($\chi^2$ distributions). Recall that the $\chi^2$ distribution, like the Student $t$ distribution, is indexed by a parameter called the degrees of freedom. However, the $\chi^2$ distribution is not symmetric and covers positive values only, and hence, it cannot be used to describe a random variable that assumes negative values. Let $X_1, \ldots, X_n$ be normally distributed with mean $\mu$ and variance $\sigma^2$, with both $\mu$ and $\sigma$ unknown. We know that:
+\[
+\frac{\sum_{i=1}^{n}(X_i - \bar{X})^2}{\sigma^2} = \frac{(n-1)S^2}{\sigma^2}
+\]
+has a $\chi^2$ distribution with $(n-1)$ degrees of freedom irrespective of $\sigma^2$. Hence, it can be used as a pivot. We now find two numbers, $\chi^2_L$ and $\chi^2_U$, such that
+\[
+P\left(\chi^2_L \leq \frac{(n-1)S^2}{\sigma^2} \leq \chi^2_U\right) = 1 - \alpha.
+\]
+
+The foregoing inequality can be rewritten as
+\[
+P\left(\frac{(n-1)S^2}{\chi^2_U} \leq \sigma^2 \leq \frac{(n-1)S^2}{\chi^2_L}\right) = 1 - \alpha.
+\]
+
+Hence, a $(1-\alpha)100\%$ CI for $\sigma^2$ is given by $\left((n-1)S^2/\chi^2_U, (n-1)S^2/\chi^2_L\right)$. For convenience, we take the areas to the right of $\chi^2_U = \chi^2_{\alpha/2}$ and to the left of $\chi^2_L = \chi^2_{1-\alpha/2}$ to be both equal to $\alpha/2$; see Fig. 5.6. Using the chi-square table we can find the values of $\chi^2_{\alpha/2}$ and $\chi^2_{1-\alpha/2}$. Then, we have the following result.
+
+\begin{theorem}[5.6.1]
+If $\bar{X}$ and $S$ are the mean and standard deviation of a random sample of size $n$ from a normal population, then:
+\[
+P\left(\frac{(n-1)S^2}{\chi^2_{\alpha/2}} \leq \sigma^2 \leq \frac{(n-1)S^2}{\chi^2_{1-\alpha/2}}\right) = 1 - \alpha.
+\]
+where the $\chi^2$ distribution has $(n-1)$ degrees of freedom.
+
+That is, we are $(1-\alpha)100\%$ confident that the population variance $\sigma^2$ falls in the interval $\left((n-1)S^2 / \chi^2_{\alpha/2}, \ (n-1)S^2 / \chi^2_{1-\alpha/2}\right)$.
+\end{theorem}
+
+\begin{figure}[h]
+\centering
+\fbox{\parbox{0.6\textwidth}{\centering \textit{[Chi-square density curve with shaded tails of area $\alpha/2$ on each side at $\chi^2_L$ and $\chi^2_U$, with central area $1-\alpha$]}}}
+\caption*{\textbf{FIGURE 5.6} Chi-square density with equal areas on both sides of the confidence interval.}
+\end{figure}
+
+\subsection*{EXAMPLE 5.6.1}
+A random sample of size 21 from a normal population gave a standard deviation of 9. Determine a 90\% CI for $\sigma^2$.
+
+\textbf{Solution}
+
+Here $n = 21$ and $s^2 = 81$. From the $\chi^2$ table with 20 degrees of freedom, $\chi^2_{0.05} = 31.4104$ and $\chi^2_{0.95} = 10.8508$. Therefore, a 90\% CI for $\sigma^2$ is obtained from:

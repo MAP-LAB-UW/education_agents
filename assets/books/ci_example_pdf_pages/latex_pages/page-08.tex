@@ -1,0 +1,51 @@
+\textit{and has a standard normal distribution. Select two tail values $-z_{\alpha/2}$ and $z_{\alpha/2}$ such that:}
+\[
+P(-z_{\alpha/2} \leq Z \leq z_{\alpha/2}) = 1 - \alpha.
+\]
+
+\textit{Because of symmetry, this is the shortest interval that contains the area $1 - \alpha$. Then,}
+\[
+P\left(\bar{\theta} - z_{\alpha/2}\sigma_{\hat{\theta}} \leq \theta \leq \hat{\theta} + z_{\alpha/2}\sigma_{\hat{\theta}}\right) = 1 - \alpha.
+\]
+
+\textit{Therefore, the confidence limits of $\theta$ are $\hat{\theta} - z_{\alpha/2}\sigma_{\hat{\theta}}$ and $\hat{\theta} + z_{\alpha/2}\sigma_{\hat{\theta}}$. Hence, the $(1-\alpha)100\%$ CI for $\theta$ is given by $\hat{\theta} \pm z_{\alpha/2}\sigma_{\hat{\theta}}$.}
+
+In particular, for a large sample of size $n$, let $\hat{\theta} = \bar{X}$ be the sample mean. Then the large-sample $(1-\alpha)$ CI for the population mean $\mu$ is:
+\[
+\bar{X} \pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}} \approx \bar{X} \pm z_{\alpha/2}\frac{\hat{S}}{\sqrt{n}}
+\]
+where $\hat{S}$ is a point estimate of $\sigma$. That is,
+\[
+P\left(\bar{X} - z_{\alpha/2}\frac{\hat{S}}{\sqrt{n}} \leq \mu \leq \bar{X} + z_{\alpha/2}\frac{\hat{S}}{\sqrt{n}}\right) = 1 - \alpha.
+\]
+
+As we have seen in Section 5.4, the correct interpretation of this CI is that in a repeated sampling, approximately $(1-\alpha)100\%$ of all intervals of the form $\bar{X} \pm z_{\alpha/2}(\hat{S}/\sqrt{n})$ include $\mu$, the true mean. Suppose $\bar{x}$ and $s$ are the sample mean and the sample standard deviation, respectively, for a particular set of $n$ observed sample values $x_1, \ldots, x_n$. Then we do not know whether the particular interval $(\bar{x} - z_{\alpha/2}(s/\sqrt{n}), \bar{x} - z_{\alpha/2}(s/\sqrt{n}))$ contains $\mu$. However, the procedure that produced this interval does capture the true mean in approximately $(1-\alpha)100\%$ of cases. This interpretation will be assumed hereafter, when we make a statement such as, ``We are 95\% confident that the true mean will lie in the interval (74.1, 79.8).''
+
+\begin{quote}
+\textbf{EXAMPLE 5.5.2}
+
+Two statistics professors want to estimate average scores for an elementary statistics course that has two sections. Each professor teaches one section and each section has a large number of students. A random sample of 50 scores from each section produced the following results:
+\begin{enumerate}
+\item[(a)] Section 1: $\bar{x}_1 = 77.01$, $s_1 = 10.32$
+\item[(b)] Section II: $\bar{x}_2 = 72.22$, $s_2 = 11.02$
+\end{enumerate}
+Calculate 95\% CIs for each of these two samples.
+
+\textbf{Solution}
+
+Because $n = 50$ is large, we could use normal approximation. For $\alpha = 0.05$, from the normal table, $z_{\alpha/2} = z_{0.025} = 1.96$. The CIs are as follows:
+\begin{enumerate}
+\item[(a)] We have:
+\[
+\bar{x}_1 \pm z_{\alpha/2}\frac{s_1}{\sqrt{n}} = 77.01 \pm 1.96\left(\frac{10.32}{\sqrt{50}}\right),
+\]
+which gives a 95\% CI (74.149, 79.871).
+\item[(b)] We can compute:
+\[
+\bar{x}_2 \pm z_{\alpha/2}\frac{s_2}{\sqrt{n}} = 72.22 \pm 1.96\left(\frac{11.02}{\sqrt{50}}\right),
+\]
+which gives the interval (69.165, 75.275).
+\end{enumerate}
+\end{quote}
+
+It may be noted that if the population is normal with a known variance $\sigma^2$, we can use $\bar{X} \pm z_{\alpha/2}(\sigma/\sqrt{n})$ as the CI for the population mean $\mu$, irrespective of the sample size. However, if $\sigma^2$ is unknown, to use $\bar{X} \pm z_{\alpha/2}(s/\sqrt{n})$ as an approximate CI for $\mu$, the sample size has to be large for the CLT to hold. However, to use this approximate procedure, we do not need the condition that samples arise from a normal distribution. We will consider sample size to be large if $n \geq 30$ (applicable to estimators of the mean). If not, we shall use the small-sample procedure discussed in the next section.

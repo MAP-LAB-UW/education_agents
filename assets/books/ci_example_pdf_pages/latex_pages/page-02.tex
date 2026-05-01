@@ -1,0 +1,39 @@
+determined by specified probabilities. The width of the CI reflects the amount of variability inherent in the point estimate. Thus, our objective is to find a narrow interval with high probability of enclosing the true parameter, $\theta$. We will restrict our attention to single-parameter estimation.
+
+The probability that a CI will contain the true parameter $\theta$ is called the \textit{confidence coefficient}. The confidence coefficient gives the fraction of the time that the constructed interval will contain the true parameter, under repeated sampling.
+
+Let $L$ and $U$ be the lower and upper confidence limits for a parameter $\theta$ based on a random sample $X_1, \ldots, X_n$. Both $L$ and $U$ are functions of the sample. We can write the interval estimate of $\theta$ as:
+\[
+P(L \leq \theta \leq U) = 1 - \alpha,
+\]
+and we read it as we are $(1 - \alpha)100\%$ confident that the true parameter $\theta$ is located in the interval $(L, U)$. The number $1 - \alpha$ is the confidence coefficient, and the interval $(L, U)$ is referred to as a $(1 - \alpha)100\%$ CI for $\theta$. Thus, if we want a 95\% CI for, say, population mean $\mu$, then $\alpha = 0.05$. Note that for the discrete random variables, we may not be able to find a lower bound $L$ and an upper bound $U$ such that the probability, $P(L \leq \theta \leq U)$, is exactly $(1 - \alpha)$. In such a case we can choose $L$ and $U$ such that $P(L \leq \theta \leq U) \geq 1 - \alpha$.
+
+How do we find the CI? For this, we use the error structure of the point estimator to obtain this interval. For instance, we know that the sample mean, $\bar{X}$, is a point estimate (MLE or unbiased estimator) of the population mean $\mu$. In this case, we also know that the standard error of $\bar{X}$ is $\sigma/\sqrt{n}$. If the sample came from a normal population, then for a 95\% CI for the mean, multiply the standard error by 1.96 and then add and subtract this product from the sample mean. From this we can also observe that, if everything else remains the same, the size of the CI reduces as the sample size increases.
+
+\begin{example}[5.4.1]
+As part of a promotion, the management of a large health club wants to estimate average weight loss for its members within the first 3 months after joining the club. They took a random sample of 45 members of this health club and found that they lost an average of 13.8 lb within the first 3 months of membership with a sample standard deviation of 4.2 lb. Find a 95\% CI for the true mean. What if a random sample of 200 members of this health club also resulted in the same sample mean and sample standard deviation?
+\end{example}
+
+\textbf{Solution}
+
+Here a point estimate of the true mean $\mu$ is the sample mean $\bar{x} = 13.8$ lb. Because $n = 45$ is large enough, we can use the central limit theorem (CLT) and use approximate normality for the distribution of $\bar{X}$, with mean $\mu$ and the approximate standard error $(4.2/\sqrt{45}) = 0.626$. Thus a 95\% CI is $13.8 \pm (1.96)(0.626)$, resulting in the interval (12.57, 15.03). Thus, on average, with 95\% confidence, one can expect the true mean to lie in this interval.
+
+For $n = 200$, the standard error is $(4.2/\sqrt{200}) \approx 0.297$. Thus a 95\% CI is $13.8 \pm (1.96)(0.297)$ resulting in the interval (13.22, 14.38). Thus, the mean sample values (that is, the more information we have, the tighter (smaller width) the interval.
+
+The previous example was built on our knowledge of the sampling distribution of the sample mean. What if the sampling distribution of the statistic we are interested in is not readily available? More generally, our success in building CIs for an estimate of a parameter depends on identifying a quantity known as the pivot. We now describe this method.
+
+The \textit{pivotal method} is a general method of constructing a CI using a pivotal quantity. This relies on our knowledge of sampling distributions. Here we have to find a pivotal quantity with the following two characteristics:
+
+\begin{enumerate}
+\item[(i)] It is a function of the random sample (a statistic or an estimator $\hat{\theta}$) and the unknown parameter $\theta$, where $\theta$ is the only unknown quantity, and
+\item[(ii)] Its probability distribution that does not depend on the parameter $\theta$.
+\end{enumerate}
+
+Suppose that $\widetilde{\theta} = \widetilde{\theta}(X)$ is a point estimate of $\theta$, and let $p(\widetilde{\theta}, \theta)$ be the pivotal quantity. Now, for a given value of $\alpha$ ($0 < \alpha < 1$), and constants $a$ and $b$, with $a < b$, let
+\[
+P\left(a \leq p\left(\widetilde{\theta}, \theta\right) \leq b\right) = 1 - \alpha.
+\]
+
+Hence, given $\widetilde{\theta}$, the inequality is solved for $\theta$ to obtain a region of $\theta$ values, usually an interval corresponding to the observed $\widetilde{\theta}$ value. This will be a desired CI.
+
+From (i) and (ii), it is important to note that the pivotal quantity depends on the parameter, but its distribution is independent of the parameter. Let $X_1, \ldots, X_n$ be a random sample and let $\widehat{\theta}$ be a reasonable point estimate of $\theta$. For instance, $\widehat{\theta}$ could be the maximum likelihood (or some other) estimator of $\theta$. Examples, if finding a pivotal quantity may not be easy,
