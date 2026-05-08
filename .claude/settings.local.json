@@ -13,7 +13,23 @@
       "Bash(ls /mmfs1/gscratch/argon/kahuja/work/repos/slop-analysis/outputs/appraisal/*.jsonl)",
       "Bash(python3 -c \"import json,sys; d=json.loads\\(sys.stdin.readline\\(\\)\\); print\\(json.dumps\\({k:d[k] for k in [''''excerpt_index'''']}, indent=2\\)\\); a=d[''''appraisal_annotations''''][0]; print\\(''''annotator_id:'''', a[''''annotator_id'''']\\); print\\(''''n_attitudes:'''', len\\(a[''''attitudes'''']\\)\\); print\\(''''first_attitude:'''', json.dumps\\(a[''''attitudes''''][0], indent=2\\)\\)\")",
       "Bash(python3 -c \":*)",
-      "Bash(conda run:*)"
+      "Bash(conda run:*)",
+      "Bash(python3 -m http.server 5173)",
+      "Bash(curl -sS -o /dev/null -w \"index.html %{http_code}\\\\n\" http://localhost:5173/index.html)",
+      "Bash(curl -sS -o /dev/null -w \"app.jsx    %{http_code}\\\\n\" http://localhost:5173/app.jsx)",
+      "Bash(curl -sS -o /dev/null -w \"mock-data  %{http_code}\\\\n\" http://localhost:5173/mock-data.js)",
+      "Bash(kill %1)",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_take_screenshot",
+      "Bash(kill 93442)",
+      "mcp__playwright__browser_navigate",
+      "Bash(lsof -ti:8765)",
+      "Bash(xargs kill)",
+      "Bash(python3 -m http.server 8765)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8765/)",
+      "mcp__playwright__browser_file_upload"
     ]
   }
 }
