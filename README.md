@@ -1,7 +1,6 @@
 # Diagnostic Assessment Copilot
 
-An LLM-powered pipeline for generating high-quality multiple-choice diagnostic assessment items aligned to learning goals and misconception facets. Built for the **EDPSY 490 — Applied Statistics** course, currently focused on the **confidence intervals** topic.
-
+An LLM-powered pipeline for generating high-quality multiple-choice diagnostic assessment items aligned to learning goals and misconception facets. 
 ## What This Does
 
 The pipeline takes a **facet map** (learning goals + common misconceptions) and generates diagnostic MC items where:
