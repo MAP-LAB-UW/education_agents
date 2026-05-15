@@ -28,6 +28,14 @@ If you just want to look at the generated items and evaluation results:
 
 The web dashboard provides an interactive way to explore generated items and compare evaluation results. It runs entirely in the browser (no build step needed).
 
+**Item Explorer** — browse generated items, judge reports, and evaluation scores:
+
+![Item Explorer Dashboard](docs/screenshots/item_explorer.png)
+
+**Evaluation Comparison** — side-by-side rubric metrics across runs:
+
+![Evaluation Comparison Dashboard](docs/screenshots/eval_comparison.png)
+
 ### Prerequisites
 
 - Python 3.11+ with a local HTTP server (or any static file server)

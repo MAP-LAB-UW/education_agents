@@ -200,6 +200,7 @@ cython_debug/
 !outputs/eval_*.json
 !outputs/third_pass_no_books_gemini-*.json
 !docs/*.md
+!docs/screenshots/*.png
 !README.md
 !data/facets/**
 
