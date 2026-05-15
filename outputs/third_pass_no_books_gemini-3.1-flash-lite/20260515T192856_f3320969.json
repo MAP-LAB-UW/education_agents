@@ -1,0 +1,158 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B10"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-flash-lite-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets the relationship between sample size, standard error, and the width of the confidence interval. It contrasts the correct understanding that larger samples reduce standard error (A1, A7) with the common misconception that larger samples increase the spread of the sampling distribution (B10).",
+  "item": {
+    "stem": "A researcher is calculating a confidence interval for the population mean. She wonders how increasing the sample size (n) affects the width of the confidence interval. Which statement correctly describes this relationship?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Increasing the sample size reduces the standard error, which leads to a narrower confidence interval.",
+        "facet_tags": [
+          "A1",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "Correctly identifies that larger samples decrease standard error (A1) and that smaller standard error results in a narrower interval width (A7)."
+      },
+      {
+        "id": "B",
+        "text": "Increasing the sample size increases the standard error, which leads to a wider confidence interval.",
+        "facet_tags": [
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "Reflects the misconception that larger samples make the sampling distribution more spread out (B10)."
+      },
+      {
+        "id": "C",
+        "text": "Increasing the sample size does not change the standard error, so the width of the confidence interval remains the same.",
+        "facet_tags": [
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "Represents a failure to understand the relationship between sample size and the precision of the estimate via the standard error (B10)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item assesses the student's understanding of the role of sample size in determining the precision of a confidence interval. The correct answer highlights that a larger sample size leads to a smaller standard error (A1), which consequently decreases the margin of error and the overall interval width (A7). Distractors focus on the common misconception (B10) that increasing sample size either increases spread or has no effect on the interval width.",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B10"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is calculating a confidence interval for the population mean. She wonders how increasing the sample size (n) affects the width of the confidence interval. Which statement correctly describes this relationship?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1",
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option A correctly identifies that a larger sample size decreases standard error (A1), and relates the reduced standard error to a narrower confidence interval width, which demonstrates an understanding of A7."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B10"
+        ],
+        "judge_tags": [
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option B states that increasing the sample size increases the standard error, which perfectly aligns with the misconception described in B10."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B10"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "mismatch",
+        "confidence": 0.95,
+        "reasoning": "Option C claims that increasing the sample size does not change the standard error. This aligns with B9, which explicitly states that the standard deviation of the sampling distribution stays the same regardless of sample size. B10, as tagged by the generator, applies when a student thinks standard error increases with sample size (as seen in Option B)."
+      }
+    ],
+    "overall_agreement": 0.67,
+    "overall_confidence": 0.98,
+    "issues": [
+      "Option C is incorrectly tagged by the generator as B10. It should be tagged as B9 because it describes the standard error remaining unchanged, rather than becoming more spread out."
+    ]
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 2,
+    "latency_similarity": 0.7858,
+    "latency_bucket": "surface",
+    "latency_option_details": [
+      {
+        "option_id": "A",
+        "similarity": 0.7696,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "A1",
+          "A7"
+        ]
+      },
+      {
+        "option_id": "B",
+        "similarity": 0.8422,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "B10"
+        ]
+      },
+      {
+        "option_id": "C",
+        "similarity": 0.7457,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "B10"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 2.0,
+    "judge_s": 11.51,
+    "eval_s": 9.27
+  },
+  "created_at": "2026-05-15T19:28:56.917404+00:00"
+}

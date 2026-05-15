@@ -1,0 +1,140 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A3",
+      "B13",
+      "B14"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 5,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets the properties of the center of the sampling distribution. It contrasts the goal facet A3 (mean of sampling distribution equals population mean) with the misconception B13 (the mean depends on sample size). It also incorporates B14 to test whether students over-apply the 'law of large numbers' to assume a single sample's mean must always be closer to the population mean just because the sample size is larger, which addresses the nuances of randomness in sample statistics.",
+  "item": {
+    "stem": "A city records that the population mean monthly electricity bill for its residents is $150. Researcher A takes a random sample of 25 residents, while Researcher B takes a random sample of 100 residents. Both researchers are interested in the sampling distribution of the sample mean (̄x) for their respective sample sizes.",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Both researchers have sampling distributions centered at $150. Even though Researcher B has a larger sample, it is possible for Researcher A’s specific sample mean to be closer to $150$ than Researcher B’s.",
+        "facet_tags": [
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies that the mean of the sampling distribution (μ_̄x) is equal to the population mean (μ) regardless of sample size, and it correctly acknowledges that while larger samples are more likely to be accurate, individual sample means are still subject to random variation."
+      },
+      {
+        "id": "opt_2",
+        "text": "Both researchers have sampling distributions centered at $150. However, because Researcher B used 100 residents, their specific sample mean will definitely be closer to $150$ than the mean calculated from Researcher A’s sample of 25.",
+        "facet_tags": [
+          "A3",
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly understands that the center of the sampling distribution is the population mean, but incorrectly believes that the Law of Large Numbers guarantees that every single large sample mean is more accurate than every single small sample mean, ignoring the randomness inherent in sampling."
+      },
+      {
+        "id": "opt_3",
+        "text": "Researcher B's sampling distribution is centered at $150$, but Researcher A's sampling distribution is centered at a different value because the center of the sampling distribution shifts depending on how many people are sampled.",
+        "facet_tags": [
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "This indicates the misconception that the expected value (mean) of the sampling distribution changes as a function of sample size, whereas it always remains equal to the population mean."
+      },
+      {
+        "id": "opt_4",
+        "text": "Researcher B's sampling distribution is centered at $1.50$ ($150/100$) and Researcher A's is centered at $6.00$ ($150/25$) because the average of the sampling distribution is calculated by dividing the population mean by the sample size.",
+        "facet_tags": [
+          "B13",
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "This student conflates the calculation of the mean of the sampling distribution with the calculation of standard error or some other $n$-dependent formula, and assumes that the larger sample size results in a 'better' (in this case, smaller) center, demonstrating both B13 and a misapplied logic related to B14."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "This item tests whether students understand that the mean of the sampling distribution of the mean is always equal to the population mean (A3), regardless of the sample size (diagnosing B13). It also probes the understanding of randomness; specifically, that while larger samples generally produce means closer to the population mean (smaller standard error), any one specific sample from a larger group is not guaranteed to be closer to the truth than a specific sample from a smaller group (diagnosing B14).",
+    "target_facets": [
+      "A3",
+      "B13",
+      "B14"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A city records that the population mean monthly electricity bill for its residents is $150...",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A3"
+        ],
+        "judge_tags": [
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option correctly states that the sampling distribution is centered at the population mean regardless of sample size (A3) and correctly acknowledges that a particular sample mean from a smaller sample can still randomly be closer to the population mean."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "A3",
+          "B14"
+        ],
+        "judge_tags": [
+          "A3",
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option includes the correct understanding that the center of the sampling distribution is the population mean (A3), but explicitly exhibits the misconception that a particular sample mean from a larger sample will ALWAYS be closer to the population mean (B14)."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "B13"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states that the center of the sampling distribution shifts depending on the sample size, which is the exact definition of facet B13."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B13",
+          "B14"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The option clearly shows a misunderstanding that the mean of the sampling distribution depends on the sample size (B13). However, it does not state anything about a 'particular sample' or 'sample mean from a larger sample' being closer to the truth, which is what B14 entails. It only discusses the calculation for the center of the distribution."
+      }
+    ],
+    "overall_agreement": 0.75,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Option 4 is tagged with B14 by the generator, but the text of the option does not actually exhibit the B14 misconception (which specifically relates to individual sample means, not the center of the sampling distribution)."
+    ]
+  },
+  "timing": {
+    "generator_s": 14.98,
+    "judge_s": 16.19
+  },
+  "created_at": "2026-05-14T23:25:25.433934+00:00"
+}

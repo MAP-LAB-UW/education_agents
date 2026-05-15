@@ -1,0 +1,146 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A5",
+      "B16",
+      "A7",
+      "B8"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 5,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets the fundamental purpose and construction of confidence intervals. It contrasts the correct understanding that a CI estimates population parameters (A5) with the common misconception that it estimates sample statistics or raw data (B16). To deepen the diagnostic value, it incorporates the underlying mechanics of the sampling distribution, distinguishing the theoretical distribution from a single sample (B8) and connecting the resulting interval width to the standard error (A7).",
+  "item": {
+    "stem": "A researcher reports a 95% confidence interval of (135 mg, 165 mg) for the mean daily caffeine intake of all adults in a city, based on a random sample of 100 people. Which of the following is a correct interpretation of these results?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "We are 95% confident that the average caffeine intake of all adults in the city is between 135 mg and 165 mg; if the researcher had used a sample of 400 people, the interval would likely be narrower (e.g., 142.5 mg to 157.5 mg).",
+        "facet_tags": [
+          "A5",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "The student correctly identifies the population mean as the target of the confidence interval (A5) and understands that increasing the sample size reduces the standard error of the sampling distribution, which results in a more precise, narrower interval (A7)."
+      },
+      {
+        "id": "opt_b",
+        "text": "We are 95% confident that the mean caffeine intake for the 100 adults in this specific sample is between 135 mg and 165 mg.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "The student incorrectly believes the confidence interval is used to estimate the reliability of a sample statistic that is already known, rather than estimating an unknown population parameter (B16)."
+      },
+      {
+        "id": "opt_c",
+        "text": "95% of the individual adults in the city have a caffeine intake between 135 mg and 165 mg, as the confidence interval describes the distribution of individual caffeine scores.",
+        "facet_tags": [
+          "B8",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "The student confuses the confidence interval for the mean with a range that captures the majority of individual data points (B16) and mistakenly treats the sampling distribution of the mean as if it were the same as the population distribution of individual scores (B8)."
+      },
+      {
+        "id": "opt_d",
+        "text": "We are 95% confident that the average caffeine intake of all adults in the city is between 135 mg and 165 mg; however, increasing the sample size to 400 would not change the interval width because the population's natural variation remains the same.",
+        "facet_tags": [
+          "A5",
+          "B8"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly identifies the population mean as the target (A5) but fails to understand that interval width depends on the standard error (which shrinks with N) rather than the raw population standard deviation. By claiming the width is constant relative to population variation, they reveal a confusion between the properties of the sampling distribution and the population distribution (B8)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_a"
+    ],
+    "explanation": "This item evaluates the student's ability to distinguish between population parameters and sample data (A5 vs B16) and their understanding of how sample size affects the precision of a confidence interval (A7). It specifically targets the common misconception that the width of a confidence interval is a direct representation of the individual variation in a sample or population rather than being derived from the standard error of the sampling distribution (B8).",
+    "target_facets": [
+      "A5",
+      "B16",
+      "A7",
+      "B8"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher reports a 95% confidence interval of (135 mg, 165 mg) for the mean daily caffeine intake of all adults in a city...",
+    "option_assessments": [
+      {
+        "option_id": "opt_a",
+        "generator_tags": [
+          "A5",
+          "A7"
+        ],
+        "judge_tags": [
+          "A5",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "The option correctly interprets the CI as capturing the population mean (A5) and correctly states that a larger sample size would result in a narrower interval, showing an understanding of the relationship between standard error and CI width (A7)."
+      },
+      {
+        "option_id": "opt_b",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly claims the CI is for the mean of 'the 100 adults in this specific sample', which perfectly aligns with B16 (believing CI estimates sample statistics rather than population parameters)."
+      },
+      {
+        "option_id": "opt_c",
+        "generator_tags": [
+          "B8",
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The option misinterprets the CI as capturing a percentage of individual true scores or population data, which is captured by B16. B8 refers to confusing the sampling distribution with the sample distribution, but this option conflates the CI with the distribution of individuals in the population. Therefore, B16 is the most accurate facet."
+      },
+      {
+        "option_id": "opt_d",
+        "generator_tags": [
+          "A5",
+          "B8"
+        ],
+        "judge_tags": [
+          "A5",
+          "B9"
+        ],
+        "agreement": "partial",
+        "confidence": 0.95,
+        "reasoning": "The first clause correctly identifies the population parameter (A5). The second clause claims that the width would not change because the 'population's natural variation remains the same'. This perfectly reflects B9 (confusion about sampling distribution vs. population distribution, believing the standard deviation stays the same regardless of sample size) rather than B8 (confusion with the sample distribution)."
+      }
+    ],
+    "overall_agreement": 0.75,
+    "overall_confidence": 0.95,
+    "issues": [
+      "The generator misdiagnosed Option D with B8 when it perfectly aligns with B9. The text explicitly attributes the unchanging interval width to 'the population's natural variation', exactly matching B9's description of confusing the sampling distribution with the population distribution.",
+      "The item itself is very well-written, addresses common misconceptions effectively, and features strong distractors."
+    ]
+  },
+  "timing": {
+    "generator_s": 46.01,
+    "judge_s": 18.29
+  },
+  "created_at": "2026-05-14T23:24:48.334622+00:00"
+}

@@ -1,0 +1,150 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A6",
+      "B10",
+      "B17"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This facet combination allows for the creation of a diagnostic item that tests the simultaneous effects of sample size and confidence level on the width of a confidence interval. It specifically targets the tension between the goal of increasing sample size to reduce standard error (A1 vs. B10) and the effect of increasing the confidence level on the critical value and interval width (A6 vs. B17). This set is conceptually coherent as it focuses on the mechanics of precision and the factors that researchers can manipulate to control it.",
+  "item": {
+    "stem": "A team of researchers is planning a study to estimate the mean sleep duration of college students. They want their resulting confidence interval to be narrower than the one they obtained in a pilot study. Which of the following combinations of changes would be most effective in achieving a narrower interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Increase the sample size and decrease the confidence level.",
+        "facet_tags": [
+          "A1",
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies that increasing the sample size reduces the standard error, making the sampling distribution more packed (A1), and that a lower confidence level corresponds to a smaller critical value (A6), both of which results in a narrower confidence interval."
+      },
+      {
+        "id": "opt2",
+        "text": "Decrease the sample size and increase the confidence level.",
+        "facet_tags": [
+          "B10",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This option incorrectly assumes that decreasing the sample size would make the distribution less spread out (B10) and that increasing the confidence level would lead to a more precise, narrower interval (B17)."
+      },
+      {
+        "id": "opt3",
+        "text": "Increase the sample size and increase the confidence level.",
+        "facet_tags": [
+          "A1",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "While this option correctly identifies that increasing the sample size will narrow the interval (A1), it incorrectly assumes that increasing the confidence level will also result in a narrower interval (B17)."
+      },
+      {
+        "id": "opt4",
+        "text": "Decrease the sample size and decrease the confidence level.",
+        "facet_tags": [
+          "B10",
+          "A6"
+        ],
+        "is_correct": false,
+        "rationale": "This option correctly identifies that a lower confidence level narrows the interval (A6), but it incorrectly suggests that decreasing the sample size will contribute to a narrower interval (B10)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt1"
+    ],
+    "explanation": "To produce a narrower confidence interval, one must decrease the margin of error. This is achieved by either increasing the sample size (which reduces the standard error of the sampling distribution, A1) or by decreasing the confidence level (which reduces the multiplier/critical value, A6). Common misconceptions include the belief that increasing sample size increases spread (B10) or that higher confidence leads to a more precise (narrower) interval (B17).",
+    "target_facets": [
+      "A1",
+      "A6",
+      "B10",
+      "B17"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A team of researchers is planning a study to estimate the mean sleep duration of college students. They want their resulting confidence interval to be narrower than the one they obtained in a pilot study. Which of the following combinations of changes would be most effective in achieving a narrower interval?",
+    "option_assessments": [
+      {
+        "option_id": "opt1",
+        "generator_tags": [
+          "A1",
+          "A6"
+        ],
+        "judge_tags": [
+          "A1",
+          "A6",
+          "A7"
+        ],
+        "agreement": "partial",
+        "confidence": 0.95,
+        "reasoning": "The option correctly pairs increasing the sample size with decreasing the confidence level. Increasing sample size reduces the standard error (A1), and recognizing that a smaller standard error leads to a narrower CI is facet A7. Decreasing the confidence level decreases the CI width (A6). The generator missed A7, which bridges standard error to CI width."
+      },
+      {
+        "option_id": "opt2",
+        "generator_tags": [
+          "B10",
+          "B17"
+        ],
+        "judge_tags": [
+          "B10",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "Selecting this option indicates a belief that decreasing sample size reduces spread/error (the inverse of B10: believing that increasing sample size makes the distribution more spread out) and that increasing confidence leads to a shorter, more precise interval (B17)."
+      },
+      {
+        "option_id": "opt3",
+        "generator_tags": [
+          "A1",
+          "B17"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7",
+          "B17"
+        ],
+        "agreement": "partial",
+        "confidence": 0.95,
+        "reasoning": "This option captures the correct understanding of sample size (A1, and by extension A7, knowing that a smaller SE reduces CI width) but pairs it with the misconception that a higher confidence level yields a narrower interval (B17)."
+      },
+      {
+        "option_id": "opt4",
+        "generator_tags": [
+          "B10",
+          "A6"
+        ],
+        "judge_tags": [
+          "B10",
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "This option captures the misconception about sample size (B10, believing smaller sample sizes lead to less spread) while correctly understanding that a lower confidence level narrows the interval (A6)."
+      }
+    ],
+    "overall_agreement": 0.8,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Facet A7 (relationship between standard error and CI width) is implicitly required whenever students translate the effect of sample size changes into changes in CI width, but the generator omitted it from the keys for opt1 and opt3."
+    ]
+  },
+  "timing": {
+    "generator_s": 24.68,
+    "judge_s": 18.21
+  },
+  "created_at": "2026-05-07T22:49:14.508613+00:00"
+}

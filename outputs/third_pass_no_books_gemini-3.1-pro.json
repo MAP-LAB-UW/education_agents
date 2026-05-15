@@ -1,0 +1,777 @@
+{
+  "input_dir": "outputs/third_pass_no_books_gemini-3.1-pro",
+  "n_items": 10,
+  "item_evaluations": [
+    {
+      "source": "2026-05-15T20:00:34",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "opt_B"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.5128,
+        "score": 4,
+        "bucket": "highly_latent",
+        "option_details": [
+          {
+            "option_id": "opt_A",
+            "similarity": 0.444,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "A5",
+              "B15"
+            ]
+          },
+          {
+            "option_id": "opt_B",
+            "similarity": 0.6069,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A4",
+              "A5"
+            ]
+          },
+          {
+            "option_id": "opt_C",
+            "similarity": 0.6425,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A4",
+              "B16"
+            ]
+          },
+          {
+            "option_id": "opt_D",
+            "similarity": 0.3578,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "B15",
+              "B16"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 0.95,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-15T20:01:33",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "A"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.804,
+        "score": 1,
+        "bucket": "paraphrase",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.8017,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "A1",
+              "A2"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.8265,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "A2",
+              "B10"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.7773,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A1",
+              "B11"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.8105,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B10",
+              "B11"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-15T20:03:07",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "D"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.697,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.7917,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B17"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.7201,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A7",
+              "B17"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.6501,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A6"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.6262,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A6",
+              "A7"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-15T20:04:29",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "optA"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.7535,
+        "score": 2,
+        "bucket": "surface",
+        "option_details": [
+          {
+            "option_id": "optA",
+            "similarity": 0.648,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A3"
+            ]
+          },
+          {
+            "option_id": "optB",
+            "similarity": 0.7084,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B13"
+            ]
+          },
+          {
+            "option_id": "optC",
+            "similarity": 0.7994,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B14"
+            ]
+          },
+          {
+            "option_id": "optD",
+            "similarity": 0.8582,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B13"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": [
+          "Options B and D both diagnose misconception B13. While slight redundancy is acceptable in a true/false per option format (testing an applied example vs. a generalized rule), this limits the breadth of the facets the item could otherwise cover."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-15T20:05:29",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "opt_D"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.7917,
+        "score": 2,
+        "bucket": "surface",
+        "option_details": [
+          {
+            "option_id": "opt_A",
+            "similarity": 0.8128,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B9"
+            ]
+          },
+          {
+            "option_id": "opt_B",
+            "similarity": 0.5637,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B8"
+            ]
+          },
+          {
+            "option_id": "opt_C",
+            "similarity": 0.9104,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B12"
+            ]
+          },
+          {
+            "option_id": "opt_D",
+            "similarity": 0.88,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "A2"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-15T20:06:53",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "opt_A"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.7784,
+        "score": 2,
+        "bucket": "surface",
+        "option_details": [
+          {
+            "option_id": "opt_A",
+            "similarity": 0.78,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A1",
+              "A7"
+            ]
+          },
+          {
+            "option_id": "opt_B",
+            "similarity": 0.7945,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A7",
+              "B10"
+            ]
+          },
+          {
+            "option_id": "opt_C",
+            "similarity": 0.7365,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B9"
+            ]
+          },
+          {
+            "option_id": "opt_D",
+            "similarity": 0.8026,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "A1"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-15T20:08:06",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "A"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.622,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.577,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A5",
+              "A6"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.6423,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A5",
+              "B17"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.6084,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A6",
+              "B16"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.6604,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B16",
+              "B17"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-15T20:09:13",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "opt_B",
+          "opt_D"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 4,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.6554,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "opt_A",
+            "similarity": 0.7563,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B17"
+            ]
+          },
+          {
+            "option_id": "opt_B",
+            "similarity": 0.6808,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A6"
+            ]
+          },
+          {
+            "option_id": "opt_C",
+            "similarity": 0.5699,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B15"
+            ]
+          },
+          {
+            "option_id": "opt_D",
+            "similarity": 0.6146,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A4"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": [
+          "Options A and B are mutually exclusive opposites testing the exact same relationship between confidence level and interval width. In a True/False matrix, this is slightly redundant, as knowing the answer to one guarantees knowing the answer to the other.",
+          "Similarly, Options C and D contrast the incorrect and correct definitions of confidence levels, making them largely inverse statements."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-15T20:10:58",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "A"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [
+          "C. Increase the sample size to 1000 and increase the confidence level to 99%."
+        ],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.6309,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.6116,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A1",
+              "A6"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.7098,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B10",
+              "B17"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.6911,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A1",
+              "B17"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.5111,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "A6",
+              "B10"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 0.85,
+        "overall_confidence": 0.95,
+        "issues": [
+          "Mathematically, Option C also results in a narrower confidence interval. The original interval's margin of error is proportional to 1.96 / sqrt(500) ≈ 0.0876. Option C's margin of error is proportional to 2.576 / sqrt(1000) ≈ 0.0815. Because 0.0815 < 0.0876, Option C guarantees a narrower interval just like Option A. This makes the item have two correct answers if a student calculates the relative effects. To fix this, change Option C's sample size to something smaller that doesn't overpower the z-score increase, such as 'Increase the sample size to 600'."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-15T20:12:38",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "opt_a"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 3,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.7415,
+        "score": 2,
+        "bucket": "surface",
+        "option_details": [
+          {
+            "option_id": "opt_a",
+            "similarity": 0.6745,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A1",
+              "A7"
+            ]
+          },
+          {
+            "option_id": "opt_b",
+            "similarity": 0.7941,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A1",
+              "A7",
+              "B14"
+            ]
+          },
+          {
+            "option_id": "opt_c",
+            "similarity": 0.685,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A1"
+            ]
+          },
+          {
+            "option_id": "opt_d",
+            "similarity": 0.8074,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B10",
+              "A7",
+              "B14"
+            ]
+          },
+          {
+            "option_id": "opt_e",
+            "similarity": 0.7463,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B10"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": [
+          "The item is very well-constructed. It successfully isolates three different dimensions of understanding (effect of n on SE, effect of SE on CI width, and the probabilistic vs deterministic nature of sample means) and plausibly mixes them to accurately diagnose specific misconceptions."
+        ]
+      }
+    }
+  ],
+  "corpus_evaluation": {
+    "facet_coverage": {
+      "facet_counts": {
+        "A1": 9,
+        "A2": 3,
+        "A3": 1,
+        "A4": 3,
+        "A5": 4,
+        "A6": 7,
+        "A7": 7,
+        "B8": 1,
+        "B9": 2,
+        "B10": 7,
+        "B11": 2,
+        "B12": 1,
+        "B13": 2,
+        "B14": 3,
+        "B15": 3,
+        "B16": 4,
+        "B17": 7
+      },
+      "total_facets_in_map": 17,
+      "covered_facets": 17,
+      "uniformity": 0.9295801271901989
+    },
+    "facet_combination_diversity": {
+      "total_items": 10,
+      "unique_combinations": 10,
+      "combination_ratio": 1.0,
+      "mean_pairwise_jaccard_distance": 0.8685
+    },
+    "problem_diversity": {
+      "structural": {
+        "format_distribution": {
+          "true_false_per_option": 3,
+          "single_select": 7
+        },
+        "format_entropy": 0.8812908992306927,
+        "style_distribution": {
+          "interpretation": 1,
+          "prediction": 6,
+          "conceptual": 3
+        },
+        "style_entropy": 0.8173454221465103
+      },
+      "semantic": {
+        "mean_pairwise_similarity": 0.5976,
+        "max_pairwise_similarity": 0.8802,
+        "most_similar_pair": [
+          "confidence_intervals_2",
+          "confidence_intervals_8"
+        ]
+      }
+    }
+  }
+}

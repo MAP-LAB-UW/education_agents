@@ -1,0 +1,135 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "B12",
+      "B14"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the Central Limit Theorem and the behavior of the sampling distribution as sample size changes. It contrasts the correct understanding that normality is reached as n increases (A2) with the common misconception that the sampling distribution is always normal (B12). Additionally, it incorporates B14 to diagnose a deterministic view of sample means, testing whether students recognize that while a larger sample size reduces standard error, it does not guarantee a closer mean for every individual sample.",
+  "item": {
+    "stem": "Researchers are studying the distribution of annual income in a city, which is known to be highly right-skewed. They are comparing the properties of the sampling distribution of the sample mean for two different sample sizes: n = 5 and n = 100. Which of the following statements is true?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "1",
+        "text": "As the sample size increases from 5 to 100, the sampling distribution of the mean will become more bell-shaped and closer to a normal distribution, rather than mirroring the skewed shape of the population.",
+        "facet_tags": [
+          "A2"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly describes the Central Limit Theorem, which states that as the sample size increases, the sampling distribution of the mean approaches a normal distribution, regardless of the population's shape."
+      },
+      {
+        "id": "2",
+        "text": "The sampling distribution of the mean will be perfectly normal for both n = 5 and n = 100 because the distribution of sample means always follows a normal distribution.",
+        "facet_tags": [
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that the sampling distribution of the mean is always normally distributed, even for small samples from a non-normal population."
+      },
+      {
+        "id": "3",
+        "text": "If a researcher takes one random sample of size n = 100 and one random sample of size n = 5, the mean of the larger sample will always be closer to the true population mean than the mean of the smaller sample.",
+        "facet_tags": [
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "This option demonstrates a deterministic misconception; while larger samples are more likely to be accurate on average, the randomness of sampling means that a specific small sample could be closer to the mean than a specific large sample."
+      },
+      {
+        "id": "4",
+        "text": "Because the sampling distribution is always normal, a single sample mean from a sample of size n = 100 will definitely be more accurate than a single sample mean from a sample of size n = 5.",
+        "facet_tags": [
+          "B12",
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "This option combines two misconceptions: that normality is independent of sample size (B12) and that larger samples are guaranteed to produce closer estimates in every individual instance (B14)."
+      }
+    ],
+    "correct_option_ids": [
+      "1"
+    ],
+    "explanation": "This item tests the student's understanding of how sample size affects the shape and reliability of the sampling distribution of the mean. The correct response identifies the Central Limit Theorem (A2). Distractors target the belief that the sampling distribution is always normal (B12) and the deterministic fallacy that a larger sample size always produces a more accurate mean for any specific sample (B14).",
+    "target_facets": [
+      "A2",
+      "B12",
+      "B14"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "Researchers are studying the distribution of annual income in a city, which is known to be highly right-skewed. They are comparing the properties of the sampling distribution of the sample mean for two different sample sizes: n = 5 and n = 100. Which of the following statements is true?",
+    "option_assessments": [
+      {
+        "option_id": "1",
+        "generator_tags": [
+          "A2"
+        ],
+        "judge_tags": [
+          "A2"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states exactly the principles described in facet A2: as sample size increases, the sampling distribution becomes closer to normal and does not mirror the population distribution."
+      },
+      {
+        "option_id": "2",
+        "generator_tags": [
+          "B12"
+        ],
+        "judge_tags": [
+          "B12"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option explicitly states the misconception that the sampling distribution is always normal regardless of sample size or population distribution, matching B12."
+      },
+      {
+        "option_id": "3",
+        "generator_tags": [
+          "B14"
+        ],
+        "judge_tags": [
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option exhibits the exact misconception described in B14, asserting that for a particular sample, a larger sample size will 'always' yield a sample mean closer to the true population mean."
+      },
+      {
+        "option_id": "4",
+        "generator_tags": [
+          "B12",
+          "B14"
+        ],
+        "judge_tags": [
+          "B12",
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This distractor combines two misconceptions: the belief that the sampling distribution is always normal (B12) and the deterministic fallacy that any particular larger sample is definitely more accurate (B14)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 11.06,
+    "judge_s": 9.73
+  },
+  "created_at": "2026-05-07T22:48:11.197936+00:00"
+}

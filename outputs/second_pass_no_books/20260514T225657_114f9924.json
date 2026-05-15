@@ -1,0 +1,150 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B11",
+      "B13"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the foundational properties of the sampling distribution, which is central to understanding confidence intervals. It contrasts the correct understanding that the sampling distribution's mean equals the population mean regardless of sample size (A3) and its shape approaches normality (A2), against misconceptions that the mean changes with sample size (B13) or that the sampling distribution increasingly resembles the population distribution as sample size grows (B11).",
+  "item": {
+    "stem": "The amount of time spent on social media by teenagers in a certain city is highly right-skewed, with a population mean of 24 hours per week. A researcher takes a random sample of 100 teenagers. Which of the following best describes the shape and mean of the sampling distribution of the sample mean for samples of size n = 100?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The distribution is approximately normal with a mean of 24 hours.",
+        "facet_tags": [
+          "A2",
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "For a sufficiently large sample size (n=100), the Central Limit Theorem dictates that the sampling distribution of the mean will be approximately normal even if the population is skewed (A2). Additionally, the mean of the sampling distribution is always equal to the population mean (A3)."
+      },
+      {
+        "id": "B",
+        "text": "The distribution is highly right-skewed with a mean of 24 hours.",
+        "facet_tags": [
+          "B11",
+          "A3"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly identifies that the mean of the sampling distribution equals the population mean (A3), but mistakenly believes the sampling distribution must mirror the shape of the population distribution (B11), failing to account for the effect of the Central Limit Theorem."
+      },
+      {
+        "id": "C",
+        "text": "The distribution is approximately normal with a mean of 2.4 hours.",
+        "facet_tags": [
+          "A2",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly applies the Central Limit Theorem regarding the normal shape for large samples (A2), but incorrectly believes that the mean of the sampling distribution changes based on sample size (B13), perhaps confusing the calculation for the mean with a calculation related to standard error (e.g., dividing by the square root of n)."
+      },
+      {
+        "id": "D",
+        "text": "The distribution is highly right-skewed with a mean of 2.4 hours.",
+        "facet_tags": [
+          "B11",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "The student holds two common misconceptions: that the sampling distribution must look like the population (B11) and that the mean of the sampling distribution depends on the sample size (B13)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item evaluates student understanding of the sampling distribution of the mean for a skewed population. According to the Central Limit Theorem, for a large sample size (typically n > 30), the sampling distribution of the mean will be approximately normal regardless of the population shape (Goal A2). Furthermore, the mean of the sampling distribution (mu_x-bar) is always equal to the population mean (mu), regardless of sample size (Goal A3). Incorrect options address the misconception that the sampling distribution shape must follow the population shape (Problematic B11) and the misconception that the mean of the distribution is adjusted by the sample size (Problematic B13).",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B11",
+      "B13"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "The amount of time spent on social media by teenagers in a certain city is highly right-skewed, with a population mean of 24 hours per week. A researcher takes a random sample of 100 teenagers. Which of the following best describes the shape and mean of the sampling distribution...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A2",
+          "A3"
+        ],
+        "judge_tags": [
+          "A2",
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies that the sampling distribution is approximately normal for a large sample (A2) and that its mean equals the population mean (A3)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B11",
+          "A3"
+        ],
+        "judge_tags": [
+          "B9",
+          "A3"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The option correctly identifies the mean (A3), but incorrectly states the distribution is right-skewed. This aligns best with B9 (Sampling distribution mirrors population distribution). The generator tagged B11, which assumes the student specifically thinks the large sample size CAUSES it to mirror the population, but B9 is a more direct match for the belief that it simply mirrors the population shape."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A2",
+          "B13"
+        ],
+        "judge_tags": [
+          "A2",
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly applies the central limit theorem for shape (A2) but calculates the mean as 24 / sqrt(100) = 2.4, demonstrating the misconception that the mean of the sampling distribution depends on sample size (B13)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B11",
+          "B13"
+        ],
+        "judge_tags": [
+          "B9",
+          "B13"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "This option combines the misconception that the shape mirrors the population (B9, though B11 is related) and the misconception that the mean depends on the sample size (B13)."
+      }
+    ],
+    "overall_agreement": 0.8,
+    "overall_confidence": 0.95,
+    "issues": [
+      "The generator's use of B11 instead of B9 is a minor conceptual difference. B9 explicitly states 'mirrors population distribution', which directly explains the choice of 'highly right-skewed'. B11 implies a dynamic misunderstanding (as n increases, it gets closer to population). Either way, the item serves as a solid diagnostic tool.",
+      "The distractors using 2.4 are very clever, as they anticipate the student incorrectly applying the standard error formula (dividing by square root of n) to the mean."
+    ]
+  },
+  "timing": {
+    "generator_s": 12.3,
+    "judge_s": 17.82
+  },
+  "created_at": "2026-05-14T22:56:57.445120+00:00"
+}

@@ -1,0 +1,146 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the conceptual definition and interpretation of a confidence interval. It contrasts the correct interpretation of the confidence level as a long-run frequency of successful captures (A4) against the common probability misconception (B15). Additionally, it tests whether students understand that the interval targets the population parameter (A5) rather than sample statistics or raw data (B16). This creates a coherent diagnostic item about what a confidence interval 'tells' a researcher.",
+  "item": {
+    "stem": "A researcher investigates the study habits of university students and finds that a random sample of 64 students has a mean study time of 15.0 hours per week. A 95% confidence interval for the population mean is calculated to be (13.2, 16.8) hours. Which of the following is a correct interpretation of this interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "We are 95% confident that the population mean study time for all students at the university is between 13.2 and 16.8 hours per week.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies that the confidence interval is used to estimate a population parameter (the mean study time for all students) and uses the standard frequentist 'confidence' phrasing which correctly implies the reliability of the estimation process over repeated sampling."
+      },
+      {
+        "id": "opt_2",
+        "text": "There is a 95% probability that the population mean study time for all students at the university is between 13.2 and 16.8 hours per week.",
+        "facet_tags": [
+          "A5",
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "While this option correctly identifies the population mean as the target of the inference, it incorrectly uses 'probability' to describe a specific, calculated interval. In frequentist statistics, once an interval is fixed, the population mean is either inside it or not; the 95% refers to the long-run success rate of the method, not the probability of a single interval."
+      },
+      {
+        "id": "opt_3",
+        "text": "Approximately 95% of the students in the researcher's sample reported studying between 13.2 and 16.8 hours per week.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option represents a common misconception where students believe the confidence interval describes the distribution of the sample data (the individual observations) rather than providing an estimate for the population mean."
+      },
+      {
+        "id": "opt_4",
+        "text": "There is a 95% chance that a randomly selected student from the university studies between 13.2 and 16.8 hours per week.",
+        "facet_tags": [
+          "B15",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option combines two misconceptions: it uses probabilistic language for a fixed range (B15) and incorrectly applies the confidence interval to individual scores or 'true scores' rather than the population parameter (B16)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "This item assesses whether students can distinguish between the correct interpretation of a confidence interval and common misconceptions. The correct interpretation (A) focuses on the population mean and uses the concept of confidence. Distractor B highlights the misconception that confidence is a probability for a specific interval (B15). Distractor C incorrectly suggests the interval describes sample data (B16). Distractor D incorrectly suggests the interval predicts individual values (B16) and uses probabilistic language (B15).",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher investigates the study habits of university students and finds that a random sample of 64 students has a mean study time of 15.0 hours per week. A 95% confidence interval for the population mean is calculated to be (13.2, 16.8) hours. Which of the following is a correct interpretation of this interval?",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A4",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The option correctly identifies the population parameter (A5) and uses the standard 'confident' terminology to avoid the probability misconception, which serves as a proxy for the frequentist confidence level interpretation (A4), although it doesn't explicitly mention repeated sampling."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "A5",
+          "B15"
+        ],
+        "judge_tags": [
+          "A5",
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly targets the population mean (A5) but incorrectly applies the word 'probability' to a fixed interval, demonstrating the misconception in B15."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option misinterprets the interval as the range containing 95% of the sample data, directly demonstrating facet B16."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B15",
+          "B16"
+        ],
+        "judge_tags": [
+          "B15",
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option uses 'chance' (probability) indicating B15, and applies the interval to an individual student's score rather than the population parameter, indicating B16."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.95,
+    "issues": [
+      "While opt_1 is considered the standard 'correct' shorthand in many introductory courses, it does not explicitly demonstrate an understanding of the 'percentage of times (implications of replications)' as strictly defined in facet A4. However, it functions correctly by process of elimination against B15."
+    ]
+  },
+  "timing": {
+    "generator_s": 32.0,
+    "judge_s": 13.78
+  },
+  "created_at": "2026-05-14T22:58:47.948513+00:00"
+}

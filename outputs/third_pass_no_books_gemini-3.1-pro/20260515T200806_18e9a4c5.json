@@ -1,0 +1,200 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A5",
+      "A6",
+      "B16",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-pro-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination perfectly structures a 2x2 diagnostic item testing two fundamental concepts of confidence intervals: what the interval estimates (population parameter vs. sample statistic) and how confidence level affects the interval's width (wider vs. narrower). It contrasts the correct understandings (A5, A6) with their direct misconceptions (B16, B17), allowing for a highly coherent and discriminatory multiple-choice question.",
+  "item": {
+    "stem": "A biologist calculates a 90% confidence interval for the average lifespan of a particular species of bird in the wild. The resulting interval is (4.2 years, 5.8 years). The biologist then decides to construct a 99% confidence interval using the exact same sample data. Which of the following statements correctly describes how the width of the new 99% confidence interval will compare to the 90% confidence interval, and what the interval is intended to estimate?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The 99% confidence interval will be wider than the 90% interval, and it estimates the true average lifespan of all birds of this species in the wild.",
+        "facet_tags": [
+          "A5",
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "Correct. Increasing the confidence level from 90% to 99% increases the critical value, leading to a wider interval. Additionally, confidence intervals are used to estimate the unknown population parameter (true average lifespan of all birds of this species in the wild), not the sample statistic."
+      },
+      {
+        "id": "B",
+        "text": "The 99% confidence interval will be narrower than the 90% interval, and it estimates the true average lifespan of all birds of this species in the wild.",
+        "facet_tags": [
+          "A5",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "Incorrect. While this option correctly identifies that the interval estimates the true population parameter, it incorrectly states that a higher confidence level results in a narrower interval. A higher confidence level requires a wider interval."
+      },
+      {
+        "id": "C",
+        "text": "The 99% confidence interval will be wider than the 90% interval, and it estimates the average lifespan of the birds in the biologist's sample.",
+        "facet_tags": [
+          "A6",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "Incorrect. While this option correctly identifies that a higher confidence level results in a wider interval, it incorrectly states that the interval estimates the sample mean. The sample mean is already known and does not need to be estimated."
+      },
+      {
+        "id": "D",
+        "text": "The 99% confidence interval will be narrower than the 90% interval, and it estimates the average lifespan of the birds in the biologist's sample.",
+        "facet_tags": [
+          "B16",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "Incorrect. This option incorrectly states that a higher confidence level results in a narrower (more precise) interval, and it also incorrectly claims that the interval estimates the sample mean instead of the population mean."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item assesses two key concepts regarding confidence intervals: the effect of the confidence level on the interval's width, and the fundamental purpose of the interval itself. To achieve a higher confidence level (e.g., going from 90% to 99%), the interval must be made wider to capture the true parameter more frequently in repeated sampling (addressing facets A6 and B17). Furthermore, confidence intervals are constructed specifically to estimate an unknown population parameter, not a sample statistic, which is already known precisely from the sample data (addressing facets A5 and B16).",
+    "target_facets": [
+      "A5",
+      "A6",
+      "B16",
+      "B17"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A biologist calculates a 90% confidence interval for the average lifespan of a particular species of bird... Which of the following statements correctly describes how the width of the new 99% confidence interval will compare...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A5",
+          "A6"
+        ],
+        "judge_tags": [
+          "A5",
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that the interval will be wider (A6) and that it estimates the true population parameter (A5)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A5",
+          "B17"
+        ],
+        "judge_tags": [
+          "A5",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies that the interval estimates the true population parameter (A5) but incorrectly states that a higher confidence level leads to a narrower interval (B17)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A6",
+          "B16"
+        ],
+        "judge_tags": [
+          "A6",
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that a higher confidence level results in a wider interval (A6) but incorrectly claims that the interval estimates the sample statistic (B16)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B16",
+          "B17"
+        ],
+        "judge_tags": [
+          "B16",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option incorrectly states that a higher confidence level results in a narrower interval (B17) and incorrectly claims that it estimates the sample average (B16)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 3,
+    "latency_similarity": 0.622,
+    "latency_bucket": "latent",
+    "latency_option_details": [
+      {
+        "option_id": "A",
+        "similarity": 0.577,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A5",
+          "A6"
+        ]
+      },
+      {
+        "option_id": "B",
+        "similarity": 0.6423,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A5",
+          "B17"
+        ]
+      },
+      {
+        "option_id": "C",
+        "similarity": 0.6084,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A6",
+          "B16"
+        ]
+      },
+      {
+        "option_id": "D",
+        "similarity": 0.6604,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "B16",
+          "B17"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 23.63,
+    "judge_s": 9.97,
+    "eval_s": 13.96
+  },
+  "created_at": "2026-05-15T20:08:06.206583+00:00"
+}

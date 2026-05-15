@@ -1,0 +1,188 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "A6",
+      "B15",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-pro-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination conceptually links the interpretation of the confidence level with its impact on the interval's width. It contrasts the correct long-run frequency interpretation of confidence levels (A4) and the correct relationship between confidence level and interval width (A6) with two prevalent misconceptions: interpreting confidence levels as exact probabilities for a single interval (B15) and believing that higher confidence yields a more precise, narrower interval (B17).",
+  "item": {
+    "stem": "A researcher calculates a 90% confidence interval for the mean weight of a population of penguins and finds it to be (12.5 kg, 14.2 kg). They are now considering calculating a 95% confidence interval using the exact same sample. For each of the following statements, indicate whether it is true or false.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "opt_A",
+        "text": "If the researcher calculates a 95% confidence interval from the same sample, the interval will be narrower than the 90% confidence interval.",
+        "facet_tags": [
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This statement is false. It reflects the misconception that higher confidence implies higher precision (a narrower interval). In reality, to be more confident that an interval captures the true parameter, the interval must be wider."
+      },
+      {
+        "id": "opt_B",
+        "text": "If the researcher calculates a 95% confidence interval from the same sample, the interval will be wider than the 90% confidence interval.",
+        "facet_tags": [
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "This statement is true. Increasing the confidence level requires a larger critical value, which increases the margin of error and makes the confidence interval wider."
+      },
+      {
+        "id": "opt_C",
+        "text": "The 90% confidence interval of (12.5 kg, 14.2 kg) means there is a 90% probability that the true population mean weight lies between 12.5 kg and 14.2 kg.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This statement is false. It reflects the common misconception that a specific calculated confidence interval has a given probability of containing the true parameter. Once calculated, the specific interval either contains the mean or it doesn't; the 90% refers to the success rate of the method itself, not a probability for a single interval."
+      },
+      {
+        "id": "opt_D",
+        "text": "The 90% confidence level means that if the researcher were to take many random samples of the same size and construct a 90% confidence interval from each, approximately 90% of those intervals would contain the true population mean weight.",
+        "facet_tags": [
+          "A4"
+        ],
+        "is_correct": true,
+        "rationale": "This statement is true. This is the correct frequentist interpretation of a confidence level, framing it as the success rate of the interval estimation method over many repeated samples."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_B",
+      "opt_D"
+    ],
+    "explanation": "This item probes students' understanding of confidence levels, specifically how to interpret them and how they affect the width of a confidence interval. Option A addresses the misconception that higher confidence yields a more precise, narrower interval (B17), while Option B represents the correct understanding that higher confidence requires a wider interval to capture the parameter (A6). Option C tests the common misconception that a confidence level represents the probability that a specifically calculated interval contains the population parameter (B15). Option D provides the correct frequentist interpretation of a confidence level as the long-run capture rate of the interval construction method across many replications (A4).",
+    "target_facets": [
+      "A4",
+      "A6",
+      "B15",
+      "B17"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher calculates a 90% confidence interval for the mean weight of a population of penguins...",
+    "option_assessments": [
+      {
+        "option_id": "opt_A",
+        "generator_tags": [
+          "B17"
+        ],
+        "judge_tags": [
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states that a higher confidence level leads to a narrower interval, which perfectly aligns with the misconception described in facet B17."
+      },
+      {
+        "option_id": "opt_B",
+        "generator_tags": [
+          "A6"
+        ],
+        "judge_tags": [
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that a higher confidence level results in a wider interval. This directly demonstrates the understanding outlined in facet A6."
+      },
+      {
+        "option_id": "opt_C",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option presents the classic misconception that a calculated confidence interval gives the probability of the population mean being in that specific interval, exactly matching facet B15."
+      },
+      {
+        "option_id": "opt_D",
+        "generator_tags": [
+          "A4"
+        ],
+        "judge_tags": [
+          "A4"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option presents the correct frequentist interpretation of confidence level (the proportion of intervals from repeated sampling that would contain the parameter), matching facet A4."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": [
+      "Options A and B are mutually exclusive opposites testing the exact same relationship between confidence level and interval width. In a True/False matrix, this is slightly redundant, as knowing the answer to one guarantees knowing the answer to the other.",
+      "Similarly, Options C and D contrast the incorrect and correct definitions of confidence levels, making them largely inverse statements."
+    ]
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 4,
+    "naturalness_overall": 4,
+    "latency_score": 3,
+    "latency_similarity": 0.6554,
+    "latency_bucket": "latent",
+    "latency_option_details": [
+      {
+        "option_id": "opt_A",
+        "similarity": 0.7563,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "B17"
+        ]
+      },
+      {
+        "option_id": "opt_B",
+        "similarity": 0.6808,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A6"
+        ]
+      },
+      {
+        "option_id": "opt_C",
+        "similarity": 0.5699,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "B15"
+        ]
+      },
+      {
+        "option_id": "opt_D",
+        "similarity": 0.6146,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A4"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 24.58,
+    "judge_s": 11.39,
+    "eval_s": 17.05
+  },
+  "created_at": "2026-05-15T20:09:13.101340+00:00"
+}

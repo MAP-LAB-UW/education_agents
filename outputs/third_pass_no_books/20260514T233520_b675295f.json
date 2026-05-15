@@ -1,0 +1,119 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B14",
+      "B15"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 5,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection connects the impact of sample size on standard error (A1) to the resulting confidence interval width (A7). It includes distractors targeting the 'deterministic' view of larger samples (B14) and the persistent probability misinterpretation of confidence levels (B15), providing a comprehensive check of student understanding of how sample size affects inference.",
+  "item": {
+    "stem": "A city planner is studying the commute times of residents. The population standard deviation is known to be 10 minutes. Researcher A takes a random sample of 25 residents and finds a sample mean of 32 minutes, which results in a 95% confidence interval for the mean of (28.1, 35.9) minutes. Researcher B takes a random sample of 100 residents from the same population and also calculates a 95% confidence interval. Which of the following is true?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "There is a 95% probability that the actual population mean commute time is between 28.1 and 35.9 minutes.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This student incorrectly treats the confidence level as a probability for a specific fixed interval that has already been calculated. They do not understand that for a specific interval, the population mean is either inside it or not; the probability is either 0 or 1."
+      },
+      {
+        "id": "opt_2",
+        "text": "Researcher B's sample mean is guaranteed to be closer to the population mean than 32, because larger samples are always more accurate than smaller samples.",
+        "facet_tags": [
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "This student understands that larger samples are generally more reliable but fails to account for the randomness inherent in any single sample, incorrectly believing that a larger sample must always be more accurate than a smaller one in every instance."
+      },
+      {
+        "id": "opt_3",
+        "text": "Researcher B's 95% confidence interval will be narrower than (28.1, 35.9) because the larger sample size decreases the standard error of the mean.",
+        "facet_tags": [
+          "A1",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "This student correctly applies the relationship between sample size and standard error (A1), and the relationship between standard error and confidence interval width (A7), correctly predicting that a larger n leads to a smaller SE and a narrower interval."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_3"
+    ],
+    "explanation": "In a 95% confidence interval, the width is calculated as twice the margin of error (2 * Z * standard error). As the sample size (n) increases from 25 to 100, the standard error (sigma / sqrt(n)) decreases (facet A1). Because the confidence interval width is directly dependent on the standard error, this decrease results in a narrower interval (facet A7). Option A is incorrect because the 95% confidence level describes the process of interval construction, not the probability of a specific fixed interval containing the parameter (misconception B15). Option B is incorrect because while larger samples generally produce more precise estimates, sampling variability means a larger sample's mean is not guaranteed to be closer to the truth than a smaller sample's mean in any specific case (misconception B14).",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B14",
+      "B15"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A city planner is studying the commute times of residents...",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option explicitly states that there is a 95% probability that the actual population mean falls within the calculated interval, perfectly matching the misconception described in B15."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B14"
+        ],
+        "judge_tags": [
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option expresses the incorrect belief that a larger sample will always guarantee a sample mean closer to the population mean, reflecting misconception B14."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "A1",
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option correctly states that a larger sample size decreases standard error (A1), and connects the decreased standard error to a narrower confidence interval width (A7)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": [
+      "The item only has three options; standard multiple-choice items often require four or five options to reduce guessing probability."
+    ]
+  },
+  "timing": {
+    "generator_s": 38.67,
+    "judge_s": 8.97
+  },
+  "created_at": "2026-05-14T23:35:20.329055+00:00"
+}

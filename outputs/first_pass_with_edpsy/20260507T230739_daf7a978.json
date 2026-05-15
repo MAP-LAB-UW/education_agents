@@ -1,0 +1,142 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A5",
+      "A7",
+      "B8",
+      "B16"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection addresses the fundamental concepts of what a confidence interval estimates and how its margin of error is derived. By combining A5 and B16, the item distinguishes between population parameters and sample statistics as the target of inference. By including A7 and B8, it diagnoses whether students understand that the interval width is governed by the standard error (the variability of the sampling distribution) rather than simply the variability within the sample itself.",
+  "item": {
+    "stem": "A researcher studies the daily social media usage of teenagers. From a random sample of 64 teenagers, she calculates a 95% confidence interval for the mean of (3.2, 4.8) hours per day. Which of the following statements correctly describes this interval or the factors affecting its width?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "The interval provides a range of plausible values for the true population mean; if the standard error of the mean were larger, the resulting interval would be wider.",
+        "facet_tags": [
+          "A5",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "This option is correct because it identifies the population parameter as the object of inference (A5) and correctly describes the direct relationship between the standard error and the interval width (A7)."
+      },
+      {
+        "id": "opt_b",
+        "text": "We are 95% confident that the mean social media usage of the 64 teenagers in this researcher's sample is between 3.2 and 4.8 hours.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option addresses the misconception that a confidence interval is used to estimate a known sample statistic (B16) rather than an unknown population parameter."
+      },
+      {
+        "id": "opt_c",
+        "text": "The interval indicates that 95% of the teenagers in the researcher's sample spend between 3.2 and 4.8 hours on social media daily.",
+        "facet_tags": [
+          "B8",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option diagnoses both the confusion between a confidence interval for the mean and the distribution of individual scores (B8) and the belief that a CI estimates sample data points (B16)."
+      },
+      {
+        "id": "opt_d",
+        "text": "The interval represents the spread of individual scores in the sample, because the sampling distribution is identical to the distribution of the 64 collected scores.",
+        "facet_tags": [
+          "B8",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option directly targets the misconception that the sampling distribution is identical to the sample distribution (B8) and that the CI's purpose is to describe individual scores within that sample (B16)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_a"
+    ],
+    "explanation": "This item evaluates students' understanding of the purpose and properties of confidence intervals. The correct option (A) identifies the target of the CI as the population parameter (A5) and recognizes that interval width increases with the standard error (A7). Distractor B identifies a common misconception where students believe the CI estimates the sample mean (B16). Distractors C and D test the confusion between the sampling distribution of the mean and the sample distribution (B8), as well as the incorrect belief that CIs describe individual data points or sample statistics (B16).",
+    "target_facets": [
+      "A5",
+      "A7",
+      "B8",
+      "B16"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher studies the daily social media usage of teenagers. From a random sample of 64 teenagers, she calculates a 95% confidence interval for the mean of (3.2, 4.8) hours per day. Which of the following statements correctly describes this interval or the factors affecting its width?",
+    "option_assessments": [
+      {
+        "option_id": "opt_a",
+        "generator_tags": [
+          "A5",
+          "A7"
+        ],
+        "judge_tags": [
+          "A5",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that the interval is for the true population mean (A5) and that a larger standard error would result in a wider interval (A7)."
+      },
+      {
+        "option_id": "opt_b",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option incorrectly applies the confidence interval to the sample mean, perfectly reflecting the misconception in B16."
+      },
+      {
+        "option_id": "opt_c",
+        "generator_tags": [
+          "B8",
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "This option illustrates the misconception that a CI captures the spread of the sample data points, which aligns directly with B16. While it implies confusion about the difference between a sample distribution and a sampling distribution (B8), the option does not explicitly mention sampling distributions."
+      },
+      {
+        "option_id": "opt_d",
+        "generator_tags": [
+          "B8",
+          "B16"
+        ],
+        "judge_tags": [
+          "B8",
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly equates the sampling distribution with the distribution of the collected scores (B8) and claims the interval represents the spread of individual scores in the sample (B16)."
+      }
+    ],
+    "overall_agreement": 0.88,
+    "overall_confidence": 0.97,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 39.7,
+    "judge_s": 14.45
+  },
+  "created_at": "2026-05-07T23:07:39.538314+00:00"
+}

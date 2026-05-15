@@ -1,0 +1,148 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B12",
+      "B13"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This facet combination focuses on the structural properties of the sampling distribution of the mean, specifically its shape and center. It evaluates whether students understand how the sampling distribution behaves as sample size increases according to the Central Limit Theorem (A2, A3) versus common misconceptions that the distribution is always normal regardless of sample size (B12) or that the mean of the sampling distribution is affected by the size of the samples (B13).",
+  "item": {
+    "stem": "A researcher is studying household energy consumption in a city. The population distribution of energy usage is known to be highly right-skewed with a population mean of μ = 450 kWh. If the researcher repeatedly draws random samples of size n to create the sampling distribution of the sample mean (ᄁ), which of the following best describes how the properties of this sampling distribution change as the sample size n increases?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "The distribution of ᄁ will become more bell-shaped (normal) and will be centered at 450 kWh regardless of the sample size.",
+        "facet_tags": [
+          "A2",
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct interpretation of the Central Limit Theorem. As n increases, the sampling distribution of the mean approaches a normal distribution (A2), and the mean of the sampling distribution is always equal to the population mean μ (A3)."
+      },
+      {
+        "id": "opt_2",
+        "text": "The distribution of ᄁ is always perfectly normal even for very small samples, and its mean will consistently be 450 kWh.",
+        "facet_tags": [
+          "B12",
+          "A3"
+        ],
+        "is_correct": false,
+        "rationale": "This option correctly identifies the mean (A3) but incorrectly assumes that the sampling distribution is normal regardless of the sample size or the underlying population shape (B12), ignoring that for skewed populations, n must be sufficiently large for normality."
+      },
+      {
+        "id": "opt_3",
+        "text": "The distribution of ᄁ will become more bell-shaped, but the mean of the sampling distribution will only shift to 450 kWh as n becomes very large.",
+        "facet_tags": [
+          "A2",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "While this correctly identifies the move toward normality (A2), it incorrectly suggests that the mean of the sampling distribution depends on or changes with the sample size (B13). The mean of the sampling distribution is μ for any n."
+      },
+      {
+        "id": "opt_4",
+        "text": "The distribution of ᄁ is always perfectly normal, but its center depends on the sample size n used by the researcher.",
+        "facet_tags": [
+          "B12",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "This option combines two misconceptions: that the sampling distribution is always normal regardless of n or population shape (B12), and that the center of the sampling distribution is determined by the sample size (B13)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "This item evaluates students' understanding of the Central Limit Theorem and the properties of sampling distributions. The correct answer (opt_1) demonstrates that the sampling distribution's shape approaches normality as sample size increases (A2) and that its mean remains equal to the population mean (A3). Distractors address the misconception that the sampling distribution is automatically normal regardless of size (B12) and the misconception that the mean of the sampling distribution changes as a function of sample size (B13).",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B12",
+      "B13"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is studying household energy consumption in a city. The population distribution of energy usage is known to be highly right-skewed with a population mean of μ = 450 kWh. If the researcher repeatedly draws random samples of size n to create the sampling distribution of the sample mean (ᄁ), which of the following best describes how the properties of this sampling distribution change as the sample size n increases?",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A2",
+          "A3"
+        ],
+        "judge_tags": [
+          "A2",
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly indicates that the sampling distribution becomes more bell-shaped/normal as sample size increases (A2) and that its center is always equal to the population mean (450 kWh) regardless of the sample size (A3)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B12",
+          "A3"
+        ],
+        "judge_tags": [
+          "B12",
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option expresses the misconception that the sampling distribution is always perfectly normal regardless of sample size or population shape (B12), but correctly identifies that its mean equals the population mean (A3)."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "A2",
+          "B13"
+        ],
+        "judge_tags": [
+          "A2",
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly indicates that the shape becomes more bell-shaped as sample size increases (A2), but includes the misconception that the mean of the sampling distribution depends on the sample size (B13)."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B12",
+          "B13"
+        ],
+        "judge_tags": [
+          "B12",
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option combines two misconceptions: that the sampling distribution is always perfectly normal (B12) and that its center depends on the sample size (B13)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": [
+      "There is an encoding error or typo in the stem and the options regarding the symbol for the sample mean ('ᄁ' is used instead of the standard x-bar or 'X̄'). This should be fixed to prevent confusion."
+    ]
+  },
+  "timing": {
+    "generator_s": 8.74,
+    "judge_s": 14.84
+  },
+  "created_at": "2026-05-07T23:05:28.113441+00:00"
+}

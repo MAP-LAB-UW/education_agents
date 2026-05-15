@@ -1,0 +1,149 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A5",
+      "B10",
+      "B16"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection focuses on how sample size influences the precision of the sampling distribution (A1, B10) and checks for common misconceptions regarding the target of a confidence interval (A5, B16). By combining these, the item can diagnose whether students correctly associate larger sample sizes with decreased standard error while also distinguishing between population parameters and sample statistics.",
+  "item": {
+    "stem": "A researcher is constructing a 95% confidence interval for the mean height of a specific tree species. If the researcher increases the sample size from n=40 to n=400, which of the following best describes the resulting change in the confidence interval and what it represents?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The confidence interval will likely become narrower because the sampling distribution becomes more packed around the mean, and the interval provides a range of plausible values for the true population mean.",
+        "facet_tags": [
+          "A1",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This option is correct because it identifies that increasing the sample size reduces the standard error, making the sampling distribution more packed (A1), and correctly states that the purpose of a confidence interval is to estimate the population parameter (A5)."
+      },
+      {
+        "id": "B",
+        "text": "The confidence interval will likely become narrower because the standard error of the sampling distribution decreases, and it defines the range containing 95% of the individual tree heights in the researcher's sample.",
+        "facet_tags": [
+          "A1",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "While this option correctly identifies that the interval narrows due to a smaller standard error (A1), it incorrectly claims the confidence interval is used to describe the range of individual data points in the sample rather than the population parameter (B16)."
+      },
+      {
+        "id": "C",
+        "text": "The confidence interval will likely become wider because a larger sample size captures more individual variation, making the sampling distribution more spread out, though it still estimates the true population mean.",
+        "facet_tags": [
+          "A5",
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "This option correctly identifies the target of the CI as the population mean (A5), but it exhibits the misconception that larger sample sizes increase the spread of the sampling distribution (B10), which would lead to a wider interval."
+      },
+      {
+        "id": "D",
+        "text": "The confidence interval will likely become wider because the sampling distribution is more spread out with more data, and the interval is now 95% likely to include the sample mean from the previous smaller study.",
+        "facet_tags": [
+          "B10",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option combines two misconceptions: that a larger sample size leads to a more spread-out sampling distribution (B10) and that the confidence interval is intended to estimate or capture a specific sample statistic (the previous mean) rather than a population parameter (B16)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "The item assesses the student's understanding of how sample size affects the width of a confidence interval (CI) via the standard error of the sampling distribution, and the purpose of the CI itself. A correct response (A) requires knowing that a larger sample size leads to a smaller standard error (making the distribution 'more packed' - A1) and that the CI estimates a population parameter (A5). Distractors target the belief that more data increases the spread of the sampling distribution (B10) and the common confusion that a CI describes sample data or sample statistics rather than population parameters (B16).",
+    "target_facets": [
+      "A1",
+      "A5",
+      "B10",
+      "B16"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is constructing a 95% confidence interval for the mean height of a specific tree species. If the researcher increases the sample size from n=40 to n=400, which of the following best describes the resulting change in the confidence interval and what it represents?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1",
+          "A5"
+        ],
+        "judge_tags": [
+          "A1",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that a larger sample size makes the sampling distribution more packed (A1) and that the CI provides plausible values for the true population mean (A5)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A1",
+          "B16"
+        ],
+        "judge_tags": [
+          "A1",
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly associates a larger sample size with a decreased standard error (A1), but incorrectly states that the CI defines the range of 95% of individual heights in the sample, which is a misunderstanding that CI captures sample data (B16)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A5",
+          "B10"
+        ],
+        "judge_tags": [
+          "A5",
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly notes that the CI estimates the true population mean (A5), but incorrectly asserts that a larger sample size makes the sampling distribution more spread out (B10)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B10",
+          "B16"
+        ],
+        "judge_tags": [
+          "B10",
+          "B15",
+          "B16"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The option exhibits the misconception that more data makes the sampling distribution more spread out (B10) and that the CI captures sample statistics (B16). Additionally, the phrasing '95% likely to include' exhibits the misconception of interpreting the CI as a probability (B15)."
+      }
+    ],
+    "overall_agreement": 0.75,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Option D contains the phrase '95% likely to include', which triggers facet B15 (interpreting CI as probabilities), but this was not captured in the generator's tags."
+    ]
+  },
+  "timing": {
+    "generator_s": 14.82,
+    "judge_s": 15.35
+  },
+  "created_at": "2026-05-07T23:01:03.231945+00:00"
+}

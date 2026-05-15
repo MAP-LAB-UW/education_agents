@@ -1,0 +1,276 @@
+#!/usr/bin/env python3
+"""Evaluate expert examples from the facet map using item-level and corpus-level rubrics."""
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+
+from education_agents.evaluation.correctness import evaluate_correctness
+from education_agents.evaluation.corpus_metrics import evaluate_corpus
+from education_agents.evaluation.facet_latency import _get_model, evaluate_facet_latency
+from education_agents.evaluation.naturalness import evaluate_naturalness
+from education_agents.evaluation.schemas import ItemEvaluation
+from education_agents.facets import load_facet_map
+from education_agents.schemas import (
+    GeneratedItem,
+    GenerationRequest,
+    JudgeReport,
+    Option,
+    OptionAssessment,
+    RunArtifact,
+)
+
+
+def expert_to_generated_item(example, index: int) -> GeneratedItem:
+    options = [
+        Option(
+            id=o.id,
+            text=o.text,
+            facet_tags=o.facet_tags,
+            is_correct=o.is_correct,
+            rationale="Expert-authored option",
+        )
+        for o in example.options
+    ]
+    correct_ids = [o.id for o in example.options if o.is_correct]
+    all_tags = set()
+    for o in example.options:
+        all_tags.update(o.facet_tags)
+
+    return GeneratedItem(
+        stem=example.stem,
+        response_format=example.response_format,
+        options=options,
+        correct_option_ids=correct_ids,
+        explanation="Expert-authored item",
+        target_facets=sorted(all_tags),
+    )
+
+
+def item_to_stub_artifact(item: GeneratedItem, topic: str, index: int) -> RunArtifact:
+    stub_assessments = [
+        OptionAssessment(
+            option_id=o.id,
+            generator_tags=o.facet_tags,
+            judge_tags=o.facet_tags,
+            agreement="match",
+            confidence=1.0,
+            reasoning="Expert-authored",
+        )
+        for o in item.options
+    ]
+    return RunArtifact(
+        request=GenerationRequest(
+            topic=topic,
+            target_facets=item.target_facets,
+            response_format=item.response_format,
+        ),
+        models={"generator": "expert", "judge": "n/a"},
+        item=item,
+        judge_report=JudgeReport(
+            item_stem_preview=item.stem[:60],
+            option_assessments=stub_assessments,
+            overall_agreement=1.0,
+            overall_confidence=1.0,
+            issues=[],
+        ),
+        timing={"generator_s": 0, "judge_s": 0},
+        created_at=f"expert_{index+1}",
+    )
+
+
+def print_item_results(results: list[ItemEvaluation], has_llm: bool):
+    n = len(results)
+
+    print("\n" + "=" * 70)
+    print("  EXPERT EXAMPLES — ITEM SUMMARY")
+    print("=" * 70)
+
+    if has_llm:
+        n_correct = sum(1 for r in results if r.correctness.is_correct)
+        mean_natural = sum(r.naturalness.overall_score for r in results) / n
+        print(f"  Correctness: {n_correct}/{n} ({n_correct/n:.0%})")
+        print(f"  Naturalness: {mean_natural:.1f}/5")
+
+    mean_latency = sum(r.facet_latency.score for r in results) / n
+    mean_sim = sum(r.facet_latency.mean_similarity for r in results) / n
+    print(f"  Facet Latency: {mean_latency:.1f}/4 (mean sim={mean_sim:.3f})")
+
+    for r in results:
+        fl = r.facet_latency
+        line = f"    {r.source}: {fl.score}/4 ({fl.bucket}, sim={fl.mean_similarity:.3f})"
+        if has_llm:
+            c = "PASS" if r.correctness.is_correct else "FAIL"
+            line += f"  correct={c}  natural={r.naturalness.overall_score}/5"
+        print(line)
+
+
+def print_corpus_results(corpus):
+    print("\n" + "=" * 70)
+    print("  EXPERT EXAMPLES — CORPUS METRICS")
+    print("=" * 70)
+
+    fc = corpus.facet_coverage
+    print(f"\n  Facet Coverage:")
+    print(f"    Covered: {fc.covered_facets}/{fc.total_facets_in_map} facets")
+    print(f"    Uniformity: {fc.uniformity:.3f} (1.0 = perfectly uniform)")
+    print(f"    Counts:")
+    for fid, count in sorted(fc.facet_counts.items()):
+        bar = "#" * count
+        print(f"      {fid:4s}: {bar} ({count})")
+
+    fcd = corpus.facet_combination_diversity
+    print(f"\n  Facet Combination Diversity:")
+    print(f"    Unique combos: {fcd.unique_combinations}/{fcd.total_items} ({fcd.combination_ratio:.0%})")
+    print(f"    Mean pairwise Jaccard distance: {fcd.mean_pairwise_jaccard_distance:.3f}")
+
+    pd = corpus.problem_diversity
+    print(f"\n  Problem Diversity (Structural):")
+    print(f"    Format entropy: {pd.structural.format_entropy:.3f}")
+    for fmt, count in sorted(pd.structural.format_distribution.items()):
+        print(f"      {fmt}: {count}")
+    print(f"    Style entropy: {pd.structural.style_entropy:.3f}")
+    for style, count in sorted(pd.structural.style_distribution.items()):
+        print(f"      {style}: {count}")
+
+    print(f"\n  Problem Diversity (Semantic):")
+    print(f"    Mean pairwise stem similarity: {pd.semantic.mean_pairwise_similarity:.3f}")
+    print(f"    Max pairwise stem similarity:  {pd.semantic.max_pairwise_similarity:.3f}")
+    if pd.semantic.most_similar_pair:
+        print(f"    Most similar pair: {pd.semantic.most_similar_pair}")
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Evaluate expert examples from the facet map."
+    )
+    parser.add_argument(
+        "--topic",
+        default="confidence_intervals",
+        help="Topic name for facet map lookup",
+    )
+    parser.add_argument(
+        "--eval-model",
+        default=None,
+        help="Model for LLM-based rubrics",
+    )
+    parser.add_argument(
+        "--skip-llm",
+        action="store_true",
+        help="Skip LLM-based rubrics (correctness, naturalness) — only run facet latency",
+    )
+    parser.add_argument(
+        "--skip-item",
+        action="store_true",
+        help="Skip item-level evaluation (only run corpus metrics)",
+    )
+    parser.add_argument(
+        "--skip-corpus",
+        action="store_true",
+        help="Skip corpus-level evaluation (only run item metrics)",
+    )
+    parser.add_argument(
+        "--out",
+        default=None,
+        help="Output JSON file for results",
+    )
+    args = parser.parse_args()
+
+    facet_map = load_facet_map(args.topic)
+    print(f"Loaded {len(facet_map.examples)} expert examples for topic '{args.topic}'")
+
+    items = [expert_to_generated_item(ex, i) for i, ex in enumerate(facet_map.examples)]
+    artifacts = [item_to_stub_artifact(item, args.topic, i) for i, item in enumerate(items)]
+
+    item_results: list[ItemEvaluation] = []
+    if not args.skip_item:
+        embed_model = _get_model()
+        print("\nRunning item-level evaluation...")
+        for i, item in enumerate(items):
+            print(f"  [{i+1}/{len(items)}] {item.stem[:60]}...")
+
+            correctness = None
+            naturalness = None
+            if not args.skip_llm:
+                correctness = evaluate_correctness(item, model=args.eval_model)
+                naturalness = evaluate_naturalness(item, model=args.eval_model)
+            latency = evaluate_facet_latency(item, facet_map, model=embed_model)
+
+            item_results.append(ItemEvaluation(
+                source=f"expert_{i+1}",
+                correctness=correctness or _dummy_correctness(item),
+                naturalness=naturalness or _dummy_naturalness(),
+                facet_latency=latency,
+            ))
+
+            if correctness and naturalness:
+                correct_mark = "PASS" if correctness.is_correct else "FAIL"
+                print(f"    correct={correct_mark}  natural={naturalness.overall_score}/5  latency={latency.score}/4 ({latency.bucket})")
+            else:
+                print(f"    latency={latency.score}/4 ({latency.bucket}, sim={latency.mean_similarity:.3f})")
+
+        print_item_results(item_results, has_llm=not args.skip_llm)
+
+    corpus_result = None
+    if not args.skip_corpus:
+        print("\nRunning corpus-level evaluation...")
+        corpus_result = evaluate_corpus(
+            artifacts, facet_map, eval_model=args.eval_model
+        )
+        print_corpus_results(corpus_result)
+
+    if args.out:
+        output = {
+            "source": "expert_examples",
+            "topic": args.topic,
+            "n_items": len(items),
+        }
+        if item_results:
+            item_dicts = []
+            for r, art in zip(item_results, artifacts):
+                d = r.model_dump()
+                jr = art.judge_report
+                if jr:
+                    d["judge"] = {
+                        "overall_agreement": jr.overall_agreement,
+                        "overall_confidence": jr.overall_confidence,
+                        "issues": jr.issues,
+                    }
+                item_dicts.append(d)
+            output["item_evaluations"] = item_dicts
+        if corpus_result:
+            output["corpus_evaluation"] = corpus_result.model_dump()
+
+        out_path = Path(args.out)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(json.dumps(output, indent=2, ensure_ascii=False))
+        print(f"\nResults saved to {out_path}")
+
+
+def _dummy_correctness(item):
+    from education_agents.evaluation.schemas import CorrectnessResult
+    return CorrectnessResult(
+        selected_answer=",".join(item.correct_option_ids),
+        correct_answer_ids=item.correct_option_ids,
+        is_correct=True,
+        flagged_distractors=[],
+        reasoning="LLM eval skipped",
+    )
+
+
+def _dummy_naturalness():
+    from education_agents.evaluation.schemas import NaturalnessResult
+    return NaturalnessResult(
+        stem_score=0,
+        stem_reasoning="LLM eval skipped",
+        options_score=0,
+        options_reasoning="LLM eval skipped",
+        overall_score=0,
+    )
+
+
+if __name__ == "__main__":
+    main()

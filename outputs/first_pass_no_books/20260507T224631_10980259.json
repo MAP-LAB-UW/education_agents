@@ -1,0 +1,140 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A2",
+      "B10",
+      "B11"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection focuses on the Central Limit Theorem and the properties of the sampling distribution as sample size increases. It contrasts the correct understanding that the sampling distribution becomes more normal and less spread out (A1, A2) with common misconceptions that larger samples lead to more spread (B10) or that the sampling distribution should increasingly resemble the population distribution's shape (B11).",
+  "item": {
+    "stem": "According to the Central Limit Theorem, how does the sampling distribution of the sample mean change as the sample size increases from n = 25 to n = 250?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "The sampling distribution will become more normally distributed and its standard error will decrease, resulting in a more concentrated distribution.",
+        "facet_tags": [
+          "A1",
+          "A2"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct application of the Central Limit Theorem. As n increases, the sampling distribution becomes more normal (A2) and the standard error decreases (SE = sigma/sqrt(n)), making the distribution more packed (A1)."
+      },
+      {
+        "id": "opt2",
+        "text": "The sampling distribution will become more spread out because a larger sample size captures more of the variability present in the population.",
+        "facet_tags": [
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "This option represents the misconception that larger samples lead to a wider sampling distribution, whereas the standard error actually decreases with larger n."
+      },
+      {
+        "id": "opt3",
+        "text": "The sampling distribution will increasingly resemble the shape of the original population distribution as more data points are included.",
+        "facet_tags": [
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that the sampling distribution of the mean converges to the population distribution, whereas it actually converges to a normal distribution regardless of the population's shape."
+      },
+      {
+        "id": "opt4",
+        "text": "The sampling distribution will become more spread out and will take on the exact skewness of the population distribution.",
+        "facet_tags": [
+          "B10",
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "This option combines two misconceptions: that the sampling distribution gets wider with larger samples (B10) and that it mirrors the population's shape/skew (B11)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt1"
+    ],
+    "explanation": "This question assesses the student's understanding of how sample size affects the sampling distribution of the mean. The correct answer (opt1) identifies that increasing sample size reduces the standard error (A1) and makes the distribution more normal (A2). Distractors address the common confusion between the sampling distribution and the population distribution (B11) and the misunderstanding of how n affects the spread of sample means (B10).",
+    "target_facets": [
+      "A1",
+      "A2",
+      "B10",
+      "B11"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "According to the Central Limit Theorem, how does the sampling distribution of the sample mean change as the sample size increases from n = 25 to n = 250?",
+    "option_assessments": [
+      {
+        "option_id": "opt1",
+        "generator_tags": [
+          "A1",
+          "A2"
+        ],
+        "judge_tags": [
+          "A1",
+          "A2"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly mentions that the standard error decreases leading to a more concentrated distribution (A1) and that it becomes more normally distributed (A2)."
+      },
+      {
+        "option_id": "opt2",
+        "generator_tags": [
+          "B10"
+        ],
+        "judge_tags": [
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states that the sampling distribution will become more spread out as sample size increases, which perfectly maps to B10."
+      },
+      {
+        "option_id": "opt3",
+        "generator_tags": [
+          "B11"
+        ],
+        "judge_tags": [
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option directly states that the sampling distribution will resemble the shape of the population distribution as sample size increases, which maps exactly to B11."
+      },
+      {
+        "option_id": "opt4",
+        "generator_tags": [
+          "B10",
+          "B11"
+        ],
+        "judge_tags": [
+          "B10",
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option combines the misconceptions that the distribution becomes more spread out (B10) and that it takes on the skewness of the population distribution (B11)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 8.03,
+    "judge_s": 8.53
+  },
+  "created_at": "2026-05-07T22:46:31.406715+00:00"
+}

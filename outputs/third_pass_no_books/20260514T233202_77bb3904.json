@@ -1,0 +1,167 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 5,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection allows for a diagnostic item focusing on the conceptual definition and interpretation of a confidence interval. It contrasts the correct frequentist interpretation of confidence levels (A4) against the common probability-based misconception (B15), while simultaneously checking if students understand that CIs estimate population parameters (A5) rather than sample statistics or individual data points (B16).",
+  "item": {
+    "stem": "A researcher conducted a study on the average amount of daily screen time for teenagers in a large city. Based on a random sample of 200 teenagers, she calculated a 95% confidence interval for the mean daily screen time to be (4.5, 6.1) hours. For each of the following statements about this confidence interval, determine if it is True or False.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "If the researcher repeated this study with many different random samples of 200 teenagers, about 95% of the resulting confidence intervals would contain the true average screen time for all teenagers in the city.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This correctly interprets the confidence level as a long-run success rate of the procedure (replications) and correctly identifies the target of the interval as the population mean."
+      },
+      {
+        "id": "opt_2",
+        "text": "There is a 95% probability that the population mean daily screen time for all teenagers in the city is between 4.5 and 6.1 hours.",
+        "facet_tags": [
+          "A5",
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "A student picking this correctly identifies that the interval is about the population mean (A5) but mistakenly believes that once an interval is calculated, it carries a probability (B15). In frequentist statistics, the true mean is either in the specific interval or it is not (probability 0 or 1)."
+      },
+      {
+        "id": "opt_3",
+        "text": "Approximately 95% of the teenagers in the original sample of 200 had a daily screen time between 4.5 and 6.1 hours.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This interpretation incorrectly assumes the confidence interval describes the distribution of individual data points in the sample rather than the estimate of the population parameter."
+      },
+      {
+        "id": "opt_4",
+        "text": "We are 95% confident that the sample mean for these 200 teenagers is between 4.5 and 6.1 hours.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This is a misconception that the interval estimates the sample statistic. The sample mean is actually the center of the interval, so we are 100% certain it is within the bounds."
+      },
+      {
+        "id": "opt_5",
+        "text": "We are 95% confident that the true population mean screen time for all teenagers in the city is between 4.5 and 6.1 hours.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This is the standard, correct interpretation of a calculated confidence interval, focusing on the population parameter and using the correct level of confidence terminology."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1",
+      "opt_5"
+    ],
+    "explanation": "This item tests the student's ability to distinguish between correct interpretations of a confidence interval and common misconceptions. Options 1 and 5 are correct because they focus on the long-run success rate of the estimation process and correctly identify the population mean as the target of the inference (A4, A5). Option 2 is incorrect because it treats the calculated interval as a probability statement about the population parameter (B15). Options 3 and 4 are incorrect because they focus on the distribution of sample data or the sample mean itself, rather than the population parameter (B16).",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher conducted a study on the average amount of daily screen time for teenagers in a large city. Based on a random sample of 200 teenagers, she calculated a 95% confidence interval for the mean daily screen time to be (4.5, 6.1) hours. For each of the following statements about this confidence interval, determine if it is True or False.",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A4",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option explicitly describes the long-run repeated sampling interpretation of a confidence interval, successfully capturing both A4 (implications of replications) and A5 (targeting the true population average)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "A5",
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "This statement represents the classic 'probability' misconception of a confidence interval (B15). While it references the population mean (A5), tagging a problematic option with a goal facet is somewhat contradictory here, as endorsing this option primarily flags the B15 misconception."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option interprets the confidence interval as applying to the sample data points rather than the population parameter, which aligns perfectly with misconception B16."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This statement incorrectly assumes the confidence interval is estimating the sample mean, which is an exact match for misconception B16."
+      },
+      {
+        "option_id": "opt_5",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A5"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "This option provides the standard shorthand interpretation ('95% confident') and accurately identifies the true population mean as the target (A5). However, unlike Option 1, it does not explicitly describe the percentage of times or replications, so tagging it with A4 is a stretch."
+      }
+    ],
+    "overall_agreement": 0.8,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Option 5's phrasing ('We are 95% confident...') is standard but doesn't explicitly test the conceptual understanding of replications (A4), unlike Option 1.",
+      "Tagging a distractor (Option 2) with a goal facet (A5) simply because it contains the phrase 'population mean' can be misleading; endorsing the option primarily demonstrates the B15 misconception."
+    ]
+  },
+  "timing": {
+    "generator_s": 8.74,
+    "judge_s": 15.98
+  },
+  "created_at": "2026-05-14T23:32:02.710719+00:00"
+}

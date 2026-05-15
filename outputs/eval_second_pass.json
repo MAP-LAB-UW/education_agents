@@ -1,0 +1,770 @@
+{
+  "input_dir": "outputs/second_pass_no_books",
+  "n_items": 10,
+  "item_evaluations": [
+    {
+      "source": "2026-05-14T22:54:53",
+      "correctness": {
+        "selected_answer": "Option A",
+        "correct_answer_ids": [
+          "A"
+        ],
+        "is_correct": false,
+        "flagged_distractors": [],
+        "reasoning": "To construct a narrower confidence interval using the same sample data (which means the sample mean, sample standard deviation, and sample size are held constant), the only parameter that can be adjusted is the confidence level. Decreasing the confidence level (e.g., from 95% to 90%) leads to a smaller critical value (z or t), thereby reducing the margin of error and producing a narrower interval. The purpose of a confidence interval is to estimate an unknown population parameter, which in this case is the true mean height of the entire rare species of orchid population, not the sample mean (which is already known exactly from the data)."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem presents a clear, relatable real-world scenario. The question is concise and explicitly outlines the two pieces of information needed for the answer.",
+        "options_score": 5,
+        "options_reasoning": "The options are perfectly parallel and symmetrically combine the two variables, making them very easy to scan and compare.",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.5849,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.5463,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "A5",
+              "A6"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.56,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A6",
+              "B16"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.6172,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A5",
+              "B17"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.6162,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B16",
+              "B17"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-14T22:55:35",
+      "correctness": {
+        "selected_answer": "A",
+        "correct_answer_ids": [
+          "A"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "The standard error of the mean (SE) is calculated using the formula SE = ̃ / ∘n. For the first study with a sample size of 16, the standard error is 12 / ∘16 = 3 mmHg. For the second study with a sample size of 64, the standard error is 12 / ∘64 = 1.5 mmHg. Since the standard error is smaller in the second study, the margin of error decreases, resulting in a narrower confidence interval."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem presents a clear and realistic scenario with a logical progression of information, making it easy to understand exactly what is being asked on the first read.",
+        "options_score": 4,
+        "options_reasoning": "The options are clear and easy to compare, but there is a minor structural inconsistency since options C and D include explanatory 'because' clauses while options A and B do not.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.6793,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.6771,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A1",
+              "A7"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.6048,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B9"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.7992,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B10"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.6359,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B9"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 0.95,
+        "issues": [
+          "Option D targets B9, but B9 explicitly defines the misconception as 'Sampling distribution mirrors population distribution'. If a student chooses D, they acknowledge the SE is 3 mmHg (which is different from the population SD of 12 mmHg), meaning they do NOT believe it mirrors the population distribution. Thus, D represents an unlisted misconception (that SE is fixed after the first calculation) rather than a clean diagnosis of B9."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-14T22:56:22",
+      "correctness": {
+        "selected_answer": "option_a",
+        "correct_answer_ids": [
+          "option_a"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [
+          "option_c"
+        ],
+        "reasoning": "Option A provides the correct frequentist interpretation of a confidence interval. In frequentist statistics, a 95% confidence level refers to the long-run success rate of the estimation procedure itself. If the sampling process were repeated many times, we would expect approximately 95% of those calculated intervals to successfully capture the true population mean (which in this case is 45 pounds)."
+      },
+      "naturalness": {
+        "stem_score": 4,
+        "stem_reasoning": "The scenario is clearly laid out and realistic, but slightly wordy in its setup of the researcher and the two students' samples.",
+        "options_score": 4,
+        "options_reasoning": "The options are mostly clear and well-structured, but they are somewhat lengthy and vary slightly in phrasing, which requires careful reading to compare.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.6298,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "option_a",
+            "similarity": 0.6027,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A4"
+            ]
+          },
+          {
+            "option_id": "option_b",
+            "similarity": 0.6744,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B14"
+            ]
+          },
+          {
+            "option_id": "option_c",
+            "similarity": 0.5991,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B15"
+            ]
+          },
+          {
+            "option_id": "option_d",
+            "similarity": 0.6428,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B14",
+              "B15"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 0.95,
+        "issues": [
+          "The item is well-constructed and accurately assesses the target facets. The scenario of estimating a 'known' population mean is slightly contrived but works well pedagogically to test students' interpretations of the confidence interval mechanism."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-14T22:56:57",
+      "correctness": {
+        "selected_answer": "A",
+        "correct_answer_ids": [
+          "A"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "According to the Central Limit Theorem (CLT), the sampling distribution of the sample mean will be approximately normal regardless of the population's underlying distribution, provided the sample size is sufficiently large (typically n ≥ 30). In this scenario, the sample size is n = 100, which is large enough for the CLT to apply. Furthermore, the expected value (mean) of the sampling distribution of the sample mean is always equal to the population mean, which is 24 hours."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem presents a clear, standard statistical scenario that is concise and straightforward. The question is unambiguous.",
+        "options_score": 5,
+        "options_reasoning": "The options are perfectly parallel in structure, concisely varying only the shape and the mean, making them very easy to compare.",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.5189,
+        "score": 4,
+        "bucket": "highly_latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.5546,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A2",
+              "A3"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.5205,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "B11",
+              "A3"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.5475,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "A2",
+              "B13"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.4531,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "B11",
+              "B13"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 0.8,
+        "overall_confidence": 0.95,
+        "issues": [
+          "The generator's use of B11 instead of B9 is a minor conceptual difference. B9 explicitly states 'mirrors population distribution', which directly explains the choice of 'highly right-skewed'. B11 implies a dynamic misunderstanding (as n increases, it gets closer to population). Either way, the item serves as a solid diagnostic tool.",
+          "The distractors using 2.4 are very clever, as they anticipate the student incorrectly applying the standard error formula (dividing by square root of n) to the mean."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-14T22:57:55",
+      "correctness": {
+        "selected_answer": "A",
+        "correct_answer_ids": [
+          "A"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "According to the Central Limit Theorem, the sampling distribution of the sample mean will be approximately normal for a sufficiently large sample size (typically n ≥ 30), regardless of the shape of the population's distribution (assuming finite variance). Since the sample size is n = 100, the sampling distribution of the mean is approximately normal."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem presents a clear, concise, and realistic scenario that is easy to understand on the first read.",
+        "options_score": 4,
+        "options_reasoning": "The options are parallel in structure and easy to compare, though slightly wordy due to the detailed explanations included in each choice.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.751,
+        "score": 2,
+        "bucket": "surface",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.7418,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A2"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.6165,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B8"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.8657,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B12"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.7799,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B11"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-14T22:58:47",
+      "correctness": {
+        "selected_answer": "opt_1",
+        "correct_answer_ids": [
+          "opt_1"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [
+          "opt_2"
+        ],
+        "reasoning": "In standard frequentist statistics, a confidence interval gives a range of plausible values for a population parameter. The correct interpretation is that we are '95% confident' that the true population mean falls within this specific interval, which is shorthand for stating that the procedure used to generate the interval will capture the true population mean 95% of the time in repeated sampling."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem presents a clear, concise, and realistic statistical scenario. It directly asks the student to interpret the confidence interval, making it easy to understand on the first pass.",
+        "options_score": 5,
+        "options_reasoning": "The options are structurally parallel, well-written, and present classic, easily comparable statistical interpretations and misinterpretations of a confidence interval.",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.4727,
+        "score": 4,
+        "bucket": "highly_latent",
+        "option_details": [
+          {
+            "option_id": "opt_1",
+            "similarity": 0.5789,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A4",
+              "A5"
+            ]
+          },
+          {
+            "option_id": "opt_2",
+            "similarity": 0.5491,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "A5",
+              "B15"
+            ]
+          },
+          {
+            "option_id": "opt_3",
+            "similarity": 0.3788,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "B16"
+            ]
+          },
+          {
+            "option_id": "opt_4",
+            "similarity": 0.384,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "B15",
+              "B16"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 0.95,
+        "issues": [
+          "While opt_1 is considered the standard 'correct' shorthand in many introductory courses, it does not explicitly demonstrate an understanding of the 'percentage of times (implications of replications)' as strictly defined in facet A4. However, it functions correctly by process of elimination against B15."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-14T22:59:43",
+      "correctness": {
+        "selected_answer": "opt_1",
+        "correct_answer_ids": [
+          "opt_1"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "The theoretical sampling distribution of the sample mean has a mean equal to the population mean (μ) and a standard deviation, known as the standard error, equal to the population standard deviation divided by the square root of the sample size (σ / √n). For both researchers, the distribution is centered at 18 lbs. Researcher A's standard error is 4 / √64 = 0.5 lbs. Researcher B's standard error is 4 / √256 = 0.25 lbs. Because Researcher B's standard error is smaller, their sampling distribution is more tightly packed."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem clearly presents a straightforward, realistic statistical scenario about sampling distributions without any unnecessary wordiness.",
+        "options_score": 3,
+        "options_reasoning": "The options are quite wordy and structurally inconsistent. Some focus on calculating numerical parameters (center and standard error) while another focuses on the conceptual definition of the distribution, making them harder to compare.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.582,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "opt_1",
+            "similarity": 0.582,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A1",
+              "A3"
+            ]
+          },
+          {
+            "option_id": "opt_2",
+            "similarity": 0.5501,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B8"
+            ]
+          },
+          {
+            "option_id": "opt_3",
+            "similarity": 0.597,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B13"
+            ]
+          },
+          {
+            "option_id": "opt_4",
+            "similarity": 0.599,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B13"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 0.95,
+        "issues": [
+          "Options 3 and 4 both target the exact same misconception (B13), just in opposite directions (mean scaling up vs. scaling down). While this is diagnostically fine, it leaves room to test a different misconception (such as B10 or B12) in one of those options to increase the diagnostic breadth of the item."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-14T23:00:53",
+      "correctness": {
+        "selected_answer": "Option 1",
+        "correct_answer_ids": [
+          "1"
+        ],
+        "is_correct": false,
+        "flagged_distractors": [],
+        "reasoning": "Option 1 is the correct answer because the standard error of the sample mean is inversely proportional to the square root of the sample size (SE = σ/√n). Increasing the sample size from 36 to 100 decreases the standard error, which results in a narrower margin of error and, consequently, a narrower confidence interval (especially given that the population standard deviation is known). Option 2 contradicts the Central Limit Theorem. Option 3 is incorrect because the sampling distribution is not normal for small n if the population is skewed. Option 4 is incorrect because probabilistic convergence does not guarantee a closer sample mean on any single sample realization."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem presents a clear, concise, and realistic scenario that is easy to process on the first read. The statistical parameters and the task are explicitly stated without unnecessary fluff.",
+        "options_score": 3,
+        "options_reasoning": "The options are noticeably wordy and evaluate completely different statistical concepts like distribution shape versus standard error. This makes them cognitively heavy and difficult to quickly compare.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.7651,
+        "score": 2,
+        "bucket": "surface",
+        "option_details": [
+          {
+            "option_id": "1",
+            "similarity": 0.6693,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A7"
+            ]
+          },
+          {
+            "option_id": "2",
+            "similarity": 0.8023,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B11"
+            ]
+          },
+          {
+            "option_id": "3",
+            "similarity": 0.8355,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B12"
+            ]
+          },
+          {
+            "option_id": "4",
+            "similarity": 0.7534,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B14"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 0.88,
+        "overall_confidence": 0.99,
+        "issues": [
+          "Option 1 represents a composite of two facets (A1 and A7) to form a complete logical chain. The generator only tagged one of them, but this is a minor issue as the option serves as an excellent correct answer.",
+          "Overall, the item is exceptionally well-written, with highly plausible distractors that precisely isolate distinct, documented misconceptions."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-14T23:01:30",
+      "correctness": {
+        "selected_answer": "opt_1",
+        "correct_answer_ids": [
+          "opt_1"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "The width of a confidence interval is determined by the critical value (based on the confidence level) and the standard error (which is inversely proportional to the square root of the sample size). Decreasing the confidence level from 95% to 90% yields a smaller critical value, and increasing the sample size from 64 to 100 decreases the standard error. Both of these changes will simultaneously reduce the margin of error, guaranteeing a narrower confidence interval."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The scenario is realistic, concise, and easy to read on the first pass. The student knows exactly what is being asked without encountering any unnecessary wordiness.",
+        "options_score": 4,
+        "options_reasoning": "The options are mostly clear and easy to understand. However, option 2 breaks parallel structure slightly by omitting a change in sample size and including a justification.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.6856,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "opt_1",
+            "similarity": 0.6246,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A1",
+              "A6"
+            ]
+          },
+          {
+            "option_id": "opt_2",
+            "similarity": 0.7919,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B17"
+            ]
+          },
+          {
+            "option_id": "opt_3",
+            "similarity": 0.59,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B10"
+            ]
+          },
+          {
+            "option_id": "opt_4",
+            "similarity": 0.7358,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B10",
+              "B17"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 0.9,
+        "overall_confidence": 0.95,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-14T23:02:08",
+      "correctness": {
+        "selected_answer": "opt_1",
+        "correct_answer_ids": [
+          "opt_1"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [
+          "opt_3"
+        ],
+        "reasoning": "A 99% confidence interval requires a larger critical value than a 95% confidence interval, meaning the interval will be wider. The frequentist definition of a confidence interval correctly states that if the sampling process is repeated many times, 99% of the constructed intervals will contain the true population mean."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem presents a clear, concise, and realistic scenario, and asks a direct question that is easy to understand on the first read.",
+        "options_score": 3,
+        "options_reasoning": "The options are noticeably wordy and dense because they combine two distinct concepts (interval width and statistical interpretation) into long, complex sentences, making comparison difficult.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.6919,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "opt_1",
+            "similarity": 0.6006,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A4",
+              "A6"
+            ]
+          },
+          {
+            "option_id": "opt_2",
+            "similarity": 0.8163,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B17"
+            ]
+          },
+          {
+            "option_id": "opt_3",
+            "similarity": 0.6509,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A6",
+              "B15"
+            ]
+          },
+          {
+            "option_id": "opt_4",
+            "similarity": 0.6997,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B15",
+              "B17"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": []
+      }
+    }
+  ],
+  "corpus_evaluation": {
+    "facet_coverage": {
+      "facet_counts": {
+        "A1": 3,
+        "A2": 3,
+        "A3": 3,
+        "A4": 3,
+        "A5": 4,
+        "A6": 5,
+        "A7": 2,
+        "B8": 2,
+        "B9": 2,
+        "B10": 3,
+        "B11": 4,
+        "B12": 2,
+        "B13": 4,
+        "B14": 3,
+        "B15": 6,
+        "B16": 4,
+        "B17": 6
+      },
+      "total_facets_in_map": 17,
+      "covered_facets": 17,
+      "uniformity": 0.9782597589589461
+    },
+    "facet_combination_diversity": {
+      "total_items": 10,
+      "unique_combinations": 10,
+      "combination_ratio": 1.0,
+      "mean_pairwise_jaccard_distance": 0.896
+    },
+    "problem_diversity": {
+      "structural": {
+        "format_distribution": {
+          "single_select": 10
+        },
+        "format_entropy": 0.0,
+        "style_distribution": {
+          "action": 1,
+          "prediction": 3,
+          "interpretation": 2,
+          "conceptual": 4
+        },
+        "style_entropy": 0.9232196723355077
+      },
+      "semantic": {
+        "mean_pairwise_similarity": 0.6069,
+        "max_pairwise_similarity": 0.8426,
+        "most_similar_pair": [
+          "confidence_intervals_0",
+          "confidence_intervals_8"
+        ]
+      }
+    }
+  }
+}

@@ -11,6 +11,11 @@
                            │
                            ▼
               ┌─────────────────────────┐
+              │ Facet Selection Agent   │  (optional, auto mode)
+              └──────────┬──────────────┘
+                         │  target_facets
+                         ▼
+              ┌─────────────────────────┐
               │ Item Generation Agent   │  (LLM call, structured output)
               └──────────┬──────────────┘
                          │  GeneratedItem
@@ -21,11 +26,16 @@
                          │  JudgeReport
                          ▼
               ┌─────────────────────────┐
-              │ Persisted run artifact  │  (item + report + metadata)
+              │ Evaluation Rubrics      │  (LLM + embedding, per-item)
+              └──────────┬──────────────┘
+                         │  EvalScores
+                         ▼
+              ┌─────────────────────────┐
+              │ Persisted run artifact  │  (item + report + eval + metadata)
               └─────────────────────────┘
 ```
 
-No refinement loop. No human-in-the-loop yet — but artifacts are stored in a shape that a future review UI can consume.
+Corpus-level evaluation runs separately across a batch of artifacts via `scripts/run_evaluation.py`.
 
 ## 2. Inputs
 
@@ -57,11 +67,13 @@ No refinement loop. No human-in-the-loop yet — but artifacts are stored in a s
 
 A single call specifies:
 - `topic` (which facet map to load)
-- `target_facets`: list of facet IDs the item should diagnose (e.g., `["A4", "B7", "B9"]`)
-- `response_format`: `single_select` | `multi_select` | `true_false_per_option`
-- `num_options`: typically 4–6
+- `target_facets`: list of facet IDs the item should diagnose (e.g., `["A4", "B7", "B9"]`). If empty, the pipeline auto-selects facets per item.
+- `response_format`: `single_select` | `multi_select` | `true_false_per_option` | `null`. When null, the model chooses the best format for the problem.
+- `num_options`: typically 3–6, or `null` to let the model choose.
 - `book_context_mode`: `none` | `full_tex` | `rag` (rag = `NotImplementedError` for now)
 - `n_items`: how many to generate (each is an independent LLM call)
+- `exclude_image_examples`: whether to omit image-based few-shot examples (default true)
+- `prompt_version`: `v1` | `v2` (see §3.5)
 
 ### 2.3 Book context modes
 
@@ -75,14 +87,18 @@ The mode is recorded in the run artifact so we can compare quality across modes 
 
 ## 3. Item Generation Agent
 
-### 3.1 Inputs to the prompt
+### 3.1 Facet auto-selection
+
+When `target_facets` is empty, the pipeline calls a facet selection agent before generation. The selector receives the full facet map plus the list of facet combinations used by previously generated items in the current batch, and chooses a diverse combination for the next item.
+
+### 3.2 Inputs to the prompt
 - Facet map (full list of A and B facets, with text).
-- Target facet IDs (the agent must "cover" these — see §3.3 for what coverage means).
-- Response format + number of options.
+- Target facet IDs (the agent must "cover" these — see §3.4 for what coverage means).
+- Response format + number of options (or instructions to choose these if null).
 - Optional book chapter (per context mode).
 - Few-shot examples from the facet map (`examples` field).
 
-### 3.2 Output schema (structured JSON)
+### 3.3 Output schema (structured JSON)
 
 ```python
 class Option(BaseModel):
@@ -102,21 +118,31 @@ class GeneratedItem(BaseModel):
     target_facets: list[str]         # echo of the request, for traceability
 ```
 
-### 3.3 Coverage rule (what the prompt enforces)
+### 3.4 Coverage rule (what the prompt enforces)
 - Each goal facet (A) in `target_facets` must be tagged on at least one **correct** option.
 - Each problematic facet (B) in `target_facets` must be tagged on at least one **incorrect** option (a distractor).
 - Every option must have ≥1 facet tag.
-- An option may carry multiple tags (e.g., a distractor that conflates A3 with B9, as in Example 2).
+- An option may carry multiple tags (e.g., a distractor that conflates A3 with B9).
+- Distractors must be plausible — they should represent reasoning a student might actually produce, not strawmen.
 
-### 3.4 Prompt structure (`prompts/generator.md`)
-1. Role: assessment item writer for a stats course.
-2. Task: write one MC item that diagnoses a specified set of facets.
-3. Facet map (rendered from JSON).
-4. Coverage rule (§3.3).
-5. Few-shot examples (rendered from facet map).
-6. Optional book chapter.
-7. The specific request (target facets, format, num_options).
-8. Output schema reminder.
+### 3.5 Prompt versions
+
+Two generator prompt versions are available, selected via `prompt_version`:
+
+| version | file | description |
+|---------|------|-------------|
+| `v1` | `prompts/generator.md` | Original prompt. Straightforward coverage-based generation. |
+| `v2` | `prompts/generator_v2.md` | Improved prompt with latent-facet design principle, scenario-based stem guidelines, and style variation instructions. |
+
+**V2 core design principle — latent facets:** Facets should be embedded as latent concepts within realistic scenarios. Options must not paraphrase facet definitions; instead they should describe concrete outcomes, actions, or predictions that a student holding a particular understanding (or misconception) would endorse. This was motivated by quantitative comparison showing V1 items had significantly higher embedding similarity to facet definitions (mean 0.716) than expert items (mean 0.576).
+
+### 3.6 Dynamic format and option count
+
+When `response_format` or `num_options` is null, the generator prompt instructs the model to choose the best format and count for the problem:
+- `true_false_per_option` when testing multiple independent claims about a single scenario
+- `multi_select` when multiple options can be simultaneously correct
+- `single_select` for "best answer" questions
+- Option count: 3–6, depending on how many distinct facets need representation
 
 ## 4. Verifier / Judge Agent
 
@@ -154,7 +180,60 @@ class JudgeReport(BaseModel):
 4. Task: independently tag each option, compare to claimed tags, score confidence.
 5. Output schema.
 
-## 5. LLM interface (`src/education_agents/llm.py`)
+## 5. Evaluation Rubrics
+
+Evaluation runs automatically after the judge step (skippable via `--skip-eval`). There are two levels: item-level rubrics (per item) and corpus-level rubrics (across a batch).
+
+Full rubric documentation: `docs/rubrics.md`.
+
+### 5.1 Item-level rubrics
+
+| Rubric | Method | Output | Key metric |
+|--------|--------|--------|------------|
+| **Correctness** | LLM blind-solves the item (no answer key), flags defensibly-correct distractors | `is_correct`, `flagged_distractors` | Pass/Fail |
+| **Naturalness** | LLM-as-judge rates stem (1–5) and options (1–5) for readability and clarity | `stem_score`, `options_score`, `overall_score` | Overall /5 |
+| **Facet Latency** | Embedding similarity between option text and concatenated facet definitions | `score` (1–4), `bucket`, `mean_similarity` | Score /4 |
+
+**Facet latency scoring buckets** (empirically calibrated from expert vs. generated item distributions):
+
+| Similarity | Bucket | Score | Interpretation |
+|------------|--------|-------|----------------|
+| < 0.55 | highly_latent | 4 | Facet deeply embedded in scenario |
+| 0.55 – 0.70 | latent | 3 | Present but not a direct paraphrase |
+| 0.70 – 0.80 | surface | 2 | Noticeably echoes facet language |
+| >= 0.80 | paraphrase | 1 | Near-direct restatement of facet definition |
+
+Embedding model: `Qwen/Qwen3-Embedding-0.6B`.
+
+Item-level results are stored in the `eval_scores` field of each run artifact.
+
+### 5.2 Corpus-level rubrics
+
+| Rubric | Method | Key metric |
+|--------|--------|------------|
+| **Facet Coverage** | Count per-facet occurrences, compute normalized Shannon entropy | Uniformity (0–1) |
+| **Facet Combination Diversity** | Unique facet-set ratio + mean pairwise Jaccard distance | Jaccard distance (0–1) |
+| **Structural Diversity** | LLM classifies item style (numerical/interpretation/prediction/action/conceptual) + format distribution; normalized entropy for each | Style entropy, format entropy |
+| **Semantic Diversity** | Pairwise cosine similarity of stem embeddings | Mean/max similarity |
+
+Corpus-level evaluation runs via `scripts/run_evaluation.py` or `scripts/eval_experts.py`.
+
+### 5.3 Eval scores schema
+
+```python
+class EvalScores(BaseModel):
+    correctness_pass: bool
+    correctness_flagged_distractors: list[str] = []
+    naturalness_stem: int
+    naturalness_options: int
+    naturalness_overall: int
+    latency_score: int
+    latency_similarity: float
+    latency_bucket: str
+    latency_option_details: list[dict] = []
+```
+
+## 6. LLM interface (`src/education_agents/llm.py`)
 
 A thin wrapper over `litellm.completion`:
 
@@ -163,63 +242,98 @@ def complete(messages, model=None, **kwargs) -> str: ...
 def structured_complete(messages, schema: type[BaseModel], model=None, **kwargs) -> BaseModel: ...
 ```
 
-- `model` defaults to `os.getenv("EDU_AGENTS_MODEL", "gemini/gemini-2.5-pro")`.
-- `structured_complete` uses `response_format={"type": "json_schema", "json_schema": ...}` via litellm, with a fallback path that does JSON-mode + pydantic validation for providers without strict-schema support.
+- `model` defaults to `os.getenv("EDU_AGENTS_MODEL", "gemini/gemini-3-flash-preview")`.
+- `structured_complete` uses `response_format={"type": "json_schema", "json_schema": ...}` via litellm, with a fallback path that does JSON-mode + schema hint + pydantic validation for providers without strict-schema support.
 - `.env` loaded via `python-dotenv`.
+
+Default models:
+| Role | Model |
+|------|-------|
+| Generator | `gemini/gemini-3-flash-preview` |
+| Judge | `gemini/gemini-3.1-pro-preview` |
+| Eval (LLM rubrics) | `gemini/gemini-3.1-pro-preview` |
+| Eval (embeddings) | `Qwen/Qwen3-Embedding-0.6B` |
 
 This is the only file other modules touch when calling LLMs — swapping providers = changing one env var.
 
-## 6. Module layout
+## 7. Module layout
 
 ```
 src/education_agents/
 ├── __init__.py
 ├── llm.py              # litellm wrapper
-├── schemas.py          # Facet, FacetMap, Option, GeneratedItem, JudgeReport, OptionAssessment
+├── schemas.py          # Facet, FacetMap, Option, GeneratedItem, JudgeReport, EvalScores, etc.
 ├── facets.py           # load_facet_map(topic) -> FacetMap; render_facet_map_for_prompt()
 ├── book_context.py     # load_book_context(mode, path) -> str | None; raises for "rag"
-├── generator.py        # generate_item(request, llm) -> GeneratedItem
-├── judge.py            # judge_item(item, facet_map, llm) -> JudgeReport
-├── pipeline.py         # run(request) -> RunArtifact (calls generator then judge, persists)
+├── generator.py        # generate_item(request, facet_map, book_context, model) -> GeneratedItem
+│                       # select_facets(facet_map, previously_used, model) -> FacetSelection
+├── judge.py            # judge_item(item, facet_map, model) -> JudgeReport
+├── pipeline.py         # run(request, ...) -> list[RunArtifact]
+├── evaluation/
+│   ├── __init__.py
+│   ├── schemas.py      # CorrectnessResult, NaturalnessResult, FacetLatencyResult, CorpusEvaluation, etc.
+│   ├── correctness.py  # evaluate_correctness(item, model) -> CorrectnessResult
+│   ├── naturalness.py  # evaluate_naturalness(item, model) -> NaturalnessResult
+│   ├── facet_latency.py # evaluate_facet_latency(item, facet_map) -> FacetLatencyResult
+│   └── corpus_metrics.py # evaluate_corpus(artifacts, facet_map) -> CorpusEvaluation
 └── prompts/
-    ├── generator.md
+    ├── generator.md    # v1 prompt
+    ├── generator_v2.md # v2 prompt (latent-facet, scenario-based)
     └── judge.md
 ```
 
 ```
 scripts/
-├── run_pipeline.py     # CLI: --topic, --facets, --format, --book-mode, --n-items, --out
-└── ...                 # (existing extract_figures.py untouched)
+├── run_pipeline.py     # CLI: --topic, --facets, --format, --n-items, --prompt-version, --skip-eval, etc.
+├── run_evaluation.py   # CLI: standalone eval on artifact directories
+├── eval_experts.py     # CLI: evaluate expert examples from facet map
+└── eval_facet_latency.py  # experimental: compare embedding vs surface matching approaches
 ```
 
-## 7. Run artifact (`outputs/<timestamp>_<short_hash>.json`)
+```
+web/
+├── index.html          # item explorer dashboard
+├── app.jsx             # item list, detail, judge report, eval tab, aggregate view
+├── mock-data.js        # static facet map for dashboard
+├── compare.html        # evaluation comparison dashboard
+└── compare.jsx         # side-by-side metrics across runs
+```
+
+## 8. Run artifact (`outputs/<timestamp>_<short_hash>.json`)
 
 ```json
 {
-  "request": { "topic": "...", "target_facets": [...], "book_context_mode": "...", ... },
+  "request": { "topic": "...", "target_facets": [...], "response_format": null, "num_options": null, "book_context_mode": "...", "prompt_version": "v2", ... },
   "models": { "generator": "gemini/...", "judge": "gemini/..." },
+  "facet_selection_reasoning": "...",
   "item": { /* GeneratedItem */ },
   "judge_report": { /* JudgeReport */ },
-  "timing": { "generator_s": 2.4, "judge_s": 1.9 },
-  "created_at": "2026-04-30T..."
+  "eval_scores": { /* EvalScores — null if --skip-eval */ },
+  "timing": { "generator_s": 2.4, "judge_s": 1.9, "eval_s": 3.1 },
+  "created_at": "2026-05-14T..."
 }
 ```
 
-One artifact per item. Easy to glob, easy to feed into a future review UI.
+One artifact per item. Easy to glob, easy to feed into the dashboards.
 
-## 8. Out of scope (explicit, for future)
+## 9. Dashboards
+
+### 9.1 Item explorer (`web/index.html`)
+- Load artifact JSONs or folders
+- Item list with inline eval badges (correct/wrong, N{score}, L{score})
+- Detail view with Generated Item, Judge Report, and Evaluation tabs
+- Aggregate view with summary stats, facet coverage, and per-item breakdown
+
+### 9.2 Evaluation comparison (`web/compare.html`)
+- Load multiple eval result JSONs or artifact folders
+- Side-by-side comparison table: judge scores, item-level rubrics, corpus-level rubrics
+- Per-item detail table across datasets
+- Facet coverage heatmap
+
+## 10. Out of scope (explicit, for future)
 
 - Refinement loop where judge feedback is fed back to generator.
 - Human verification UI.
 - RAG-based book context (interface reserved, raises `NotImplementedError`).
-- Cross-item quality metrics (item difficulty estimation, distractor plausibility, etc.).
+- Student simulation for distractor plausibility testing.
 - Multi-topic batches.
-
----
-
-## Open design questions
-
-1. **Target-facet selection:** does the user specify `target_facets` per call, or do we add a sampling helper that proposes combinations (e.g., "1 goal + 2 misconceptions")? Leaning toward user-specified for now, with a sampler later.
-2. **`is_correct` for `true_false_per_option`:** modeling as "is the keyed verdict True?" — i.e., `is_correct=True` means the statement *is* true. Confirm or use a separate `keyed_verdict: bool` field.
-3. **Judge sees target facets or not?** Proposing **not**, so the judge re-derives tags blind. Makes the agreement signal more meaningful.
-4. **Few-shot examples:** include all examples from facet map, or sample? With only 2 currently, include all.

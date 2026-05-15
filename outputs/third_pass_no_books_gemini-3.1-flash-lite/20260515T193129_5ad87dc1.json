@@ -1,0 +1,192 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A2",
+      "B12"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-flash-lite-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination tests the student's understanding of the Central Limit Theorem and sampling distribution properties. It contrasts the correct understanding that larger sample sizes reduce standard error and approach normality (A1, A2) with the common misconception that the sampling distribution is always normal regardless of sample size or population distribution shape (B12).",
+  "item": {
+    "stem": "Consider a population that is heavily skewed. Researchers are investigating the sampling distribution of the sample mean (x̄) as the sample size (n) increases. Which of the following accurately describes how the sampling distribution changes as n increases?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The sampling distribution becomes more normally distributed, and the spread of the distribution decreases because the standard error gets smaller.",
+        "facet_tags": [
+          "A1",
+          "A2"
+        ],
+        "is_correct": true,
+        "rationale": "Correctly identifies that as sample size increases, the Central Limit Theorem causes the distribution to approach normality (A2) and the variability/standard error decreases (A1)."
+      },
+      {
+        "id": "B",
+        "text": "The sampling distribution always follows a normal distribution regardless of the sample size.",
+        "facet_tags": [
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "This reflects the misconception that the sampling distribution is always normal, ignoring that normality is an asymptotic property dependent on sufficient sample size (B12)."
+      },
+      {
+        "id": "C",
+        "text": "The sampling distribution becomes more normally distributed, but the spread of the distribution remains constant regardless of the sample size.",
+        "facet_tags": [
+          "A2",
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "Correctly identifies the move toward normality but incorrectly assumes the spread (standard error) remains constant, which confuses the sampling distribution with the population (B9)."
+      },
+      {
+        "id": "D",
+        "text": "The sampling distribution always maintains the same shape as the population distribution, so it remains skewed regardless of the sample size.",
+        "facet_tags": [
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "This reflects the misconception that the sampling distribution mirrors the population distribution shape rather than approaching normality (B11)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item tests the students' understanding of the Central Limit Theorem. It requires them to differentiate between the shape of the sampling distribution as it approaches normality (A2) and the reduction in standard error (variability) as sample size increases (A1), while specifically acting as a distractor for those who believe the distribution is inherently or always normal regardless of sample size (B12).",
+    "target_facets": [
+      "A1",
+      "A2",
+      "B12"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "Consider a population that is heavily skewed. Researchers are investigating the sampling distribution of the sample mean (x̄) as the sample size (n) increases. Which of the following accurately describes how the sampling distribution changes as n increases?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1",
+          "A2"
+        ],
+        "judge_tags": [
+          "A1",
+          "A2"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Correctly maps to A1 (spread decreases/standard error gets smaller) and A2 (closer to normal distribution)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B12"
+        ],
+        "judge_tags": [
+          "B12"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Clearly maps to B12: sampling distribution always follows normal distribution regardless of sample size."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A2",
+          "B9"
+        ],
+        "judge_tags": [
+          "A2",
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Maps to A2 for becoming more normal, but B9 for the misconception that spread remains constant like the population."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B11"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "mismatch",
+        "confidence": 0.9,
+        "reasoning": "Option D states the distribution always maintains the same shape, which is B9 (mirrors population distribution). B11 would be that it gets closer to the population distribution as n increases."
+      }
+    ],
+    "overall_agreement": 0.75,
+    "overall_confidence": 0.97,
+    "issues": [
+      "Option D is incorrectly tagged by the generator as B11. It actually reflects B9 (mirrors population distribution) because it states the shape remains the same regardless of sample size, rather than getting closer to the population distribution as n increases."
+    ]
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 2,
+    "latency_similarity": 0.795,
+    "latency_bucket": "surface",
+    "latency_option_details": [
+      {
+        "option_id": "A",
+        "similarity": 0.8389,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "A1",
+          "A2"
+        ]
+      },
+      {
+        "option_id": "B",
+        "similarity": 0.8141,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "B12"
+        ]
+      },
+      {
+        "option_id": "C",
+        "similarity": 0.819,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "A2",
+          "B9"
+        ]
+      },
+      {
+        "option_id": "D",
+        "similarity": 0.7081,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "B11"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 2.66,
+    "judge_s": 22.66,
+    "eval_s": 11.52
+  },
+  "created_at": "2026-05-15T19:31:29.747204+00:00"
+}

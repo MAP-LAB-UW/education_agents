@@ -1,0 +1,144 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "A7",
+      "B10",
+      "B15"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection explores the intersection of interval interpretation and the mechanical drivers of interval width. By combining the frequentist interpretation of confidence levels (A4) against the probability misconception (B15) with the relationship between sample size and standard error (A7, B10), the item can diagnose whether a student's misunderstanding of confidence intervals stems from a failure to interpret the confidence level or a misunderstanding of how sampling variability changes with sample size.",
+  "item": {
+    "stem": "A researcher calculated a 95% confidence interval for the average number of hours university students sleep per night based on a random sample of 50 students. Which of the following is true regarding the interpretation of this confidence level and the effect of the sample size on the interval's width?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "If we were to repeat this sampling process many times, we expect 95% of the resulting intervals to contain the true population mean. Additionally, if the researcher had used a larger sample size, the standard error would be smaller, resulting in a narrower confidence interval.",
+        "facet_tags": [
+          "A4",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies the frequentist interpretation of confidence levels (A4) and correctly identifies that an increased sample size reduces the standard error, which in turn narrows the interval (A7)."
+      },
+      {
+        "id": "opt_2",
+        "text": "There is a 95% probability that the true population mean of sleep hours falls between the specific lower and upper bounds calculated from this particular sample.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This reflects the common misconception that the confidence level refers to the probability of the parameter falling into a specific, fixed interval already calculated, rather than the reliability of the estimation process (B15)."
+      },
+      {
+        "id": "opt_3",
+        "text": "If the researcher increased the sample size, the sampling distribution of the mean would become more spread out to capture more of the population's variability, thus increasing the width of the confidence interval.",
+        "facet_tags": [
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "This distractor targets the misconception that increasing sample size increases the spread of the sampling distribution (B10), whereas it actually decreases the standard error and packs the distribution tighter."
+      },
+      {
+        "id": "opt_4",
+        "text": "While 95% of intervals calculated from repeated samples would contain the population mean, increasing the sample size would actually make the interval wider because larger samples result in a larger standard error.",
+        "facet_tags": [
+          "A4",
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "This option correctly states the long-run interpretation (A4) but incorrectly claims that a larger sample size increases the standard error and width (B10)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "This item assesses the student's ability to distinguish between the correct frequentist interpretation of confidence intervals (long-run success rate) and the common misconception that it represents a probability for a single fixed interval. It also tests the understanding of how sample size affects the precision of the interval. According to Goal A4, confidence level is about the percentage of intervals that capture the parameter in the long run. Goal A7 notes that width is determined by the standard error; since the standard error is sigma divided by the square root of n, a larger n results in a smaller standard error and a narrower interval. Problematic facet B15 is addressed by checking if students treat the interval as a fixed probability for the mean. B10 addresses the confusion that more data points lead to more spread in the sampling distribution of the mean.",
+    "target_facets": [
+      "A4",
+      "A7",
+      "B10",
+      "B15"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher calculated a 95% confidence interval for the average number of hours university students sleep per night based on a random sample of 50 students. Which of the following is true regarding the interpretation of this confidence level and the effect of the sample size on the interval's width?",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A4",
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A4",
+          "A7"
+        ],
+        "agreement": "partial",
+        "confidence": 0.95,
+        "reasoning": "The option states 'if the researcher had used a larger sample size, the standard error would be smaller', which directly maps to facet A1. It also states this results in a narrower confidence interval (A7) and uses the frequentist long-run interpretation of confidence intervals (A4)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option perfectly captures the misconception B15, asserting that a confidence interval gives a 95% probability that the true population mean falls within a specific, already-calculated interval."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "B10"
+        ],
+        "judge_tags": [
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option directly claims that increasing sample size makes the sampling distribution more spread out, which maps exactly to misconception B10."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "A4",
+          "B10"
+        ],
+        "judge_tags": [
+          "A4",
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option starts with the correct frequentist interpretation of confidence intervals (A4) but incorrectly claims that larger samples result in a larger standard error and a wider interval (B10)."
+      }
+    ],
+    "overall_agreement": 0.75,
+    "overall_confidence": 0.98,
+    "issues": [
+      "The stem is double-barreled ('interpretation of this confidence level AND the effect of the sample size'), but Options 2 and 3 only address one of these two components. Savvy students could eliminate them immediately based on length or structural mismatch.",
+      "Because Options 1 and 4 both start with the exact same correct interpretation for the confidence interval (A4), a student does not actually need to know the correct CI interpretation to get the answer right. They only need to know the relationship between sample size, standard error, and CI width to decide between 1 and 4."
+    ]
+  },
+  "timing": {
+    "generator_s": 10.78,
+    "judge_s": 18.71
+  },
+  "created_at": "2026-05-07T23:04:09.573294+00:00"
+}

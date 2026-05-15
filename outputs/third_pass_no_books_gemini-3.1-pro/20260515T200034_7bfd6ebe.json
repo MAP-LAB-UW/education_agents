@@ -1,0 +1,200 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-pro-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "These facets form a highly coherent set focused on the conceptual interpretation of a confidence interval. An item can present a computed confidence interval and ask for its correct meaning. The key will reflect the long-run frequency interpretation (A4) and correctly target the population parameter (A5). Distractors can elegantly incorporate the common probabilistic misconception (B15) and the confusion of estimating sample statistics or individual scores instead of the population parameter (B16).",
+  "item": {
+    "stem": "A health researcher measured the daily water consumption (in liters) for a random sample of adults in a large city. Based on the sample data, they constructed a 95% confidence interval of (1.8, 2.4). For each of the following statements about this confidence interval, indicate whether it represents a valid (true) or invalid (false) interpretation.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "opt_A",
+        "text": "There is a 95% probability that the true average daily water consumption for all adults in the city is between 1.8 and 2.4 liters.",
+        "facet_tags": [
+          "A5",
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This statement correctly identifies that the interval is intended to estimate the true population average, but it incorrectly uses probability to describe a fixed interval. Once constructed, a specific interval either contains the true parameter or it does not, so the probability is strictly 1 or 0."
+      },
+      {
+        "id": "opt_B",
+        "text": "If the researcher took 100 random samples of the same size and computed a 95% confidence interval for each, we would expect approximately 95 of these intervals to contain the true average daily water consumption of all adults in the city.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This is a correct interpretation. It accurately describes the confidence level in terms of the success rate of the estimation process over repeated sampling, and correctly states that the interval is estimating the unknown population mean."
+      },
+      {
+        "id": "opt_C",
+        "text": "If the researcher took 100 random samples of the same size and computed a 95% confidence interval for each, we would expect approximately 95 of these intervals to contain the sample mean.",
+        "facet_tags": [
+          "A4",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "While this statement uses the correct repeated-sampling interpretation of the confidence level, it incorrectly states that the interval estimates the sample mean. A confidence interval is always constructed around the sample mean, meaning 100% of such intervals contain their own sample mean, but the goal is to capture the population mean."
+      },
+      {
+        "id": "opt_D",
+        "text": "There is a 95% probability that a randomly selected adult in this city consumes between 1.8 and 2.4 liters of water per day.",
+        "facet_tags": [
+          "B15",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This statement is incorrect in two ways. It uses probabilistic language inappropriately for the interval, and it incorrectly suggests the confidence interval is estimating individual scores (the water consumption of a single adult) rather than the overall population parameter."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_B"
+    ],
+    "explanation": "Understanding confidence intervals requires recognizing both what is being estimated (the population parameter, not the sample statistic or individual scores) and what the confidence level represents (the success rate of the method over many repeated samples, not the probability that a specific calculated interval contains the parameter). Only the interpretation describing repeated sampling capturing the true population mean is fully valid.",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A health researcher measured the daily water consumption (in liters) for a random sample of adults in a large city. Based on the sample data, they constructed a 95% confidence interval of (1.8, 2.4).",
+    "option_assessments": [
+      {
+        "option_id": "opt_A",
+        "generator_tags": [
+          "A5",
+          "B15"
+        ],
+        "judge_tags": [
+          "A5",
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The option clearly exhibits B15 by incorrectly describing the confidence interval using a probability of containing the true mean. It also correctly identifies the target as the true average, relating to A5."
+      },
+      {
+        "option_id": "opt_B",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A4",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This is the correct interpretation. It demonstrates A4 by framing the confidence level in terms of expected frequency in repeated sampling, and A5 by correctly identifying the population mean as the target of estimation."
+      },
+      {
+        "option_id": "opt_C",
+        "generator_tags": [
+          "A4",
+          "B16"
+        ],
+        "judge_tags": [
+          "A4",
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The option correctly frames confidence through repeated sampling (A4) but incorrectly states the interval is meant to capture the sample mean instead of the population mean (B16)."
+      },
+      {
+        "option_id": "opt_D",
+        "generator_tags": [
+          "B15",
+          "B16"
+        ],
+        "judge_tags": [
+          "B15",
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The statement uses the incorrect probabilistic interpretation (B15) and incorrectly identifies the target as an individual score rather than a population parameter (B16)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.95,
+    "issues": []
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 4,
+    "latency_similarity": 0.5128,
+    "latency_bucket": "highly_latent",
+    "latency_option_details": [
+      {
+        "option_id": "opt_A",
+        "similarity": 0.444,
+        "score": 4,
+        "bucket": "highly_latent",
+        "facet_tags": [
+          "A5",
+          "B15"
+        ]
+      },
+      {
+        "option_id": "opt_B",
+        "similarity": 0.6069,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ]
+      },
+      {
+        "option_id": "opt_C",
+        "similarity": 0.6425,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A4",
+          "B16"
+        ]
+      },
+      {
+        "option_id": "opt_D",
+        "similarity": 0.3578,
+        "score": 4,
+        "bucket": "highly_latent",
+        "facet_tags": [
+          "B15",
+          "B16"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 39.73,
+    "judge_s": 18.57,
+    "eval_s": 28.94
+  },
+  "created_at": "2026-05-15T20:00:34.161948+00:00"
+}

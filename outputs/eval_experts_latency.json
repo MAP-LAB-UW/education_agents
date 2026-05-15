@@ -1,0 +1,534 @@
+{
+  "source": "expert_examples",
+  "topic": "confidence_intervals",
+  "n_items": 8,
+  "item_evaluations": [
+    {
+      "source": "expert_1",
+      "correctness": {
+        "selected_answer": "B",
+        "correct_answer_ids": [
+          "B"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "According to the Central Limit Theorem, the sampling distribution of the sample mean approaches a normal distribution as the sample size becomes large, regardless of the population's shape. With a sample size of 40, the sampling distribution will be approximately normal and have a smaller spread (standard error) than the population distribution. Option B accurately depicts this approximately normal, narrower distribution."
+      },
+      "naturalness": {
+        "stem_score": 3,
+        "stem_reasoning": "The stem contains a jarring sentence fragment and a minor typo ('central limits theorem'), which disrupts the reading flow. However, despite these grammatical issues, the core question is still understandable.",
+        "options_score": 5,
+        "options_reasoning": "The options consist entirely of figures. This makes them perfectly concise, parallel in format, and easy to visually compare.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.5463,
+        "score": 4,
+        "bucket": "highly_latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.5923,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B8",
+              "B9"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.6325,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A2"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.4141,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "A1",
+              "B8"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "source": "expert_2",
+      "correctness": {
+        "selected_answer": "D",
+        "correct_answer_ids": [
+          "D"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "In frequentist statistics, a confidence interval is used to estimate a population parameter. The term '95% confidence' means that if we were to draw an infinite number of independent samples of the same size from the population and compute a confidence interval from each one, approximately 95% of those intervals would capture the true, unobservable population parameter (in this case, the 'true mean')."
+      },
+      "naturalness": {
+        "stem_score": 3,
+        "stem_reasoning": "The stem includes unnecessary filler sentences and asks two overlapping questions, making it noticeably wordy and disjointed.",
+        "options_score": 5,
+        "options_reasoning": "The options are perfectly parallel in structure, differing only in their final words, which makes them very easy to scan and compare.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.5398,
+        "score": 4,
+        "bucket": "highly_latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.5664,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B16"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.5431,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "B16"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.5343,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "B16"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.5153,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "A5"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "source": "expert_3",
+      "correctness": {
+        "selected_answer": "B",
+        "correct_answer_ids": [
+          "B"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "The Central Limit Theorem (CLT) states that as the sample size increases, the sampling distribution of the sample mean approaches a normal distribution, regardless of the population's distribution (provided the population has a finite variance). Additionally, the standard deviation of the sampling distribution (known as the standard error) is calculated as the population standard deviation divided by the square root of the sample size (sigma / sqrt(n)). Therefore, as the sample size increases, the standard error decreases, which practically means the sample means will have a much narrower spread or 'smaller range of scores' clustered tightly around the true population mean."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem is a straightforward, concise sentence completion that clearly sets up the question for the student without any unnecessary wordiness.",
+        "options_score": 4,
+        "options_reasoning": "The options are concise and easy to read, though option C slightly breaks the structural parallelism established by options A and B.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.5825,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.5507,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A2",
+              "B10"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.556,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A1",
+              "A2"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.6408,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B11"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "source": "expert_4",
+      "correctness": {
+        "selected_answer": "C",
+        "correct_answer_ids": [
+          "C"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "The expected value (or mean) of the sampling distribution of the sample mean, x̄, is always equal to the population mean, μ, assuming the population mean exists. This represents the fact that x̄ is an unbiased estimator of μ. Option A is incorrect because while a larger sample size decreases the standard error and increases the probability that x̄ is close to μ (Law of Large Numbers), it does not guarantee that x̄ will 'always' get closer in every single instance due to random sampling variability. Option B is incorrect because the standard deviation of the sampling distribution is σ / √n, not σ. Option D is incorrect because the sampling distribution is only exactly Normal if the population itself is Normal; otherwise, it is only approximately Normal for large sample sizes due to the Central Limit Theorem."
+      },
+      "naturalness": {
+        "stem_score": 4,
+        "stem_reasoning": "The stem is a very direct and concise textbook-style question, though it lacks a real-world scenario.",
+        "options_score": 3,
+        "options_reasoning": "The options are generally understandable but suffer from structural inconsistencies (e.g., a conditional statement in A vs. declarative statements in the others) and minor capitalization errors.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.755,
+        "score": 2,
+        "bucket": "surface",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.7895,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B14"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.6966,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B9"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.7442,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A3"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.7897,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B12"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "source": "expert_5",
+      "correctness": {
+        "selected_answer": "B, E, F",
+        "correct_answer_ids": [
+          "B",
+          "E"
+        ],
+        "is_correct": false,
+        "flagged_distractors": [
+          "A"
+        ],
+        "reasoning": "To solve this, we evaluate each option from a standard frequentist perspective (which is the paradigm of confidence intervals):\n\n- A is False: In frequentist statistics, the population mean (μ) is a fixed but unknown constant, not a random variable. Therefore, it is either entirely inside the interval (1) or entirely outside it (0); the probability is not 0.95.\n- B is True: This is the standard, textbook-accepted phrasing for interpreting a confidence interval.\n- C is False: The interval is meant to estimate the population mean, not the distribution of future sample means. (A new sample mean has an approximate 83% chance of falling into this specific 95% CI, not 95%).\n- D is False: The interval describes the population mean, not individual data points (households), which must be integer values anyway.\n- E is True: This represents the frequentist definition of confidence. If we generate 100 intervals under the same process, the number of intervals capturing μ follows a Binomial distribution with n=100 and p=0.95. The expected value is 100 * 0.95 = 95.\n- F is True: Because every confidence interval for a mean is constructed as the sample mean plus or minus a margin of error (x̄ ± ME), every single interval constructed this way will be centered on—and thus capture—its own sample mean. Hence, 100 out of 100 intervals will capture their sample mean."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem is clear, concise, and provides a straightforward statistical scenario with direct instructions that are easy to understand on the first pass.",
+        "options_score": 4,
+        "options_reasoning": "The options effectively target common misconceptions and are easy to compare, though minor phrasing choices like the colloquial 'x-bars' and the slightly clunky parenthetical '(95%)' introduce minor awkwardness.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.5083,
+        "score": 4,
+        "bucket": "highly_latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.5829,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A5",
+              "B15"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.5006,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "A4",
+              "A5"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.5083,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "A4",
+              "B16"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.2086,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "B8",
+              "B16"
+            ]
+          },
+          {
+            "option_id": "E",
+            "similarity": 0.6125,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A4",
+              "A5"
+            ]
+          },
+          {
+            "option_id": "F",
+            "similarity": 0.6371,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A4",
+              "B16"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "source": "expert_6",
+      "correctness": {
+        "selected_answer": "Option D",
+        "correct_answer_ids": [
+          "D"
+        ],
+        "is_correct": false,
+        "flagged_distractors": [
+          "Option A"
+        ],
+        "reasoning": "In frequentist statistics, a confidence interval provides a range of plausible values for a population parameter (in this case, the true average number of hours worked by all UF students). The correct interpretation of a realized confidence interval uses the term 'confident' to describe the reliability of the estimation process, avoiding the term 'probability' because the population parameter is a fixed, unknown constant rather than a random variable. Therefore, Option D is the standard and correct frequentist interpretation."
+      },
+      "naturalness": {
+        "stem_score": 4,
+        "stem_reasoning": "The stem is very straightforward, but the phrase 'this confidence interval' implies missing context and it omits the 95 percent confidence level that is suddenly introduced in the options.",
+        "options_score": 5,
+        "options_reasoning": "The options are perfectly parallel, structurally consistent, and logically constructed to make comparing the common misconceptions about confidence intervals very easy for the student.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.484,
+        "score": 4,
+        "bucket": "highly_latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.4604,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "A5",
+              "B15"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.4445,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "B15",
+              "B16"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.5931,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A4",
+              "B16"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.4381,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "A4",
+              "A5"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "source": "expert_7",
+      "correctness": {
+        "selected_answer": "C",
+        "correct_answer_ids": [
+          "C"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "The width of a confidence interval is determined by its margin of error. To make a confidence interval shorter (narrower), you must decrease the margin of error. The margin of error is proportional to the critical value (which is determined by the confidence level) and inversely proportional to the square root of the sample size. Decreasing the confidence level produces a smaller critical value, which narrows the interval. Increasing the sample size produces a smaller standard error, which also narrows the interval. By doing both (Option C), the researchers ensure the confidence interval will be shorter."
+      },
+      "naturalness": {
+        "stem_score": 4,
+        "stem_reasoning": "The scenario is generally clear but slightly repetitive with the phrase 'shorter confidence interval' and could use the more standard statistical term 'narrower'.",
+        "options_score": 5,
+        "options_reasoning": "The options are perfectly parallel, concise, and systematically vary the two factors, making them very easy to compare.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.6756,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.6657,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A1",
+              "A7",
+              "B17"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.7855,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B10",
+              "B17"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.6537,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A1",
+              "A6",
+              "A7"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.5974,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A6",
+              "B10"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "source": "expert_8",
+      "correctness": {
+        "selected_answer": "B",
+        "correct_answer_ids": [
+          "B"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "According to the central limit theorem and properties of linear combinations of normal random variables, the sampling distribution of the sample mean from a normally distributed population is also exactly normally distributed. The mean of this sampling distribution is equal to the population mean (55,000), and its standard deviation (the standard error) is equal to the population standard deviation divided by the square root of the sample size (8,000/√25)."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem provides a clear, concise, and standard real-world scenario. The question being asked is explicit and easy to comprehend on the first pass.",
+        "options_score": 5,
+        "options_reasoning": "The options are concise, perfectly parallel in structure, and easy to compare against one another.",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.4892,
+        "score": 4,
+        "bucket": "highly_latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.4918,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "A3",
+              "B9"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.4922,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "A1",
+              "A3"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.5284,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "B9",
+              "B13",
+              "B14"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.4445,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "A1",
+              "B13",
+              "B14"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

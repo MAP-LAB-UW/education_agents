@@ -83,15 +83,36 @@ class JudgeReport(BaseModel):
 class GenerationRequest(BaseModel):
     topic: str
     target_facets: list[str] = []
-    response_format: Literal["single_select", "multi_select", "true_false_per_option"] = "single_select"
-    num_options: int = 4
+    response_format: Literal["single_select", "multi_select", "true_false_per_option"] | None = None
+    num_options: int | None = None
     book_context_mode: Literal["none", "full_tex", "rag"] = "none"
     n_items: int = 1
     exclude_image_examples: bool = True
+    prompt_version: Literal["v1", "v2"] = "v1"
 
     @property
     def auto_select_facets(self) -> bool:
         return len(self.target_facets) == 0
+
+    @property
+    def auto_select_format(self) -> bool:
+        return self.response_format is None
+
+    @property
+    def auto_select_num_options(self) -> bool:
+        return self.num_options is None
+
+
+class EvalScores(BaseModel):
+    correctness_pass: bool
+    correctness_flagged_distractors: list[str] = []
+    naturalness_stem: int
+    naturalness_options: int
+    naturalness_overall: int
+    latency_score: int
+    latency_similarity: float
+    latency_bucket: str
+    latency_option_details: list[dict] = []
 
 
 class RunArtifact(BaseModel):
@@ -100,5 +121,6 @@ class RunArtifact(BaseModel):
     facet_selection_reasoning: str | None = None
     item: GeneratedItem
     judge_report: JudgeReport
+    eval_scores: EvalScores | None = None
     timing: dict[str, float]
     created_at: str

@@ -1,0 +1,200 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A2",
+      "B10",
+      "B11"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-pro-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "These facets form a coherent diagnostic item focusing on how sample size affects the sampling distribution. It evaluates whether students correctly understand that increasing sample size decreases standard error and pushes the shape toward a normal distribution (A1, A2), rather than holding the misconception that the distribution will become more spread out (B10) or will increasingly resemble the shape of the underlying population distribution (B11).",
+  "item": {
+    "stem": "A researcher draws random samples from a population that is heavily right-skewed. If the researcher decides to increase the sample size of each sample from $n=30$ to $n=500$, what will happen to the shape and spread of the sampling distribution of the sample mean?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The sampling distribution will become more normally distributed and less spread out.",
+        "facet_tags": [
+          "A1",
+          "A2"
+        ],
+        "is_correct": true,
+        "rationale": "Correct. According to the Central Limit Theorem, as sample size increases, the sampling distribution of the mean approaches a normal distribution. Furthermore, the standard error of the mean decreases as sample size increases, making the distribution less spread out (more packed)."
+      },
+      {
+        "id": "B",
+        "text": "The sampling distribution will become more normally distributed and more spread out.",
+        "facet_tags": [
+          "A2",
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "Incorrect. While it is true that the distribution becomes more normal, increasing the sample size actually decreases the standard error, making the sampling distribution less spread out, not more."
+      },
+      {
+        "id": "C",
+        "text": "The sampling distribution will look more like the right-skewed population distribution and be less spread out.",
+        "facet_tags": [
+          "A1",
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "Incorrect. While a larger sample size does make the sampling distribution less spread out, the shape of the sampling distribution of the mean becomes more normal as sample size increases, rather than mirroring the shape of the population distribution."
+      },
+      {
+        "id": "D",
+        "text": "The sampling distribution will look more like the right-skewed population distribution and be more spread out.",
+        "facet_tags": [
+          "B10",
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "Incorrect. Increasing the sample size causes the sampling distribution of the mean to become more normally distributed (not more like the skewed population) and decreases its spread (rather than making it more spread out)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item tests students' understanding of how sample size affects the sampling distribution of the sample mean. By presenting a scenario where sample size increases, the item assesses two key dimensions: shape and spread. It diagnoses whether students understand that the shape becomes more normal (A2) rather than mirroring the population distribution (B11), and whether they understand that the spread decreases due to a smaller standard error (A1) rather than increasing (B10).",
+    "target_facets": [
+      "A1",
+      "A2",
+      "B10",
+      "B11"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher draws random samples from a population that is heavily right-skewed. If the researcher decides to increase the sample size...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1",
+          "A2"
+        ],
+        "judge_tags": [
+          "A1",
+          "A2"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly states that the distribution will become 'more normally distributed' (A2) and 'less spread out' (A1)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A2",
+          "B10"
+        ],
+        "judge_tags": [
+          "A2",
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states the distribution becomes 'more normally distributed' (A2) but incorrectly claims it will be 'more spread out' (B10)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A1",
+          "B11"
+        ],
+        "judge_tags": [
+          "A1",
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option incorrectly claims the distribution will 'look more like the right-skewed population distribution' (B11) but correctly states it will be 'less spread out' (A1)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B10",
+          "B11"
+        ],
+        "judge_tags": [
+          "B10",
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option combines two misconceptions, claiming the distribution will 'look more like the right-skewed population distribution' (B11) and be 'more spread out' (B10)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 1,
+    "latency_similarity": 0.804,
+    "latency_bucket": "paraphrase",
+    "latency_option_details": [
+      {
+        "option_id": "A",
+        "similarity": 0.8017,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "A1",
+          "A2"
+        ]
+      },
+      {
+        "option_id": "B",
+        "similarity": 0.8265,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "A2",
+          "B10"
+        ]
+      },
+      {
+        "option_id": "C",
+        "similarity": 0.7773,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "A1",
+          "B11"
+        ]
+      },
+      {
+        "option_id": "D",
+        "similarity": 0.8105,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "B10",
+          "B11"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 18.64,
+    "judge_s": 10.32,
+    "eval_s": 13.75
+  },
+  "created_at": "2026-05-15T20:01:33.159330+00:00"
+}

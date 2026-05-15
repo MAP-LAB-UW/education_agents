@@ -1,0 +1,135 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "B9",
+      "B12"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 5,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This item focuses on the conceptual understanding of the shape of the sampling distribution of the mean. It contrasts the Central Limit Theorem (A2: normality improves with sample size) with two common misconceptions: that the sampling distribution is always normal regardless of sample size (B12) and that the sampling distribution will always mirror the shape of the population distribution (B9).",
+  "item": {
+    "stem": "The time it takes for a specific chemical reaction to complete is known to be heavily right-skewed with a population mean (μ) of 40 seconds and a population standard deviation (σ) of 10 seconds. A scientist plans to calculate the mean completion time (x̄) from a random sample of reactions. Which of the following best describes the sampling distribution of the sample mean (x̄)?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "For a sample of n=4, the sampling distribution of x̄ is right-skewed; for a sample of n=100, the sampling distribution of x̄ is approximately normal.",
+        "facet_tags": [
+          "A2"
+        ],
+        "is_correct": true,
+        "rationale": "The student correctly understands the Central Limit Theorem: for small sample sizes, the sampling distribution of the mean inherits the shape of the population (skewed), but as the sample size increases (n=100), the sampling distribution approaches a normal distribution regardless of the population's shape."
+      },
+      {
+        "id": "B",
+        "text": "For any sample size, such as n=4, the sampling distribution of x̄ is already perfectly normal because the distribution of a sample mean is always normal.",
+        "facet_tags": [
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "The student holds the misconception that the sampling distribution of the mean is always normal, failing to realize that for small sample sizes, the shape of the sampling distribution depends heavily on the shape of the underlying population."
+      },
+      {
+        "id": "C",
+        "text": "For a sample of n=100, the sampling distribution of x̄ is right-skewed and has a standard deviation of 10 seconds.",
+        "facet_tags": [
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "The student believes the sampling distribution mirrors the population distribution's shape and variability, failing to account for both the normalization effect of the Central Limit Theorem and the reduction in standard error as sample size increases."
+      },
+      {
+        "id": "D",
+        "text": "For a sample of n=100, the sampling distribution of x̄ is normal, but its standard deviation remains 10 seconds because it must match the population standard deviation.",
+        "facet_tags": [
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly identifies that a large sample size leads to a normal sampling distribution but incorrectly believes the standard deviation of the sampling distribution (standard error) is the same as the population standard deviation, regardless of sample size."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item evaluates the student's understanding of how sample size affects the shape and variability of the sampling distribution of the mean. According to the Central Limit Theorem, as the sample size (n) increases, the sampling distribution of the mean becomes increasingly normal (A2), even if the underlying population is skewed. Students with the B12 misconception believe the sampling distribution is always normal, regardless of n. Students with the B9 misconception fail to distinguish between the population distribution and the sampling distribution, assuming the sampling distribution 'mirrors' the population's skewness and standard deviation.",
+    "target_facets": [
+      "A2",
+      "B9",
+      "B12"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "The time it takes for a specific chemical reaction to complete is known to be heavily right-skewed with a population mean (μ) of 40 seconds and a population standard deviation (σ) of 10 seconds. A scientist plans to calculate the mean completion time (x̄) from a random sample of reactions. Which of the following best describes the sampling distribution of the sample mean (x̄)?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A2"
+        ],
+        "judge_tags": [
+          "A2"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option correctly describes the Central Limit Theorem, indicating an understanding that the sampling distribution approaches a normal distribution as sample size increases, which maps perfectly to A2."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B12"
+        ],
+        "judge_tags": [
+          "B12"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly states that the sampling distribution is always normal regardless of sample size, which is exactly the misconception defined in B12."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B9"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The student believes the sampling distribution mirrors the population in both shape (right-skewed) and spread (SD of 10), which aligns perfectly with B9."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B9"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "This option captures the part of B9 related to the standard deviation of the sampling distribution remaining the same as the population distribution. Although it correctly identifies the shape as normal, the misconception regarding the spread mirrors population spread falls under B9."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.975,
+    "issues": [
+      "Options C and D both target the same misconception (B9), just varying whether the shape is also assumed to match the population. While clinically useful, having more diversity in the tested misconceptions (e.g., assessing B10) could improve diagnostic breadth."
+    ]
+  },
+  "timing": {
+    "generator_s": 17.22,
+    "judge_s": 12.39
+  },
+  "created_at": "2026-05-14T23:26:05.285630+00:00"
+}

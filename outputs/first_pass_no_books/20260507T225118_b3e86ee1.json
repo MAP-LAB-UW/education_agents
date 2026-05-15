@@ -1,0 +1,140 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "A6",
+      "B15",
+      "B17"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the conceptual interpretation and the structural mechanics of the confidence level. It seeks to distinguish between the frequentist definition of confidence (A4) versus the probability-based misconception (B15), while simultaneously testing the understanding of how increasing confidence affects the precision (width) of the resulting interval (A6 vs B17).",
+  "item": {
+    "stem": "A researcher is studying the average amount of time students spend studying per week. After collecting data from a random sample, the researcher calculates a 95% confidence interval for the population mean. Which of the following is true regarding the interpretation of this interval and how it would change if the confidence level were increased to 99%?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "A 99% confidence interval would be wider than the 95% confidence interval because it uses a larger critical value. The '95% confidence' refers to the fact that if we repeated the study many times, 95% of the calculated intervals would contain the true population mean.",
+        "facet_tags": [
+          "A4",
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies the relationship between the confidence level and the interval width (A6) and provides the correct frequentist interpretation of the confidence level as a long-run success rate (A4)."
+      },
+      {
+        "id": "opt_2",
+        "text": "There is a 95% probability that the true population mean for study time falls between the specific lower and upper limits calculated in this 95% confidence interval.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This option incorrectly interprets the confidence level as the probability that the population parameter lies within a fixed, already calculated interval (B15)."
+      },
+      {
+        "id": "opt_3",
+        "text": "The researcher should prefer a 99% confidence level because higher confidence leads to a more precise estimate, resulting in a shorter confidence interval than the 95% level.",
+        "facet_tags": [
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This option contains the common misconception that higher confidence levels lead to shorter, more precise intervals, when in fact higher confidence requires a wider interval (B17)."
+      },
+      {
+        "id": "opt_4",
+        "text": "A 99% confidence interval is better because it ensures a 99% probability that the true mean is captured and provides a narrower range than a 95% interval.",
+        "facet_tags": [
+          "B15",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This option combines two misconceptions: interpreting confidence as a probability for a specific interval (B15) and believing that higher confidence results in a narrower (shorter) interval (B17)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "To correctly understand confidence intervals, students must recognize that the 'confidence level' describes the reliability of the procedure over many replications (A4) rather than a probability for one specific interval (B15). Furthermore, they must understand the trade-off between confidence and precision: a higher confidence level requires a larger critical value, which increases the margin of error and results in a wider interval (A6). Misunderstanding this relationship often leads students to believe higher confidence produces more 'precise' (shorter) intervals (B17).",
+    "target_facets": [
+      "A4",
+      "A6",
+      "B15",
+      "B17"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is studying the average amount of time students spend studying per week. After collecting data from a random sample, the researcher calculates a 95% confidence interval for the population mean. Which of the following is true regarding the interpretation of this interval and how it would change if the confidence level were increased to 99%?",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A4",
+          "A6"
+        ],
+        "judge_tags": [
+          "A4",
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly states that the 99% CI would be wider due to a larger critical value (A6) and correctly provides the frequentist replication interpretation of confidence intervals (A4)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option clearly exhibits facet B15 by describing the confidence level as a '95% probability' that the true mean falls within the specific calculated limits."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "B17"
+        ],
+        "judge_tags": [
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option demonstrates the B17 misconception by stating that a higher confidence level results in a more precise estimate and a shorter interval."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B15",
+          "B17"
+        ],
+        "judge_tags": [
+          "B15",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option combines two distinct misconceptions: the probability interpretation of capturing the true mean (B15) and the belief that a higher confidence level provides a narrower range (B17)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 11.29,
+    "judge_s": 12.44
+  },
+  "created_at": "2026-05-07T22:51:18.831903+00:00"
+}

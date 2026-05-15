@@ -1,0 +1,139 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A3",
+      "A5",
+      "B13",
+      "B16"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection focuses on the central target of statistical inference. It combines facets related to the center of the sampling distribution (A3, B13) with facets regarding what a confidence interval is actually intended to estimate (A5, B16). By grouping these, the diagnostic item can distinguish between students who understand that the sampling distribution is anchored at the population mean and those who confuse the properties of the sampling distribution with sample-specific statistics.",
+  "item": {
+    "stem": "A health researcher takes a random sample of 100 adults to estimate the population mean blood pressure (represented by the parameter μ). She constructs a 95% confidence interval from her data. Which of the following statements is true regarding the sampling distribution she is using and the purpose of her interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The confidence interval is intended to estimate the population mean μ, and the mean of the sampling distribution of the sample mean is equal to this population mean regardless of the sample size.",
+        "facet_tags": [
+          "A3",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies that the target of the confidence interval is the population parameter (A5) and correctly identifies the property that the mean of the sampling distribution of the mean is the population mean (A3)."
+      },
+      {
+        "id": "B",
+        "text": "The confidence interval is intended to estimate the specific sample mean (ā) obtained in this study, as the population mean is too large to be captured by a single interval.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This distractor represents the misconception that confidence intervals are used to estimate sample statistics rather than population parameters (B16)."
+      },
+      {
+        "id": "C",
+        "text": "If the researcher increased her sample size to 1,000 adults, the mean of the sampling distribution of the sample mean would increase to reflect the larger amount of data.",
+        "facet_tags": [
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "This distractor targets the misconception that the mean of a sampling distribution depends on or changes with the sample size (B13)."
+      },
+      {
+        "id": "D",
+        "text": "The 95% confidence interval provides the range within which 95% of the individual blood pressure readings in the researcher's sample are found.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This distractor reflects the misconception that a confidence interval describes the distribution of individual data points or sample scores instead of the population parameter (B16)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item assesses whether students understand the fundamental purpose of a confidence interval and the properties of the sampling distribution. The correct answer (A) acknowledges that the interval targets the population parameter (A5) and that the sampling distribution is centered at that parameter (A3). Incorrect options probe the misconception that the sampling distribution's center changes with sample size (B13) or that the interval describes sample-level statistics or individual data points rather than population-level parameters (B16).",
+    "target_facets": [
+      "A3",
+      "A5",
+      "B13",
+      "B16"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A health researcher takes a random sample of 100 adults to estimate the population mean blood pressure...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A3",
+          "A5"
+        ],
+        "judge_tags": [
+          "A3",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly states that the CI estimates the population parameter (A5) and that the mean of the sampling distribution equals the population mean (A3)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states that the confidence interval is used to estimate the sample mean, perfectly illustrating the B16 misconception (estimating sample statistics instead of population parameters)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B13"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option claims that increasing the sample size changes the mean of the sampling distribution, which is precisely the B13 misconception."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option claims the CI describes the range of individual readings in the sample, which aligns with the B16 misconception (interpreting CI as capturing sample data rather than population parameters)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": [
+      "The options are slightly asymmetrical. Option A combines two distinct concepts (purpose of CI and mean of sampling distribution), while B, C, and D generally focus on only one concept each. A student who only knows the correct purpose of a CI might guess A without understanding the sampling distribution component, although this is mitigated by the stem prompting for both."
+    ]
+  },
+  "timing": {
+    "generator_s": 14.64,
+    "judge_s": 13.95
+  },
+  "created_at": "2026-05-07T22:50:43.500932+00:00"
+}

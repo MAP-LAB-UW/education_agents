@@ -279,15 +279,30 @@ function AggregateBar({ items }) {
   const avgConfidence = items.reduce((s, r) => s + r.judge_report.overall_confidence, 0) / items.length;
   const issueCount    = items.reduce((s, r) => s + r.judge_report.issues.length, 0);
 
+  const withEval = items.filter(r => r.eval_scores);
+  const hasEval = withEval.length > 0;
+  const correctPct  = hasEval ? Math.round(withEval.filter(r => r.eval_scores.correctness_pass).length / withEval.length * 100) : null;
+  const avgNatural  = hasEval ? (withEval.reduce((s, r) => s + r.eval_scores.naturalness_overall, 0) / withEval.length) : null;
+  const avgLatency  = hasEval ? (withEval.reduce((s, r) => s + r.eval_scores.latency_score, 0) / withEval.length) : null;
+
+  const stats = [
+    { label: "Items",          value: items.length,                                  color: DS.ink },
+    { label: "Avg. Agreement", value: `${Math.round(avgAgreement * 100)}%`,           color: DS.matchFg },
+    { label: "Avg. Confidence",value: `${Math.round(avgConfidence * 100)}%`,          color: DS.goalFg },
+    { label: "Issues",         value: issueCount === 0 ? "None" : issueCount,         color: issueCount > 0 ? DS.mismatchFg : DS.matchFg },
+  ];
+  if (hasEval) {
+    stats.push(
+      { label: "Correctness",  value: `${correctPct}%`,                    color: correctPct === 100 ? DS.matchFg : DS.mismatchFg },
+      { label: "Naturalness",  value: `${avgNatural.toFixed(1)}/5`,        color: DS.goalFg },
+      { label: "Facet Latency", value: `${avgLatency.toFixed(1)}/4`,       color: DS.accent },
+    );
+  }
+
   return (
     <div style={{ background: DS.paper, border: `1px solid ${DS.ruleStrong}`, borderRadius: DS.rlg, overflow: "hidden" }}>
       <div style={{ padding: "14px 20px", display: "flex", gap: 32, flexWrap: "wrap" }}>
-        {[
-          { label: "Items",          value: items.length,                                  color: DS.ink },
-          { label: "Avg. Agreement", value: `${Math.round(avgAgreement * 100)}%`,           color: DS.matchFg },
-          { label: "Avg. Confidence",value: `${Math.round(avgConfidence * 100)}%`,          color: DS.goalFg },
-          { label: "Issues",         value: issueCount === 0 ? "None" : issueCount,         color: issueCount > 0 ? DS.mismatchFg : DS.matchFg },
-        ].map(s => (
+        {stats.map(s => (
           <div key={s.label} style={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <div style={{ fontSize: 22, fontWeight: 600, fontFamily: FN, color: s.color, lineHeight: 1 }}>{s.value}</div>
             <div style={{ fontSize: 10.5, letterSpacing: "0.1em", textTransform: "uppercase", color: DS.inkMuted, fontFamily: FM }}>{s.label}</div>
@@ -333,6 +348,12 @@ function ItemRow({ result, index, selected, onClick }) {
         <span style={{ fontSize: 10.5, fontFamily: FM, color: agreeColor, fontWeight: 600, letterSpacing: "0.04em" }}>{Math.round(agree * 100)}% agree</span>
         <span style={{ fontSize: 10.5, fontFamily: FM, color: DS.inkMuted, letterSpacing: "0.04em" }}>{Math.round(judge_report.overall_confidence * 100)}% conf</span>
         {judge_report.issues.length > 0 && <span style={{ fontSize: 10.5, fontFamily: FM, color: DS.mismatchFg, fontWeight: 600, letterSpacing: "0.04em" }}>{judge_report.issues.length} issue{judge_report.issues.length > 1 ? "s" : ""}</span>}
+        {result.eval_scores && (
+          <>
+            <span style={{ fontSize: 10.5, fontFamily: FM, color: result.eval_scores.correctness_pass ? DS.matchFg : DS.mismatchFg, fontWeight: 600, letterSpacing: "0.04em" }}>{result.eval_scores.correctness_pass ? "correct" : "wrong"}</span>
+            <span style={{ fontSize: 10.5, fontFamily: FM, color: DS.inkMuted, letterSpacing: "0.04em" }}>N{result.eval_scores.naturalness_overall} L{result.eval_scores.latency_score}</span>
+          </>
+        )}
         <div style={{ flex: 1 }} />
         <TagRow tags={item.target_facets.slice(0, 3)} small />
       </div>
@@ -363,6 +384,7 @@ function ItemDetail({ result }) {
       <div style={{ display: "flex", borderBottom: `1px solid ${DS.rule}`, padding: "0 20px", flexShrink: 0, background: DS.paper, alignItems: "center" }}>
         <button style={tabStyle(tab === "item")} onClick={() => setTab("item")}>Generated Item</button>
         <button style={tabStyle(tab === "judge")} onClick={() => setTab("judge")}>Judge Report</button>
+        {result.eval_scores && <button style={tabStyle(tab === "eval")} onClick={() => setTab("eval")}>Evaluation</button>}
         <div style={{ flex: 1 }} />
         <div style={{ display: "flex", alignItems: "center", gap: 10, paddingRight: 4 }}>
           <span style={{ fontSize: 10.5, fontFamily: FM, color: DS.inkMuted, letterSpacing: "0.04em" }}>
@@ -482,6 +504,85 @@ function ItemDetail({ result }) {
             </div>
           </>
         )}
+
+        {tab === "eval" && result.eval_scores && (() => {
+          const ev = result.eval_scores;
+          const bucketColor = b => b === "highly_latent" ? DS.matchFg : b === "latent" ? DS.goalFg : b === "surface" ? DS.partialFg : DS.mismatchFg;
+          const bucketLabel = b => b === "highly_latent" ? "Highly Latent" : b === "latent" ? "Latent" : b === "surface" ? "Surface" : "Paraphrase";
+          return (
+            <>
+              {/* Score cards */}
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                <div style={{ flex: 1, minWidth: 140, background: DS.paper, border: `1px solid ${DS.ruleStrong}`, borderRadius: DS.rlg, padding: "16px 20px" }}>
+                  <MonoLabel>Correctness</MonoLabel>
+                  <div style={{ fontSize: 26, fontWeight: 600, fontFamily: FN, color: ev.correctness_pass ? DS.matchFg : DS.mismatchFg, lineHeight: 1 }}>
+                    {ev.correctness_pass ? "Pass" : "Fail"}
+                  </div>
+                  {ev.correctness_flagged_distractors.length > 0 && (
+                    <div style={{ marginTop: 8, fontSize: 11.5, color: DS.mismatchFg, fontFamily: FM }}>
+                      Flagged: {ev.correctness_flagged_distractors.join(", ")}
+                    </div>
+                  )}
+                </div>
+                <div style={{ flex: 1, minWidth: 140, background: DS.paper, border: `1px solid ${DS.ruleStrong}`, borderRadius: DS.rlg, padding: "16px 20px" }}>
+                  <MonoLabel>Naturalness</MonoLabel>
+                  <div style={{ fontSize: 26, fontWeight: 600, fontFamily: FN, color: DS.goalFg, lineHeight: 1 }}>{ev.naturalness_overall}/5</div>
+                  <div style={{ marginTop: 8, display: "flex", gap: 16 }}>
+                    <span style={{ fontSize: 11.5, fontFamily: FM, color: DS.inkMuted }}>Stem: {ev.naturalness_stem}</span>
+                    <span style={{ fontSize: 11.5, fontFamily: FM, color: DS.inkMuted }}>Options: {ev.naturalness_options}</span>
+                  </div>
+                </div>
+                <div style={{ flex: 1, minWidth: 140, background: DS.paper, border: `1px solid ${DS.ruleStrong}`, borderRadius: DS.rlg, padding: "16px 20px" }}>
+                  <MonoLabel>Facet Latency</MonoLabel>
+                  <div style={{ fontSize: 26, fontWeight: 600, fontFamily: FN, color: bucketColor(ev.latency_bucket), lineHeight: 1 }}>{ev.latency_score}/4</div>
+                  <div style={{ marginTop: 8 }}>
+                    <span style={{
+                      padding: "2px 7px", borderRadius: DS.r,
+                      fontSize: 10, fontWeight: 600, letterSpacing: "0.08em",
+                      textTransform: "uppercase", fontFamily: FM,
+                      background: DS.paper3, color: bucketColor(ev.latency_bucket),
+                    }}>{bucketLabel(ev.latency_bucket)}</span>
+                    <span style={{ fontSize: 11.5, fontFamily: FM, color: DS.inkMuted, marginLeft: 8 }}>sim={ev.latency_similarity.toFixed(3)}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Per-option latency */}
+              {ev.latency_option_details && ev.latency_option_details.length > 0 && (
+                <div style={{ background: DS.paper, border: `1px solid ${DS.ruleStrong}`, borderRadius: DS.rlg, padding: "16px 20px" }}>
+                  <MonoLabel>Per-Option Facet Latency</MonoLabel>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                    {ev.latency_option_details.map((od, i) => {
+                      const opt = result.item.options.find(o => o.id === od.option_id);
+                      return (
+                        <React.Fragment key={od.option_id}>
+                          {i > 0 && <Rule />}
+                          <div style={{ display: "flex", gap: 12, alignItems: "flex-start", paddingTop: i > 0 ? 10 : 0 }}>
+                            <span style={{ width: 20, height: 20, borderRadius: 2, flexShrink: 0, background: DS.paper3, color: DS.inkMuted, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 600, fontFamily: FM }}>{od.option_id}</span>
+                            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 6 }}>
+                              <p style={{ margin: 0, fontSize: 13, color: DS.ink2, fontFamily: FS, fontStyle: "italic", lineHeight: 1.5 }}>{opt?.text}</p>
+                              <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                                <span style={{
+                                  padding: "2px 7px", borderRadius: DS.r,
+                                  fontSize: 10, fontWeight: 600, letterSpacing: "0.08em",
+                                  textTransform: "uppercase", fontFamily: FM,
+                                  background: DS.paper3, color: bucketColor(od.bucket),
+                                }}>{od.score}/4 · {bucketLabel(od.bucket)}</span>
+                                <span style={{ fontSize: 10.5, fontFamily: FM, color: DS.inkMuted }}>sim={od.similarity.toFixed(3)}</span>
+                                <TagRow tags={od.facet_tags} small />
+                              </div>
+                              <ScoreBar value={1 - od.similarity} color={bucketColor(od.bucket)} />
+                            </div>
+                          </div>
+                        </React.Fragment>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </>
+          );
+        })()}
       </div>
     </div>
   );
@@ -776,23 +877,43 @@ function VariationA() {
                   <div style={{ padding: "12px 18px", borderBottom: `1px solid ${DS.rule}` }}>
                     <MonoLabel style={{ marginBottom: 0 }}>Per-item breakdown</MonoLabel>
                   </div>
-                  {results.map((r, i) => (
+                  {results.map((r, i) => {
+                    const ev = r.eval_scores;
+                    const bucketColor = b => b === "highly_latent" ? DS.matchFg : b === "latent" ? DS.goalFg : b === "surface" ? DS.partialFg : DS.mismatchFg;
+                    return (
                     <React.Fragment key={r.id || i}>
                       {i > 0 && <Rule />}
                       <div style={{ padding: "11px 18px", display: "flex", gap: 12, alignItems: "center" }}>
                         <span style={{ width: 18, height: 18, borderRadius: 2, flexShrink: 0, background: DS.paper3, color: DS.inkMuted, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 600, fontFamily: FM, letterSpacing: "0.04em" }}>{i + 1}</span>
                         <div style={{ flex: 1, minWidth: 0 }}>
                           <div style={{ fontSize: 12.5, color: DS.ink2, fontFamily: FS, fontStyle: "italic", marginBottom: 6, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{r.item.stem.slice(0, 90)}…</div>
-                          <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+                          <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
                             <div style={{ minWidth: 110 }}><div style={{ fontSize: 10.5, color: DS.inkMuted, fontFamily: FM, letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 3 }}>Agreement</div><ScoreBar value={r.judge_report.overall_agreement} color={DS.matchFg} /></div>
                             <div style={{ minWidth: 110 }}><div style={{ fontSize: 10.5, color: DS.inkMuted, fontFamily: FM, letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 3 }}>Confidence</div><ScoreBar value={r.judge_report.overall_confidence} color={DS.goalFg} /></div>
+                            {ev && (
+                              <>
+                                <div style={{ minWidth: 50 }}>
+                                  <div style={{ fontSize: 10.5, color: DS.inkMuted, fontFamily: FM, letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 3 }}>Correct</div>
+                                  <span style={{ fontSize: 11, fontFamily: FM, fontWeight: 600, color: ev.correctness_pass ? DS.matchFg : DS.mismatchFg }}>{ev.correctness_pass ? "Pass" : "Fail"}</span>
+                                </div>
+                                <div style={{ minWidth: 50 }}>
+                                  <div style={{ fontSize: 10.5, color: DS.inkMuted, fontFamily: FM, letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 3 }}>Natural</div>
+                                  <span style={{ fontSize: 11, fontFamily: FM, fontWeight: 600, color: DS.goalFg }}>{ev.naturalness_overall}/5</span>
+                                </div>
+                                <div style={{ minWidth: 50 }}>
+                                  <div style={{ fontSize: 10.5, color: DS.inkMuted, fontFamily: FM, letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 3 }}>Latency</div>
+                                  <span style={{ fontSize: 11, fontFamily: FM, fontWeight: 600, color: bucketColor(ev.latency_bucket) }}>{ev.latency_score}/4</span>
+                                </div>
+                              </>
+                            )}
                             <div style={{ flex: 1 }}><TagRow tags={r.item.target_facets} small /></div>
                           </div>
                         </div>
                         <Btn small onClick={() => { setSelected(i); setView("list"); }}>View</Btn>
                       </div>
                     </React.Fragment>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}

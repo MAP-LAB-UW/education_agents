@@ -29,11 +29,15 @@ def main():
     parser.add_argument(
         "--format",
         dest="response_format",
-        default="single_select",
+        default=None,
         choices=["single_select", "multi_select", "true_false_per_option"],
+        help="Response format. Omit to let the model choose.",
     )
     parser.add_argument(
-        "--num-options", type=int, default=4, help="Number of options per item"
+        "--num-options",
+        type=int,
+        default=None,
+        help="Number of options per item. Omit to let the model choose.",
     )
     parser.add_argument(
         "--book-mode",
@@ -50,6 +54,12 @@ def main():
         help="Include image-based examples in few-shot prompt (excluded by default)",
     )
     parser.add_argument(
+        "--prompt-version",
+        default="v1",
+        choices=["v1", "v2"],
+        help="Generator prompt version: v1 (original) or v2 (latent-facet, scenario-based)",
+    )
+    parser.add_argument(
         "--generator-model",
         default=None,
         help="Override generator model (default: gemini/gemini-3-flash-preview)",
@@ -58,6 +68,16 @@ def main():
         "--judge-model",
         default=None,
         help="Override judge model (default: gemini/gemini-3.1-pro-preview)",
+    )
+    parser.add_argument(
+        "--eval-model",
+        default=None,
+        help="Override eval model (default: gemini/gemini-3.1-pro-preview)",
+    )
+    parser.add_argument(
+        "--skip-eval",
+        action="store_true",
+        help="Skip evaluation rubrics (only run generation + judge)",
     )
     parser.add_argument(
         "--out",
@@ -75,6 +95,7 @@ def main():
         book_context_mode=args.book_mode,
         n_items=args.n_items,
         exclude_image_examples=not args.include_image_examples,
+        prompt_version=args.prompt_version,
     )
 
     out_dir = Path(args.out) if args.out else None
@@ -84,7 +105,9 @@ def main():
         print("Target facets: auto (model will select per item)")
     else:
         print(f"Target facets: {', '.join(request.target_facets)}")
-    print(f"Format: {request.response_format}, {request.num_options} options")
+    fmt = request.response_format or "auto (model will choose)"
+    opts = str(request.num_options) if request.num_options else "auto (model will choose)"
+    print(f"Format: {fmt}, {opts} options")
     print(f"Book context: {request.book_context_mode}")
     print(f"Items to generate: {request.n_items}")
     print()
@@ -93,7 +116,9 @@ def main():
         request,
         generator_model=args.generator_model,
         judge_model=args.judge_model,
+        eval_model=args.eval_model,
         output_dir=out_dir,
+        skip_eval=args.skip_eval,
     )
 
     print(f"\nDone. Generated {len(artifacts)} item(s).")

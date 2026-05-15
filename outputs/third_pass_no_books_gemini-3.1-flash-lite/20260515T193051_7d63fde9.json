@@ -1,0 +1,196 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B11",
+      "B13"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-flash-lite-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination addresses common misconceptions about the properties of the sampling distribution of the mean. A2 and B11 contrast the Central Limit Theorem's effect on normality versus the incorrect belief that the distribution mirrors the population. A3 and B13 contrast the unbiased nature of the sample mean with the common error that the center of the sampling distribution is influenced by sample size.",
+  "item": {
+    "stem": "A researcher is studying the distribution of sample means taken from a highly skewed population of income data. As the researcher increases the sample size from n=30 to n=100, which of the following statements correctly describes the resulting sampling distribution of the sample mean?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The sampling distribution becomes more normal and its mean decreases as the sample size increases.",
+        "facet_tags": [
+          "A2",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "Correctly identifies the shift toward normality (A2) but incorrectly assumes the mean changes with sample size (B13)."
+      },
+      {
+        "id": "B",
+        "text": "The sampling distribution becomes more normal, and its mean remains equal to the population mean.",
+        "facet_tags": [
+          "A2",
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "Correctly identifies that the sampling distribution becomes more normal (A2) and that the mean of the sampling distribution is equal to the population mean regardless of sample size (A3)."
+      },
+      {
+        "id": "C",
+        "text": "The sampling distribution begins to look more like the original skewed population distribution as the sample size increases.",
+        "facet_tags": [
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "This reflects the misconception that the sampling distribution mirrors the population distribution (B11)."
+      },
+      {
+        "id": "D",
+        "text": "The sampling distribution mirrors the population distribution and its mean increases as the sample size increases.",
+        "facet_tags": [
+          "B11",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "Combines two misconceptions: that the sampling distribution mirrors the population (B11) and that the sampling distribution mean is dependent on sample size (B13)."
+      }
+    ],
+    "correct_option_ids": [
+      "B"
+    ],
+    "explanation": "This item targets the properties of the sampling distribution. It tests the correct understanding that the sampling distribution approaches normality (A2) and maintains the population mean (A3), while distinguishing these from the common misconceptions that the sampling distribution mirrors the population shape (B11) or that its mean fluctuates based on sample size (B13).",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B11",
+      "B13"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is studying the distribution of sample means taken from a highly skewed population of income data. As the researcher increases the sample size from n=30 to n=100...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A2",
+          "B13"
+        ],
+        "judge_tags": [
+          "A2",
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that the sampling distribution becomes more normal (A2) but incorrectly claims that the mean decreases as the sample size increases, which demonstrates the misconception that the mean of the sampling distribution depends on sample size (B13)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A2",
+          "A3"
+        ],
+        "judge_tags": [
+          "A2",
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies both that the sampling distribution becomes more normal as sample size increases (A2) and that its mean remains equal to the population mean (A3)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B11"
+        ],
+        "judge_tags": [
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly expresses the misconception that as sample size increases, the sampling distribution becomes closer to or looks more like the original population distribution (B11)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B11",
+          "B13"
+        ],
+        "judge_tags": [
+          "B11",
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The option states that the sampling distribution mirrors the population distribution (B11, though B9 is also a very close fit regarding mirroring) and that its mean changes/increases with sample size, matching the misconception in B13."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.95,
+    "issues": []
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 1,
+    "latency_similarity": 0.8532,
+    "latency_bucket": "paraphrase",
+    "latency_option_details": [
+      {
+        "option_id": "A",
+        "similarity": 0.8445,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "A2",
+          "B13"
+        ]
+      },
+      {
+        "option_id": "B",
+        "similarity": 0.8166,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "A2",
+          "A3"
+        ]
+      },
+      {
+        "option_id": "C",
+        "similarity": 0.8675,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "B11"
+        ]
+      },
+      {
+        "option_id": "D",
+        "similarity": 0.8841,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "B11",
+          "B13"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 2.85,
+    "judge_s": 13.14,
+    "eval_s": 12.38
+  },
+  "created_at": "2026-05-15T19:30:51.644613+00:00"
+}

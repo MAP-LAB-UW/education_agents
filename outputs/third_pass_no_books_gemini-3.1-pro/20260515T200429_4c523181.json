@@ -1,0 +1,184 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A3",
+      "B13",
+      "B14"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-pro-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the expected value of the sampling distribution and the effect of sample size. It contrasts the correct understanding that the mean of the sampling distribution is fixed and equals the population mean (A3) with the misconceptions that the mean of the sampling distribution itself changes with sample size (B13) or that a larger sample size guarantees any individual sample mean will definitely be closer to the population mean, ignoring randomness (B14). These facets have not been used in previous items.",
+  "item": {
+    "stem": "A large population of adult trees has an average height of 45 feet. A researcher considers taking random samples of either $n=15$ or $n=60$ trees to calculate the sample mean height. For each of the following statements, choose True or False.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "optA",
+        "text": "The mean of the sampling distribution of sample means for samples of $n=60$ is exactly 45 feet.",
+        "facet_tags": [
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "The mean of the sampling distribution of the sample mean is always equal to the population mean (μ), regardless of the sample size."
+      },
+      {
+        "id": "optB",
+        "text": "The mean of the sampling distribution for samples of $n=60$ is closer to 45 feet than the mean of the sampling distribution for samples of $n=15$.",
+        "facet_tags": [
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "This statement is false because the mean of the sampling distribution is exactly 45 feet for both sample sizes. It does not get \"closer\" with a larger sample size because it is already exactly equal to the population mean."
+      },
+      {
+        "id": "optC",
+        "text": "If the researcher draws one sample of $n=60$ and one sample of $n=15$, the sample mean of the $n=60$ sample will definitely be closer to 45 feet than the sample mean of the $n=15$ sample.",
+        "facet_tags": [
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "While a larger sample size reduces the standard error (making it *more likely* for the sample mean to be close to the population mean), random sampling variability means a smaller sample can sometimes produce a mean closer to the population mean than a larger sample. It is not a definite guarantee."
+      },
+      {
+        "id": "optD",
+        "text": "The mean of the sampling distribution of sample means changes based on the sample size selected.",
+        "facet_tags": [
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "The mean of the sampling distribution depends only on the population mean, not the sample size. The sample size affects the spread (standard error) of the sampling distribution, not its center."
+      }
+    ],
+    "correct_option_ids": [
+      "optA"
+    ],
+    "explanation": "This item tests students' understanding of the center of a sampling distribution and how sample size affects both the sampling distribution and individual sample means. The correct understanding (A3) is that the mean of the sampling distribution is always exactly the population mean (μ = 45), regardless of the sample size. Students who incorrectly believe that the center of the sampling distribution changes or gets 'more accurate' as sample size increases hold misconception B13. Students who fail to recognize the role of random variability and assume a larger sample will *always* produce a more accurate sample mean hold misconception B14; larger samples only increase the *probability* of being closer to the population mean.",
+    "target_facets": [
+      "A3",
+      "B13",
+      "B14"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A large population of adult trees has an average height of 45 feet. A researcher considers taking random samples of either n=15 or n=60 trees...",
+    "option_assessments": [
+      {
+        "option_id": "optA",
+        "generator_tags": [
+          "A3"
+        ],
+        "judge_tags": [
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The statement accurately reflects goal facet A3, which is the understanding that the mean of a sampling distribution is exactly equal to the population mean."
+      },
+      {
+        "option_id": "optB",
+        "generator_tags": [
+          "B13"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Selecting True for this statement indicates a belief that the mean of the sampling distribution itself gets closer to the population mean as the sample size increases, directly mapping to misconception B13."
+      },
+      {
+        "option_id": "optC",
+        "generator_tags": [
+          "B14"
+        ],
+        "judge_tags": [
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This statement tests the deterministic versus probabilistic effect of sample size. Believing a larger sample 'definitely' has a sample mean closer to the population mean is exactly the B14 misconception."
+      },
+      {
+        "option_id": "optD",
+        "generator_tags": [
+          "B13"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This statement states the B13 misconception in broad, generalized terms, directly asserting that the mean of the sampling distribution depends on sample size."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": [
+      "Options B and D both diagnose misconception B13. While slight redundancy is acceptable in a true/false per option format (testing an applied example vs. a generalized rule), this limits the breadth of the facets the item could otherwise cover."
+    ]
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 2,
+    "latency_similarity": 0.7535,
+    "latency_bucket": "surface",
+    "latency_option_details": [
+      {
+        "option_id": "optA",
+        "similarity": 0.648,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A3"
+        ]
+      },
+      {
+        "option_id": "optB",
+        "similarity": 0.7084,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "B13"
+        ]
+      },
+      {
+        "option_id": "optC",
+        "similarity": 0.7994,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "B14"
+        ]
+      },
+      {
+        "option_id": "optD",
+        "similarity": 0.8582,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "B13"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 35.52,
+    "judge_s": 12.9,
+    "eval_s": 19.99
+  },
+  "created_at": "2026-05-15T20:04:29.126330+00:00"
+}

@@ -1,0 +1,183 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A5",
+      "B16"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-flash-lite-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets the fundamental conceptual goal that confidence intervals are designed to estimate population parameters, while specifically addressing the common misconception that students think intervals are intended to capture sample statistics or data points.",
+  "item": {
+    "stem": "A researcher collects a sample of data from a large population and constructs a 95% confidence interval for the population mean. Which of the following is the most accurate description of what the confidence interval provides?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The interval is a range of values that captures the true population mean with 95% confidence.",
+        "facet_tags": [
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This correctly identifies that a confidence interval is an inference method intended to estimate a population parameter (the true mean) rather than sample-specific metrics."
+      },
+      {
+        "id": "B",
+        "text": "The interval provides a range that contains 95% of the values in the collected sample.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This reflects the misconception that confidence intervals describe the distribution of individual data points within the sample rather than estimating a population parameter."
+      },
+      {
+        "id": "C",
+        "text": "The interval provides a range of values that the sample mean is 95% likely to fall within.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This implies the interval is estimating properties of the sample mean (a known statistic) rather than using the sample mean to estimate the unknown population parameter."
+      },
+      {
+        "id": "D",
+        "text": "The interval represents the range of values that are most likely to be the sample mean.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This confuses the goal of confidence intervals, which is to provide a plausible range for the population parameter, with an attempt to pinpoint the sample mean itself."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item is designed to distinguish between students who understand that confidence intervals are meant to estimate population parameters (Goal A5) and those who mistakenly believe they characterize sample-specific data or the sample mean itself (Misconception B16).",
+    "target_facets": [
+      "A5",
+      "B16"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher collects a sample of data from a large population and constructs a 95% confidence interval for the population mean. Which of the following is the most accurate description of what the confidence interval provides?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A5"
+        ],
+        "judge_tags": [
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies that the confidence interval is used to capture the true population mean, directly aligning with facet A5."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option explicitly states that the interval contains sample data (95% of the values in the collected sample), which is the exact misconception described by B16."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "This option targets the idea that the CI estimates the sample mean rather than the population mean, cleanly fitting the B16 misconception. It also includes probabilistic language ('95% likely') which flirts slightly with B15, but B16 is the dominant and most accurate tag."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Like option C, this option misidentifies the target of the estimation as the sample mean rather than the population parameter, corresponding to B16."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Options C and D are extremely similar in that they both test the exact same specific variant of misconception B16 (estimating the sample mean). The item would be stronger if one of them tested a different misconception, such as B15 (interpreting CI as a probability).",
+      "Option A uses the shorthand 'with 95% confidence' rather than testing the frequentist interpretation of confidence level (Goal A4). While acceptable since the item focuses on A5 vs B16, it misses an opportunity to reinforce A4."
+    ]
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 3,
+    "latency_similarity": 0.6179,
+    "latency_bucket": "latent",
+    "latency_option_details": [
+      {
+        "option_id": "A",
+        "similarity": 0.6664,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A5"
+        ]
+      },
+      {
+        "option_id": "B",
+        "similarity": 0.6115,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "B16"
+        ]
+      },
+      {
+        "option_id": "C",
+        "similarity": 0.5865,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "B16"
+        ]
+      },
+      {
+        "option_id": "D",
+        "similarity": 0.6072,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "B16"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 2.29,
+    "judge_s": 20.05,
+    "eval_s": 13.88
+  },
+  "created_at": "2026-05-15T19:29:34.160964+00:00"
+}

@@ -1,0 +1,185 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A6",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-flash-lite-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This pair addresses the misconception that higher confidence implies a more precise (narrower) interval. By contrasting A6 (the correct relationship: higher confidence leads to wider intervals) with B17 (the common belief that higher confidence equals precision), the item can effectively diagnose whether students understand the trade-off between confidence level and interval width.",
+  "item": {
+    "stem": "A researcher is constructing a confidence interval for a population mean. If the researcher increases the confidence level from 90% to 99%, how will the width of the confidence interval change, and what does this imply about the precision of the estimate?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The width will increase, providing a more precise estimate.",
+        "facet_tags": [
+          "A6",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "Correctly identifies that the width increases with confidence level, but incorrectly assumes this higher confidence leads to more precision."
+      },
+      {
+        "id": "B",
+        "text": "The width will decrease, providing a more precise estimate.",
+        "facet_tags": [
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "Displays the common misconception that higher confidence implies higher precision, while also incorrectly stating that the width decreases."
+      },
+      {
+        "id": "C",
+        "text": "The width will increase, providing a less precise estimate.",
+        "facet_tags": [
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "Correctly understands that higher confidence requires a wider interval to capture the parameter, resulting in lower precision."
+      },
+      {
+        "id": "D",
+        "text": "The width will decrease, providing a less precise estimate.",
+        "facet_tags": [
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "Misunderstands the relationship between confidence level and interval width."
+      }
+    ],
+    "correct_option_ids": [
+      "C"
+    ],
+    "explanation": "This item probes the conceptual understanding of the trade-off between confidence level and the width (precision) of the confidence interval. It tests whether students realize that requiring higher confidence (A6) necessarily requires a wider interval, which is inherently less precise, rather than falling for the misconception that higher confidence leads to a better/tighter estimate (B17).",
+    "target_facets": [
+      "A6",
+      "B17"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is constructing a confidence interval for a population mean. If the researcher increases the confidence level from 90% to 99%, how will the width of the confidence interval change, and what does this imply about the precision of the estimate?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A6",
+          "B17"
+        ],
+        "judge_tags": [
+          "A6",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The option correctly identifies that the width increases (A6), but attributes this to a more precise estimate, capturing the first half of the B17 misconception ('Higher confidence leads to more precise estimate')."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B17"
+        ],
+        "judge_tags": [
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option perfectly aligns with B17, representing both parts of the misconception: that higher confidence yields a more precise estimate and therefore a shorter interval (decreased width)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A6"
+        ],
+        "judge_tags": [
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This is the correct answer and directly maps to A6, affirming that CI width increases as confidence level increases. It correctly infers that a wider interval is less precise."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B17"
+        ],
+        "judge_tags": [],
+        "agreement": "mismatch",
+        "confidence": 0.95,
+        "reasoning": "The generator tagged B17, but B17 explicitly involves thinking higher confidence provides a *more* precise estimate. Option D says it provides a *less* precise estimate while decreasing width, which contradicts B17. There is no specific facet for this combination of errors, so it should be left untagged."
+      }
+    ],
+    "overall_agreement": 0.75,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Option D is tagged with B17 by the generator, but its text explicitly contradicts the 'more precise estimate' component of B17.",
+      "Facet B17 contains two linked concepts (higher confidence = more precise, leading to shorter interval). When options break these concepts apart (like Option A, which has increased width but more precision), it creates slight tagging ambiguity."
+    ]
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 3,
+    "latency_similarity": 0.661,
+    "latency_bucket": "latent",
+    "latency_option_details": [
+      {
+        "option_id": "A",
+        "similarity": 0.5934,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A6",
+          "B17"
+        ]
+      },
+      {
+        "option_id": "B",
+        "similarity": 0.7303,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "B17"
+        ]
+      },
+      {
+        "option_id": "C",
+        "similarity": 0.5976,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A6"
+        ]
+      },
+      {
+        "option_id": "D",
+        "similarity": 0.7225,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "B17"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 2.25,
+    "judge_s": 15.09,
+    "eval_s": 22.72
+  },
+  "created_at": "2026-05-15T19:28:33.153205+00:00"
+}

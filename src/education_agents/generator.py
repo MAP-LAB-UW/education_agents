@@ -13,9 +13,11 @@ DEFAULT_GENERATOR_MODEL = os.getenv(
     "EDU_AGENTS_GENERATOR_MODEL", "gemini/gemini-3-flash-preview"
 )
 
-_PROMPT_TEMPLATE = (
-    Path(__file__).parent / "prompts" / "generator.md"
-).read_text()
+_PROMPT_DIR = Path(__file__).parent / "prompts"
+_PROMPT_TEMPLATES = {
+    "v1": (_PROMPT_DIR / "generator.md").read_text(),
+    "v2": (_PROMPT_DIR / "generator_v2.md").read_text(),
+}
 
 
 def select_facets(
@@ -92,13 +94,24 @@ def _build_system_prompt(
 
     target_facets_str = ", ".join(request.target_facets)
 
-    prompt = _PROMPT_TEMPLATE
+    format_str = (
+        request.response_format
+        if request.response_format
+        else "Choose the best format (single_select, multi_select, or true_false_per_option) for the target facets"
+    )
+    num_options_str = (
+        str(request.num_options)
+        if request.num_options
+        else "Choose the best number of options (typically 3–6) for the item"
+    )
+
+    prompt = _PROMPT_TEMPLATES[request.prompt_version]
     prompt = prompt.replace("{{FACET_MAP}}", facet_text)
     prompt = prompt.replace("{{EXAMPLES}}", examples_text)
     prompt = prompt.replace("{{BOOK_CONTEXT}}", book_section)
     prompt = prompt.replace("{{TARGET_FACETS}}", target_facets_str)
-    prompt = prompt.replace("{{RESPONSE_FORMAT}}", request.response_format)
-    prompt = prompt.replace("{{NUM_OPTIONS}}", str(request.num_options))
+    prompt = prompt.replace("{{RESPONSE_FORMAT}}", format_str)
+    prompt = prompt.replace("{{NUM_OPTIONS}}", num_options_str)
 
     return prompt
 
@@ -112,16 +125,31 @@ def generate_item(
     model = model or DEFAULT_GENERATOR_MODEL
     system_prompt = _build_system_prompt(request, facet_map, book_context)
 
+    facets_str = ", ".join(request.target_facets)
+    if request.response_format and request.num_options:
+        user_content = (
+            f"Generate a {request.response_format} item with "
+            f"{request.num_options} options diagnosing facets: {facets_str}."
+        )
+    elif request.response_format:
+        user_content = (
+            f"Generate a {request.response_format} item diagnosing "
+            f"facets: {facets_str}. Choose the best number of options."
+        )
+    elif request.num_options:
+        user_content = (
+            f"Generate an item with {request.num_options} options "
+            f"diagnosing facets: {facets_str}. Choose the best response format."
+        )
+    else:
+        user_content = (
+            f"Generate an item diagnosing facets: {facets_str}. "
+            f"Choose the best response format and number of options."
+        )
+
     messages = [
         {"role": "system", "content": system_prompt},
-        {
-            "role": "user",
-            "content": (
-                f"Generate a {request.response_format} item with "
-                f"{request.num_options} options diagnosing facets: "
-                f"{', '.join(request.target_facets)}."
-            ),
-        },
+        {"role": "user", "content": user_content},
     ]
 
     return structured_complete(messages, GeneratedItem, model=model)

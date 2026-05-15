@@ -1,0 +1,190 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A6",
+      "A7",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-pro-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the determinants of confidence interval width. Facets A6 and B17 directly contrast the correct and incorrect understanding of how confidence level impacts interval width. Including A7 allows the item to also address the role of standard error, creating a comprehensive question about what makes a confidence interval wider or narrower.",
+  "item": {
+    "stem": "A researcher computed a 95% confidence interval for a population mean and found the resulting interval to be too wide for their practical needs. Which of the following combinations of changes will guarantee a narrower (more precise) confidence interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Increasing the confidence level to 99% and increasing the standard error.",
+        "facet_tags": [
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "Increasing the confidence level actually widens the interval, though the student may mistakenly believe higher confidence yields a more precise, shorter interval (B17). Increasing the standard error also increases the margin of error, making the interval even wider."
+      },
+      {
+        "id": "B",
+        "text": "Increasing the confidence level to 99% and decreasing the standard error.",
+        "facet_tags": [
+          "A7",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "Decreasing the standard error correctly narrows the interval (A7). However, increasing the confidence level requires a larger critical value, which widens the interval. Students selecting this likely believe higher confidence implies a more precise (shorter) interval (B17)."
+      },
+      {
+        "id": "C",
+        "text": "Decreasing the confidence level to 90% and increasing the standard error.",
+        "facet_tags": [
+          "A6"
+        ],
+        "is_correct": false,
+        "rationale": "Decreasing the confidence level reduces the critical value and correctly narrows the interval (A6). However, increasing the standard error will increase the margin of error and widen the interval, counteracting the first change and failing to guarantee a narrower interval."
+      },
+      {
+        "id": "D",
+        "text": "Decreasing the confidence level to 90% and decreasing the standard error.",
+        "facet_tags": [
+          "A6",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "Decreasing the confidence level yields a smaller critical value (A6), and decreasing the standard error directly reduces the margin of error (A7). Both of these changes work together to guarantee a narrower confidence interval."
+      }
+    ],
+    "correct_option_ids": [
+      "D"
+    ],
+    "explanation": "The width of a confidence interval depends on two main components: the critical value (determined by the confidence level) and the standard error. First, a lower confidence level corresponds to a smaller critical value, which produces a narrower interval (Facet A6). Assuming higher confidence leads to a shorter interval is a common misconception (Facet B17). Second, the standard error is directly proportional to the margin of error. Decreasing the standard error narrows the confidence interval (Facet A7). Therefore, to guarantee a narrower interval, the researcher must decrease the confidence level and decrease the standard error.",
+    "target_facets": [
+      "A6",
+      "A7",
+      "B17"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher computed a 95% confidence interval for a population mean and found the resulting interval to be too wide for their practical needs. Which of the following combinations of changes will guarantee a narrower (more precise) confidence interval?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B17"
+        ],
+        "judge_tags": [
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Choosing this option indicates the misconception that a higher confidence level yields a narrower/more precise interval (B17). It also implies a misunderstanding of the relationship between standard error and CI width, but there is no specific B-facet for 'increasing SE decreases width', so B17 is the most appropriate tag."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A7",
+          "B17"
+        ],
+        "judge_tags": [
+          "A7",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option correctly identifies that decreasing standard error narrows the interval (A7), but incorrectly assumes that increasing the confidence level also narrows the interval (B17)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A6"
+        ],
+        "judge_tags": [
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option correctly identifies that decreasing the confidence level to 90% narrows the interval (A6), but fails to recognize how standard error impacts CI width. A student choosing this likely grasps A6 but misses A7."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A6",
+          "A7"
+        ],
+        "judge_tags": [
+          "A6",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This is the correct answer. It correctly applies the principles that both decreasing the confidence level (A6) and decreasing the standard error (A7) will reduce the width of the confidence interval."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 3,
+    "latency_similarity": 0.697,
+    "latency_bucket": "latent",
+    "latency_option_details": [
+      {
+        "option_id": "A",
+        "similarity": 0.7917,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "B17"
+        ]
+      },
+      {
+        "option_id": "B",
+        "similarity": 0.7201,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "A7",
+          "B17"
+        ]
+      },
+      {
+        "option_id": "C",
+        "similarity": 0.6501,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A6"
+        ]
+      },
+      {
+        "option_id": "D",
+        "similarity": 0.6262,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A6",
+          "A7"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 55.69,
+    "judge_s": 14.54,
+    "eval_s": 11.64
+  },
+  "created_at": "2026-05-15T20:03:07.353143+00:00"
+}

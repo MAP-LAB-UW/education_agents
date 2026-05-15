@@ -1,0 +1,119 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A2",
+      "B10",
+      "B11"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 5,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection focuses on the properties of sampling distributions as sample size increases, which is fundamental to understanding confidence intervals. It contrasts the correct application of the Central Limit Theorem (A1, A2) with common misconceptions regarding the spread of the sampling distribution (B10) and its tendency to resemble the population distribution rather than a normal distribution (B11).",
+  "item": {
+    "stem": "The annual rainfall in the Atacama Desert follows a highly right-skewed distribution with a population standard deviation of 5 inches. Researcher A plans to collect a random sample of 20 years to calculate the sample mean rainfall. Researcher B plans to collect a random sample of 150 years to calculate the sample mean rainfall. Which of the following best describes the difference between the sampling distributions of the sample mean for Researcher A and Researcher B?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Researcher B's sampling distribution will be more bell-shaped and have a smaller standard error than Researcher A's.",
+        "facet_tags": [
+          "A1",
+          "A2"
+        ],
+        "is_correct": true,
+        "rationale": "As sample size increases, the Central Limit Theorem states the sampling distribution of the mean becomes more approximately normal (bell-shaped) and the standard error decreases (the distribution becomes more packed)."
+      },
+      {
+        "id": "opt_2",
+        "text": "Researcher B's sampling distribution will be more heavily right-skewed and look more like the population's shape than Researcher A's.",
+        "facet_tags": [
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "This choice reflects the misconception that the sampling distribution should increasingly resemble the population distribution as the sample size increases, whereas it actually becomes more normal."
+      },
+      {
+        "id": "opt_3",
+        "text": "Researcher B's sampling distribution will have a larger standard error and a wider spread of sample means than Researcher A's.",
+        "facet_tags": [
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "This choice reflects the misconception that a larger sample size leads to more variability in the sampling distribution, when in fact it leads to less variability (a smaller standard error)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "This item tests the student's understanding of how sample size affects the shape and spread of the sampling distribution of the mean. According to the Central Limit Theorem and the formula for standard error (σ/√n), as the sample size (n) increases, the sampling distribution becomes more normal (A2) and the spread/standard error decreases (A1). Incorrect choices target the belief that the sampling distribution mirrors the population shape (B11) or that more data points lead to more spread in the average (B10).",
+    "target_facets": [
+      "A1",
+      "A2",
+      "B10",
+      "B11"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "The annual rainfall in the Atacama Desert follows a highly right-skewed distribution...",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A1",
+          "A2"
+        ],
+        "judge_tags": [
+          "A1",
+          "A2"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly states that a larger sample size (Researcher B) will result in a 'more bell-shaped' distribution (A2: closer to normal) and a 'smaller standard error' (A1: standard errors become smaller)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B11"
+        ],
+        "judge_tags": [
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states that as the sample size increases, the sampling distribution will 'look more like the population's shape', which aligns perfectly with misconception B11."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "B10"
+        ],
+        "judge_tags": [
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option suggests that a larger sample size leads to a 'larger standard error and a wider spread', which is the exact definition of misconception B10."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": [
+      "The item only has three options. It would be strengthened by adding a fourth distractor that tests another related misconception, such as B9 (standard error stays the same) or B13 (the mean of the sampling distribution changes depending on the sample size)."
+    ]
+  },
+  "timing": {
+    "generator_s": 9.8,
+    "judge_s": 11.05
+  },
+  "created_at": "2026-05-14T23:23:34.611435+00:00"
+}

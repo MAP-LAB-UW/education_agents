@@ -194,6 +194,13 @@ cython_debug/
 *.pdf
 *.html
 
+# Exceptions: track web dashboard HTML, output artifacts, and markdown docs
+!web/*.html
+!outputs/**/*.json
+!outputs/*.json
+!docs/*.md
+!README.md
+
 # Model files
 *.pkl
 *.pickle

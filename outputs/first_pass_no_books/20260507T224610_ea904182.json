@@ -1,0 +1,146 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A5",
+      "A6",
+      "B16",
+      "B17"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection allows for a diagnostic item that tests whether students understand both the target of a confidence interval and the trade-off between confidence and precision. It specifically targets the common confusion that higher confidence levels provide more precise (shorter) intervals (B17 vs A6) and the misunderstanding of whether the interval estimates population parameters or sample statistics (B16 vs A5).",
+  "item": {
+    "stem": "A health researcher calculates a 99% confidence interval for the mean blood pressure of all adults in a city. After reviewing the result, they decide they want a narrower (shorter) interval but cannot collect any more data. Which of the following correctly describes the change they should make and the purpose of the interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "They should decrease the confidence level (e.g., to 95%), as the interval is designed to capture the true population mean.",
+        "facet_tags": [
+          "A5",
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "This is correct because decreasing the confidence level reduces the critical value, resulting in a narrower interval (A6), and correctly identifies that the interval estimates the population parameter (A5)."
+      },
+      {
+        "id": "B",
+        "text": "They should increase the confidence level (e.g., to 99.9%), because higher confidence results in a more precise and shorter range for the true population mean.",
+        "facet_tags": [
+          "A5",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This option correctly identifies the population parameter as the target (A5) but holds the misconception that increasing confidence makes an interval shorter and more precise (B17)."
+      },
+      {
+        "id": "C",
+        "text": "They should decrease the confidence level (e.g., to 95%), because the primary goal of the interval is to capture the mean blood pressure of the people in their specific sample.",
+        "facet_tags": [
+          "A6",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "While this option correctly identifies that lower confidence yields a narrower interval (A6), it incorrectly suggests that the interval is meant to estimate the sample statistic rather than the population parameter (B16)."
+      },
+      {
+        "id": "D",
+        "text": "They should increase the confidence level (e.g., to 99.9%), because this will better capture the sample mean of the next group of people they might test.",
+        "facet_tags": [
+          "B16",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This option contains two misconceptions: it suggests increasing confidence makes the interval shorter (B17) and incorrectly identifies the target of the interval as a future sample statistic (B16)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "To successfully answer this question, students must understand both the target of a confidence interval and the mechanical relationship between confidence levels and interval width. Goal facet A5 is addressed by identifying the population mean as the target, while A6 is addressed by understanding that a lower confidence level (smaller critical value) results in a narrower interval. Distractors target B16 (the misconception that CIs estimate sample statistics) and B17 (the misconception that higher confidence equals more precision/shorter intervals).",
+    "target_facets": [
+      "A5",
+      "A6",
+      "B16",
+      "B17"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A health researcher calculates a 99% confidence interval for the mean blood pressure of all adults in a city. After reviewing the result, they decide they want a narrower (shorter) interval but cannot collect any more data. Which of the following correctly describes the change they should make and the purpose of the interval?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A5",
+          "A6"
+        ],
+        "judge_tags": [
+          "A5",
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly pairs the goal of capturing the true population mean (A5) with the action of decreasing the confidence level to narrow the interval (A6)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A5",
+          "B17"
+        ],
+        "judge_tags": [
+          "A5",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies the goal of capturing the population parameter (A5) but incorrectly asserts that increasing the confidence level will narrow the interval, which perfectly illustrates the misconception B17."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A6",
+          "B16"
+        ],
+        "judge_tags": [
+          "A6",
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that decreasing the confidence level will shorten the interval (A6), but it exhibits misconception B16 by stating the interval aims to capture the sample mean."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B16",
+          "B17"
+        ],
+        "judge_tags": [
+          "B16",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option exhibits both misconceptions: it incorrectly claims that a higher confidence level yields a shorter interval (B17) and that the interval aims to capture a sample mean (B16)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 9.07,
+    "judge_s": 12.23
+  },
+  "created_at": "2026-05-07T22:46:10.150129+00:00"
+}

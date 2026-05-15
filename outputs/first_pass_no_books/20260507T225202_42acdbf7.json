@@ -1,0 +1,142 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A5",
+      "B8",
+      "B16"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination of facets targets the fundamental conceptual bridge between a sampling distribution and a confidence interval. It allows the item to distinguish between students who understand that a CI uses a theoretical sampling distribution (which gets narrower with larger sample sizes - A1) to estimate a population parameter (A5), versus those who confuse the sampling distribution with their observed dataset (B8) or believe the CI is intended to describe sample-specific statistics (B16).",
+  "item": {
+    "stem": "A veterinarian calculates a 95% confidence interval for the mean weight of a specific breed of dog based on a random sample of 50 dogs. Which of the following statements correctly describes the interval or the effect of sample size?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "The interval provides a range of plausible values for the population's true mean weight; if the sample size were increased to 200, the interval would likely become narrower because the sampling distribution becomes more packed.",
+        "facet_tags": [
+          "A1",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies that the confidence interval targets the population parameter (A5) and that increasing sample size reduces the standard error, making the sampling distribution more packed and the interval narrower (A1)."
+      },
+      {
+        "id": "opt_2",
+        "text": "We can be 95% confident that the mean weight of the 50 dogs in this specific sample is captured within the calculated interval.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option incorrectly suggests that the confidence interval is used to estimate a sample statistic (the mean of the 50 dogs already measured) rather than a population parameter."
+      },
+      {
+        "id": "opt_3",
+        "text": "The interval represents the range of weights for 95% of the individual dogs in the dataset because the sampling distribution is identical to the sample distribution.",
+        "facet_tags": [
+          "B8",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This distractor conflates the sampling distribution with the sample distribution (B8) and incorrectly interprets the CI as an estimate of individual sample data points rather than a population parameter (B16)."
+      },
+      {
+        "id": "opt_4",
+        "text": "Increasing the sample size will not change the precision of the interval because the sampling distribution is derived solely from the single dataset already collected.",
+        "facet_tags": [
+          "B8"
+        ],
+        "is_correct": false,
+        "rationale": "This option demonstrates a misconception that the sampling distribution is restricted to or defined by a single observed dataset (B8), leading to a misunderstanding of how sample size affects precision."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "This item assesses the student's understanding of what a confidence interval estimates and how sample size affects its width. The correct answer (A1, A5) identifies that the CI targets the population mean and that a larger sample size increases precision by decreasing the standard error (making the sampling distribution more packed). Distractors address common misconceptions: that CIs describe sample statistics (B16), that they describe individual data points (B16), or that the sampling distribution is the same as the distribution of the current sample (B8).",
+    "target_facets": [
+      "A1",
+      "A5",
+      "B8",
+      "B16"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A veterinarian calculates a 95% confidence interval for the mean weight of a specific breed of dog based on a random sample of 50 dogs. Which of the following statements correctly describes the interval or the effect of sample size?",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A1",
+          "A5"
+        ],
+        "judge_tags": [
+          "A1",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that the interval is for the population's true mean (A5) and that increasing the sample size makes the sampling distribution more packed, thus narrowing the interval (A1)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option incorrectly states that the confidence interval captures the sample mean (the 50 dogs in the sample), which perfectly aligns with B16."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "B8",
+          "B16"
+        ],
+        "judge_tags": [
+          "B8",
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states the interval applies to individual dogs in the dataset (B16) and explicitly claims the sampling distribution is identical to the sample distribution (B8)."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B8"
+        ],
+        "judge_tags": [
+          "B8"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option attributes the lack of change in precision to the misconception that the sampling distribution is derived solely from a single dataset, which maps directly to B8."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": [
+      "The options are slightly uneven in structure; some are 'double-barreled' by addressing both the interpretation of the confidence interval and the effect of sample size (e.g., Option 1 and Option 3), while Option 2 only addresses the interpretation of the interval."
+    ]
+  },
+  "timing": {
+    "generator_s": 14.15,
+    "judge_s": 15.49
+  },
+  "created_at": "2026-05-07T22:52:02.208007+00:00"
+}

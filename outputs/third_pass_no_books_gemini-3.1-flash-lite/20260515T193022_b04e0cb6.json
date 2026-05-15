@@ -1,0 +1,186 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "B15"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-flash-lite-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets the common misconception where students interpret confidence intervals as a probability statement about a single interval (B15), contrasted with the goal of understanding confidence level as the long-run success rate across infinite repeated sampling (A4).",
+  "item": {
+    "stem": "A researcher calculates a 95% confidence interval for the mean height of adult women in a specific city. Which of the following statements provides the most accurate statistical interpretation of this confidence interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "There is a 95% probability that the true population mean height falls within the calculated interval.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the common misconception (B15) that the confidence interval represents a probability distribution for the parameter itself, rather than a method of estimation."
+      },
+      {
+        "id": "B",
+        "text": "If we were to repeat the sampling process many times and construct an interval for each sample, approximately 95% of these intervals would contain the true population mean height.",
+        "facet_tags": [
+          "A4"
+        ],
+        "is_correct": true,
+        "rationale": "This correctly defines a confidence interval based on the long-run success rate of the estimation process (A4)."
+      },
+      {
+        "id": "C",
+        "text": "There is a 95% chance that the interval calculated from this specific sample captures the mean height of the population.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This conflates confidence with probability, treating the fixed, calculated interval as a random variable with a specific likelihood of success (B15)."
+      },
+      {
+        "id": "D",
+        "text": "95% of all women in the city have heights that fall within this specific confidence interval.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This misinterprets the confidence interval as a descriptive statistic for individual data points rather than an inferential tool for the population parameter (B15)."
+      }
+    ],
+    "correct_option_ids": [
+      "B"
+    ],
+    "explanation": "This item is designed to distinguish between students who understand that confidence intervals relate to the reliability of the estimation procedure over many repetitions (A4) and those who incorrectly assign a probability to the parameter being inside a fixed interval (B15).",
+    "target_facets": [
+      "A4",
+      "B15"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher calculates a 95% confidence interval for the mean height of adult women in a specific city. Which of the following statements provides the most accurate statistical interpretation of this confidence interval?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly interprets the confidence level as the probability that the true parameter is in the interval, matching B15."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A4"
+        ],
+        "judge_tags": [
+          "A4"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly interprets the confidence interval using repeated sampling and percentage of times the intervals capture the parameter, matching A4."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Using the phrase '95% chance' to describe a specific calculated interval capturing the mean is equivalent to the probability misconception described in B15."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "mismatch",
+        "confidence": 0.9,
+        "reasoning": "This option incorrectly states that the interval contains 95% of the individual population data points (true scores/data), which aligns with B16 (estimating true scores or sample data instead of population parameters), not B15 (probability of capturing the parameter)."
+      }
+    ],
+    "overall_agreement": 0.75,
+    "overall_confidence": 0.97,
+    "issues": [
+      "Options A and C are too similar; they both test the exact same misconception (B15) using almost identical phrasing ('probability' vs 'chance'). This reduces the diagnostic value of having both options.",
+      "The generator's tag for Option D is incorrect based on its own rationale. It should be tagged as B16 because it conflates estimating the population mean with capturing individual scores/data points."
+    ]
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [
+      "A",
+      "C"
+    ],
+    "naturalness_stem": 5,
+    "naturalness_options": 4,
+    "naturalness_overall": 4,
+    "latency_score": 3,
+    "latency_similarity": 0.5652,
+    "latency_bucket": "latent",
+    "latency_option_details": [
+      {
+        "option_id": "A",
+        "similarity": 0.6549,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "B15"
+        ]
+      },
+      {
+        "option_id": "B",
+        "similarity": 0.585,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A4"
+        ]
+      },
+      {
+        "option_id": "C",
+        "similarity": 0.5823,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "B15"
+        ]
+      },
+      {
+        "option_id": "D",
+        "similarity": 0.4384,
+        "score": 4,
+        "bucket": "highly_latent",
+        "facet_tags": [
+          "B15"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 2.61,
+    "judge_s": 18.24,
+    "eval_s": 25.79
+  },
+  "created_at": "2026-05-15T19:30:22.153057+00:00"
+}

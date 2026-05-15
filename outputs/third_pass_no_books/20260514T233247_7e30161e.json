@@ -1,0 +1,149 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A6",
+      "B10",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 5,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the factors that determine the width and precision of a confidence interval. It evaluates whether students understand how increasing sample size affects the standard error and distribution spread (A1 vs B10) and the relationship between the chosen confidence level and the resulting interval width (A6 vs B17). This allows for an item that asks students to predict how an interval will change when both the sample size and confidence level are adjusted.",
+  "item": {
+    "stem": "A public health researcher calculates a 95% confidence interval for the average daily sodium intake of adults in a specific city. Based on a sample of 64 adults, the current interval is (3,200 mg, 3,600 mg). The researcher is planning a follow-up study and wants to produce a narrower (more precise) confidence interval. Which of the following changes to the study design would definitely result in a narrower interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Recruit a larger sample of 200 adults and use a 90% confidence level.",
+        "facet_tags": [
+          "A1",
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "A larger sample size reduces the standard error (making the sampling distribution more packed), and a lower confidence level reduces the critical value. Both of these actions work together to decrease the width of the confidence interval."
+      },
+      {
+        "id": "opt_2",
+        "text": "Recruit a smaller sample of 30 adults and use a 90% confidence level.",
+        "facet_tags": [
+          "B10",
+          "A6"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly understands that lowering the confidence level narrows the interval, but they incorrectly believe that a smaller sample size reduces the spread or 'noise' of the sampling distribution."
+      },
+      {
+        "id": "opt_3",
+        "text": "Recruit a larger sample of 200 adults and use a 99% confidence level.",
+        "facet_tags": [
+          "A1",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly understands that a larger sample size narrows the interval, but they hold the common misconception that 'higher confidence' means a 'better' or more precise (narrower) estimate."
+      },
+      {
+        "id": "opt_4",
+        "text": "Recruit a smaller sample of 30 adults and use a 99% confidence level.",
+        "facet_tags": [
+          "B10",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This student conflates two misconceptions: they believe smaller samples are less spread out and that higher confidence levels lead to narrower, more precise intervals."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "This item tests the student's understanding of how sample size and confidence levels affect the width of a confidence interval. To obtain a narrower interval, one must either increase the sample size (which decreases the standard error, A1) or decrease the confidence level (which decreases the critical value, A6). Common misconceptions include thinking that smaller samples are more 'concentrated' (B10) or that higher confidence results in a shorter, more precise interval (B17).",
+    "target_facets": [
+      "A1",
+      "A6",
+      "B10",
+      "B17"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A public health researcher calculates a 95% confidence interval for the average daily sodium intake of adults...",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A1",
+          "A6"
+        ],
+        "judge_tags": [
+          "A1",
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly pairs a larger sample size (A1, which reduces standard error) with a lower confidence level (A6, which uses a smaller critical value), both of which act to narrow the confidence interval."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B10",
+          "A6"
+        ],
+        "judge_tags": [
+          "B10",
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option correctly applies a lower confidence level to narrow the interval (A6) but incorrectly suggests a smaller sample size would help, implying the student believes smaller samples yield less spread out sampling distributions (B10)."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "A1",
+          "B17"
+        ],
+        "judge_tags": [
+          "A1",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The student correctly identifies that a larger sample size narrows the interval (A1) but incorrectly believes that a higher confidence level also yields a narrower interval (B17)."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B10",
+          "B17"
+        ],
+        "judge_tags": [
+          "B10",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The student selects a smaller sample size (B10) and a higher confidence level (B17), combining both misconceptions about how to narrow a confidence interval."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": [
+      "The item has multiple correct answers due to mathematical oversight. Option 3 mathematically produces a narrower interval than the original, even though it is intended to be a distractor. The original margin of error (MOE) is proportional to 1.96 / sqrt(64) = 0.245. The MOE for Option 3 is proportional to 2.576 / sqrt(200) = 0.182. Since 0.182 < 0.245, Option 3 also 'definitely' results in a narrower interval. To fix this, change the sample size in Option 3 to something like 100 (where 2.576 / sqrt(100) = 0.2576 > 0.245), ensuring the interval becomes wider despite the sample size increase."
+    ]
+  },
+  "timing": {
+    "generator_s": 11.59,
+    "judge_s": 23.61
+  },
+  "created_at": "2026-05-14T23:32:47.253676+00:00"
+}

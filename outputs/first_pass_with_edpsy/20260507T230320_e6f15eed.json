@@ -1,0 +1,141 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A4",
+      "B11",
+      "B14"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection focuses on the conceptual consequences of increasing sample size (n) within the context of confidence intervals. It contrasts the correct understanding that larger n decreases the standard error and packs the sampling distribution (A1) with the misconception that the sampling distribution converges to the shape of the population (B11) or that it guarantees specific sample means are closer to the truth (B14). It also incorporates the long-run interpretation of confidence levels (A4) to distinguish it from sample-specific misinterpretations.",
+  "item": {
+    "stem": "A psychologist is planning a study and decides to increase her sample size from n = 30 to n = 120 to estimate a population mean μ with a 95% confidence interval. Which of the following is true regarding this change?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The sampling distribution of the mean will become more packed around μ due to a smaller standard error; furthermore, if this study were repeated many times, we would expect 95% of the resulting intervals to capture μ.",
+        "facet_tags": [
+          "A1",
+          "A4"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies that increasing sample size reduces the standard error and packs the sampling distribution closer to the population mean (A1). It also correctly identifies the frequentist interpretation of the confidence level as a long-run success rate of the interval-building process (A4)."
+      },
+      {
+        "id": "B",
+        "text": "As the sample size increases to 120, the shape and spread of the sampling distribution of the mean will more closely mirror the shape and spread of the original population distribution.",
+        "facet_tags": [
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that the sampling distribution of the mean converges to the population distribution (becoming more like it) as the sample size increases, rather than narrowing toward the parameter μ (B11)."
+      },
+      {
+        "id": "C",
+        "text": "By using n = 120 instead of n = 30, any specific sample mean obtained from the larger sample is guaranteed to be closer to the population mean μ than a sample mean obtained from the smaller sample.",
+        "facet_tags": [
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "This option incorrectly suggests that the increased precision of a larger sample size removes the inherent randomness of sampling, asserting a guarantee that any individual large-sample mean must be more accurate than a small-sample mean (B14)."
+      },
+      {
+        "id": "D",
+        "text": "The larger sample size will cause the sampling distribution to spread out to match the population variance, ensuring that the 95% confidence interval will contain 95% of the individual scores in the population.",
+        "facet_tags": [
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "This option combines the misconception that the sampling distribution mirrors the population's spread (B11) with the idea that the distribution should expand to match population variability rather than contract."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item assesses the student's understanding of how sample size affects the sampling distribution and how to correctly interpret a confidence level. Option A is correct because it identifies the reduction in standard error (A1) and the correct long-run interpretation of confidence intervals (A4). Option B and D address the common misconception (B11) that sampling distributions should look more like the population distribution (in terms of variance or shape) as n increases. Option C targets the deterministic misunderstanding of the Law of Large Numbers (B14), where students think a single large sample is guaranteed to be more accurate than a smaller one, ignoring the probabilistic nature of sampling.",
+    "target_facets": [
+      "A1",
+      "A4",
+      "B11",
+      "B14"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A psychologist is planning a study and decides to increase her sample size from n = 30 to n = 120 to estimate a population mean μ with a 95% confidence interval. Which of the following is true regarding this change?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1",
+          "A4"
+        ],
+        "judge_tags": [
+          "A1",
+          "A4"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly states that the sampling distribution will become more packed due to a smaller standard error (A1) and accurately interprets the confidence level in terms of long-run replication (A4). The judge and generator tags align perfectly."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B11"
+        ],
+        "judge_tags": [
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states that as sample size increases, the sampling distribution mirrors the population distribution, which directly matches facet B11."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B14"
+        ],
+        "judge_tags": [
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states that any specific sample mean from the larger sample is 'guaranteed to be closer' to the population mean, which precisely matches the misconception defined in B14."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B11"
+        ],
+        "judge_tags": [
+          "B10",
+          "B11",
+          "B16"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The option contains several distinct misconceptions. It states the sampling distribution will 'spread out' (B10) to match the population variance (B11). Furthermore, it claims the CI will contain 95% of 'individual scores in the population', which aligns with B16 (estimating true scores/sample data instead of the parameter). The generator only tagged B11."
+      }
+    ],
+    "overall_agreement": 0.85,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Option A and Option D assess multiple distinct concepts/misconceptions simultaneously (e.g., Option A covers both sampling distribution spread and CI replication interpretation). This compound structure can make it harder to precisely diagnose exactly what a student misunderstood if they select or avoid these options."
+    ]
+  },
+  "timing": {
+    "generator_s": 18.87,
+    "judge_s": 15.87
+  },
+  "created_at": "2026-05-07T23:03:20.435643+00:00"
+}

@@ -1,0 +1,138 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "B14",
+      "B15"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the conceptual interpretation of confidence levels. It distinguishes the correct frequentist interpretation of confidence as a long-run success rate across replications (A4) from the common misconception that the confidence level represents the probability that a specific interval contains the parameter (B15). It also addresses the misunderstanding that larger samples eliminate randomness in the proximity of a single sample mean to the population mean (B14).",
+  "item": {
+    "stem": "A researcher is studying the average weight of a specific breed of dogs. The true population mean is known by the kennel club to be 45 pounds. Two students, Mark and Jen, collect their own data to estimate this mean. Mark takes a random sample of 20 dogs and calculates a mean of 44.3 pounds and a 95% confidence interval of (42.1, 46.5). Jen takes a random sample of 200 dogs. Which of the following is a correct statement about their studies?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "option_a",
+        "text": "If Mark were to repeat his sampling process many times, we would expect about 95% of the confidence intervals he constructs to capture the true population mean of 45 pounds.",
+        "facet_tags": [
+          "A4"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies that the 95% confidence level describes the long-run success rate of the interval-generation procedure over many hypothetical replications."
+      },
+      {
+        "id": "option_b",
+        "text": "Because Jen's sample size is 200, her sample mean is guaranteed to be closer to 45 pounds than Mark's sample mean of 44.3 pounds.",
+        "facet_tags": [
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "This student incorrectly believes that a larger sample size eliminates the randomness of the sample mean in every individual case, failing to realize that a single sample mean from a large sample could still, by chance, be further from the population mean than one from a smaller sample."
+      },
+      {
+        "id": "option_c",
+        "text": "For the specific interval of (42.1, 46.5) that Mark calculated, there is a 95% probability that the true population mean of 45 pounds lies between those two values.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This is a common misconception where the student incorrectly assigns a probability to a fixed interval. Once the interval is calculated, the population mean is either in it or not; the 95% refers to the process, not the specific resulting range."
+      },
+      {
+        "id": "option_d",
+        "text": "If Jen calculates a 95% confidence interval, it will have a higher probability of containing the true mean than Mark's 95% confidence interval because her sample size is much larger.",
+        "facet_tags": [
+          "B14",
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This student conflates the precision gained from a larger sample size with the confidence level itself. They incorrectly assume that a larger 'n' increases the probability of the interval being 'correct' beyond the stated 95% confidence level."
+      }
+    ],
+    "correct_option_ids": [
+      "option_a"
+    ],
+    "explanation": "This item assesses whether students can distinguish between the frequentist definition of confidence levels (A4), the probabilistic misconception of a single interval (B15), and the deterministic misunderstanding of how sample size affects the accuracy of a single sample mean (B14). Option A represents the correct interpretation of confidence as a long-run proportion. Option B targets the belief that larger samples 'guarantee' better individual results. Option C targets the probability interpretation. Option D addresses the confusion between sample size and the 'likelihood' of a 95% interval being successful.",
+    "target_facets": [
+      "A4",
+      "B14",
+      "B15"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is studying the average weight of a specific breed of dogs. The true population mean is known by the kennel club to be 45 pounds...",
+    "option_assessments": [
+      {
+        "option_id": "option_a",
+        "generator_tags": [
+          "A4"
+        ],
+        "judge_tags": [
+          "A4"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option A correctly describes the frequentist interpretation of a 95% confidence interval in terms of repeated sampling, perfectly matching facet A4."
+      },
+      {
+        "option_id": "option_b",
+        "generator_tags": [
+          "B14"
+        ],
+        "judge_tags": [
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option B exhibits the misconception that a larger sample size guarantees a sample mean closer to the population mean for any individual sample, aligning exactly with facet B14."
+      },
+      {
+        "option_id": "option_c",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option C incorrectly assigns a 95% probability to a single, already-calculated interval containing the true population mean, which matches facet B15."
+      },
+      {
+        "option_id": "option_d",
+        "generator_tags": [
+          "B14",
+          "B15"
+        ],
+        "judge_tags": [
+          "B14",
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "Option D conflates the confidence level with a probability of a single interval being correct (B15) and incorrectly assumes a larger sample size increases this probability, which is rooted in a misunderstanding of randomness and precision similar to B14."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.95,
+    "issues": [
+      "The item is well-constructed and accurately assesses the target facets. The scenario of estimating a 'known' population mean is slightly contrived but works well pedagogically to test students' interpretations of the confidence interval mechanism."
+    ]
+  },
+  "timing": {
+    "generator_s": 22.68,
+    "judge_s": 13.02
+  },
+  "created_at": "2026-05-14T22:56:22.592407+00:00"
+}

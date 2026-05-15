@@ -1,0 +1,137 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B9",
+      "B10"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the mechanical relationship between sample size, the standard error of the sampling distribution, and the resulting confidence interval width. It targets whether students understand that increasing the sample size decreases the standard error (A1), which leads to a narrower interval (A7), while diagnosing common misconceptions that the sampling distribution's variability is either independent of sample size (B9) or increases with it (B10).",
+  "item": {
+    "stem": "A researcher is comparing two study designs to estimate a population mean. Design 1 uses a sample size of n = 25, and Design 2 uses a sample size of n = 100. Assuming the population standard deviation is the same for both, which of the following correctly describes how the sampling distribution of the mean and the 95% confidence interval (CI) for Design 2 will compare to Design 1?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The sampling distribution for Design 2 will be more packed (having a smaller standard error), resulting in a narrower confidence interval.",
+        "facet_tags": [
+          "A1",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "This option is correct because increasing the sample size reduces the standard error of the sampling distribution, making it more concentrated around the mean (A1). A smaller standard error directly leads to a narrower margin of error and thus a narrower confidence interval (A7)."
+      },
+      {
+        "id": "B",
+        "text": "The sampling distribution for Design 2 will have the same spread as the population distribution, meaning the width of the confidence interval will not change regardless of sample size.",
+        "facet_tags": [
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that the sampling distribution is identical to the population distribution and that its standard deviation is not influenced by the sample size (B9)."
+      },
+      {
+        "id": "C",
+        "text": "The sampling distribution for Design 2 will be more spread out because larger samples contain more individual variation, resulting in a wider confidence interval.",
+        "facet_tags": [
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that increasing the sample size leads to a more spread-out sampling distribution (B10), which is the opposite of the mathematical reality of the standard error."
+      },
+      {
+        "id": "D",
+        "text": "The sampling distribution for Design 2 will be more spread out, but the confidence interval will be narrower because the larger sample size provides more information.",
+        "facet_tags": [
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "This option correctly identifies that the interval should be narrower but incorrectly attributes this to a more spread-out sampling distribution, which is a common misunderstanding of how sample size affects standard error (B10)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item tests whether students understand the inverse relationship between sample size and the spread of the sampling distribution. The correct answer (A) identifies that as n increases, the standard error decreases (A1) and the confidence interval becomes more precise (A7). Distractors address the belief that the sampling distribution matches the population distribution (B9) or that larger samples increase the standard error (B10).",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B9",
+      "B10"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is comparing two study designs to estimate a population mean...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1",
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option A correctly identifies that increasing the sample size results in a more packed sampling distribution (A1) and subsequently a narrower confidence interval (A7)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B9"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option B explicitly reflects the misconception that the sampling distribution has the same spread as the population distribution and does not change with sample size, which aligns perfectly with facet B9."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B10"
+        ],
+        "judge_tags": [
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option C claims the sampling distribution will be more spread out as sample size increases, directly aligning with facet B10."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B10"
+        ],
+        "judge_tags": [
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option D also presents the misconception that a larger sample size leads to a more spread out sampling distribution, which defines facet B10."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 15.82,
+    "judge_s": 9.79
+  },
+  "created_at": "2026-05-07T22:49:56.000973+00:00"
+}

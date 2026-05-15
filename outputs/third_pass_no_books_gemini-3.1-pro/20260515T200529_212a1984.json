@@ -1,0 +1,184 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "B8",
+      "B9",
+      "B12"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-pro-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the conceptual understanding of the sampling distribution and the Central Limit Theorem. It contrasts the correct understanding that larger sample sizes lead to a more normal sampling distribution (A2) against common misconceptions: confusing the sampling distribution with the sample data itself (B8), believing the sampling distribution perfectly mirrors the population distribution's shape regardless of sample size (B9), or mistakenly thinking that the sampling distribution is always strictly normal regardless of population shape or sample size (B12).",
+  "item": {
+    "stem": "A researcher is investigating the distribution of household incomes in a large city. The population distribution of incomes is known to be heavily right-skewed. The researcher takes a random sample of 100 households and calculates the sample mean.\n\nIf we consider the sampling distribution of the sample mean for samples of size n = 100, which of the following statements is true?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_A",
+        "text": "It will be heavily right-skewed and have the same standard deviation as the population, because the sampling distribution mirrors the population distribution.",
+        "facet_tags": [
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "This option represents the misconception that the sampling distribution is the same as the population distribution, improperly assuming it mirrors the population's shape and standard deviation."
+      },
+      {
+        "id": "opt_B",
+        "text": "It is simply the right-skewed distribution formed by the 100 individual household incomes collected in the researcher's sample.",
+        "facet_tags": [
+          "B8"
+        ],
+        "is_correct": false,
+        "rationale": "This option demonstrates the misconception that the sampling distribution of the sample mean is equivalent to the distribution of the individual data points within a single collected sample."
+      },
+      {
+        "id": "opt_C",
+        "text": "It will be a perfectly normal distribution, because the sampling distribution of the sample mean is always normal regardless of sample size or population shape.",
+        "facet_tags": [
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that the sampling distribution of the sample mean is always normal, failing to recognize that this approximation depends on having a sufficiently large sample size when the population is not normal."
+      },
+      {
+        "id": "opt_D",
+        "text": "It will be approximately normal, because as the sample size increases, the sampling distribution becomes closer to a normal distribution.",
+        "facet_tags": [
+          "A2"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly applies the Central Limit Theorem, recognizing that for a large sample size, the sampling distribution of the sample mean approaches a normal distribution, even though the underlying population is skewed."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_D"
+    ],
+    "explanation": "The correct statement identifies that for a sufficiently large sample size (n = 100), the Central Limit Theorem dictates that the sampling distribution of the sample mean will be approximately normal, even if the population distribution is heavily skewed (Facet A2). The other options represent common misconceptions: confusing the sampling distribution with the population distribution (Facet B9), confusing the sampling distribution with the specific sample's distribution of data points (Facet B8), or believing the sampling distribution is always normal regardless of sample size or population shape (Facet B12).",
+    "target_facets": [
+      "A2",
+      "B8",
+      "B9",
+      "B12"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is investigating the distribution of household incomes in a large city. The population distribution of incomes is known to be heavily right-skewed. The researcher takes a random sample of 100 households and calculates the sample mean. If we consider the sampling distribution of the sample mean for samples of size n = 100, which of the following statements is true?",
+    "option_assessments": [
+      {
+        "option_id": "opt_A",
+        "generator_tags": [
+          "B9"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option A explicitly states that the sampling distribution mirrors the population distribution in shape (heavily right-skewed) and standard deviation, which directly corresponds to the misconception in B9."
+      },
+      {
+        "option_id": "opt_B",
+        "generator_tags": [
+          "B8"
+        ],
+        "judge_tags": [
+          "B8"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option B defines the sampling distribution as the distribution of the 100 individual data points collected in a single sample, which exactly matches the misconception described in B8."
+      },
+      {
+        "option_id": "opt_C",
+        "generator_tags": [
+          "B12"
+        ],
+        "judge_tags": [
+          "B12"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option C claims the sampling distribution is perfectly normal and that it is always normal regardless of sample size or population shape. This perfectly maps to the B12 misconception."
+      },
+      {
+        "option_id": "opt_D",
+        "generator_tags": [
+          "A2"
+        ],
+        "judge_tags": [
+          "A2"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option D correctly states that the sampling distribution will be approximately normal because, as sample size increases, it becomes closer to a normal distribution. This is a direct application of the Central Limit Theorem and matches A2."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 2,
+    "latency_similarity": 0.7917,
+    "latency_bucket": "surface",
+    "latency_option_details": [
+      {
+        "option_id": "opt_A",
+        "similarity": 0.8128,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "B9"
+        ]
+      },
+      {
+        "option_id": "opt_B",
+        "similarity": 0.5637,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "B8"
+        ]
+      },
+      {
+        "option_id": "opt_C",
+        "similarity": 0.9104,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "B12"
+        ]
+      },
+      {
+        "option_id": "opt_D",
+        "similarity": 0.88,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "A2"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 23.01,
+    "judge_s": 9.09,
+    "eval_s": 17.81
+  },
+  "created_at": "2026-05-15T20:05:29.887045+00:00"
+}

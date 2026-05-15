@@ -1,0 +1,236 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B10",
+      "B14"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-pro-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the effects of increasing sample size on the sampling distribution, confidence interval width, and the sample mean itself. It contrasts the correct understanding that larger sample sizes reduce standard error and thereby narrow the CI (A1, A7) with two common misconceptions: the deterministic belief that a larger sample size guarantees the specific sample mean will be closer to the population mean (B14), and the erroneous belief that larger samples increase the spread of the sampling distribution (B10).",
+  "item": {
+    "stem": "A researcher wants to estimate the average lifespan of a certain type of battery. They initially take a random sample of 30 batteries and construct a 95% confidence interval. Later, they decide to take a new random sample of 150 batteries to construct a new 95% confidence interval. Which of the following statements is true regarding the expected differences between the two estimates?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "The sampling distribution will have a smaller standard error, resulting in a narrower confidence interval. However, the new sample mean is not guaranteed to be closer to the population mean than the old sample mean.",
+        "facet_tags": [
+          "A1",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies that increasing the sample size decreases the standard error of the sampling distribution, which in turn leads to a narrower confidence interval. It also correctly acknowledges that because of sampling variability, any single sample mean is not guaranteed to be closer to the population mean, even if it comes from a larger sample."
+      },
+      {
+        "id": "opt_b",
+        "text": "The sampling distribution will have a smaller standard error, resulting in a narrower confidence interval. Because the sample is larger, the new sample mean will definitely be closer to the population mean.",
+        "facet_tags": [
+          "A1",
+          "A7",
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "While this option correctly identifies that a larger sample size decreases the standard error and narrows the confidence interval, it incorrectly assumes that a larger sample size guarantees the new sample mean will be closer to the population mean. This misunderstands the random nature of sampling; a larger sample only increases the probability of being closer, it does not guarantee it."
+      },
+      {
+        "id": "opt_c",
+        "text": "The sampling distribution will have a smaller standard error, resulting in a wider confidence interval. However, the new sample mean is not guaranteed to be closer to the population mean than the old sample mean.",
+        "facet_tags": [
+          "A1"
+        ],
+        "is_correct": false,
+        "rationale": "This option correctly identifies that the standard error decreases as sample size increases, but it incorrectly concludes that this leads to a wider confidence interval. A smaller standard error actually leads to a narrower confidence interval."
+      },
+      {
+        "id": "opt_d",
+        "text": "The sampling distribution will have a larger standard error, resulting in a wider confidence interval. Because the sample is larger, the new sample mean will definitely be closer to the population mean.",
+        "facet_tags": [
+          "B10",
+          "A7",
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "This option incorrectly states that a larger sample size increases the standard error and incorrectly guarantees that the sample mean will be closer to the population mean. However, it does correctly apply the relationship between standard error and confidence interval width (i.e., a larger standard error would result in a wider interval)."
+      },
+      {
+        "id": "opt_e",
+        "text": "The sampling distribution will have a larger standard error, resulting in a narrower confidence interval. However, the new sample mean is not guaranteed to be closer to the population mean than the old sample mean.",
+        "facet_tags": [
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "This option incorrectly states that a larger sample size increases the standard error. It also misidentifies the relationship between standard error and confidence interval width, incorrectly stating that a larger standard error leads to a narrower interval."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_a"
+    ],
+    "explanation": "Increasing the sample size reduces the variability of the sampling distribution, which means the standard error becomes smaller. Since the margin of error in a confidence interval calculation is proportional to the standard error, a smaller standard error results in a narrower confidence interval. However, because each sample is drawn randomly, the sample mean from any specific larger sample is not absolutely guaranteed to be closer to the true population mean than the mean from a smaller sample, even though the probability of it being closer is higher.",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B10",
+      "B14"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher wants to estimate the average lifespan of a certain type of battery. They initially take a random sample of 30 batteries and construct a 95% confidence interval...",
+    "option_assessments": [
+      {
+        "option_id": "opt_a",
+        "generator_tags": [
+          "A1",
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies that larger sample sizes lead to a smaller standard error (A1), which produces a narrower confidence interval (A7). It also correctly avoids misconception B14."
+      },
+      {
+        "option_id": "opt_b",
+        "generator_tags": [
+          "A1",
+          "A7",
+          "B14"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7",
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option correctly applies A1 (smaller standard error) and A7 (narrower confidence interval), but includes the misconception that a larger sample size guarantees the specific sample mean will be closer to the population mean (B14)."
+      },
+      {
+        "option_id": "opt_c",
+        "generator_tags": [
+          "A1"
+        ],
+        "judge_tags": [
+          "A1"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies that the standard error will be smaller (A1). It fails to apply A7 correctly (incorrectly stating a wider CI), and avoids B14. Since there is no specific misconception facet for 'smaller SE leads to wider CI', tagging just A1 is accurate."
+      },
+      {
+        "option_id": "opt_d",
+        "generator_tags": [
+          "B10",
+          "A7",
+          "B14"
+        ],
+        "judge_tags": [
+          "B10",
+          "A7",
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option exhibits the misconception that a larger sample size increases standard error (B10). However, it correctly applies the rule that a larger standard error results in a wider confidence interval (A7). It also includes the misconception about guaranteed proximity of the sample mean to the population mean (B14)."
+      },
+      {
+        "option_id": "opt_e",
+        "generator_tags": [
+          "B10"
+        ],
+        "judge_tags": [
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option incorrectly states that standard error increases with sample size (B10). It incorrectly states that a larger SE leads to a narrower CI, failing to show A7. It correctly avoids B14."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": [
+      "The item is very well-constructed. It successfully isolates three different dimensions of understanding (effect of n on SE, effect of SE on CI width, and the probabilistic vs deterministic nature of sample means) and plausibly mixes them to accurately diagnose specific misconceptions."
+    ]
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 3,
+    "naturalness_overall": 4,
+    "latency_score": 2,
+    "latency_similarity": 0.7415,
+    "latency_bucket": "surface",
+    "latency_option_details": [
+      {
+        "option_id": "opt_a",
+        "similarity": 0.6745,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A1",
+          "A7"
+        ]
+      },
+      {
+        "option_id": "opt_b",
+        "similarity": 0.7941,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "A1",
+          "A7",
+          "B14"
+        ]
+      },
+      {
+        "option_id": "opt_c",
+        "similarity": 0.685,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A1"
+        ]
+      },
+      {
+        "option_id": "opt_d",
+        "similarity": 0.8074,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "B10",
+          "A7",
+          "B14"
+        ]
+      },
+      {
+        "option_id": "opt_e",
+        "similarity": 0.7463,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "B10"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 46.08,
+    "judge_s": 15.03,
+    "eval_s": 17.23
+  },
+  "created_at": "2026-05-15T20:12:38.314029+00:00"
+}

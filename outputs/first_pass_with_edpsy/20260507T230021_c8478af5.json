@@ -1,0 +1,146 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A6",
+      "B17",
+      "A4",
+      "B15"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection focuses on the conceptual and structural meaning of the confidence level. It allows for a diagnostic item that contrasts the correct relationship between confidence levels and interval width (A6 vs B17) while also addressing the common misinterpretation of the confidence level as a probability for a specific interval rather than a long-run success rate (A4 vs B15).",
+  "item": {
+    "stem": "A social scientist calculated a 95% confidence interval for the mean annual income of a city based on a random sample. She then decided to recalculate the interval using a 99% confidence level on the exact same dataset. Which of the following statements correctly compares the 99% interval to the original 95% interval and interprets its meaning?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "The 99% confidence interval will be wider than the 95% interval. This reflects that if the process were repeated many times, 99% of such constructed intervals would capture the true population mean.",
+        "facet_tags": [
+          "A6",
+          "A4"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct option because it identifies that increasing the confidence level increases the critical value (z or t), thus increasing the width (A6). It also correctly identifies the frequentist long-run interpretation of confidence levels (A4)."
+      },
+      {
+        "id": "opt_2",
+        "text": "The 99% confidence interval will be narrower than the 95% interval because higher confidence provides a more precise estimate. For this specific interval, there is a 99% probability that it contains the true population mean.",
+        "facet_tags": [
+          "B17",
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This distractor captures the misconception that higher confidence leads to better precision/narrower intervals (B17) and incorrectly interprets the confidence level as a probability for a specific, already-calculated interval (B15)."
+      },
+      {
+        "id": "opt_3",
+        "text": "The 99% confidence interval will be wider than the 95% interval. Therefore, there is a 99% probability that the true population mean income is between the lower and upper bounds of this particular interval.",
+        "facet_tags": [
+          "A6",
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "While this option correctly identifies that the interval becomes wider (A6), it fails by applying a probabilistic interpretation to a specific realized interval (B15), which is a common misconception."
+      },
+      {
+        "id": "opt_4",
+        "text": "The 99% confidence interval will be narrower than the 95% interval. In the long run, if we drew many samples, 99% of the resulting intervals would contain the population mean.",
+        "facet_tags": [
+          "B17",
+          "A4"
+        ],
+        "is_correct": false,
+        "rationale": "This option correctly describes the long-run behavior of confidence intervals (A4) but incorrectly suggests that increasing confidence results in a narrower interval (B17)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "To solve this item, students must understand two key components of confidence intervals. First, the relationship between confidence level and width: as the confidence level increases (e.g., from 95% to 99%), the critical value (multiplier) increases, which widens the interval (A6); believing it becomes narrower is a misconception about precision (B17). Second, students must distinguish between the long-run frequency of the procedure and the probability of a single interval. Confidence intervals refer to the percentage of intervals that would contain the parameter over many replications (A4). Interpreting a specific calculated interval as having a '99% probability' of containing the mean is a common misconception (B15), as the parameter is a fixed constant and is either inside that specific interval or it is not.",
+    "target_facets": [
+      "A6",
+      "B17",
+      "A4",
+      "B15"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A social scientist calculated a 95% confidence interval for the mean annual income of a city based on a random sample. She then decided to recalculate the interval using a 99% confidence level on the exact same dataset.",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A6",
+          "A4"
+        ],
+        "judge_tags": [
+          "A6",
+          "A4"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that a higher confidence level yields a wider interval (A6) and correctly interprets the confidence level using a long-run frequentist perspective (A4)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B17",
+          "B15"
+        ],
+        "judge_tags": [
+          "B17",
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option incorrectly claims the interval will be narrower due to higher precision (B17) and incorrectly interprets the confidence level as the probability of a specific realized interval capturing the mean (B15)."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "A6",
+          "B15"
+        ],
+        "judge_tags": [
+          "A6",
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies that the interval will be wider (A6) but incorrectly applies a probabilistic interpretation to the specific calculated interval (B15)."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B17",
+          "A4"
+        ],
+        "judge_tags": [
+          "B17",
+          "A4"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option incorrectly claims the interval will be narrower (B17) while correctly providing the frequentist long-run interpretation of the confidence level (A4)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 11.95,
+    "judge_s": 12.63
+  },
+  "created_at": "2026-05-07T23:00:21.264446+00:00"
+}

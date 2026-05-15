@@ -1,0 +1,197 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B14"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-flash-lite-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the impact of sample size on precision and variability. It contrasts the correct understanding that larger samples reduce standard error (A1, A7) with the common misconception that larger samples guarantee a closer estimate due to deterministic expectations rather than probabilistic ones (B14).",
+  "item": {
+    "stem": "A researcher is studying the average height of a specific plant species. Suppose the true population mean is 20 cm and the population standard deviation is 5 cm. If the researcher increases their sample size from n=25 to n=100, how does this affect the confidence interval and the reliability of the sample mean?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The confidence interval becomes narrower because the standard error decreases, and the sample mean is guaranteed to be closer to the population mean.",
+        "facet_tags": [
+          "A1",
+          "A7",
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "Correctly identifies the narrowing effect due to smaller standard error, but incorrectly assumes the sample mean will always be closer to the population mean, reflecting the B14 misconception."
+      },
+      {
+        "id": "B",
+        "text": "The confidence interval becomes narrower because the standard error decreases, providing a more precise estimate of the population mean.",
+        "facet_tags": [
+          "A1",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "Correctly links increased sample size to smaller standard error (A1) and consequently a narrower/more precise confidence interval (A7)."
+      },
+      {
+        "id": "C",
+        "text": "The confidence interval stays the same width because the population standard deviation is unchanged, and the sample mean is more likely to be closer to the population mean.",
+        "facet_tags": [
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "Fails to recognize that sample size impacts the standard error, and includes the misconception B14 about guaranteed closeness."
+      },
+      {
+        "id": "D",
+        "text": "The confidence interval becomes wider because the sample mean is more likely to be farther from the population mean with more data.",
+        "facet_tags": [
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "Incorrectly predicts interval width and relies on the misunderstanding of randomness and precision (B14)."
+      }
+    ],
+    "correct_option_ids": [
+      "B"
+    ],
+    "explanation": "This item evaluates whether students correctly link sample size to precision (A1 and A7) while checking if they fall for the common belief that larger samples guarantee a more accurate sample mean (B14). Option B correctly isolates the impacts on precision without overstating the deterministic nature of sampling.",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B14"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is studying the average height of a specific plant species. Suppose the true population mean is 20 cm and the population standard deviation is 5 cm. If the researcher increases their sample size from n=25 to n=100, how does this affect the confidence interval and the reliability of the sample mean?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1",
+          "A7",
+          "B14"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7",
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly pairs the decrease in standard error (A1) and narrower confidence interval (A7) with the deterministic misconception that the sample mean is *guaranteed* to be closer to the population mean (B14)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A1",
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that standard error decreases as sample size increases (A1), leading to a narrower, more precise confidence interval (A7)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B14"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "mismatch",
+        "confidence": 0.9,
+        "reasoning": "The generator tagged B14 (which claims a larger sample *always* yields a closer mean), but the option text says 'more likely to be closer', which is a statistically true statement, not the B14 misconception. The error in this option is claiming the CI stays the same width because population SD is unchanged, which aligns with facet B9 (confusion between standard deviation of the population and standard error of the sampling distribution)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B14"
+        ],
+        "judge_tags": [
+          "B10"
+        ],
+        "agreement": "mismatch",
+        "confidence": 0.95,
+        "reasoning": "The generator incorrectly tagged B14. Option D states that the interval becomes wider and the mean is more likely to be farther away. This directly reflects facet B10 (misconception that as sample size increases, the sampling distribution becomes more spread out), not B14."
+      }
+    ],
+    "overall_agreement": 0.5,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Option C's text uses the phrase 'more likely to be closer', which is statistically correct, but the generator's rationale claims the option exhibits B14 ('guaranteed closeness'). The option text contradicts the generator's intended misconception.",
+      "Option D is tagged with B14 by the generator, but B14 is about sample means always being *closer* with larger samples. Option D argues the sample mean is *farther* and the CI is *wider*, which perfectly matches facet B10 instead."
+    ]
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 2,
+    "latency_similarity": 0.7254,
+    "latency_bucket": "surface",
+    "latency_option_details": [
+      {
+        "option_id": "A",
+        "similarity": 0.7241,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "A1",
+          "A7",
+          "B14"
+        ]
+      },
+      {
+        "option_id": "B",
+        "similarity": 0.6995,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A1",
+          "A7"
+        ]
+      },
+      {
+        "option_id": "C",
+        "similarity": 0.7272,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "B14"
+        ]
+      },
+      {
+        "option_id": "D",
+        "similarity": 0.7507,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "B14"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 2.76,
+    "judge_s": 23.32,
+    "eval_s": 14.3
+  },
+  "created_at": "2026-05-15T19:32:44.014743+00:00"
+}

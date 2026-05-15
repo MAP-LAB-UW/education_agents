@@ -1,0 +1,151 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B11",
+      "B13"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 5,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the properties of the sampling distribution of the mean (its center and shape) as the sample size increases. It contrasts the correct understanding of the Central Limit Theorem (shape becomes normal and mean remains equal to the population mean) with common misconceptions that the sampling distribution mirrors or approaches the population distribution shape (B11) or that its center fluctuates based on sample size (B13).",
+  "item": {
+    "stem": "The distribution of household sizes in a large city is strongly right-skewed with a population mean (μ) of 2.8 people and a standard deviation (σ) of 1.4 people. A researcher plans to take a random sample of 100 households and calculate the sample mean (x̄). Which of the following best describes the sampling distribution of the sample mean (x̄)?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "It is approximately normal with a mean of 2.8.",
+        "facet_tags": [
+          "A2",
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "The student correctly applies the Central Limit Theorem, recognizing that for a large sample size (n=100), the sampling distribution of the mean is approximately normal even if the population is skewed (A2). They also correctly identify that the mean of the sampling distribution is equal to the population mean (A3)."
+      },
+      {
+        "id": "B",
+        "text": "It is strongly right-skewed with a mean of 2.8.",
+        "facet_tags": [
+          "B11",
+          "A3"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly identifies the mean of the sampling distribution but incorrectly believes that the sampling distribution must mirror the shape of the population distribution (B11), failing to recognize the effect of the Central Limit Theorem."
+      },
+      {
+        "id": "C",
+        "text": "It is approximately normal with a mean of 0.28.",
+        "facet_tags": [
+          "A2",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly identifies that the sampling distribution becomes approximately normal as the sample size increases (A2), but they incorrectly believe that the mean of the sampling distribution changes based on the sample size (B13), likely by dividing the population mean by a factor related to n."
+      },
+      {
+        "id": "D",
+        "text": "It is strongly right-skewed with a mean of 0.28.",
+        "facet_tags": [
+          "B11",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "The student exhibits two misconceptions: that the sampling distribution maintains the shape of the population regardless of sample size (B11) and that the mean of the sampling distribution is dependent on the sample size (B13)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item tests the student's understanding of the Central Limit Theorem and the properties of the sampling distribution of the mean. According to the Central Limit Theorem, as the sample size (n) increases, the sampling distribution of the sample mean becomes approximately normal (A2), even if the population distribution is skewed. Additionally, the mean of the sampling distribution of the mean is always equal to the population mean (A3), regardless of the sample size. Students who choose B think the sampling distribution must look like the population (B11). Students who choose C think the mean of the sampling distribution is reduced by the sample size (B13).",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B11",
+      "B13"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "The distribution of household sizes in a large city is strongly right-skewed with a population mean (μ) of 2.8 people and a standard deviation (σ) of 1.4 people. A researcher plans to take a random sample of 100 households and calculate the sample mean (x̄). Which of the following best describes the sampling distribution of the sample mean (x̄)?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A2",
+          "A3"
+        ],
+        "judge_tags": [
+          "A2",
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies that the sampling distribution will be approximately normal due to the large sample size (A2) and that its mean equals the population mean (A3)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B11",
+          "A3"
+        ],
+        "judge_tags": [
+          "B9",
+          "B11",
+          "A3"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The option correctly identifies the mean (A3), but suggests the sampling distribution's shape mirrors that of the population (strongly right-skewed). This aligns well with both B9 (Sampling distribution mirrors population distribution) and B11 (belief that larger samples make the distribution look more like the population)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A2",
+          "B13"
+        ],
+        "judge_tags": [
+          "A2",
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies the shape as approximately normal (A2) but incorrectly calculates the mean as 0.28 (likely by dividing the population mean of 2.8 by sqrt(100)), which perfectly demonstrates the misconception that the mean of the sampling distribution depends on sample size (B13)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B11",
+          "B13"
+        ],
+        "judge_tags": [
+          "B9",
+          "B11",
+          "B13"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The option reflects the shape misconception (mirroring the population's skewness, B9/B11) and the mean misconception (calculating the mean based on the sample size, B13)."
+      }
+    ],
+    "overall_agreement": 0.8,
+    "overall_confidence": 0.95,
+    "issues": [
+      "The generator's use of B11 is plausible, but B9 ('Sampling distribution mirrors population distribution') is also highly applicable for options B and D, since the options explicitly assume the shape mirrors the population's skewness."
+    ]
+  },
+  "timing": {
+    "generator_s": 9.78,
+    "judge_s": 17.48
+  },
+  "created_at": "2026-05-14T23:33:21.121442+00:00"
+}

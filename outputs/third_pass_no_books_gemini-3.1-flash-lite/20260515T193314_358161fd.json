@@ -1,0 +1,182 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A6",
+      "A7",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-flash-lite-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination explores the relationship between confidence interval width, confidence level, and standard error (A6, A7), while directly addressing the common misconception that higher confidence levels lead to narrower, more precise intervals (B17).",
+  "item": {
+    "stem": "A researcher is calculating a confidence interval for a population mean. Which of the following statements correctly describes how changes in the confidence level or standard error affect the width of the confidence interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Increasing the confidence level makes the interval wider because a larger critical value is required to capture a greater percentage of the sampling distribution.",
+        "facet_tags": [
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "This correctly identifies that higher confidence levels require larger critical values, leading to a wider interval."
+      },
+      {
+        "id": "B",
+        "text": "Increasing the confidence level makes the interval shorter, as it provides a more precise estimate of the population parameter.",
+        "facet_tags": [
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This reflects the common misconception that higher confidence implies higher precision, when in fact it implies higher certainty but lower precision (wider interval)."
+      },
+      {
+        "id": "C",
+        "text": "The width of the confidence interval is independent of the standard error and is solely determined by the sample size.",
+        "facet_tags": [
+          "A7"
+        ],
+        "is_correct": false,
+        "rationale": "This ignores the direct relationship between the standard error and the margin of error; the width depends directly on the standard error."
+      },
+      {
+        "id": "D",
+        "text": "Decreasing the standard error of the sampling distribution causes the confidence interval to become wider.",
+        "facet_tags": [
+          "A7"
+        ],
+        "is_correct": false,
+        "rationale": "This contradicts the definition of standard error; a smaller standard error results in a more narrow (more precise) confidence interval."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item probes students' understanding of the components that determine the width of a confidence interval. Option A captures the correct relationship between confidence level and critical value (A6). Option B explicitly tests the misconception that higher confidence equals higher precision (B17). Options C and D test the students' ability to recognize the impact of the standard error on the interval width (A7).",
+    "target_facets": [
+      "A6",
+      "A7",
+      "B17"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is calculating a confidence interval for a population mean. Which of the following statements correctly describes how changes in the confidence level or standard error affect the width of the confidence interval?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A6"
+        ],
+        "judge_tags": [
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option A correctly describes the relationship between the confidence level, the critical value, and the interval width, perfectly aligning with facet A6."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B17"
+        ],
+        "judge_tags": [
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option B states that increasing the confidence level leads to a shorter interval and more precision, which is the exact misconception defined in B17."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A7"
+        ],
+        "judge_tags": [
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option C tests the relationship between CI width and standard error by proposing they are independent. A student must understand facet A7 to know this is false."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A7"
+        ],
+        "judge_tags": [
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option D posits an inverse relationship between standard error and CI width (decreasing standard error makes the interval wider). Recognizing this as false relies directly on facet A7."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 2,
+    "latency_similarity": 0.7745,
+    "latency_bucket": "surface",
+    "latency_option_details": [
+      {
+        "option_id": "A",
+        "similarity": 0.7474,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "A6"
+        ]
+      },
+      {
+        "option_id": "B",
+        "similarity": 0.8542,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "B17"
+        ]
+      },
+      {
+        "option_id": "C",
+        "similarity": 0.7384,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "A7"
+        ]
+      },
+      {
+        "option_id": "D",
+        "similarity": 0.758,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "A7"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 2.74,
+    "judge_s": 15.39,
+    "eval_s": 11.25
+  },
+  "created_at": "2026-05-15T19:33:14.309394+00:00"
+}

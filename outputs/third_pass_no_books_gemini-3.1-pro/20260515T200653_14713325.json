@@ -1,0 +1,192 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B9",
+      "B10"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-pro-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination bridges sampling distribution characteristics with confidence interval width. It assesses whether students understand that increasing the sample size decreases the standard error (A1), thereby making the confidence interval narrower (A7). Distractors can effectively target the misconceptions that standard error/spread increases with sample size (B10) or remains unaffected because the sampling distribution merely mirrors the population distribution's spread (B9).",
+  "item": {
+    "stem": "A researcher computes a 95% confidence interval for a population mean using a sample of 30 participants. If the researcher had instead used a sample of 120 participants (assuming the sample standard deviation remains exactly the same), how would this increase in sample size affect the standard error of the sampling distribution and the width of the confidence interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_A",
+        "text": "The sampling distribution would become more packed (smaller standard error), resulting in a narrower confidence interval.",
+        "facet_tags": [
+          "A1",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "Correct. Increasing the sample size decreases the standard error, making the sampling distribution more packed (A1). Because the confidence interval is computed using the standard error, a smaller standard error leads directly to a narrower confidence interval (A7)."
+      },
+      {
+        "id": "opt_B",
+        "text": "The sampling distribution would become more spread out (larger standard error), resulting in a wider confidence interval.",
+        "facet_tags": [
+          "A7",
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "Incorrect. While the student correctly associates a larger standard error with a wider confidence interval (A7), they mistakenly believe that increasing the sample size makes the sampling distribution more spread out with a larger standard error (B10)."
+      },
+      {
+        "id": "opt_C",
+        "text": "The spread of the sampling distribution would stay the same because it mirrors the population distribution, resulting in a confidence interval of the same width.",
+        "facet_tags": [
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "Incorrect. This option reflects the misconception that the sampling distribution simply mirrors the population distribution and therefore its spread (standard error) does not change when the sample size increases (B9)."
+      },
+      {
+        "id": "opt_D",
+        "text": "The sampling distribution would become more packed (smaller standard error), resulting in a wider confidence interval.",
+        "facet_tags": [
+          "A1"
+        ],
+        "is_correct": false,
+        "rationale": "Incorrect. The student correctly identifies that a larger sample size decreases the standard error (A1), but they fail to understand how this impacts the confidence interval, incorrectly concluding the interval would become wider instead of narrower."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_A"
+    ],
+    "explanation": "This item diagnoses student understanding of how sample size affects both the sampling distribution and the width of a confidence interval. To answer correctly, students must synthesize two concepts: first, that larger sample sizes reduce the standard error and make the sampling distribution more packed (A1); and second, that there is a direct relationship between the standard error and the confidence interval width, where a smaller standard error yields a narrower interval (A7). The distractors specifically target common confusions, such as believing that larger samples produce a wider sampling distribution (B10) or that the sampling distribution's spread is identical to the population's spread regardless of sample size (B9).",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B9",
+      "B10"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher computes a 95% confidence interval for a population mean using a sample of 30 participants. If the researcher had instead used a sample of 120 participants...",
+    "option_assessments": [
+      {
+        "option_id": "opt_A",
+        "generator_tags": [
+          "A1",
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that as sample size increases, the sampling distribution becomes more packed (A1) and correctly relates the smaller standard error to a narrower confidence interval (A7)."
+      },
+      {
+        "option_id": "opt_B",
+        "generator_tags": [
+          "A7",
+          "B10"
+        ],
+        "judge_tags": [
+          "A7",
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option demonstrates the misconception that larger sample sizes lead to more spread out sampling distributions (B10), while correctly applying the relationship that larger standard errors result in wider confidence intervals (A7)."
+      },
+      {
+        "option_id": "opt_C",
+        "generator_tags": [
+          "B9"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option explicitly states that the sampling distribution mirrors the population distribution, resulting in an unchanged standard error and CI width, which perfectly aligns with B9."
+      },
+      {
+        "option_id": "opt_D",
+        "generator_tags": [
+          "A1"
+        ],
+        "judge_tags": [
+          "A1"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies that the sampling distribution becomes more packed with a smaller standard error (A1), but fails to correctly apply the relationship between standard error and CI width. Since there is no specific problematic facet for this incorrect relationship, tagging A1 alone is appropriate."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 2,
+    "latency_similarity": 0.7784,
+    "latency_bucket": "surface",
+    "latency_option_details": [
+      {
+        "option_id": "opt_A",
+        "similarity": 0.78,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "A1",
+          "A7"
+        ]
+      },
+      {
+        "option_id": "opt_B",
+        "similarity": 0.7945,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "A7",
+          "B10"
+        ]
+      },
+      {
+        "option_id": "opt_C",
+        "similarity": 0.7365,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "B9"
+        ]
+      },
+      {
+        "option_id": "opt_D",
+        "similarity": 0.8026,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "A1"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 38.91,
+    "judge_s": 12.68,
+    "eval_s": 11.35
+  },
+  "created_at": "2026-05-15T20:06:53.228078+00:00"
+}

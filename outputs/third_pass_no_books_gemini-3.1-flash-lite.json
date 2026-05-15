@@ -1,0 +1,757 @@
+{
+  "input_dir": "outputs/third_pass_no_books_gemini-3.1-flash-lite",
+  "n_items": 10,
+  "item_evaluations": [
+    {
+      "source": "2026-05-15T19:28:33",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "C"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.661,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.5934,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A6",
+              "B17"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.7303,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B17"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.5976,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A6"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.7225,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B17"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 0.75,
+        "overall_confidence": 0.95,
+        "issues": [
+          "Option D is tagged with B17 by the generator, but its text explicitly contradicts the 'more precise estimate' component of B17.",
+          "Facet B17 contains two linked concepts (higher confidence = more precise, leading to shorter interval). When options break these concepts apart (like Option A, which has increased width but more precision), it creates slight tagging ambiguity."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-15T19:28:56",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "A"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.7858,
+        "score": 2,
+        "bucket": "surface",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.7696,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A1",
+              "A7"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.8422,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B10"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.7457,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B10"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 0.67,
+        "overall_confidence": 0.98,
+        "issues": [
+          "Option C is incorrectly tagged by the generator as B10. It should be tagged as B9 because it describes the standard error remaining unchanged, rather than becoming more spread out."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-15T19:29:34",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "A"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.6179,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.6664,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A5"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.6115,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B16"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.5865,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B16"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.6072,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B16"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 0.95,
+        "issues": [
+          "Options C and D are extremely similar in that they both test the exact same specific variant of misconception B16 (estimating the sample mean). The item would be stronger if one of them tested a different misconception, such as B15 (interpreting CI as a probability).",
+          "Option A uses the shorthand 'with 95% confidence' rather than testing the frequentist interpretation of confidence level (Goal A4). While acceptable since the item focuses on A5 vs B16, it misses an opportunity to reinforce A4."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-15T19:30:22",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "B"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [
+          "A",
+          "C"
+        ],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 4,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.5652,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.6549,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B15"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.585,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A4"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.5823,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B15"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.4384,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "B15"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 0.75,
+        "overall_confidence": 0.97,
+        "issues": [
+          "Options A and C are too similar; they both test the exact same misconception (B15) using almost identical phrasing ('probability' vs 'chance'). This reduces the diagnostic value of having both options.",
+          "The generator's tag for Option D is incorrect based on its own rationale. It should be tagged as B16 because it conflates estimating the population mean with capturing individual scores/data points."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-15T19:30:51",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "B"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.8532,
+        "score": 1,
+        "bucket": "paraphrase",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.8445,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "A2",
+              "B13"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.8166,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "A2",
+              "A3"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.8675,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B11"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.8841,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B11",
+              "B13"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 0.95,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-15T19:31:29",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "A"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.795,
+        "score": 2,
+        "bucket": "surface",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.8389,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "A1",
+              "A2"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.8141,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B12"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.819,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "A2",
+              "B9"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.7081,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B11"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 0.75,
+        "overall_confidence": 0.97,
+        "issues": [
+          "Option D is incorrectly tagged by the generator as B11. It actually reflects B9 (mirrors population distribution) because it states the shape remains the same regardless of sample size, rather than getting closer to the population distribution as n increases."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-15T19:32:02",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "A"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 4,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.6769,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.654,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A3"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.6942,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A3",
+              "B9"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.6223,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B8",
+              "B13"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.7373,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B8",
+              "B9"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 0.85,
+        "overall_confidence": 0.9,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-15T19:32:44",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "B"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.7254,
+        "score": 2,
+        "bucket": "surface",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.7241,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A1",
+              "A7",
+              "B14"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.6995,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A1",
+              "A7"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.7272,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B14"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.7507,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B14"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 0.5,
+        "overall_confidence": 0.95,
+        "issues": [
+          "Option C's text uses the phrase 'more likely to be closer', which is statistically correct, but the generator's rationale claims the option exhibits B14 ('guaranteed closeness'). The option text contradicts the generator's intended misconception.",
+          "Option D is tagged with B14 by the generator, but B14 is about sample means always being *closer* with larger samples. Option D argues the sample mean is *farther* and the CI is *wider*, which perfectly matches facet B10 instead."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-15T19:33:14",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "A"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.7745,
+        "score": 2,
+        "bucket": "surface",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.7474,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A6"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.8542,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B17"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.7384,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A7"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.758,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A7"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-15T19:33:49",
+      "correctness": {
+        "selected_answer": "",
+        "correct_answer_ids": [
+          "C"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "From cached eval_scores"
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "From cached eval_scores",
+        "options_score": 5,
+        "options_reasoning": "From cached eval_scores",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.8093,
+        "score": 1,
+        "bucket": "paraphrase",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.8481,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B12"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.7954,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B12",
+              "B13"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.7379,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A3"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.8557,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B12"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 0.85,
+        "overall_confidence": 0.95,
+        "issues": [
+          "Option B captures an incorrect mean, but the facet B13 specifically says 'depends on sample size'. The option does not explicitly mention sample size affecting the mean, though B13 is the best available fit.",
+          "Option D contains both a misconception (B12) and a correct facet (A3). While it functions well as a distractor for those who only partially understand the concepts, tagging should ideally capture the correct facet being affirmed."
+        ]
+      }
+    }
+  ],
+  "corpus_evaluation": {
+    "facet_coverage": {
+      "facet_counts": {
+        "A1": 4,
+        "A2": 4,
+        "A3": 4,
+        "A4": 1,
+        "A5": 1,
+        "A6": 3,
+        "A7": 5,
+        "B8": 2,
+        "B9": 3,
+        "B10": 2,
+        "B11": 3,
+        "B12": 4,
+        "B13": 4,
+        "B14": 3,
+        "B15": 3,
+        "B16": 3,
+        "B17": 4
+      },
+      "total_facets_in_map": 17,
+      "covered_facets": 17,
+      "uniformity": 0.9760209603301089
+    },
+    "facet_combination_diversity": {
+      "total_items": 10,
+      "unique_combinations": 10,
+      "combination_ratio": 1.0,
+      "mean_pairwise_jaccard_distance": 0.9244
+    },
+    "problem_diversity": {
+      "structural": {
+        "format_distribution": {
+          "single_select": 10
+        },
+        "format_entropy": 0.0,
+        "style_distribution": {
+          "prediction": 6,
+          "interpretation": 2,
+          "conceptual": 2
+        },
+        "style_entropy": 0.8649735207179273
+      },
+      "semantic": {
+        "mean_pairwise_similarity": 0.6035,
+        "max_pairwise_similarity": 0.9093,
+        "most_similar_pair": [
+          "confidence_intervals_4",
+          "confidence_intervals_5"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "B9",
+      "B11",
+      "B12"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection focuses on the Central Limit Theorem and the shape of the sampling distribution as sample size increases. It pairs the correct understanding of the approach toward normality (A2) with misconceptions regarding the distribution mirroring the population distribution (B9), converging toward the population shape as sample size grows (B11), or being inherently normal without regard for sample size or population constraints (B12).",
+  "item": {
+    "stem": "A researcher is investigating the distribution of household incomes in a city, which is known to be heavily right-skewed. The researcher plans to take many random samples of size n and plot the distribution of the resulting sample means. According to the Central Limit Theorem, what happens to the shape of this sampling distribution as the sample size n increases from 5 to 100?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The sampling distribution will become more symmetric and increasingly resemble a Normal distribution.",
+        "facet_tags": [
+          "A2"
+        ],
+        "is_correct": true,
+        "rationale": "This is correct because the Central Limit Theorem states that as sample size increases, the sampling distribution of the mean approaches a Normal distribution, regardless of the shape of the population distribution."
+      },
+      {
+        "id": "B",
+        "text": "The sampling distribution will become more right-skewed to more accurately reflect the true shape of the population distribution.",
+        "facet_tags": [
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that larger samples lead the sampling distribution to converge toward the shape of the population distribution, rather than the Normal distribution."
+      },
+      {
+        "id": "C",
+        "text": "The sampling distribution will be perfectly Normal at both n = 5 and n = 100, because sample means are always normally distributed by definition.",
+        "facet_tags": [
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "This option assumes that the sampling distribution is always Normal regardless of sample size, failing to recognize that for a skewed population, the sampling distribution only becomes approximately Normal as n increases."
+      },
+      {
+        "id": "D",
+        "text": "The sampling distribution will have the same right-skewed shape and same standard deviation as the population distribution since it is composed of samples from that population.",
+        "facet_tags": [
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects a confusion between the sampling distribution and the population distribution, incorrectly assuming the sampling distribution inherits the population's shape and variability directly."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item assesses the student's understanding of the Central Limit Theorem (CLT). The core concept is that as sample size (n) increases, the sampling distribution of the sample mean approaches a Normal distribution, even if the population itself is skewed (Goal facet A2). Distractors target common misconceptions: confusing the sampling distribution with the population distribution (B9), believing the sampling distribution becomes more like the population distribution as n increases (B11), and believing the sampling distribution is always Normal regardless of the sample size or population shape (B12).",
+    "target_facets": [
+      "A2",
+      "B9",
+      "B11",
+      "B12"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is investigating the distribution of household incomes in a city, which is known to be heavily right-skewed. The researcher plans to take many random samples of size n and plot the distribution of the resulting sample means. According to the Central Limit Theorem, what happens to the shape of this sampling distribution as the sample size n increases from 5 to 100?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A2"
+        ],
+        "judge_tags": [
+          "A2"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option A correctly states that the sampling distribution will increasingly resemble a Normal distribution as sample size increases, directly aligning with goal facet A2."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B11"
+        ],
+        "judge_tags": [
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option B states that the sampling distribution will become more right-skewed to reflect the population distribution as sample size increases, perfectly matching the misconception described in facet B11."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B12"
+        ],
+        "judge_tags": [
+          "B12"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option C claims the sampling distribution is always perfectly Normal regardless of sample size, which exactly matches the misconception in facet B12."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B9"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option D states that the sampling distribution has the same shape and standard deviation as the population distribution, accurately demonstrating the misconception in facet B9."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 11.87,
+    "judge_s": 11.2
+  },
+  "created_at": "2026-05-07T23:01:39.708540+00:00"
+}

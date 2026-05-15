@@ -1,0 +1,140 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A3",
+      "B8",
+      "B13"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets the fundamental properties of a sampling distribution as the sample size changes. It contrasts the correct understanding that the mean of the sampling distribution remains equal to the population mean (A3) with the misconception that it varies with sample size (B13). Simultaneously, it addresses the spread of the distribution, testing whether students recognize that standard error decreases as sample size increases (A1) or if they incorrectly equate the sampling distribution with the distribution of a single sample (B8).",
+  "item": {
+    "stem": "The weights of adult salmon in a specific river are known to follow a distribution with a population mean (μ) of 18 lbs and a population standard deviation (σ) of 4 lbs. Researcher A plans to take a random sample of 64 salmon, while Researcher B plans to take a random sample of 256 salmon. Which of the following best describes the theoretical sampling distributions of the sample mean for these two researchers?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Both researchers' distributions will be centered at 18 lbs, but Researcher B's distribution will have a standard error of 0.25 lbs, making it more tightly packed than Researcher A's distribution, which has a standard error of 0.5 lbs.",
+        "facet_tags": [
+          "A1",
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies that the mean of the sampling distribution is equal to the population mean regardless of sample size (A3) and correctly calculates that a larger sample size results in a smaller standard error (4/√256 vs 4/√64), leading to a more packed distribution (A1)."
+      },
+      {
+        "id": "opt_2",
+        "text": "Researcher A's distribution is the collection of the 64 individual weights they measured, whereas Researcher B's distribution is the collection of the 256 individual weights they measured.",
+        "facet_tags": [
+          "B8"
+        ],
+        "is_correct": false,
+        "rationale": "This choice reflects a common misconception where the student confuses the theoretical sampling distribution (the distribution of all possible sample means) with the actual sample distribution or data set collected in a single study (B8)."
+      },
+      {
+        "id": "opt_3",
+        "text": "Both distributions will have a standard error of 0.5 lbs, but Researcher B's sampling distribution will be centered at 72 lbs (18 lbs × 4) because they are weighing four times as many fish as Researcher A.",
+        "facet_tags": [
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "This distractor assumes the mean of the sampling distribution scales upward with the sample size, reflecting the misconception that the average or expected value depends on the quantity of data collected (B13)."
+      },
+      {
+        "id": "opt_4",
+        "text": "Researcher A's distribution will be centered at 18 lbs, but Researcher B's distribution will be centered at 4.5 lbs (18 lbs / 4) because the much larger sample size reduces the average value.",
+        "facet_tags": [
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "This option targets the misconception that the mean of the sampling distribution decreases as the sample size increases, perhaps by incorrectly applying the logic of standard error reduction to the mean itself (B13)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "This item tests the student's understanding of the properties of the sampling distribution of the mean. According to the Central Limit Theorem, the mean of the sampling distribution is always equal to the population mean (μ), which in this case is 18 lbs (A3). Additionally, the standard error (the standard deviation of the sampling distribution) is calculated as σ/√ n. As the sample size (n) increases, the standard error decreases, meaning the distribution becomes more 'packed' or less spread out (A1). Incorrect answers reflect confusion between the sample itself and the sampling distribution (B8), or the belief that the expected mean of the distribution changes based on sample size (B13).",
+    "target_facets": [
+      "A1",
+      "A3",
+      "B8",
+      "B13"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "The weights of adult salmon in a specific river are known to follow a distribution with a population mean (μ) of 18 lbs and a population standard deviation (σ) of 4 lbs. Researcher A plans to take a random sample of 64 salmon, while Researcher B plans to take a random sample of 256 salmon. Which of the following best describes the theoretical sampling distributions of the sample mean for these two researchers?",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A1",
+          "A3"
+        ],
+        "judge_tags": [
+          "A1",
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that both sampling distributions will be centered at the population mean (A3) and that the larger sample size (Researcher B) yields a smaller standard error and a more tightly packed distribution (A1)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B8"
+        ],
+        "judge_tags": [
+          "B8"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option explicitly describes the sampling distribution as the collection of individual weights measured in a single sample, which perfectly aligns with the misconception that the sampling distribution is just a single dataset/sample distribution (B8)."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "B13"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The option claims the sampling distribution's mean will scale upward based on the number of fish weighed, illustrating the misconception that the mean of the sampling distribution depends on sample size (B13). Although it also holds the standard error constant across different sample sizes, B13 is the primary mapped facet."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B13"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option claims the mean of the sampling distribution decreases as sample size increases, which directly reflects the misconception that the mean of the sampling distribution depends on sample size (B13)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Options 3 and 4 both target the exact same misconception (B13), just in opposite directions (mean scaling up vs. scaling down). While this is diagnostically fine, it leaves room to test a different misconception (such as B10 or B12) in one of those options to increase the diagnostic breadth of the item."
+    ]
+  },
+  "timing": {
+    "generator_s": 18.67,
+    "judge_s": 19.2
+  },
+  "created_at": "2026-05-14T22:59:43.192824+00:00"
+}

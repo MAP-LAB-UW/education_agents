@@ -1,0 +1,205 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A6",
+      "B10",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-pro-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination tests students' understanding of how sample size and confidence level independently affect the width (or precision) of a confidence interval. It contrasts the correct relationships (larger sample size decreases standard error and interval width [A1]; higher confidence level increases interval width [A6]) with their direct problematic counterparts (larger sample size increases spread [B10]; higher confidence level decreases interval width [B17]).",
+  "item": {
+    "stem": "A polling agency constructs a 95% confidence interval for the mean age of registered voters using a sample of 500 people. They find that the resulting confidence interval is too wide to be useful. If they were to conduct a new poll, which of the following combinations of changes would guarantee a narrower confidence interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Increase the sample size to 1000 and decrease the confidence level to 90%.",
+        "facet_tags": [
+          "A1",
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "Correct. Increasing the sample size reduces the standard error of the sampling distribution, which narrows the confidence interval (A1). Decreasing the confidence level reduces the critical value, which also narrows the confidence interval (A6)."
+      },
+      {
+        "id": "B",
+        "text": "Decrease the sample size to 250 and increase the confidence level to 99%.",
+        "facet_tags": [
+          "B10",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "Incorrect. Decreasing the sample size actually increases the standard error and widens the interval; believing it narrows the interval reflects the misconception that smaller samples result in less spread (B10). Increasing the confidence level also widens the interval; believing it narrows the interval reflects the misconception that higher confidence leads to a shorter, more precise interval (B17)."
+      },
+      {
+        "id": "C",
+        "text": "Increase the sample size to 1000 and increase the confidence level to 99%.",
+        "facet_tags": [
+          "A1",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "Incorrect. While increasing the sample size correctly narrows the interval by reducing the standard error (A1), increasing the confidence level makes the interval wider. Selecting this option reflects the misconception that higher confidence leads to a shorter, more precise interval (B17)."
+      },
+      {
+        "id": "D",
+        "text": "Decrease the sample size to 250 and decrease the confidence level to 90%.",
+        "facet_tags": [
+          "A6",
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "Incorrect. While decreasing the confidence level correctly narrows the interval (A6), decreasing the sample size increases the standard error and widens the interval. Believing a smaller sample size narrows the interval reflects the misconception that smaller samples result in less spread (B10)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "The width of a confidence interval depends on the standard error and the critical value. A larger sample size reduces the standard error (because the sampling distribution becomes more packed), leading to a narrower interval. A lower confidence level reduces the critical value, which also leads to a narrower interval. Therefore, to guarantee a narrower interval, the agency should increase the sample size and decrease the confidence level. Options containing misconceptions incorrectly assume that smaller samples are less spread out or that higher confidence yields a narrower interval.",
+    "target_facets": [
+      "A1",
+      "A6",
+      "B10",
+      "B17"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A polling agency constructs a 95% confidence interval for the mean age of registered voters using a sample of 500 people. They find that the resulting confidence interval is too wide to be useful. If they were to conduct a new poll, which of the following combinations of changes would guarantee a narrower confidence interval?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1",
+          "A6"
+        ],
+        "judge_tags": [
+          "A1",
+          "A6",
+          "A7"
+        ],
+        "agreement": "partial",
+        "confidence": 0.95,
+        "reasoning": "Option A correctly identifies that increasing sample size (A1) and decreasing confidence level (A6) both work to narrow the confidence interval. A7 is also implicitly required to understand that a smaller standard error leads to a narrower confidence interval."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B10",
+          "B17"
+        ],
+        "judge_tags": [
+          "B10",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "This option combines two actions that would actually widen the interval. Choosing this indicates the misconception that smaller samples are less spread out (B10) and that higher confidence levels provide more precise (narrower) intervals (B17)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A1",
+          "B17"
+        ],
+        "judge_tags": [
+          "A1",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The intended reasoning for this distractor is that the student correctly knows increasing sample size narrows the interval (A1) but incorrectly believes higher confidence also narrows it (B17). However, there is a severe mathematical flaw in this option (see issues)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A6",
+          "B10"
+        ],
+        "judge_tags": [
+          "A6",
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "This option incorrectly suggests decreasing the sample size narrows the interval (B10), while correctly noting that decreasing the confidence level does (A6)."
+      }
+    ],
+    "overall_agreement": 0.85,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Mathematically, Option C also results in a narrower confidence interval. The original interval's margin of error is proportional to 1.96 / sqrt(500) ≈ 0.0876. Option C's margin of error is proportional to 2.576 / sqrt(1000) ≈ 0.0815. Because 0.0815 < 0.0876, Option C guarantees a narrower interval just like Option A. This makes the item have two correct answers if a student calculates the relative effects. To fix this, change Option C's sample size to something smaller that doesn't overpower the z-score increase, such as 'Increase the sample size to 600'."
+    ]
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [
+      "C. Increase the sample size to 1000 and increase the confidence level to 99%."
+    ],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 3,
+    "latency_similarity": 0.6309,
+    "latency_bucket": "latent",
+    "latency_option_details": [
+      {
+        "option_id": "A",
+        "similarity": 0.6116,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A1",
+          "A6"
+        ]
+      },
+      {
+        "option_id": "B",
+        "similarity": 0.7098,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "B10",
+          "B17"
+        ]
+      },
+      {
+        "option_id": "C",
+        "similarity": 0.6911,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A1",
+          "B17"
+        ]
+      },
+      {
+        "option_id": "D",
+        "similarity": 0.5111,
+        "score": 4,
+        "bucket": "highly_latent",
+        "facet_tags": [
+          "A6",
+          "B10"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 23.28,
+    "judge_s": 26.84,
+    "eval_s": 31.26
+  },
+  "created_at": "2026-05-15T20:10:58.744690+00:00"
+}

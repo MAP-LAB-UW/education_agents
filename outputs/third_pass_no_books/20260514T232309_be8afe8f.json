@@ -1,0 +1,136 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A6",
+      "B17",
+      "A4",
+      "B15"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 5,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection focuses on the relationship between confidence levels and interval width, as well as the interpretation of what the 'confidence level' actually represents. By combining A6 and B17, the item can diagnose if students understand the trade-off between confidence and precision (wider vs. narrower intervals). Including A4 and B15 allows the item to further distinguish whether students view the confidence level as a long-run frequency of successful captures or as a simple probability assigned to a single calculated interval.",
+  "item": {
+    "stem": "A marine biologist collects a sample of 50 adult sea turtles and calculates a 95% confidence interval for their mean shell length to be (85.2 cm, 92.8 cm). Which of the following statements correctly evaluate this interval and its properties?",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "There is a 95% probability that the actual mean shell length of the entire sea turtle population is between 85.2 cm and 92.8 cm.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This reflects the misconception that the confidence level describes the probability of the population parameter falling within a specific, already-calculated interval. In frequentist statistics, the parameter is fixed, and the specific interval either contains it or it doesn't."
+      },
+      {
+        "id": "opt_2",
+        "text": "If the biologist used the same sample data to calculate a 99% confidence interval, the resulting interval would be wider than the 95% interval.",
+        "facet_tags": [
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "Increasing the confidence level requires a larger critical value (e.g., a larger z* or t* score), which increases the margin of error and results in a wider interval to ensure a higher level of certainty."
+      },
+      {
+        "id": "opt_3",
+        "text": "If the biologist used the same sample data to calculate a 99% confidence interval, the resulting interval would be narrower because 99% is more precise than 95%.",
+        "facet_tags": [
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This is a common misconception where students assume higher 'confidence' must equate to a more 'precise' (narrower) estimate, whereas mathematically, higher confidence requires a wider interval to capture the parameter more reliably."
+      },
+      {
+        "id": "opt_4",
+        "text": "If the biologist were to take 100 different random samples of 50 turtles and calculate a 95% confidence interval for each, they would expect about 95 of those intervals to contain the true population mean shell length.",
+        "facet_tags": [
+          "A4"
+        ],
+        "is_correct": true,
+        "rationale": "This correctly interprets the confidence level as the long-run success rate of the procedure used to construct the interval over many independent replications."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_2",
+      "opt_4"
+    ],
+    "explanation": "This item tests the interpretation of confidence intervals and the relationship between confidence levels and interval width. The frequentist definition of a confidence interval (A4) refers to the long-run proportion of intervals that capture the population mean across many samples, not the probability that a specific interval contains it (B15). Additionally, there is a trade-off between confidence and precision: a higher confidence level requires a larger critical value, making the interval wider (A6), contrary to the misconception that higher confidence produces a narrower, more precise interval (B17).",
+    "target_facets": [
+      "A6",
+      "B17",
+      "A4",
+      "B15"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A marine biologist collects a sample of 50 adult sea turtles and calculates a 95% confidence interval for their mean shell length to be (85.2 cm, 92.8 cm). Which of the following statements correctly evaluate this interval and its properties?",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The statement explicitly interprets the calculated confidence interval as having a 95% probability of containing the population mean, which perfectly aligns with misconception B15."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "A6"
+        ],
+        "judge_tags": [
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This statement correctly describes that a 99% CI would be wider than a 95% CI, aligning perfectly with goal facet A6."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "B17"
+        ],
+        "judge_tags": [
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This statement embodies the misconception that higher confidence leads to a narrower (more precise) interval, completely matching problematic facet B17."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "A4"
+        ],
+        "judge_tags": [
+          "A4"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This statement correctly interprets the confidence level through the lens of replication (i.e., long-run frequency), which exactly matches goal facet A4."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 12.06,
+    "judge_s": 8.8
+  },
+  "created_at": "2026-05-14T23:23:09.391399+00:00"
+}

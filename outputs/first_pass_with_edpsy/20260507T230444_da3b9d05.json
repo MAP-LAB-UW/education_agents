@@ -1,0 +1,146 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A5",
+      "A6",
+      "B16",
+      "B17"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection focuses on the conceptual definition and the mechanics of confidence intervals. It contrasts the correct understanding that CIs target population parameters (A5) and widen with increased confidence levels (A6) against the common misconceptions that they estimate sample statistics (B16) or that higher confidence results in shorter, more 'precise' intervals (B17). This allows for a diagnostic item that tests both the purpose of the interval and the mathematical relationship between confidence and width.",
+  "item": {
+    "stem": "A researcher is considering whether to report a 95% confidence interval or a 99% confidence interval for the same set of sample data. Which of the following statements correctly describes the relationship between these two intervals?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "The 99% confidence interval will be wider than the 95% confidence interval because a higher confidence level requires a larger multiplier (critical value) to ensure the population mean is captured.",
+        "facet_tags": [
+          "A5",
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "This option is correct because it identifies that the purpose of a confidence interval is to capture a population parameter (A5) and that increasing the confidence level requires a wider interval (A6)."
+      },
+      {
+        "id": "opt_2",
+        "text": "The 99% confidence interval will be narrower than the 95% confidence interval because a higher confidence level results in a more precise estimate of the population parameter.",
+        "facet_tags": [
+          "A5",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "While this option correctly identifies that CIs target population parameters (A5), it incorrectly assumes that higher confidence leads to a more precise (narrower) interval (B17)."
+      },
+      {
+        "id": "opt_3",
+        "text": "The 99% confidence interval will be wider than the 95% confidence interval because the interval is designed to encompass 99% of the individual scores within the sample.",
+        "facet_tags": [
+          "A6",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option correctly identifies that the 99% interval is wider (A6), but it incorrectly interprets the CI as an estimate of sample data/scores rather than the population mean (B16)."
+      },
+      {
+        "id": "opt_4",
+        "text": "The 99% confidence interval will be narrower than the 95% confidence interval because it provides a more certain range for identifying where the sample mean is located.",
+        "facet_tags": [
+          "B16",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This option combines two misconceptions: that CIs are used to estimate sample statistics like the sample mean (B16) and that higher confidence results in a narrower interval (B17)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "This item evaluates student understanding of the target and width of confidence intervals. Correct understanding requires knowing that CIs estimate population parameters (A5) and that the width must increase to provide higher confidence (A6). Misconceptions include thinking CIs capture sample statistics or raw data (B16) or that higher confidence improves precision by narrowing the range (B17).",
+    "target_facets": [
+      "A5",
+      "A6",
+      "B16",
+      "B17"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is considering whether to report a 95% confidence interval or a 99% confidence interval for the same set of sample data. Which of the following statements correctly describes the relationship between these two intervals?",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A5",
+          "A6"
+        ],
+        "judge_tags": [
+          "A5",
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that the 99% interval is wider because of the larger critical value (A6) and correctly identifies the target of the interval as the population mean (A5)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "A5",
+          "B17"
+        ],
+        "judge_tags": [
+          "A5",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option exhibits the misconception that higher confidence leads to a narrower/more precise interval (B17), while correctly noting that the interval is for the population parameter (A5)."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "A6",
+          "B16"
+        ],
+        "judge_tags": [
+          "A6",
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies that the 99% interval is wider (A6), but justifies this with the misconception that the interval is designed to capture sample data/individual scores (B16)."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B16",
+          "B17"
+        ],
+        "judge_tags": [
+          "B16",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option combines two misconceptions: that a higher confidence interval is narrower (B17) and that the interval targets the sample mean rather than the population parameter (B16)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 15.98,
+    "judge_s": 10.64
+  },
+  "created_at": "2026-05-07T23:04:44.700236+00:00"
+}

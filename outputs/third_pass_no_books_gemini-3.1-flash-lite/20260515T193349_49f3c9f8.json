@@ -1,0 +1,190 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B12"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-flash-lite-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets the central limit theorem concepts. A2 and A3 cover the properties of the sampling distribution mean and shape as sample size increases, while B12 tests the common misconception that normality is inherent to the sample size regardless of the population distribution or the degree of sampling.",
+  "item": {
+    "stem": "Consider a population that is heavily right-skewed. If we take many random samples of size n=2 and calculate the mean for each, how would the sampling distribution of the sample mean compare to the population distribution?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The sampling distribution will be normal because the Central Limit Theorem ensures all sampling distributions are normal regardless of sample size.",
+        "facet_tags": [
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "This reflects the misconception that the sampling distribution of the mean is always normal, ignoring the requirement for a sufficiently large sample size when the population is not normal."
+      },
+      {
+        "id": "B",
+        "text": "The sampling distribution will be normal and centered at a different mean than the population mean.",
+        "facet_tags": [
+          "B12",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "This incorrectly claims normality for small samples and incorrectly suggests the mean of the sampling distribution is not the population mean."
+      },
+      {
+        "id": "C",
+        "text": "The sampling distribution will remain skewed, but it will have the same mean as the population.",
+        "facet_tags": [
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "The mean of the sampling distribution is always the population mean (A3). With a very small sample size (n=2), the distribution remains skewed and has not yet converged to normality (A2)."
+      },
+      {
+        "id": "D",
+        "text": "The sampling distribution will be normal and centered at the same mean as the population.",
+        "facet_tags": [
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "This correctly identifies the mean but incorrectly assumes the sampling distribution is normal for such a small sample size."
+      }
+    ],
+    "correct_option_ids": [
+      "C"
+    ],
+    "explanation": "This item tests the understanding that while the mean of the sampling distribution always equals the population mean (A3), the shape of the sampling distribution only approaches normality (A2) as the sample size increases. Students often incorrectly assume that any sampling distribution of the mean is normal (B12).",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B12"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "Consider a population that is heavily right-skewed. If we take many random samples of size n=2 and calculate the mean for each, how would the sampling distribution of the sample mean compare to the population distribution?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B12"
+        ],
+        "judge_tags": [
+          "B12"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option explicitly states the misconception that the Central Limit Theorem ensures all sampling distributions are normal regardless of sample size, perfectly aligning with facet B12."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B12",
+          "B13"
+        ],
+        "judge_tags": [
+          "B12",
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The option claims the distribution will be normal (B12) and centered at a different mean. While B13 specifically refers to the mean depending on sample size, it is the only misconception facet available for an incorrect sampling distribution mean, making it the most appropriate fit."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A3"
+        ],
+        "judge_tags": [
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "The option correctly notes that the mean of the sampling distribution equals the population mean (A3). It also correctly refrains from claiming normality for n=2, showing an implicit understanding of A2/avoidance of B12."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B12"
+        ],
+        "judge_tags": [
+          "B12",
+          "A3"
+        ],
+        "agreement": "partial",
+        "confidence": 0.95,
+        "reasoning": "The option exhibits the misconception that the sampling distribution will be normal for n=2 (B12), but it also contains the correct understanding that the sampling distribution is centered at the population mean (A3)."
+      }
+    ],
+    "overall_agreement": 0.85,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Option B captures an incorrect mean, but the facet B13 specifically says 'depends on sample size'. The option does not explicitly mention sample size affecting the mean, though B13 is the best available fit.",
+      "Option D contains both a misconception (B12) and a correct facet (A3). While it functions well as a distractor for those who only partially understand the concepts, tagging should ideally capture the correct facet being affirmed."
+    ]
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 5,
+    "naturalness_overall": 5,
+    "latency_score": 1,
+    "latency_similarity": 0.8093,
+    "latency_bucket": "paraphrase",
+    "latency_option_details": [
+      {
+        "option_id": "A",
+        "similarity": 0.8481,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "B12"
+        ]
+      },
+      {
+        "option_id": "B",
+        "similarity": 0.7954,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "B12",
+          "B13"
+        ]
+      },
+      {
+        "option_id": "C",
+        "similarity": 0.7379,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "A3"
+        ]
+      },
+      {
+        "option_id": "D",
+        "similarity": 0.8557,
+        "score": 1,
+        "bucket": "paraphrase",
+        "facet_tags": [
+          "B12"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 2.29,
+    "judge_s": 19.15,
+    "eval_s": 12.5
+  },
+  "created_at": "2026-05-15T19:33:49.566115+00:00"
+}

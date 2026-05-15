@@ -1,0 +1,195 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A3",
+      "B8",
+      "B9"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "gemini/gemini-3.1-flash-lite-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets the fundamental misconception that the sampling distribution is merely a representation of the sample distribution (B8) or the population distribution (B9), while assessing the core understanding that the sampling distribution center consistently reflects the population parameter (A3).",
+  "item": {
+    "stem": "Suppose we take a very large number of random samples of size n = 30 from a population that has a mean of 50 and a standard deviation of 10. We calculate the mean for each of these samples and plot the distribution of all these sample means. What is the mean and the distribution shape of this sampling distribution of the mean?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The mean of the distribution is 50, and the distribution is approximately normal.",
+        "facet_tags": [
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "The mean of the sampling distribution is always equal to the population mean (A3), and due to the Central Limit Theorem, it approximates a normal distribution."
+      },
+      {
+        "id": "B",
+        "text": "The mean of the distribution is 50, and it has the same shape and spread as the original population.",
+        "facet_tags": [
+          "A3",
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "While the mean is correct (A3), the sampling distribution does not mirror the population distribution; it is narrower and becomes normal (B9)."
+      },
+      {
+        "id": "C",
+        "text": "The mean of the distribution is 50/30, and it represents the spread of individual observations in the sample.",
+        "facet_tags": [
+          "B8",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "This confuses the sampling distribution of the mean with the sample distribution and miscalculates the mean (B8, B13)."
+      },
+      {
+        "id": "D",
+        "text": "The mean of the distribution depends on the values in the single sample we draw, and it mirrors the population distribution.",
+        "facet_tags": [
+          "B8",
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "This reflects the misconception that the sampling distribution is derived from a single sample and that it mimics the population distribution (B8, B9)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item evaluates whether students understand the parameters of the sampling distribution of the sample mean. It correctly identifies the population mean as the mean of the sampling distribution (A3) while contrasting it with misconceptions regarding the sampling distribution mirroring the population distribution (B9) or being identical to a single sample distribution (B8).",
+    "target_facets": [
+      "A3",
+      "B8",
+      "B9"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "Suppose we take a very large number of random samples of size n = 30 from a population that has a mean of 50 and a standard deviation of 10. We calculate the mean for each of these samples and plot the distribution of all these sample means. What is the mean and the distribution shape of this sampling distribution of the mean?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A3"
+        ],
+        "judge_tags": [
+          "A2",
+          "A3"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The option correctly identifies that the mean is the population mean (A3). It also states the distribution is approximately normal, which indicates the understanding of the Central Limit Theorem. Facet A2 encompasses the idea that sampling distributions become normal for large enough sample sizes (n=30)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A3",
+          "B9"
+        ],
+        "judge_tags": [
+          "A3",
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "The option correctly states the mean is 50 (A3) but incorrectly states that the shape and spread are the same as the original population, explicitly exhibiting facet B9 (sampling distribution mirrors population distribution)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B8",
+          "B13"
+        ],
+        "judge_tags": [
+          "B8",
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The option calculates the mean as dependent on sample size (50/30), exhibiting facet B13. By describing it as representing 'the spread of individual observations in the sample', it demonstrates confusion between the sample distribution and the sampling distribution (B8)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B8",
+          "B9"
+        ],
+        "judge_tags": [
+          "B8",
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "The option claims the sampling distribution depends on 'the single sample we draw', which corresponds to facet B8 (deriving sampling distribution from a single dataset). It also claims the distribution 'mirrors the population distribution', aligning directly with facet B9."
+      }
+    ],
+    "overall_agreement": 0.85,
+    "overall_confidence": 0.9,
+    "issues": []
+  },
+  "eval_scores": {
+    "correctness_pass": true,
+    "correctness_flagged_distractors": [],
+    "naturalness_stem": 5,
+    "naturalness_options": 4,
+    "naturalness_overall": 4,
+    "latency_score": 3,
+    "latency_similarity": 0.6769,
+    "latency_bucket": "latent",
+    "latency_option_details": [
+      {
+        "option_id": "A",
+        "similarity": 0.654,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A3"
+        ]
+      },
+      {
+        "option_id": "B",
+        "similarity": 0.6942,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "A3",
+          "B9"
+        ]
+      },
+      {
+        "option_id": "C",
+        "similarity": 0.6223,
+        "score": 3,
+        "bucket": "latent",
+        "facet_tags": [
+          "B8",
+          "B13"
+        ]
+      },
+      {
+        "option_id": "D",
+        "similarity": 0.7373,
+        "score": 2,
+        "bucket": "surface",
+        "facet_tags": [
+          "B8",
+          "B9"
+        ]
+      }
+    ]
+  },
+  "timing": {
+    "generator_s": 2.56,
+    "judge_s": 15.27,
+    "eval_s": 14.33
+  },
+  "created_at": "2026-05-15T19:32:02.814374+00:00"
+}

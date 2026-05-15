@@ -1,0 +1,140 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A3",
+      "A7",
+      "B8",
+      "B13"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination addresses the fundamental properties of the sampling distribution which serves as the basis for confidence intervals. It tests the understanding of the sampling distribution's mean (A3 vs B13) and its conceptual origin (B8), while also connecting the spread of the sampling distribution (standard error) to the resulting width of the confidence interval (A7).",
+  "item": {
+    "stem": "A researcher is using a random sample of $n=100$ recent college graduates to estimate the population mean starting salary ($\\mu$). They are evaluating the properties of the sampling distribution of the mean and how these properties affect the resulting 95% confidence interval. Which of the following statements is true?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "The mean of the sampling distribution of the mean is equal to the population mean $\\mu$. Furthermore, if the estimated standard error of the mean were to increase, the width of the 95% confidence interval would also increase.",
+        "facet_tags": [
+          "A3",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct option. It correctly identifies that the mean of the sampling distribution of the mean is the population mean (A3) and correctly describes the direct relationship between the standard error and the width of a confidence interval (A7)."
+      },
+      {
+        "id": "opt_2",
+        "text": "The sampling distribution of the mean is defined as the distribution of the individual salary scores found within the researcher's specific sample of 100 graduates.",
+        "facet_tags": [
+          "B8"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that the sampling distribution is identical to the distribution of scores within a single sample (B8), rather than a theoretical distribution of means from infinite samples."
+      },
+      {
+        "id": "opt_3",
+        "text": "The mean of the sampling distribution ($\\mu_{\\bar{X}}$) depends on the sample size; as $n$ increases from 100 to 500, the center of the sampling distribution will also increase because the total sum of salaries is larger.",
+        "facet_tags": [
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that the mean of the sampling distribution changes as a function of the sample size (B13), whereas the mean of the sampling distribution is always equal to the population mean regardless of $n$."
+      },
+      {
+        "id": "opt_4",
+        "text": "If the researcher increases the sample size to $n=1000$, the mean of the sampling distribution will shift to become closer to the mean of that specific larger sample.",
+        "facet_tags": [
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "This option incorrectly suggests that the mean of the sampling distribution is dependent on the sample size or the specific sample mean obtained (B13), failing to recognize it as a constant equal to the population parameter."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "This item assesses student understanding of the fundamental properties of the sampling distribution of the mean and its role in constructing confidence intervals. The correct answer (A3, A7) confirms that the sampling distribution is centered at the population mean and that the margin of error (the 'wings' of the interval) expands as the standard error increases. Distractors target common points of confusion: conflating the sampling distribution with the sample data itself (B8) and incorrectly believing that the sample size influences the mean (center) of the sampling distribution (B13).",
+    "target_facets": [
+      "A3",
+      "A7",
+      "B8",
+      "B13"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is using a random sample of n=100 recent college graduates to estimate the population mean starting salary...",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A3",
+          "A7"
+        ],
+        "judge_tags": [
+          "A3",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly states that the mean of the sampling distribution equals the population mean (A3) and that an increase in standard error leads to an increase in the width of the confidence interval (A7)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B8"
+        ],
+        "judge_tags": [
+          "B8"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option defines the sampling distribution as the distribution of individual scores within a single sample, perfectly aligning with misconception B8."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "B13"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states that the mean of the sampling distribution depends on the sample size and will increase as n increases, which is a direct manifestation of B13."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B13"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option claims that increasing the sample size causes the mean of the sampling distribution to shift, indicating a belief that the mean of the sampling distribution is dependent on sample size (B13)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": [
+      "Test-wiseness / Cueing: The stem explicitly mentions evaluating properties of the sampling distribution AND how they affect the resulting 95% confidence interval. Option 1 is the ONLY option that mentions the confidence interval, making it easily guessable for test-wise students.",
+      "Redundancy: Options 3 and 4 both diagnose the exact same misconception (B13). To increase diagnostic value and balance the options to match the stem's dual focus, one of these should be replaced with a distractor targeting a confidence interval misconception (e.g., B15, B16, or B17)."
+    ]
+  },
+  "timing": {
+    "generator_s": 13.33,
+    "judge_s": 15.5
+  },
+  "created_at": "2026-05-07T23:02:16.072478+00:00"
+}

@@ -1,0 +1,146 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A3",
+      "A4",
+      "B13",
+      "B15"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This set explores the conceptual foundations of the sampling distribution and the frequentist interpretation of confidence intervals. It contrasts the correct understanding of the sampling distribution's mean (A3) and the long-run frequency interpretation of confidence levels (A4) with common misconceptions that the mean depends on sample size (B13) and that confidence levels represent the probability of a specific interval containing the parameter (B15).",
+  "item": {
+    "stem": "A researcher is studying the average commute time of city residents. She plans to collect a random sample of 100 residents to construct a 95% confidence interval for the population mean (μ). Which of the following statements correctly describes the properties of the sampling distribution and the interpretation of the confidence level?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "The mean of the sampling distribution of the sample mean is equal to the population mean (μ), and 95% of the intervals constructed from many independent samples of the same size are expected to contain μ.",
+        "facet_tags": [
+          "A3",
+          "A4"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies that the mean of the sampling distribution of the sample mean is unbiased (equals the population mean) and accurately interprets the confidence level as the long-run proportion of intervals that capture the parameter."
+      },
+      {
+        "id": "opt_2",
+        "text": "The mean of the sampling distribution of the sample mean will increase as the sample size increases because larger samples provide more information about the population's center.",
+        "facet_tags": [
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "This option incorrectly suggests that the mean of the sampling distribution depends on the sample size, whereas the mean of the sampling distribution remains equal to the population mean regardless of sample size."
+      },
+      {
+        "id": "opt_3",
+        "text": "The mean of the sampling distribution equals the population mean, but for the specific interval calculated from this sample, there is a 95% probability that the true population mean lies within the calculated bounds.",
+        "facet_tags": [
+          "A3",
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "While the first part about the mean is correct, the interpretation of the specific interval as a probability is a misconception; a specific interval either contains the mean or it does not (the probability is 0 or 1)."
+      },
+      {
+        "id": "opt_4",
+        "text": "Because the mean of the sampling distribution depends on the sample size used, we can say there is a 95% probability that the population mean is included in our resulting interval.",
+        "facet_tags": [
+          "B13",
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This option combines two misconceptions: that the sampling distribution's mean is sensitive to sample size and that the confidence level refers to the probability of the parameter being in a specific, already-calculated interval."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "This item assesses understanding of the sampling distribution of the mean and the proper interpretation of confidence levels. The correct answer (A3, A4) recognizes that the expected value of the sample mean is the population mean and that the confidence level describes the process's reliability over many trials. Distractors probe the misconception that sample size alters the mean of the sampling distribution (B13) and the common 'probability' misinterpretation of a specific confidence interval (B15).",
+    "target_facets": [
+      "A3",
+      "A4",
+      "B13",
+      "B15"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is studying the average commute time of city residents. She plans to collect a random sample of 100 residents...",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A3",
+          "A4"
+        ],
+        "judge_tags": [
+          "A3",
+          "A4"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly states that the mean of the sampling distribution equals the population mean (A3) and correctly interprets the confidence level as the proportion of intervals from repeated samples that contain the parameter (A4)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B13"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option claims that the mean of the sampling distribution depends on and increases with sample size, which perfectly aligns with B13."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "A3",
+          "B15"
+        ],
+        "judge_tags": [
+          "A3",
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option starts with the correct statement about the mean of the sampling distribution (A3) but interprets the confidence interval as a 95% probability of containing the population mean for a specific calculated bound (B15)."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B13",
+          "B15"
+        ],
+        "judge_tags": [
+          "B13",
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option contains the misconception that the sampling distribution mean depends on sample size (B13) and also exhibits the probability misconception for a single interval (B15)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": [
+      "Option 2 is structurally non-parallel because it does not address the second part of the stem ('and the interpretation of the confidence level'). Students might eliminate it simply because it is incomplete.",
+      "The item tests two distinct concepts (properties of the sampling distribution's mean and the interpretation of the confidence level) simultaneously. To be perfectly crossed, Option 2 should pair B13 with A4 so that all combinations of (A3/B13) and (A4/B15) are represented."
+    ]
+  },
+  "timing": {
+    "generator_s": 9.8,
+    "judge_s": 16.61
+  },
+  "created_at": "2026-05-07T22:47:06.499816+00:00"
+}

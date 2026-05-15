@@ -1,0 +1,147 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A5",
+      "A6",
+      "B16",
+      "B17"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection focuses on the conceptual relationship between the mechanics of confidence intervals (width vs. confidence level) and their fundamental purpose (parameter estimation vs. sample statistics). By pairing A6/B17 with A5/B16, the diagnostic item can identify if a student understands that increasing confidence requires a wider, less precise interval to capture a population parameter, as opposed to the common misconceptions that high confidence implies high precision or that the interval describes the sample data itself.",
+  "item": {
+    "stem": "A biologist calculates a 95% confidence interval for the mean height of a rare species of orchid as (12.4 cm, 15.6 cm) using a sample of 40 orchids. The biologist is unhappy with the width of the interval and wants to produce a narrower (more precise) interval using the same sample data. What change should they make, and what is the specific target they are trying to estimate?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Decrease the confidence level to 90%; they are estimating the true mean height of the entire orchid population.",
+        "facet_tags": [
+          "A5",
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "The student correctly identifies that reducing the confidence level reduces the critical value, resulting in a narrower interval (A6), and understands that a confidence interval is used to estimate a population parameter (A5)."
+      },
+      {
+        "id": "B",
+        "text": "Decrease the confidence level to 90%; they are estimating the mean height of the 40 orchids in their sample.",
+        "facet_tags": [
+          "A6",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly understands the relationship between confidence level and width (A6) but incorrectly believes the interval is meant to estimate the sample mean, which is already known (B16)."
+      },
+      {
+        "id": "C",
+        "text": "Increase the confidence level to 99%; they are estimating the true mean height of the entire orchid population.",
+        "facet_tags": [
+          "A5",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly identifies the population parameter as the target (A5) but mistakenly believes that increasing confidence leads to a shorter, more precise interval (B17)."
+      },
+      {
+        "id": "D",
+        "text": "Increase the confidence level to 99%; they are estimating the mean height of the 40 orchids in their sample.",
+        "facet_tags": [
+          "B16",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "The student exhibits two misconceptions: that the interval estimates the sample mean (B16) and that higher confidence results in a narrower interval (B17)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item assesses two dimensions of confidence interval understanding: the goal of the estimation and the mechanics of the interval width. First, students must distinguish between the sample statistic (which is known) and the population parameter (which is being estimated) (A5 vs B16). Second, they must understand that a higher confidence level requires a larger critical value, which increases the margin of error and makes the interval wider, not narrower (A6 vs B17).",
+    "target_facets": [
+      "A5",
+      "A6",
+      "B16",
+      "B17"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A biologist calculates a 95% confidence interval for the mean height of a rare species of orchid as (12.4 cm, 15.6 cm) using a sample of 40 orchids. The biologist is unhappy with the width of the interval and wants to produce a narrower (more precise) interval using the same sample data. What change should they make, and what is the specific target they are trying to estimate?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A5",
+          "A6"
+        ],
+        "judge_tags": [
+          "A5",
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that to get a narrower interval, the confidence level should be decreased (A6), and correctly identifies the target of estimation as the true population mean (A5)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A6",
+          "B16"
+        ],
+        "judge_tags": [
+          "A6",
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that decreasing the confidence level narrows the interval (A6), but exhibits the misconception that the confidence interval is used to estimate the sample statistic (B16)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A5",
+          "B17"
+        ],
+        "judge_tags": [
+          "A5",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option exhibits the misconception that a higher confidence level leads to a narrower interval (B17) but correctly identifies the true population mean as the target of estimation (A5)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B16",
+          "B17"
+        ],
+        "judge_tags": [
+          "B16",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option exhibits two misconceptions: that increasing the confidence level narrows the interval (B17) and that the interval estimates the sample mean (B16)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 8.74,
+    "judge_s": 10.3
+  },
+  "created_at": "2026-05-14T22:54:53.699608+00:00"
+}

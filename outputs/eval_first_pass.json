@@ -1,0 +1,766 @@
+{
+  "input_dir": "outputs/first_pass_no_books",
+  "n_items": 10,
+  "item_evaluations": [
+    {
+      "source": "2026-05-07T22:46:10",
+      "correctness": {
+        "selected_answer": "A",
+        "correct_answer_ids": [
+          "A"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "The width of a confidence interval for a population mean is determined by the sample size, standard deviation, and the chosen confidence level. Because the researcher cannot collect more data (meaning sample size and standard deviation are fixed), the only way to obtain a narrower interval is to decrease the confidence level (e.g., from 99% to 95%). This decreases the critical value (z* or t*), yielding a shorter interval. Furthermore, the true purpose of a confidence interval is to estimate the unknown true population parameter (the true population mean), making Option A mathematically and conceptually correct."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The scenario is straightforward, realistic, and clearly states what is required without any unnecessary wordiness.",
+        "options_score": 4,
+        "options_reasoning": "The options are parallel and effectively assess the dual-part question, but minor phrasing inconsistencies ('as' in option A versus 'because' in others) slightly disrupt structural perfection.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.6292,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.5989,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A5",
+              "A6"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.7121,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A5",
+              "B17"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.5864,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A6",
+              "B16"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.6194,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B16",
+              "B17"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-07T22:46:31",
+      "correctness": {
+        "selected_answer": "opt1",
+        "correct_answer_ids": [
+          "opt1"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "According to the Central Limit Theorem, as the sample size increases, the sampling distribution of the sample mean approaches a normal distribution. Additionally, the standard error of the sample mean is calculated as the population standard deviation divided by the square root of the sample size (sigma / sqrt(n)). Therefore, as n increases from 25 to 250, the standard error decreases, causing the sampling distribution to become narrower and more concentrated around the population mean."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem is direct and concise, clearly stating the topic and asking a specific question about the effect of increasing sample size.",
+        "options_score": 4,
+        "options_reasoning": "The options are mostly clear and directly address the prompt, though they exhibit minor inconsistencies in phrasing and could be slightly more concise.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.842,
+        "score": 1,
+        "bucket": "paraphrase",
+        "option_details": [
+          {
+            "option_id": "opt1",
+            "similarity": 0.8256,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "A1",
+              "A2"
+            ]
+          },
+          {
+            "option_id": "opt2",
+            "similarity": 0.8825,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B10"
+            ]
+          },
+          {
+            "option_id": "opt3",
+            "similarity": 0.88,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B11"
+            ]
+          },
+          {
+            "option_id": "opt4",
+            "similarity": 0.7801,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B10",
+              "B11"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-07T22:47:06",
+      "correctness": {
+        "selected_answer": "opt_1",
+        "correct_answer_ids": [
+          "opt_1"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [
+          "opt_3"
+        ],
+        "reasoning": "Option 1 correctly states the unbiasedness of the sample mean (the mean of the sampling distribution is the population mean, μ) and provides the precise frequentist interpretation of a 95% confidence level: in repeated sampling, 95% of the constructed intervals are expected to capture the true population mean."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem presents a clear, realistic scenario and directly states exactly what the student needs to evaluate without any unnecessary wordiness.",
+        "options_score": 3,
+        "options_reasoning": "The options are quite long and blend two distinct concepts together, making them demanding to read and compare. Additionally, there are structural inconsistencies, such as option 2 completely omitting the interpretation of the confidence level.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.7437,
+        "score": 2,
+        "bucket": "surface",
+        "option_details": [
+          {
+            "option_id": "opt_1",
+            "similarity": 0.6811,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A3",
+              "A4"
+            ]
+          },
+          {
+            "option_id": "opt_2",
+            "similarity": 0.7096,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B13"
+            ]
+          },
+          {
+            "option_id": "opt_3",
+            "similarity": 0.8024,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "A3",
+              "B15"
+            ]
+          },
+          {
+            "option_id": "opt_4",
+            "similarity": 0.7815,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B13",
+              "B15"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": [
+          "Option 2 is structurally non-parallel because it does not address the second part of the stem ('and the interpretation of the confidence level'). Students might eliminate it simply because it is incomplete.",
+          "The item tests two distinct concepts (properties of the sampling distribution's mean and the interpretation of the confidence level) simultaneously. To be perfectly crossed, Option 2 should pair B13 with A4 so that all combinations of (A3/B13) and (A4/B15) are represented."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-07T22:47:42",
+      "correctness": {
+        "selected_answer": "option_1",
+        "correct_answer_ids": [
+          "option_1"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "The width of a confidence interval for a mean is calculated as twice the margin of error, which is the product of a critical value (e.g., a t-value or z-value) and the standard error of the mean. Because the margin of error is directly proportional to the standard error, any increase in the standard error will result in a wider confidence interval. Option 2 is incorrect because it describes the sample standard deviation, not the standard error. Option 3 is incorrect because the standard deviation of the sampling distribution (the standard error) is the population standard deviation divided by the square root of the sample size. Option 4 is incorrect because it describes the distribution of the sample data, whereas the sampling distribution is the theoretical distribution of a statistic (like the sample mean) across all possible samples of the same size."
+      },
+      "naturalness": {
+        "stem_score": 4,
+        "stem_reasoning": "The scenario is clear and straightforward, but the question sentence is slightly wordy as it lists three interconnected statistical concepts to compare.",
+        "options_score": 4,
+        "options_reasoning": "The options are generally clear and easy to read, but they lack strict parallel structure since some describe relationships while others provide definitions.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.6842,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "option_1",
+            "similarity": 0.7868,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A7"
+            ]
+          },
+          {
+            "option_id": "option_2",
+            "similarity": 0.5413,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "B8"
+            ]
+          },
+          {
+            "option_id": "option_3",
+            "similarity": 0.6911,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B9"
+            ]
+          },
+          {
+            "option_id": "option_4",
+            "similarity": 0.7176,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B8"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": [
+          "Options 2 and 4 both diagnose the exact same misconception (B8) using slightly different phrasing. This creates redundancy and wastes a distractor slot that could be used to diagnose a different misconception, such as B10 or B17."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-07T22:48:11",
+      "correctness": {
+        "selected_answer": "1",
+        "correct_answer_ids": [
+          "1"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "Option 1 correctly describes the Central Limit Theorem. When the population distribution is heavily skewed, the sampling distribution of the sample mean for a small sample size (like n = 5) will still retain some of that skew. However, as the sample size increases (to n = 100), the Central Limit Theorem states that the sampling distribution of the sample mean converges to an approximately normal, bell-shaped distribution, regardless of the population's shape."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem presents a clear, concise, and realistic statistical scenario. It directly and unambiguously asks what the student needs to evaluate.",
+        "options_score": 3,
+        "options_reasoning": "The options are somewhat wordy and structurally inconsistent, mixing general statements about distribution properties with hypothetical scenarios about single sample outcomes. This lack of parallel structure makes comparison more difficult.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.8381,
+        "score": 1,
+        "bucket": "paraphrase",
+        "option_details": [
+          {
+            "option_id": "1",
+            "similarity": 0.8332,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "A2"
+            ]
+          },
+          {
+            "option_id": "2",
+            "similarity": 0.8201,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B12"
+            ]
+          },
+          {
+            "option_id": "3",
+            "similarity": 0.8686,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B14"
+            ]
+          },
+          {
+            "option_id": "4",
+            "similarity": 0.8304,
+            "score": 1,
+            "bucket": "paraphrase",
+            "facet_tags": [
+              "B12",
+              "B14"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-07T22:49:14",
+      "correctness": {
+        "selected_answer": "opt1",
+        "correct_answer_ids": [
+          "opt1"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "The width of a confidence interval for a mean is proportional to the critical value (determined by the confidence level) and inversely proportional to the square root of the sample size. Decreasing the confidence level reduces the critical value, and increasing the sample size reduces the standard error. Both of these changes work together to reduce the margin of error, guaranteeing a narrower confidence interval."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem presents a clear, concise, and realistic scenario, making the goal of the question immediately understandable on the first read.",
+        "options_score": 5,
+        "options_reasoning": "The options are perfectly parallel, concise, and systematically vary the two factors, making them extremely easy to read and compare.",
+        "overall_score": 5
+      },
+      "facet_latency": {
+        "mean_similarity": 0.6976,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "opt1",
+            "similarity": 0.6525,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A1",
+              "A6"
+            ]
+          },
+          {
+            "option_id": "opt2",
+            "similarity": 0.7888,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B10",
+              "B17"
+            ]
+          },
+          {
+            "option_id": "opt3",
+            "similarity": 0.7075,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A1",
+              "B17"
+            ]
+          },
+          {
+            "option_id": "opt4",
+            "similarity": 0.6417,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B10",
+              "A6"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 0.8,
+        "overall_confidence": 0.95,
+        "issues": [
+          "Facet A7 (relationship between standard error and CI width) is implicitly required whenever students translate the effect of sample size changes into changes in CI width, but the generator omitted it from the keys for opt1 and opt3."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-07T22:49:56",
+      "correctness": {
+        "selected_answer": "A",
+        "correct_answer_ids": [
+          "A"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "The standard error of the mean is calculated as the population standard deviation divided by the square root of the sample size. Since Design 2 has a larger sample size (n=100) compared to Design 1 (n=25), its standard error will be smaller (specifically, half as large). Consequently, the sampling distribution of the mean for Design 2 will have less spread (be more packed), which leads to a narrower 95% confidence interval."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem presents a clear, standard statistical scenario and asks a direct, unambiguous question comparing the two designs.",
+        "options_score": 4,
+        "options_reasoning": "The options are mostly parallel in structure and easy to compare, though the phrase 'more packed' in Option A is slightly informal compared to the rest.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.7546,
+        "score": 2,
+        "bucket": "surface",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.7479,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A1",
+              "A7"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.7576,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B9"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.7727,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B10"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.7402,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B10"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-07T22:50:43",
+      "correctness": {
+        "selected_answer": "A",
+        "correct_answer_ids": [
+          "A"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "A confidence interval is constructed to estimate a population parameter, which in this case is the population mean μ. Furthermore, the sampling distribution of the sample mean ̄x is an unbiased estimator of the population mean, meaning its expected value (or mean) is exactly μ regardless of the sample size."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem is straightforward, presents a realistic and concise scenario, and clearly states what is being asked without unnecessary wordiness.",
+        "options_score": 3,
+        "options_reasoning": "The options are noticeably wordy, combine multiple different statistical concepts into single choices, and lack parallel structure, making them somewhat difficult to read and compare.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.6587,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "A",
+            "similarity": 0.7551,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "A3",
+              "A5"
+            ]
+          },
+          {
+            "option_id": "B",
+            "similarity": 0.6609,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B16"
+            ]
+          },
+          {
+            "option_id": "C",
+            "similarity": 0.6715,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B13"
+            ]
+          },
+          {
+            "option_id": "D",
+            "similarity": 0.5474,
+            "score": 4,
+            "bucket": "highly_latent",
+            "facet_tags": [
+              "B16"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": [
+          "The options are slightly asymmetrical. Option A combines two distinct concepts (purpose of CI and mean of sampling distribution), while B, C, and D generally focus on only one concept each. A student who only knows the correct purpose of a CI might guess A without understanding the sampling distribution component, although this is mitigated by the stem prompting for both."
+        ]
+      }
+    },
+    {
+      "source": "2026-05-07T22:51:18",
+      "correctness": {
+        "selected_answer": "opt_1",
+        "correct_answer_ids": [
+          "opt_1"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [
+          "opt_2"
+        ],
+        "reasoning": "Option 1 correctly states that increasing the confidence level to 99% requires a larger critical value, which makes the confidence interval wider. It also provides the correct frequentist interpretation of confidence intervals, which is that 95% of intervals generated across infinitely repeated sampling will contain the true fixed population mean."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem sets up a clear, straightforward scenario and explicitly states what the student needs to evaluate.",
+        "options_score": 3,
+        "options_reasoning": "The options are structurally inconsistent; Option 1 is much longer and more detailed than the others, and Option 2 fails to address the second part of the question asked in the stem.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.6765,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "opt_1",
+            "similarity": 0.6716,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A4",
+              "A6"
+            ]
+          },
+          {
+            "option_id": "opt_2",
+            "similarity": 0.6121,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B15"
+            ]
+          },
+          {
+            "option_id": "opt_3",
+            "similarity": 0.756,
+            "score": 2,
+            "bucket": "surface",
+            "facet_tags": [
+              "B17"
+            ]
+          },
+          {
+            "option_id": "opt_4",
+            "similarity": 0.6664,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B15",
+              "B17"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": []
+      }
+    },
+    {
+      "source": "2026-05-07T22:52:02",
+      "correctness": {
+        "selected_answer": "opt_1",
+        "correct_answer_ids": [
+          "opt_1"
+        ],
+        "is_correct": true,
+        "flagged_distractors": [],
+        "reasoning": "Option 1 correctly defines the conceptual meaning of a confidence interval (a range of plausible values for the population parameter) and accurately describes the relationship between sample size and the width of the interval. Increasing the sample size decreases the standard error, which reduces the variance of the sampling distribution (making it 'more packed' or concentrated) and thereby leads to a narrower confidence interval."
+      },
+      "naturalness": {
+        "stem_score": 5,
+        "stem_reasoning": "The stem presents a clear, concise, and realistic scenario. The question is direct, making it very easy to understand on the first pass.",
+        "options_score": 3,
+        "options_reasoning": "The options are structurally inconsistent, with the first option being noticeably wordier and using a compound sentence. Phrases like 'more packed' also introduce a slight inconsistency in tone that makes comparison harder.",
+        "overall_score": 4
+      },
+      "facet_latency": {
+        "mean_similarity": 0.6318,
+        "score": 3,
+        "bucket": "latent",
+        "option_details": [
+          {
+            "option_id": "opt_1",
+            "similarity": 0.6894,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "A1",
+              "A5"
+            ]
+          },
+          {
+            "option_id": "opt_2",
+            "similarity": 0.6017,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B16"
+            ]
+          },
+          {
+            "option_id": "opt_3",
+            "similarity": 0.6269,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B8",
+              "B16"
+            ]
+          },
+          {
+            "option_id": "opt_4",
+            "similarity": 0.6091,
+            "score": 3,
+            "bucket": "latent",
+            "facet_tags": [
+              "B8"
+            ]
+          }
+        ]
+      },
+      "judge": {
+        "overall_agreement": 1.0,
+        "overall_confidence": 1.0,
+        "issues": [
+          "The options are slightly uneven in structure; some are 'double-barreled' by addressing both the interpretation of the confidence interval and the effect of sample size (e.g., Option 1 and Option 3), while Option 2 only addresses the interpretation of the interval."
+        ]
+      }
+    }
+  ],
+  "corpus_evaluation": {
+    "facet_coverage": {
+      "facet_counts": {
+        "A1": 5,
+        "A2": 2,
+        "A3": 3,
+        "A4": 2,
+        "A5": 4,
+        "A6": 5,
+        "A7": 2,
+        "B8": 4,
+        "B9": 2,
+        "B10": 6,
+        "B11": 2,
+        "B12": 2,
+        "B13": 3,
+        "B14": 2,
+        "B15": 4,
+        "B16": 6,
+        "B17": 6
+      },
+      "total_facets_in_map": 17,
+      "covered_facets": 17,
+      "uniformity": 0.9670018785939793
+    },
+    "facet_combination_diversity": {
+      "total_items": 10,
+      "unique_combinations": 10,
+      "combination_ratio": 1.0,
+      "mean_pairwise_jaccard_distance": 0.8927
+    },
+    "problem_diversity": {
+      "structural": {
+        "format_distribution": {
+          "single_select": 10
+        },
+        "format_entropy": 0.0,
+        "style_distribution": {
+          "action": 1,
+          "prediction": 3,
+          "conceptual": 4,
+          "interpretation": 2
+        },
+        "style_entropy": 0.9232196723355077
+      },
+      "semantic": {
+        "mean_pairwise_similarity": 0.6542,
+        "max_pairwise_similarity": 0.8547,
+        "most_similar_pair": [
+          "confidence_intervals_2",
+          "confidence_intervals_7"
+        ]
+      }
+    }
+  }
+}
