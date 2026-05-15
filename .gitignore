@@ -197,9 +197,11 @@ cython_debug/
 # Exceptions: track web dashboard HTML, output artifacts, and markdown docs
 !web/*.html
 !outputs/**/*.json
-!outputs/*.json
+!outputs/eval_*.json
+!outputs/third_pass_no_books_gemini-*.json
 !docs/*.md
 !README.md
+!data/facets/**
 
 # Model files
 *.pkl

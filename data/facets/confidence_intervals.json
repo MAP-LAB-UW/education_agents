@@ -1,0 +1,333 @@
+{
+  "topic": "confidence_intervals",
+  "course": "statistics",
+  "facets": [
+    {
+      "id": "A1",
+      "type": "goal",
+      "text": "Students understand that as sample size increases, standard errors of sampling distribution become smaller, sampling distribution will become more packed"
+    },
+    {
+      "id": "A2",
+      "type": "goal",
+      "text": "Students understand that as sample size increases, sampling distribution will be closer to normal distribution (it does not mirror population distribution)"
+    },
+    {
+      "id": "A3",
+      "type": "goal",
+      "text": "Students understand that the mean of a sampling distribution equals population mean"
+    },
+    {
+      "id": "A4",
+      "type": "goal",
+      "text": "Students can correctly interpret the confidence level as the percentage of times (i.e., understand the implications of replications)"
+    },
+    {
+      "id": "A5",
+      "type": "goal",
+      "text": "Students understand CI is used to capture true population parameter, not sample statistics"
+    },
+    {
+      "id": "A6",
+      "type": "goal",
+      "text": "Students understand the relationship between CI width and critical value: CI width is dependent on confidence level; CI width increases as confidence level increases"
+    },
+    {
+      "id": "A7",
+      "type": "goal",
+      "text": "Students understand the relationship between CI width and standard error: CI width increases when standard error gets larger"
+    },
+    {
+      "id": "B8",
+      "type": "problematic",
+      "text": "Sampling distribution is derived from a single dataset or is the same as sample distribution (confusion about sampling distribution vs. sample distribution)"
+    },
+    {
+      "id": "B9",
+      "type": "problematic",
+      "text": "Sampling distribution mirrors population distribution (hence the standard deviation of the sampling distribution stays the same regardless of sample size; confusion about sampling distribution vs. population distribution)"
+    },
+    {
+      "id": "B10",
+      "type": "problematic",
+      "text": "As sample size increases, sampling distribution will be more spread out (misunderstand how sample sizes impact standard error)"
+    },
+    {
+      "id": "B11",
+      "type": "problematic",
+      "text": "As sample size increases, sampling distribution will be closer to population distribution"
+    },
+    {
+      "id": "B12",
+      "type": "problematic",
+      "text": "Sampling distribution of sample mean will always follow a normal distribution regardless of sample size or population distribution shape"
+    },
+    {
+      "id": "B13",
+      "type": "problematic",
+      "text": "The mean of the sampling distribution depends on sample size"
+    },
+    {
+      "id": "B14",
+      "type": "problematic",
+      "text": "For any particular sample, sample mean from a larger sample size will always be closer to mean (misunderstand the randomness in sample means)"
+    },
+    {
+      "id": "B15",
+      "type": "problematic",
+      "text": "CI is interpreted as probabilities of including either true population means or whichever to be inferred about"
+    },
+    {
+      "id": "B16",
+      "type": "problematic",
+      "text": "CI estimates sample statistics (e.g., mean) or true scores or sample data instead of population parameters"
+    },
+    {
+      "id": "B17",
+      "type": "problematic",
+      "text": "Higher confidence leads to more precise estimate, and hence shorter interval"
+    }
+  ],
+  "examples": [
+    {
+      "stem": "Below is a frequency distribution of a population. [See figure: @'data/facets/bimodal-population.png'] If you are taking an infinite number of samples with sample size = 40. Based on the central limits theorem, which of the following is the sampling distribution of the sample means?",
+      "response_format": "single_select",
+      "options": [
+        {
+          "id": "A",
+          "text": "[Figure: @'data/facets/distribution-matching-population.png']",
+          "facet_tags": ["B8", "B9"],
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "[Figure: @'data/facets/approximately-normal-narrow.png']",
+          "facet_tags": ["A2"],
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "[Figure: @'data/facets/skewed-bimodal-distribution.png']",
+          "facet_tags": ["A1", "B8"],
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "stem": "Suppose you constructed a particular confidence interval. What does this confidence interval mean?\n\nWhich of the following is true about the meaning of 95% confidence?",
+      "response_format": "single_select",
+      "options": [
+        {
+          "id": "A",
+          "text": "95% of the infinite intervals you could construct would contain the sample's scores.",
+          "facet_tags": ["B16"],
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "95% of the infinite intervals you could construct would contain the sample's mean.",
+          "facet_tags": ["B16"],
+          "is_correct": false
+        },
+        {
+          "id": "C",
+          "text": "95% of the infinite intervals you could construct would contain the true scores.",
+          "facet_tags": ["B16"],
+          "is_correct": false
+        },
+        {
+          "id": "D",
+          "text": "95% of the infinite intervals you could construct would contain the true mean.",
+          "facet_tags": ["A5"],
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "stem": "The central limit theorem tells us that as sample size increases the sampling distribution of the mean becomes",
+      "response_format": "single_select",
+      "options": [
+        {
+          "id": "A",
+          "text": "more normally distributed with a much larger range of scores.",
+          "facet_tags": ["A2", "B10"],
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "more normally distributed with a much smaller range of scores.",
+          "facet_tags": ["A1", "A2"],
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "more shaped like the population distribution.",
+          "facet_tags": ["B11"],
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "stem": "Which of the following is a property of the Sampling Distribution of x̄?",
+      "response_format": "single_select",
+      "options": [
+        {
+          "id": "A",
+          "text": "if you increase your sample size, x̄ will always get closer to μ, the population mean.",
+          "facet_tags": ["B14"],
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "the standard deviation of the sample mean is the same as the standard deviation from the original population σ.",
+          "facet_tags": ["B9"],
+          "is_correct": false
+        },
+        {
+          "id": "C",
+          "text": "the mean of the sampling distribution of x̄ is μ, the population mean.",
+          "facet_tags": ["A3"],
+          "is_correct": true
+        },
+        {
+          "id": "D",
+          "text": "x̄ always has a Normal distribution.",
+          "facet_tags": ["B12"],
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "stem": "A 95% confidence interval for the mean number of televisions per American household is (1.15, 4.20). For each of the following statements about the above confidence interval, choose true or false.",
+      "response_format": "true_false_per_option",
+      "options": [
+        {
+          "id": "A",
+          "text": "The probability that μ is between 1.15 and 4.20 is .95.",
+          "facet_tags": ["A5", "B15"],
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "We are 95% confident that the true mean number of televisions per American household is between 1.15 and 4.20.",
+          "facet_tags": ["A4", "A5"],
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "95% of all samples should have x-bars between 1.15 and 4.20.",
+          "facet_tags": ["A4", "B16"],
+          "is_correct": false
+        },
+        {
+          "id": "D",
+          "text": "95% of all American households have between 1.15 and 4.20 televisions.",
+          "facet_tags": ["B8", "B16"],
+          "is_correct": false
+        },
+        {
+          "id": "E",
+          "text": "Of 100 intervals calculated the same way (95%), we expect 95 of them to capture the population mean.",
+          "facet_tags": ["A4", "A5"],
+          "is_correct": true
+        },
+        {
+          "id": "F",
+          "text": "Of 100 intervals calculated the same way (95%), we expect 100 of them to capture the sample mean.",
+          "facet_tags": ["A4", "B16"],
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "stem": "Suppose that this confidence interval was (6.82, 7.38). Which of these is a valid interpretation of this confidence interval?",
+      "response_format": "single_select",
+      "options": [
+        {
+          "id": "A",
+          "text": "There is a 95% probability that the true average number of hours worked by all UF students is between 6.82 and 7.38 hours.",
+          "facet_tags": ["A5", "B15"],
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "There is a 95% probability that a randomly selected student worked between 6.82 and 7.38 hours.",
+          "facet_tags": ["B15", "B16"],
+          "is_correct": false
+        },
+        {
+          "id": "C",
+          "text": "We are 95% confident that the average number of hours worked by students in our sample is between 6.82 and 7.38 hours.",
+          "facet_tags": ["A4", "B16"],
+          "is_correct": false
+        },
+        {
+          "id": "D",
+          "text": "We are 95% confident that the average number of hours worked by all UF students is between 6.82 and 7.38 hours.",
+          "facet_tags": ["A4", "A5"],
+          "is_correct": true
+        }
+      ]
+    },
+    {
+      "stem": "The researchers are not satisfied with their confidence interval and want to do another study to find a shorter confidence interval. What should they change to ensure they find a shorter confidence interval?",
+      "response_format": "single_select",
+      "options": [
+        {
+          "id": "A",
+          "text": "They should increase their confidence level and increase their sample size.",
+          "facet_tags": ["A1", "A7", "B17"],
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "They should increase their confidence level but decrease their sample size.",
+          "facet_tags": ["B10", "B17"],
+          "is_correct": false
+        },
+        {
+          "id": "C",
+          "text": "They should decrease their confidence level but increase their sample size.",
+          "facet_tags": ["A1", "A6", "A7"],
+          "is_correct": true
+        },
+        {
+          "id": "D",
+          "text": "They should decrease their confidence level and decrease their sample size.",
+          "facet_tags": ["A6", "B10"],
+          "is_correct": false
+        }
+      ]
+    },
+    {
+      "stem": "Employee salaries are normally distributed with mean $55,000 and standard deviation $8,000. A sample of 25 employees is selected.\n\nWhat is the sampling distribution of the sample mean?",
+      "response_format": "single_select",
+      "options": [
+        {
+          "id": "A",
+          "text": "Normal with mean 55,000 and standard deviation 8,000",
+          "facet_tags": ["A3", "B9"],
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Normal with mean 55,000 and standard deviation 8,000/√25",
+          "facet_tags": ["A1", "A3"],
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "Normal with mean 55,000/√25 and standard deviation 8,000",
+          "facet_tags": ["B9", "B13", "B14"],
+          "is_correct": false
+        },
+        {
+          "id": "D",
+          "text": "Normal with mean 55,000/√25 and standard deviation 8,000/√25",
+          "facet_tags": ["A1", "B13", "B14"],
+          "is_correct": false
+        }
+      ]
+    }
+  ]
+}
