@@ -45,7 +45,7 @@ The web dashboard provides an interactive way to explore generated items and com
 
 1. **Clone the repo and navigate to it:**
    ```bash
-   git clone <repo-url>
+   git clone https://github.com/MAP-LAB-UW/education_agents.git
    cd education_agents
    ```
 
