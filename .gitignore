@@ -187,8 +187,6 @@ cython_debug/
 *.npy
 *.npz
 *.png
-*.jpg
-*.jpeg
 *.gif
 *.svg
 *.pdf
