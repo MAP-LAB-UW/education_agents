@@ -83,6 +83,47 @@ This document describes the rubrics used to evaluate generated diagnostic assess
 
 ---
 
+### 4. Figure Necessity
+
+**What it measures:** Whether a figure included in an item is essential for answering the question, or merely decorative.
+
+**Method:** The item is presented to an LLM *without* its figure images, and the LLM is asked to solve it. This is repeated 5 times at temperature=1.0 to reduce the chance of a lucky guess producing a false negative. If the model answers correctly in fewer than half the trials, the figure is classified as essential.
+
+**Scoring:**
+| Condition | Score | Label |
+|-----------|-------|-------|
+| Correct in < 50% of trials | 1 | essential |
+| Correct in >= 50% of trials | 0 | decorative |
+
+**Output:**
+- `is_necessary` (bool) — whether the figure is essential
+- `n_trials` — number of trials run (default 5)
+- `n_correct` — how many trials the LLM answered correctly without the figure
+- `trials` — per-trial details (selected answer, correctness, reasoning)
+
+**Interpretation:** A score of 1 means the item genuinely requires its figure to be answerable — removing it degrades performance below chance-like levels. A score of 0 means the figure is supplementary; the problem is solvable from text alone. Only computed for items that contain figures.
+
+**Implementation:** `src/education_agents/evaluation/figure_necessity.py`
+
+---
+
+### 5. Similarity with Experts
+
+**What it measures:** How semantically similar each generated item's stem is to expert-authored reference items.
+
+**Method:** Encode the item's stem and all expert example stems using `Qwen/Qwen3-Embedding-0.6B`, then compute cosine similarity between the item and each expert example. For expert examples evaluated against themselves, leave-one-out comparison is used.
+
+**Output:**
+- `mean_similarity` — average cosine similarity to all expert examples
+- `max_similarity` — highest cosine similarity to any single expert example
+- `most_similar_to` — identifier of the most similar expert example
+
+**Interpretation:** Higher similarity indicates the generated item covers similar conceptual territory to a known good item. Very high values (>0.85) may indicate the generator is reproducing expert items rather than creating novel problems. Low values suggest the item explores territory not covered by the expert set.
+
+**Implementation:** `src/education_agents/evaluation/corpus_metrics.py` (`evaluate_similarity_with_experts`)
+
+---
+
 ## Corpus-Level Rubrics
 
 These metrics evaluate a set of items as a whole, measuring how well a generated corpus covers the target domain and avoids repetition.
@@ -159,6 +200,21 @@ These metrics evaluate a set of items as a whole, measuring how well a generated
 **Interpretation:** A mean similarity above ~0.85 suggests items are too similar in topic/framing. The most-similar-pair helps identify specific items that may need differentiation.
 
 **Implementation:** `src/education_agents/evaluation/corpus_metrics.py` (`evaluate_semantic_diversity`)
+
+---
+
+### 5. Figure Fraction
+
+**What it measures:** The proportion of items in the corpus that include generated figures.
+
+**Method:** Count items with non-empty `figures` lists and divide by total items.
+
+**Output:**
+- `figure_fraction` (0-1) — fraction of items containing at least one figure
+
+**Interpretation:** Tracks how often the generator produces visual content. Useful for comparing prompt versions or models on their tendency to include figures.
+
+**Implementation:** `src/education_agents/evaluation/corpus_metrics.py` (`evaluate_corpus`)
 
 ---
 

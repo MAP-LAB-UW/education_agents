@@ -70,6 +70,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 1.0,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5906,
+        "max_similarity": 0.7114,
+        "most_similar_to": "expert_5"
       }
     },
     {
@@ -131,6 +136,11 @@
         "issues": [
           "The item only has three options. It would be strengthened by adding a fourth distractor that tests another related misconception, such as B9 (standard error stays the same) or B13 (the mean of the sampling distribution changes depending on the sample size)."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5171,
+        "max_similarity": 0.6477,
+        "most_similar_to": "expert_4"
       }
     },
     {
@@ -204,6 +214,11 @@
           "The generator misdiagnosed Option D with B8 when it perfectly aligns with B9. The text explicitly attributes the unchanging interval width to 'the population's natural variation', exactly matching B9's description of confusing the sampling distribution with the population distribution.",
           "The item itself is very well-written, addresses common misconceptions effectively, and features strong distractors."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.6113,
+        "max_similarity": 0.7696,
+        "most_similar_to": "expert_6"
       }
     },
     {
@@ -275,6 +290,11 @@
         "issues": [
           "Option 4 is tagged with B14 by the generator, but the text of the option does not actually exhibit the B14 misconception (which specifically relates to individual sample means, not the center of the sampling distribution)."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5144,
+        "max_similarity": 0.6494,
+        "most_similar_to": "expert_4"
       }
     },
     {
@@ -344,6 +364,11 @@
         "issues": [
           "Options C and D both target the same misconception (B9), just varying whether the shape is also assumed to match the population. While clinically useful, having more diversity in the tested misconceptions (e.g., assessing B10) could improve diagnostic breadth."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5124,
+        "max_similarity": 0.7028,
+        "most_similar_to": "expert_4"
       }
     },
     {
@@ -429,6 +454,11 @@
           "Option 5's phrasing ('We are 95% confident...') is standard but doesn't explicitly test the conceptual understanding of replications (A4), unlike Option 1.",
           "Tagging a distractor (Option 2) with a goal facet (A5) simply because it contains the phrase 'population mean' can be misleading; endorsing the option primarily demonstrates the B15 misconception."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5878,
+        "max_similarity": 0.7773,
+        "most_similar_to": "expert_5"
       }
     },
     {
@@ -504,6 +534,11 @@
         "issues": [
           "The item has multiple correct answers due to mathematical oversight. Option 3 mathematically produces a narrower interval than the original, even though it is intended to be a distractor. The original margin of error (MOE) is proportional to 1.96 / sqrt(64) = 0.245. The MOE for Option 3 is proportional to 2.576 / sqrt(200) = 0.182. Since 0.182 < 0.245, Option 3 also 'definitely' results in a narrower interval. To fix this, change the sample size in Option 3 to something like 100 (where 2.576 / sqrt(100) = 0.2576 > 0.245), ensuring the interval becomes wider despite the sample size increase."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5566,
+        "max_similarity": 0.8236,
+        "most_similar_to": "expert_7"
       }
     },
     {
@@ -577,6 +612,11 @@
         "issues": [
           "The generator's use of B11 is plausible, but B9 ('Sampling distribution mirrors population distribution') is also highly applicable for options B and D, since the options explicitly assume the shape mirrors the population's skewness."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5378,
+        "max_similarity": 0.7216,
+        "most_similar_to": "expert_8"
       }
     },
     {
@@ -647,6 +687,11 @@
           "The item is generally well-constructed and the options target the specific misconceptions accurately.",
           "Option A should ideally be tagged with A1 as well, since understanding that increasing sample size decreases standard error is explicitly tested."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5517,
+        "max_similarity": 0.6136,
+        "most_similar_to": "expert_5"
       }
     },
     {
@@ -710,6 +755,11 @@
         "issues": [
           "The item only has three options; standard multiple-choice items often require four or five options to reduce guessing probability."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5701,
+        "max_similarity": 0.6596,
+        "most_similar_to": "expert_7"
       }
     }
   ],

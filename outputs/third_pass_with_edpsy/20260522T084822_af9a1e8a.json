@@ -1,0 +1,144 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B12",
+      "B13"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the fundamental properties of the sampling distribution—shape and center—which are critical prerequisites for understanding confidence intervals. It evaluates whether students correctly apply the Central Limit Theorem regarding the progression toward normality as sample size increases (A2 vs B12) and whether they understand that the center of the sampling distribution remains anchored at the population mean regardless of sample size (A3 vs B13).",
+  "item": {
+    "stem": "At a busy post office, the time customers spend waiting in line is heavily right-skewed (most people wait a few minutes, but a few wait over an hour). The population mean wait time is 18 minutes with a population standard deviation of 10 minutes. A researcher plans to take random samples of 64 customers and calculate the sample mean wait time for each sample.",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "The sampling distribution of the sample mean is approximately normal with a mean of 18 minutes.",
+        "facet_tags": [
+          "A2",
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "The student correctly applies the Central Limit Theorem: because the sample size is large (n=64), the sampling distribution becomes approximately normal despite the population skew (A2), and the mean of the sampling distribution remains equal to the population mean (A3)."
+      },
+      {
+        "id": "opt_2",
+        "text": "The sampling distribution of the sample mean is approximately normal with a mean of 2.25 minutes (18 / √64).",
+        "facet_tags": [
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly identifies that the sampling distribution will be approximately normal, but mistakenly believes that the mean of the sampling distribution changes based on the sample size, confusing the formula for the mean with the formula for the standard error (B13)."
+      },
+      {
+        "id": "opt_3",
+        "text": "The sampling distribution of the sample mean is exactly normal for any sample size (even n=2 or n=5) with a mean of 18 minutes.",
+        "facet_tags": [
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "The student believes that the sampling distribution of the mean is always normally distributed regardless of the sample size or the shape of the underlying population (B12)."
+      },
+      {
+        "id": "opt_4",
+        "text": "The sampling distribution of the sample mean is exactly normal for any sample size, and its mean is 1.25 minutes (10 / √64).",
+        "facet_tags": [
+          "B12",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "The student exhibits two misconceptions: first, that the sampling distribution is always normal regardless of sample size (B12), and second, that the mean of the sampling distribution is calculated using the standard error formula (B13)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "This item tests the student's understanding of the Central Limit Theorem. According to the CLT, the sampling distribution of the mean will approach a normal distribution as the sample size increases, even if the population is skewed (A2). However, this is an approximation that requires a sufficiently large sample size, unlike the misconception that it is always normal (B12). Furthermore, the mean of the sampling distribution is always equal to the population mean (μ) and does not change or 'shrink' as the sample size increases (A3), which distinguishes it from the common error of calculating the mean as if it were the standard error (B13).",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B12",
+      "B13"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "At a busy post office, the time customers spend waiting in line is heavily right-skewed...",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A2",
+          "A3"
+        ],
+        "judge_tags": [
+          "A2",
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies that the sampling distribution will be approximately normal due to the large sample size (A2) and that its mean equals the population mean of 18 (A3)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B13"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option incorrectly calculates the mean of the sampling distribution by dividing the population mean by the square root of the sample size, reflecting the misconception that the mean of the sampling distribution depends on sample size (B13)."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "B12"
+        ],
+        "judge_tags": [
+          "B12"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option claims the sampling distribution is exactly normal for any sample size despite the skewed population, which perfectly aligns with misconception B12."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B12",
+          "B13"
+        ],
+        "judge_tags": [
+          "B12",
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option exhibits both the misconception that the distribution is always normal regardless of sample size (B12) and the misconception that the mean of the sampling distribution is dependent on sample size, using the standard error formula for the mean (B13)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 27.44,
+    "judge_s": 12.29
+  },
+  "created_at": "2026-05-22T08:48:22.935130+00:00"
+}

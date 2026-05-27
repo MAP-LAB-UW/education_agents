@@ -1,0 +1,166 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets the fundamental conceptual understanding of what a confidence interval represents and how its confidence level should be interpreted. By combining A4 and A5 with B15 and B16, the item can distinguish between students who understand CIs as a frequentist procedure for capturing population parameters and those who incorrectly view them as probability statements about specific intervals or as descriptors of sample data.",
+  "item": {
+    "stem": "A researcher conducted a study on the sleep habits of college students. Based on a random sample of 100 students, she calculated a 95% confidence interval for the population mean sleep time to be (6.4, 7.2) hours. Determine whether each of the following statements is a correct or incorrect interpretation of this confidence interval.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "We are 95% confident that the population mean sleep time for all college students is between 6.4 and 7.2 hours.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This is a correct interpretation of the confidence interval, focusing on the population parameter and using the standard definition of confidence."
+      },
+      {
+        "id": "opt_2",
+        "text": "There is a 95% probability that the population mean sleep time is between 6.4 and 7.2 hours.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This is incorrect because it interprets confidence as a probability for a fixed interval. In frequentist statistics, the population mean is a fixed value and the interval is either right or wrong; there is no probability for a single calculated interval."
+      },
+      {
+        "id": "opt_3",
+        "text": "If we repeated this study many times and calculated a 95% confidence interval for each sample, approximately 95% of those intervals would capture the true population mean.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This correctly describes the frequentist definition of confidence as the long-run success rate of the interval-building process across many replications."
+      },
+      {
+        "id": "opt_4",
+        "text": "Approximately 95% of all college students in the population sleep between 6.4 and 7.2 hours.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This is incorrect because it confuses the confidence interval for the mean with a range that captures individual scores or data points within the population."
+      },
+      {
+        "id": "opt_5",
+        "text": "We are 95% confident that the mean sleep time of the 100 students in the sample is between 6.4 and 7.2 hours.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This is incorrect because a confidence interval is used to estimate unknown population parameters, not the sample statistic, which is already known and always located at the center of the interval."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1",
+      "opt_3"
+    ],
+    "explanation": "This item assesses students' ability to interpret confidence intervals correctly by distinguishing the population parameter from sample statistics and individual data. Correct interpretations (opt_1 and opt_3) emphasize the population mean and the long-run frequency of the estimation process (A4, A5). Incorrect interpretations address the common probability fallacy (B15 in opt_2) and the confusion between estimating population means versus sample statistics or individual scores (B16 in opt_4 and opt_5).",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher conducted a study on the sleep habits of college students. Based on a random sample of 100 students, she calculated a 95% confidence interval for the population mean sleep time to be (6.4, 7.2) hours. Determine whether each of the following statements is a correct or incorrect interpretation of this confidence interval.",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A4",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "This option correctly describes the confidence interval as estimating the true population parameter (A5) using the accepted non-probabilistic language for a single interval, which ties into the frequentist confidence level (A4)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This explicitly states the probability misconception for a single confidence interval, which perfectly aligns with B15."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A4",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This is the classic frequentist definition of confidence level involving replications (A4), and it correctly identifies that the interval seeks to capture the population mean (A5)."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The option wrongly interprets the confidence interval as capturing individual scores (data points/true scores) instead of the population parameter, which aligns closely with B16."
+      },
+      {
+        "option_id": "opt_5",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option illustrates the misconception that a confidence interval is used to estimate a sample statistic (the sample mean), which is an exact match for B16."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.96,
+    "issues": []
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 43.49,
+    "judge_s": 14.23
+  },
+  "created_at": "2026-05-22T08:42:14.101231+00:00"
+}

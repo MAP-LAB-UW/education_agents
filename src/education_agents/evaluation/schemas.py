@@ -43,11 +43,32 @@ class FacetLatencyResult(BaseModel):
     option_details: list[OptionLatency]
 
 
+class FigureNecessityTrial(BaseModel):
+    selected_answer: str
+    is_correct: bool
+    reasoning: str
+
+
+class FigureNecessityResult(BaseModel):
+    is_necessary: bool
+    n_trials: int
+    n_correct: int
+    trials: list[FigureNecessityTrial]
+
+
+class SimilarityWithExpertsResult(BaseModel):
+    mean_similarity: float
+    max_similarity: float
+    most_similar_to: str
+
+
 class ItemEvaluation(BaseModel):
     source: str
     correctness: CorrectnessResult
     naturalness: NaturalnessResult
     facet_latency: FacetLatencyResult
+    figure_necessity: int | None = None
+    similarity_with_experts: SimilarityWithExpertsResult | None = None
 
 
 # ── Corpus-level rubrics ─────────────────────────────────────────────────────
@@ -88,3 +109,4 @@ class CorpusEvaluation(BaseModel):
     facet_coverage: FacetCoverageResult
     facet_combination_diversity: FacetCombinationDiversityResult
     problem_diversity: ProblemDiversityResult
+    figure_fraction: float | None = None

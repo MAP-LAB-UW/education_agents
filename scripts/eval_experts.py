@@ -2,19 +2,23 @@
 """Evaluate expert examples from the facet map using item-level and corpus-level rubrics."""
 
 import argparse
+import base64
 import json
+import re
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from education_agents.evaluation.correctness import evaluate_correctness
-from education_agents.evaluation.corpus_metrics import evaluate_corpus
+from education_agents.evaluation.corpus_metrics import evaluate_corpus, evaluate_similarity_with_experts
 from education_agents.evaluation.facet_latency import _get_model, evaluate_facet_latency
+from education_agents.evaluation.figure_necessity import evaluate_figure_necessity
 from education_agents.evaluation.naturalness import evaluate_naturalness
 from education_agents.evaluation.schemas import ItemEvaluation
 from education_agents.facets import load_facet_map
 from education_agents.schemas import (
+    Figure,
     GeneratedItem,
     GenerationRequest,
     JudgeReport,
@@ -23,31 +27,62 @@ from education_agents.schemas import (
     RunArtifact,
 )
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+_FIG_REF_RE = re.compile(r"\[(?:See figure|Figure):\s*@'([^']+)'\]")
 
-def expert_to_generated_item(example, index: int) -> GeneratedItem:
-    options = [
-        Option(
+
+
+def expert_to_generated_item(example, index: int) -> tuple[GeneratedItem, dict[str, str]]:
+    """Convert an expert example to a GeneratedItem + figure_data dict."""
+    all_figures: list[Figure] = []
+    all_figure_data: dict[str, str] = {}
+    seen_paths: dict[str, str] = {}
+    fig_counter = [0]
+
+    def _resolve_figures(text: str) -> str:
+        def _replace(m: re.Match) -> str:
+            path_str = m.group(1)
+            if path_str in seen_paths:
+                return f"[FIGURE:{seen_paths[path_str]}]"
+            fig_counter[0] += 1
+            fig_id = f"fig{fig_counter[0]}"
+            seen_paths[path_str] = fig_id
+            img_path = REPO_ROOT / path_str
+            if img_path.exists():
+                b64 = base64.b64encode(img_path.read_bytes()).decode("ascii")
+                all_figure_data[fig_id] = b64
+                all_figures.append(Figure(id=fig_id, python_code="", alt_text=img_path.stem))
+            return f"[FIGURE:{fig_id}]"
+        return _FIG_REF_RE.sub(_replace, text)
+
+    stem = _resolve_figures(example.stem)
+
+    options = []
+    for o in example.options:
+        opt_text = _resolve_figures(o.text)
+        options.append(Option(
             id=o.id,
-            text=o.text,
+            text=opt_text,
             facet_tags=o.facet_tags,
             is_correct=o.is_correct,
             rationale="Expert-authored option",
-        )
-        for o in example.options
-    ]
+        ))
+
     correct_ids = [o.id for o in example.options if o.is_correct]
     all_tags = set()
     for o in example.options:
         all_tags.update(o.facet_tags)
 
-    return GeneratedItem(
-        stem=example.stem,
+    item = GeneratedItem(
+        stem=stem,
         response_format=example.response_format,
         options=options,
         correct_option_ids=correct_ids,
         explanation="Expert-authored item",
         target_facets=sorted(all_tags),
+        figures=all_figures,
     )
+    return item, all_figure_data
 
 
 def item_to_stub_artifact(item: GeneratedItem, topic: str, index: int) -> RunArtifact:
@@ -99,12 +134,28 @@ def print_item_results(results: list[ItemEvaluation], has_llm: bool):
     mean_sim = sum(r.facet_latency.mean_similarity for r in results) / n
     print(f"  Facet Latency: {mean_latency:.1f}/4 (mean sim={mean_sim:.3f})")
 
+    fig_results = [r for r in results if r.figure_necessity is not None]
+    if fig_results:
+        fig_avg = sum(r.figure_necessity for r in fig_results) / len(fig_results)
+        print(f"  Figure Necessity: {fig_avg:.2f} ({len(fig_results)} items with figures)")
+
+    sem_results = [r for r in results if r.similarity_with_experts is not None]
+    if sem_results:
+        mean_sem = sum(r.similarity_with_experts.mean_similarity for r in sem_results) / len(sem_results)
+        max_sem = max(r.similarity_with_experts.max_similarity for r in sem_results)
+        print(f"  Similarity (within experts): mean={mean_sem:.3f}, max={max_sem:.3f}")
+
     for r in results:
         fl = r.facet_latency
         line = f"    {r.source}: {fl.score}/4 ({fl.bucket}, sim={fl.mean_similarity:.3f})"
         if has_llm:
             c = "PASS" if r.correctness.is_correct else "FAIL"
             line += f"  correct={c}  natural={r.naturalness.overall_score}/5"
+        if r.figure_necessity is not None:
+            line += f"  fig={r.figure_necessity}"
+        if r.similarity_with_experts is not None:
+            ss = r.similarity_with_experts
+            line += f"  sim={ss.max_similarity:.3f}(max,→{ss.most_similar_to})"
         print(line)
 
 
@@ -141,6 +192,10 @@ def print_corpus_results(corpus):
     print(f"    Max pairwise stem similarity:  {pd.semantic.max_pairwise_similarity:.3f}")
     if pd.semantic.most_similar_pair:
         print(f"    Most similar pair: {pd.semantic.most_similar_pair}")
+
+    if corpus.figure_fraction is not None:
+        print(f"\n  Figures:")
+        print(f"    Fraction with figures: {corpus.figure_fraction:.0%}")
 
 
 def main():
@@ -182,7 +237,9 @@ def main():
     facet_map = load_facet_map(args.topic)
     print(f"Loaded {len(facet_map.examples)} expert examples for topic '{args.topic}'")
 
-    items = [expert_to_generated_item(ex, i) for i, ex in enumerate(facet_map.examples)]
+    items_and_figs = [expert_to_generated_item(ex, i) for i, ex in enumerate(facet_map.examples)]
+    items = [item for item, _ in items_and_figs]
+    figure_datas = [fd for _, fd in items_and_figs]
     artifacts = [item_to_stub_artifact(item, args.topic, i) for i, item in enumerate(items)]
 
     item_results: list[ItemEvaluation] = []
@@ -190,20 +247,30 @@ def main():
         embed_model = _get_model()
         print("\nRunning item-level evaluation...")
         for i, item in enumerate(items):
+            fig_data = figure_datas[i]
             print(f"  [{i+1}/{len(items)}] {item.stem[:60]}...")
+            if fig_data:
+                print(f"    ({len(fig_data)} figure(s) loaded)")
 
             correctness = None
             naturalness = None
             if not args.skip_llm:
-                correctness = evaluate_correctness(item, model=args.eval_model)
-                naturalness = evaluate_naturalness(item, model=args.eval_model)
+                correctness = evaluate_correctness(item, model=args.eval_model, figure_data=fig_data)
+                naturalness = evaluate_naturalness(item, model=args.eval_model, figure_data=fig_data)
             latency = evaluate_facet_latency(item, facet_map, model=embed_model)
+
+            fig_nec = None
+            if fig_data:
+                fn = evaluate_figure_necessity(item, model=args.eval_model)
+                fig_nec = int(fn.is_necessary)
+                print(f"    figure_necessity: {fig_nec} ({'essential' if fn.is_necessary else 'decorative'}, {fn.n_correct}/{fn.n_trials} correct without figure)")
 
             item_results.append(ItemEvaluation(
                 source=f"expert_{i+1}",
                 correctness=correctness or _dummy_correctness(item),
                 naturalness=naturalness or _dummy_naturalness(),
                 facet_latency=latency,
+                figure_necessity=fig_nec,
             ))
 
             if correctness and naturalness:
@@ -211,6 +278,13 @@ def main():
                 print(f"    correct={correct_mark}  natural={naturalness.overall_score}/5  latency={latency.score}/4 ({latency.bucket})")
             else:
                 print(f"    latency={latency.score}/4 ({latency.bucket}, sim={latency.mean_similarity:.3f})")
+
+        print("\nComputing per-item similarity with other experts...")
+        stems = [item.stem for item in items]
+        source_ids = [f"expert_{i+1}" for i in range(len(items))]
+        sem_results = evaluate_similarity_with_experts(stems, source_ids, embed_model=embed_model)
+        for r, sem in zip(item_results, sem_results):
+            r.similarity_with_experts = sem
 
         print_item_results(item_results, has_llm=not args.skip_llm)
 

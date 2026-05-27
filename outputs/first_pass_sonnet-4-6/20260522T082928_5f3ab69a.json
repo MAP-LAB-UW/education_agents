@@ -1,0 +1,155 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A5",
+      "A6",
+      "B16",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets the purpose and interpretation of confidence intervals. A5 (CI captures the true population parameter) and B16 (misconception that CI estimates sample statistics or true scores) form a natural contrast about what a CI is actually estimating. A6 (CI width increases as confidence level increases) and B17 (misconception that higher confidence yields a shorter/more precise interval) form a complementary contrast about how confidence level affects interval width. Together, these four facets allow a single item stem to probe both what the CI is for and how the confidence level influences its width — two closely related but distinct aspects of CI interpretation. This combination has not been used before and differs meaningfully from prior items.",
+  "item": {
+    "stem": "A researcher calculates a 90% confidence interval for the average commute time (in minutes) of employees at a large company and obtains (22.4, 31.6). She then decides she wants a more precise (narrower) interval. Which of the following strategies would achieve a narrower confidence interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Increase the confidence level to 99%, which gives a higher confidence and therefore a more precise, narrower interval.",
+        "facet_tags": [
+          "B17",
+          "A6"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception (B17) that higher confidence yields a more precise/narrower interval. In fact, increasing the confidence level widens the interval (A6), which is the opposite of what is stated."
+      },
+      {
+        "id": "B",
+        "text": "Keep the same confidence level but increase the sample size, which reduces the standard error and narrows the interval.",
+        "facet_tags": [
+          "A5",
+          "A6",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct strategy. Increasing the sample size reduces the standard error, which narrows the CI without changing the confidence level. The interval still targets the true population parameter (A5), and CI width correctly depends on both the confidence level and the standard error (A6, A7)."
+      },
+      {
+        "id": "C",
+        "text": "Increase the confidence level to 99% and use the same sample size, because a 99% CI is more likely to contain the sample mean and is therefore more informative.",
+        "facet_tags": [
+          "B16",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This option conflates two misconceptions: that the CI targets the sample mean rather than the population parameter (B16), and that higher confidence produces a narrower, more precise interval (B17). Both are incorrect."
+      },
+      {
+        "id": "D",
+        "text": "Recalculate the interval so it captures 90% of the individual commute times in the sample rather than estimating a population value, which will narrow the range.",
+        "facet_tags": [
+          "B16",
+          "A5"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that the CI is meant to capture sample data or sample statistics (B16) rather than the true population parameter (A5). Reinterpreting the interval as covering individual sample values is a fundamental misunderstanding of what a CI estimates."
+      }
+    ],
+    "correct_option_ids": [
+      "B"
+    ],
+    "explanation": "The item targets four facets. A correct answer requires knowing that (1) the CI estimates the true population parameter, not sample statistics (A5), and (2) to narrow a CI the researcher should lower the confidence level or increase the sample size—not raise the confidence level (A6). Option A and C both activate B17, the misconception that higher confidence yields a narrower interval; in reality, increasing the confidence level requires a wider interval to maintain the stated coverage (A6). Option C additionally activates B16 by wrongly claiming the interval captures the sample mean. Option D activates B16 directly by reframing the CI as a description of sample data rather than an estimate of the population parameter. Only option B correctly identifies that increasing sample size reduces the standard error and thus narrows the interval, while keeping the interval aimed at the population parameter.",
+    "target_facets": [
+      "A5",
+      "A6",
+      "B16",
+      "B17"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher calculates a 90% confidence interval for the average commute time... Which of the following strategies would achieve a narrower confidence interval?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B17",
+          "A6"
+        ],
+        "judge_tags": [
+          "B17",
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "The option directly exhibits misconception B17 (higher confidence leads to a narrower interval), which is a direct violation of goal facet A6 (CI width increases as confidence level increases). The generator's tags are accurate."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A5",
+          "A6",
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The option explicitly states 'increase the sample size, which reduces the standard error' (A1) and 'narrows the interval' (A7). The generator missed A1 despite it being explicitly described in the option. Furthermore, the generator over-tagged A5 and A6; while they are true statements contextually, the option text does not discuss targeting the population parameter or the relationship between CI width and confidence level."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B16",
+          "B17"
+        ],
+        "judge_tags": [
+          "B16",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "The option suggests increasing the confidence level to narrow the interval, which aligns with misconception B17. It also claims the CI is meant to 'contain the sample mean,' which aligns perfectly with misconception B16."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B16",
+          "A5"
+        ],
+        "judge_tags": [
+          "B16",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "The option states the interval should capture 'individual commute times in the sample', which is exactly misconception B16. It explicitly contrasts this with 'estimating a population value', linking to the violation of A5."
+      }
+    ],
+    "overall_agreement": 0.75,
+    "overall_confidence": 0.9,
+    "issues": [
+      "Option B's tags by the generator omitted A1, even though the option explicitly describes the relationship between sample size and standard error.",
+      "The generator over-tagged A5 and A6 in Option B based on background context rather than the actual text presented in the option."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 16.74,
+    "judge_s": 18.16
+  },
+  "created_at": "2026-05-22T08:29:28.398418+00:00"
+}

@@ -1,0 +1,166 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A5",
+      "A7",
+      "B16",
+      "B9"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets understanding of what CIs estimate (population parameters vs. sample statistics/data) and how standard error affects CI width, while probing two distinct misconceptions: that CIs estimate sample statistics (B16) and that sampling distribution spread mirrors population distribution regardless of sample size (B9, which feeds into misunderstanding SE). These facets are conceptually linked—students who confuse the sampling distribution with the population distribution (B9) are also likely to misunderstand what the CI is capturing (B16) and how its width is determined (A7). This combination has not been used before and complements prior items by pairing population-parameter interpretation with SE-width reasoning in a novel way.",
+  "item": {
+    "stem": "A researcher collects a random sample of 36 employees and constructs a 95% confidence interval for the average salary, obtaining ($48,500, $53,500). The population standard deviation is known to be $9,000.\n\nFor each of the following statements, indicate whether it is True or False.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "We are 95% confident that the true population mean salary is between $48,500 and $53,500.",
+        "facet_tags": [
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct interpretation: the CI is designed to capture the true population parameter (mean salary), not a sample statistic or individual scores."
+      },
+      {
+        "id": "B",
+        "text": "We are 95% confident that the average salary of the 36 employees in the sample is between $48,500 and $53,500.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This incorrectly targets the sample mean (a known statistic) rather than the population mean. The CI is built to estimate the population parameter, not the sample statistic."
+      },
+      {
+        "id": "C",
+        "text": "If the researcher had used a sample of 144 employees instead of 36, the 95% confidence interval would have been wider.",
+        "facet_tags": [
+          "A7"
+        ],
+        "is_correct": false,
+        "rationale": "Increasing the sample size reduces the standard error (SE = σ/√n), which narrows the CI, not widens it. This statement reverses the correct direction of the relationship."
+      },
+      {
+        "id": "D",
+        "text": "If the researcher had used a sample of 144 employees instead of 36, the 95% confidence interval would have been narrower.",
+        "facet_tags": [
+          "A5",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "A larger sample reduces the standard error (from $9000/√36=$1500 to $9000/√144=$750), producing a narrower CI. This correctly reflects that CI width increases with larger standard errors and decreases with smaller ones."
+      },
+      {
+        "id": "E",
+        "text": "The spread of the sampling distribution of the sample mean with n=36 is the same as the population standard deviation of $9,000.",
+        "facet_tags": [
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "This confuses the sampling distribution's spread (standard error = σ/√n = $1,500) with the population standard deviation ($9,000). The sampling distribution is more tightly packed than the population distribution."
+      }
+    ],
+    "correct_option_ids": [
+      "A",
+      "D"
+    ],
+    "explanation": "This item targets four facets. Options A and D probe A5 (CI captures the population parameter, not the sample statistic) and A7 (CI width depends on standard error, which shrinks as sample size grows). Option B probes B16 (the misconception that CI estimates the sample mean rather than the population mean). Option C probes A7 from the wrong direction—students who misunderstand how sample size affects SE may think a larger sample yields a wider interval. Option E probes B9 (the misconception that the sampling distribution has the same spread as the population distribution, ignoring the 1/√n reduction in the standard error).",
+    "target_facets": [
+      "A5",
+      "A7",
+      "B16",
+      "B9"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher collects a random sample of 36 employees and constructs a 95% confidence interval for the average salary...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A5"
+        ],
+        "judge_tags": [
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "This option represents the correct, standard interpretation of a single confidence interval in introductory statistics, indicating that the CI aims to capture the population parameter, aligning perfectly with A5."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "This option explicitly states the misconception that the confidence interval is estimating the sample mean rather than the population mean, which perfectly matches facet B16."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "To evaluate this option, a student must understand both that an increased sample size leads to a smaller standard error (A1) and that a smaller standard error leads to a narrower confidence interval (A7). Evaluating it solely on A7 is incomplete without acknowledging the sample size connection in A1."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A5",
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "Similar to Option C, this requires understanding the links between sample size, standard error, and CI width (A1 and A7). The generator's inclusion of A5 here is unwarranted, as the option text does not address what parameter the CI is capturing."
+      },
+      {
+        "option_id": "E",
+        "generator_tags": [
+          "B9"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "This option directly states the misconception that the spread of the sampling distribution is equal to the population standard deviation, ignoring the effect of sample size. This is the exact definition of B9."
+      }
+    ],
+    "overall_agreement": 0.6,
+    "overall_confidence": 0.9,
+    "issues": [
+      "The numerical values in the stem are mathematically inconsistent. For n=36 and a known population standard deviation of $9,000, the standard error is $9,000 / 6 = $1,500. A 95% confidence interval margin of error would be approximately 1.96 * $1,500 = $2,940. However, the interval provided ($48,500, $53,500) implies a sample mean of $51,000 and a margin of error of $2,500. Astute students might recalculate this and become confused by the discrepancy."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 15.93,
+    "judge_s": 23.51
+  },
+  "created_at": "2026-05-22T08:32:47.481240+00:00"
+}

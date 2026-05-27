@@ -19,6 +19,10 @@ If you just want to look at the generated items and evaluation results:
 | [First Pass Items](docs/generated_items_first_pass_no_books.md) | 10 items generated with V1 prompt (single-select only) |
 | [Second Pass Items](docs/generated_items_second_pass_no_books.md) | 10 items generated with V2 prompt — latent-facet design (single-select only) |
 | [Third Pass Items](docs/generated_items_third_pass_no_books.md) | 10 items generated with V2 prompt — dynamic format (model chooses format) |
+| [Third Pass + EDPSY Book](docs/generated_items_third_pass_with_edpsy.md) | 10 items generated with V2 prompt + textbook context (Gemini 3 Flash) |
+| [Third Pass — Sonnet 4.6](docs/generated_items_third_pass_sonnet-4-6.md) | 10 items generated with V2 prompt — dynamic format (Claude Sonnet 4.6) |
+| [V3 + Figures — Gemini Flash](docs/generated_items_gemini_flash_v3_with_figures.md) | 10 items with V3 prompt — figures and LaTeX notation (Gemini 3 Flash) |
+| [V3 + Figures — Sonnet 4.6](docs/generated_items_sonnet_4_6_v3_with_figures.md) | 10 items with V3 prompt — figures and LaTeX notation (Claude Sonnet 4.6) |
 | [Rubric Comparison](docs/rubric_comparison.md) | Side-by-side comparison of evaluation metrics across all passes and generator models |
 | [Rubric Definitions](docs/rubrics.md) | Detailed description of all evaluation rubrics |
 | [Facet Map](workflow/facets.md) | The 17 facets (7 goals + 10 misconceptions) for confidence intervals |
@@ -164,7 +168,7 @@ conda run -n education-env python scripts/run_pipeline.py \
 
 ```bash
 # Evaluate a batch of generated items
-conda run -n education-env python scripts/run_evaluation.py outputs/<run_dir>
+conda run -n education-env python scripts/run_evaluation.py outputs/<run_dir> --out outputs/eval_results.json
 
 # Save evaluation results
 conda run -n education-env python scripts/run_evaluation.py outputs/<run_dir> \

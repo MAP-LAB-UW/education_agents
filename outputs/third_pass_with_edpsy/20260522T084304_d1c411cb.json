@@ -1,0 +1,138 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A3",
+      "B10",
+      "B13",
+      "B14"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the fundamental properties of the sampling distribution and how they are affected (or not affected) by sample size. It tests the goal facet that the mean of the sampling distribution remains equal to the population mean (A3) against the misconception that this mean depends on sample size (B13). Additionally, it addresses errors regarding the spread of the distribution (B10) and the common deterministic misconception that a larger sample size guarantees a closer estimate for any single trial, ignoring inherent randomness (B14).",
+  "item": {
+    "stem": "A nutritionist finds that the average calorie content of a specific brand of granola bar is 150 calories, with a population standard deviation of 15 calories. She compares the sampling distribution of the sample mean for two different research designs: Study A uses a sample size of n=9, and Study B uses a sample size of n=100. Which of the following is true about these sampling distributions?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The mean of the sampling distribution is 150 calories for Study A and 150 calories for Study B.",
+        "facet_tags": [
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "The student understands that the mean of the sampling distribution of the mean is always equal to the population mean (mu), regardless of the sample size (n)."
+      },
+      {
+        "id": "B",
+        "text": "The sampling distribution for Study B is centered at 150 calories, while for Study A it is centered at 50 calories (150 divided by the square root of 9).",
+        "facet_tags": [
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "The student incorrectly believes that the center (mean) of the sampling distribution depends on the sample size, often confusing the calculation for the mean of the sampling distribution with the calculation for the standard error."
+      },
+      {
+        "id": "C",
+        "text": "The sampling distribution for Study B will be more spread out (have a larger standard error) than Study A because it incorporates data from a larger number of bars.",
+        "facet_tags": [
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "The student has the misconception that increasing the sample size increases the variability of the sampling distribution, whereas in reality, larger samples lead to a smaller standard error and a more 'packed' distribution."
+      },
+      {
+        "id": "D",
+        "text": "If both studies are conducted once, the sample mean calculated in Study B is guaranteed to be closer to 150 calories than the sample mean calculated in Study A.",
+        "facet_tags": [
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "The student understands that larger samples are generally more accurate but fails to account for the role of randomness; they incorrectly believe the law of large numbers applies deterministically to every single sample outcome."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item assesses student understanding of the properties of the sampling distribution of the mean. A3 is the correct understanding that the mean of the sampling distribution equals the population mean. B13 addresses the misconception that the mean shifts with sample size. B10 addresses the misconception that larger samples create more variability in the sampling distribution. B14 addresses the 'law of small numbers' or deterministic fallacy where students forget that even with large samples, an individual sample mean is still a random variable and not 'guaranteed' to be closer to the parameter than a smaller sample's mean.",
+    "target_facets": [
+      "A3",
+      "B10",
+      "B13",
+      "B14"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A nutritionist finds that the average calorie content of a specific brand of granola bar is 150 calories, with a population standard deviation of 15 calories. She compares the sampling distribution of the sample mean for two different research designs: Study A uses a sample size of n=9, and Study B uses a sample size of n=100. Which of the following is true about these sampling distributions?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A3"
+        ],
+        "judge_tags": [
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that the mean of the sampling distributions for both sample sizes is equal to the population mean (150 calories), directly reflecting facet A3."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B13"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option claims that the center (mean) of the sampling distribution depends on the sample size (calculating it as 150 divided by the square root of n), perfectly matching misconception B13."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B10"
+        ],
+        "judge_tags": [
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states that a larger sample size will lead to a more spread-out sampling distribution (larger standard error), directly mirroring misconception B10."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B14"
+        ],
+        "judge_tags": [
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option asserts that a sample mean from a larger sample size is 'guaranteed' to be closer to the population mean for a single specific sample, perfectly aligning with misconception B14 about misunderstanding the randomness of individual sample outcomes."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 31.67,
+    "judge_s": 9.61
+  },
+  "created_at": "2026-05-22T08:43:04.772150+00:00"
+}

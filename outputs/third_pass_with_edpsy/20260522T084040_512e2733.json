@@ -1,0 +1,150 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A6",
+      "A7",
+      "B16",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the relationship between confidence levels, standard error (sample size), and the resulting width of the confidence interval. It allows for a diagnostic item that tests whether students understand how changing parameters affects the interval's precision (A6, A7) versus common misconceptions that higher confidence creates 'better' (shorter) intervals (B17) or that the interval describes the sample rather than the population parameter (B16).",
+  "item": {
+    "stem": "An environmental scientist measures the mercury levels in a specific lake's fish population. Based on a sample of 40 fish, he calculates a 95% confidence interval for the mean mercury concentration to be (0.42 ppm, 0.58 ppm). He wants to conduct a new study to obtain a narrower (more precise) confidence interval. Which of the following strategies would achieve this?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Increase the sample size to 100 fish and decrease the confidence level to 90%.",
+        "facet_tags": [
+          "A6",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "The student correctly understands that increasing sample size reduces the standard error (A7) and decreasing the confidence level reduces the critical value (A6), both of which shorten the width of the confidence interval."
+      },
+      {
+        "id": "B",
+        "text": "Increase the confidence level to 99% to provide a more precise range for the population mean.",
+        "facet_tags": [
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "The student incorrectly believes that a higher confidence level (99% vs 95%) leads to a more precise or narrower estimate, whereas mathematically it requires a larger critical value and thus produces a wider interval."
+      },
+      {
+        "id": "C",
+        "text": "Increase the confidence level to 99% to ensure the interval captures 99% of the individual fish mercury levels in the sample.",
+        "facet_tags": [
+          "B16",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This choice reveals the misconception that a confidence interval describes the range of individual sample data points rather than the population parameter (B16), while also incorrectly assuming that higher confidence results in a more 'precise' (narrower) range (B17)."
+      },
+      {
+        "id": "D",
+        "text": "Collect a larger sample of 100 fish and increase the confidence level to 99%.",
+        "facet_tags": [
+          "A7",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "The student understands that a larger sample size helps narrow the interval (A7), but they still hold the misconception that increasing the confidence level also helps narrow it (B17)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "To obtain a narrower confidence interval, one must reduce the margin of error ($z^* \\times \\sigma/\\sqrt{n}$). This can be done by either decreasing the critical value ($z^*$) by using a lower confidence level (e.g., 90% instead of 95%) or by decreasing the standard error by increasing the sample size ($n$). Option A correctly identifies both mechanisms (A6, A7). Distractors B, C, and D all involve increasing the confidence level to 99%, which incorrectly assumes that higher confidence improves precision by narrowing the interval (B17). Option C additionally misinterprets the interval as capturing sample data rather than a population parameter (B16).",
+    "target_facets": [
+      "A6",
+      "A7",
+      "B16",
+      "B17"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "An environmental scientist measures the mercury levels in a specific lake's fish population. Based on a sample of 40 fish, he calculates a 95% confidence interval for the mean mercury concentration to be (0.42 ppm, 0.58 ppm). He wants to conduct a new study to obtain a narrower (more precise) confidence interval. Which of the following strategies would achieve this?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A6",
+          "A7"
+        ],
+        "judge_tags": [
+          "A6",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly targets decreasing the confidence level to narrow the interval (A6) and increasing the sample size to reduce standard error, thereby narrowing the interval (A7)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B17"
+        ],
+        "judge_tags": [
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option incorrectly asserts that increasing the confidence level to 99% alone will provide a 'more precise' (narrower) range, matching B17."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B16",
+          "B17"
+        ],
+        "judge_tags": [
+          "B16",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option demonstrates the misconception that confidence intervals capture individual sample points (B16) and implicitly assumes increasing confidence makes the interval narrower, since it's selected as a strategy to achieve a narrower interval (B17)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A7",
+          "B17"
+        ],
+        "judge_tags": [
+          "A7",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The generator assumes the student knows increasing sample size narrows the interval (A7), but erroneously believes increasing confidence level also helps (B17). However, see the issues below regarding the mathematical reality of this option."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Option D is mathematically a correct answer to the stem's question. The original margin of error is proportional to 1.96 / sqrt(40) = ~0.310. The margin of error in Option D is proportional to 2.576 / sqrt(100) = ~0.258. Since 0.258 < 0.310, Option D *does* result in a narrower confidence interval. An advanced student could calculate this net effect and correctly select D, leading to a false positive for the B17 misconception.",
+      "Because both A and D achieve a narrower interval, the item currently has two valid answers."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 39.44,
+    "judge_s": 25.7
+  },
+  "created_at": "2026-05-22T08:40:40.601619+00:00"
+}

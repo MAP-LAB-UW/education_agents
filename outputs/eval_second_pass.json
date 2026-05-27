@@ -71,6 +71,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 1.0,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5556,
+        "max_similarity": 0.8024,
+        "most_similar_to": "expert_7"
       }
     },
     {
@@ -141,6 +146,11 @@
         "issues": [
           "Option D targets B9, but B9 explicitly defines the misconception as 'Sampling distribution mirrors population distribution'. If a student chooses D, they acknowledge the SE is 3 mmHg (which is different from the population SD of 12 mmHg), meaning they do NOT believe it mirrors the population distribution. Thus, D represents an unlisted misconception (that SE is fixed after the first calculation) rather than a clean diagnosis of B9."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5008,
+        "max_similarity": 0.6731,
+        "most_similar_to": "expert_7"
       }
     },
     {
@@ -213,6 +223,11 @@
         "issues": [
           "The item is well-constructed and accurately assesses the target facets. The scenario of estimating a 'known' population mean is slightly contrived but works well pedagogically to test students' interpretations of the confidence interval mechanism."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5496,
+        "max_similarity": 0.5974,
+        "most_similar_to": "expert_5"
       }
     },
     {
@@ -287,6 +302,11 @@
           "The generator's use of B11 instead of B9 is a minor conceptual difference. B9 explicitly states 'mirrors population distribution', which directly explains the choice of 'highly right-skewed'. B11 implies a dynamic misunderstanding (as n increases, it gets closer to population). Either way, the item serves as a solid diagnostic tool.",
           "The distractors using 2.4 are very clever, as they anticipate the student incorrectly applying the standard error formula (dividing by square root of n) to the mean."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5338,
+        "max_similarity": 0.6925,
+        "most_similar_to": "expert_1"
       }
     },
     {
@@ -354,6 +374,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 1.0,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5333,
+        "max_similarity": 0.6941,
+        "most_similar_to": "expert_4"
       }
     },
     {
@@ -428,6 +453,11 @@
         "issues": [
           "While opt_1 is considered the standard 'correct' shorthand in many introductory courses, it does not explicitly demonstrate an understanding of the 'percentage of times (implications of replications)' as strictly defined in facet A4. However, it functions correctly by process of elimination against B15."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5803,
+        "max_similarity": 0.7329,
+        "most_similar_to": "expert_6"
       }
     },
     {
@@ -498,6 +528,11 @@
         "issues": [
           "Options 3 and 4 both target the exact same misconception (B13), just in opposite directions (mean scaling up vs. scaling down). While this is diagnostically fine, it leaves room to test a different misconception (such as B10 or B12) in one of those options to increase the diagnostic breadth of the item."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5339,
+        "max_similarity": 0.6721,
+        "most_similar_to": "expert_8"
       }
     },
     {
@@ -568,6 +603,11 @@
           "Option 1 represents a composite of two facets (A1 and A7) to form a complete logical chain. The generator only tagged one of them, but this is a minor issue as the option serves as an excellent correct answer.",
           "Overall, the item is exceptionally well-written, with highly plausible distractors that precisely isolate distinct, documented misconceptions."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5745,
+        "max_similarity": 0.6132,
+        "most_similar_to": "expert_5"
       }
     },
     {
@@ -637,6 +677,11 @@
         "overall_agreement": 0.9,
         "overall_confidence": 0.95,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5838,
+        "max_similarity": 0.8463,
+        "most_similar_to": "expert_7"
       }
     },
     {
@@ -709,6 +754,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 1.0,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5675,
+        "max_similarity": 0.6994,
+        "most_similar_to": "expert_7"
       }
     }
   ],

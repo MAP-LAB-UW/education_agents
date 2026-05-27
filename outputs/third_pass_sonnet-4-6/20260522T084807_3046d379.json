@@ -1,0 +1,149 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B11",
+      "B12"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the shape and center of the sampling distribution. A2 (sampling distribution approaches normal, not population shape) and A3 (mean of sampling distribution equals population mean) represent correct understanding, while B11 (sampling distribution mirrors population distribution as n increases) and B12 (sampling distribution is always normal regardless of n or population shape) are complementary misconceptions about the CLT. Together they probe whether students understand both what changes (shape converges to normal) and what stays constant (mean equals population mean) as sample size grows, without duplicating any previously used combination.",
+  "item": {
+    "stem": "A population of customer wait times at a call center is strongly right-skewed with a mean of 8 minutes and a standard deviation of 6 minutes. A researcher takes repeated random samples of size n = 50 and records the sample mean each time.\n\nWhat is the sampling distribution of the sample mean?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Right-skewed with mean 8 and standard deviation 6",
+        "facet_tags": [
+          "B9",
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "A student who selects this believes the sampling distribution mirrors the population distribution — it is right-skewed like the population and has the same standard deviation. This reflects the misconception that the sampling distribution looks like or approaches the population distribution (B11) and that the SD remains the same as the population (B9)."
+      },
+      {
+        "id": "B",
+        "text": "Right-skewed with mean 8 and standard deviation 6/√50",
+        "facet_tags": [
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "A student who selects this correctly applies the standard error formula but still believes the shape of the sampling distribution mirrors the population (right-skewed). This isolates the B11 misconception — thinking the sampling distribution approaches the population distribution shape — while showing partial knowledge of the standard error."
+      },
+      {
+        "id": "C",
+        "text": "Approximately normal with mean 8 and standard deviation 6/√50",
+        "facet_tags": [
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "By the Central Limit Theorem, with n = 50 (a sufficiently large sample), the sampling distribution of the sample mean is approximately normal regardless of the population's right-skewed shape. The mean equals the population mean (8) and the standard error is 6/√50. This reflects correct understanding of CLT (A2) and the mean of the sampling distribution (A3)."
+      },
+      {
+        "id": "D",
+        "text": "Exactly normal with mean 8 and standard deviation 6/√50 for any sample size",
+        "facet_tags": [
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "A student who selects this believes the sampling distribution of the sample mean is always exactly normal regardless of sample size or population shape. The word 'exactly' and 'any sample size' reveal the B12 misconception — that normality of the sampling distribution is guaranteed regardless of conditions, when in fact it is only an approximation that improves with larger n."
+      }
+    ],
+    "correct_option_ids": [
+      "C"
+    ],
+    "explanation": "This item probes four facets. The correct answer (C) requires understanding that the Central Limit Theorem causes the sampling distribution to become approximately normal for large n even when the population is strongly skewed (A2), and that the mean of the sampling distribution equals the population mean of 8 (A3). Distractor A targets students who think the sampling distribution inherits the shape and spread of the population (B11, B9). Distractor B isolates students who know the standard error formula but still believe the shape mirrors the skewed population (B11). Distractor D targets students who think the sampling distribution is always exactly normal regardless of sample size or population shape (B12) — the key error being that normality requires sufficiently large n and is an approximation, not a guaranteed exact result.",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B11",
+      "B12"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A population of customer wait times at a call center is strongly right-skewed with a mean of 8 minutes and a standard deviation of 6 minutes. A researcher takes repeated random samples of size n = 50...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B9",
+          "B11"
+        ],
+        "judge_tags": [
+          "B9",
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option explicitly models the misconception that the sampling distribution is identical to the population distribution in both shape (B11) and standard deviation (B9)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B11"
+        ],
+        "judge_tags": [
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "This option uses the correct standard error formula but incorrectly assigns the population's shape to the sampling distribution, which aligns with the misconception that the sampling distribution approaches the population distribution (B11)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "judge_tags": [
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This is the correct answer. It correctly applies the Central Limit Theorem for a sufficiently large sample size to determine normality (A2), uses the correct mean (A3), and accurately calculates the standard error (A1)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B12"
+        ],
+        "judge_tags": [
+          "B12"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The phrase 'exactly normal ... for any sample size' perfectly captures the misconception that the sampling distribution of the sample mean is always normal regardless of sample size or population shape (B12)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.95,
+    "issues": [
+      "The item is generally excellent and tests the facets well. One minor nuance is that facet A1 explicitly mentions 'as sample size increases', while the item provides a single fixed sample size (n=50); however, applying the standard error formula correctly is sufficient evidence of understanding the SE relationship."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 15.11,
+    "judge_s": 16.38
+  },
+  "created_at": "2026-05-22T08:48:07.704918+00:00"
+}

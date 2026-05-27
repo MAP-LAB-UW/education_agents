@@ -1,0 +1,190 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A5",
+      "A6",
+      "B16",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v3"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets the purpose and precision of confidence intervals together. A5 (CI captures population parameter) and A6 (wider CI with higher confidence level) are paired against B16 (misconception that CI estimates sample statistics) and B17 (misconception that higher confidence yields a shorter/more precise interval). These facets are conceptually linked around what a CI is estimating and how confidence level affects its width, allowing a single item stem to distinguish correct understanding from two common errors simultaneously. This combination differs from all previously used sets while covering under-explored pairings of A5 and B17 together.",
+  "item": {
+    "stem": "A nutritionist calculates a 90% confidence interval for the mean daily sodium intake (in mg) of adults in a city and obtains $(1{,}820,\\; 2{,}180)$. She is unhappy with the width of this interval and considers two changes for a follow-up study: increasing the confidence level to 99% and reducing the sample size.\n\nFor each of the following statements, decide whether it is **True** or **False**.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "The interval $(1{,}820,\\; 2{,}180)$ tells us that 90% of adults in the city have a daily sodium intake between $1{,}820$ mg and $2{,}180$ mg.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "A student who believes the CI describes individual data values rather than the population parameter would mark this True. The interval estimates the population mean, not the distribution of individual sodium intakes."
+      },
+      {
+        "id": "B",
+        "text": "We are 90% confident that the true mean daily sodium intake of all adults in the city is between $1{,}820$ mg and $2{,}180$ mg.",
+        "facet_tags": [
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct interpretation: the CI is designed to capture the true population mean, not sample statistics or individual values. A student with a solid understanding of A5 will mark this True."
+      },
+      {
+        "id": "C",
+        "text": "The interval $(1{,}820,\\; 2{,}180)$ estimates the mean daily sodium intake $\\bar{x}$ observed in her sample.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "A student who thinks the CI summarizes or estimates the sample mean rather than the population mean would mark this True. In fact, $\\bar{x}$ is already known from the sample; the CI is constructed to estimate the unknown population mean $\\mu$."
+      },
+      {
+        "id": "D",
+        "text": "Switching from 90% to 99% confidence will produce a shorter interval and therefore a more precise estimate of the population mean.",
+        "facet_tags": [
+          "A6",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "A student holding the B17 misconception (higher confidence = more precise = shorter interval) would mark this True. In reality, increasing the confidence level requires a larger critical value $z^*$, which widens the interval, making it less precise (A6)."
+      },
+      {
+        "id": "E",
+        "text": "Reducing the sample size while also switching to 99% confidence will make the follow-up interval shorter than $(1{,}820,\\; 2{,}180)$.",
+        "facet_tags": [
+          "A6",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "Both changes work against a shorter interval: increasing the confidence level raises $z^*$ and reducing the sample size increases the standard error $SE = s/\\sqrt{n}$, both of which widen the interval. A student who believes higher confidence yields shorter intervals (B17) and misunderstands the effect of sample size may erroneously mark this True."
+      },
+      {
+        "id": "F",
+        "text": "If she instead lowers the confidence level to 80% (keeping the same sample), the resulting interval would be narrower than $(1{,}820,\\; 2{,}180)$.",
+        "facet_tags": [
+          "A5",
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "Lowering the confidence level decreases the critical value $z^*$, which shrinks the margin of error and produces a narrower interval. This correctly applies the relationship between confidence level and CI width (A6) and keeps focus on estimating the population mean (A5)."
+      }
+    ],
+    "correct_option_ids": [
+      "B",
+      "F"
+    ],
+    "explanation": "This item diagnoses four facets simultaneously through a concrete CI scenario. **A5** is probed by options B, C, and F: the correct interpretation (B, F) targets the population mean $\\mu$, while C reveals B16 thinking by claiming the interval estimates the already-known sample mean $\\bar{x}$. **B16** is further probed by option A, where a student mistakes the CI for a description of individual data values. **A6** and **B17** are jointly probed by options D and E: a student holding B17 (higher confidence $\\Rightarrow$ shorter interval) will incorrectly endorse D or E, while a student who correctly understands A6 (higher confidence level $\\Rightarrow$ wider interval via larger $z^*$) will mark both False. Option F provides a positive application of A6: lowering confidence level from 90% to 80% unambiguously narrows the interval.",
+    "target_facets": [
+      "A5",
+      "A6",
+      "B16",
+      "B17"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A nutritionist calculates a 90% confidence interval for the mean daily sodium intake...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly tests the misconception that a confidence interval describes the distribution of individual sample data points or true scores instead of the population parameter, which aligns perfectly with B16."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A5"
+        ],
+        "judge_tags": [
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option provides the correct interpretation of the confidence interval capturing the true population mean, directly matching facet A5."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states the interval estimates the sample mean (sample statistic), which is the exact misconception described in B16."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A6",
+          "B17"
+        ],
+        "judge_tags": [
+          "A6",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option explicitly states that a higher confidence level yields a shorter and more precise interval, mapping directly to misconception B17 and the converse of goal facet A6."
+      },
+      {
+        "option_id": "E",
+        "generator_tags": [
+          "A6",
+          "B17"
+        ],
+        "judge_tags": [
+          "A6",
+          "A7",
+          "B17"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "While the option tests the effect of confidence level (A6, B17), it also tests the effect of reducing sample size on the interval width. A reduced sample size increases the standard error, making the interval wider (which ties into A7: relationship between CI width and standard error)."
+      },
+      {
+        "option_id": "F",
+        "generator_tags": [
+          "A5",
+          "A6"
+        ],
+        "judge_tags": [
+          "A6"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "This option correctly applies the principle that a lower confidence level results in a narrower interval, which is purely A6. A5 is merely assumed in the context of the interval but is not actively discriminated or tested by this specific option."
+      }
+    ],
+    "overall_agreement": 0.8,
+    "overall_confidence": 0.95,
+    "issues": []
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 23.37,
+    "judge_s": 16.94
+  },
+  "created_at": "2026-05-22T09:00:59.291989+00:00"
+}

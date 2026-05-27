@@ -1,0 +1,167 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "B15",
+      "B16"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "These three facets form a coherent cluster around the correct interpretation of a confidence interval. A4 captures the goal understanding — that the confidence level reflects what would happen across repeated samples (a frequentist replication interpretation). B15 targets the common misconception that a CI gives a probability statement about a specific interval capturing the true mean (post-hoc probability confusion). B16 targets the misconception that a CI is estimating sample statistics or sample data rather than the true population parameter. Together they allow a single item stem (e.g., asking what a 95% CI actually tells us) that clearly distinguishes the correct replication-based interpretation from two distinct but related misconceptions about what the interval is estimating and what the confidence level means. This combination has not been previously used and covers under-represented interpretation facets.",
+  "item": {
+    "stem": "A researcher calculates a 95% confidence interval for the average commute time (in minutes) of city residents and obtains the interval (22.4, 31.6). Consider each of the following statements about this confidence interval and decide whether each is True or False.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "We are 95% confident that the true mean commute time for all city residents is between 22.4 and 31.6 minutes.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct interpretation: '95% confident' correctly conveys the long-run confidence level (A4), and the interval targets the true population mean, not a sample statistic or probability statement (A5)."
+      },
+      {
+        "id": "B",
+        "text": "There is a 95% probability that the true mean commute time for all city residents falls between 22.4 and 31.6 minutes.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This incorrectly treats the confidence level as a probability that the fixed (but unknown) population mean lies within this specific interval, which is the classic B15 misconception. Once the interval is computed, the true mean either is or is not in it."
+      },
+      {
+        "id": "C",
+        "text": "If we were to repeat this study many times, about 95% of the confidence intervals constructed the same way would contain the true mean commute time.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This correctly interprets the confidence level in terms of long-run repeated sampling (A4) and correctly identifies the target as the true population parameter (A5)."
+      },
+      {
+        "id": "D",
+        "text": "95% of all city residents have a commute time between 22.4 and 31.6 minutes.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This confuses the confidence interval with a statement about individual data values in the population, reflecting the B16 misconception that CI captures sample data or individual scores rather than the population parameter."
+      },
+      {
+        "id": "E",
+        "text": "There is a 95% probability that the sample mean commute time is between 22.4 and 31.6 minutes.",
+        "facet_tags": [
+          "B15",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This doubly errs: it frames the confidence level as a probability (B15) and targets the sample mean rather than the population parameter (B16), combining both key misconceptions."
+      }
+    ],
+    "correct_option_ids": [
+      "A",
+      "C"
+    ],
+    "explanation": "A4 requires understanding that '95% confidence' refers to what would happen across many repeated samples — about 95% of such intervals would capture the true parameter. B15 is the misconception that a specific computed interval has a 95% probability of containing the (fixed) true mean; once computed, the interval either contains the mean or it doesn't. B16 is the misconception that the interval estimates a sample statistic or individual data values rather than the population parameter. Options A and C correctly express the long-run frequency interpretation and properly target the population mean. Options B and E illustrate B15 (treating confidence as a post-hoc probability), option D illustrates B16 (interpreting the interval as covering individual data), and option E combines both misconceptions.",
+    "target_facets": [
+      "A4",
+      "B15",
+      "B16"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher calculates a 95% confidence interval for the average commute time (in minutes) of city residents and obtains the interval (22.4, 31.6). Consider each of the following statements about this confidence interval and decide whether each is True or False.",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A4",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "This option uses the standard textbook phrasing ('95% confident') that implicitly refers to the long-run frequency of correct intervals (A4) while correctly targeting the true population parameter (A5)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option incorrectly frames the confidence level as a 'probability' that a fixed parameter falls within a specific, already-calculated interval, which is the exact definition of facet B15."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A4",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly describes the long-run replication interpretation of confidence intervals (A4) and correctly targets the true population mean (A5)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option misinterprets the confidence interval as capturing individual sample data or population distributions (95% of all residents) rather than a population parameter, aligning perfectly with B16."
+      },
+      {
+        "option_id": "E",
+        "generator_tags": [
+          "B15",
+          "B16"
+        ],
+        "judge_tags": [
+          "B15",
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option combines two misconceptions: it uses the incorrect 'probability' framing for a computed interval (B15) and incorrectly states the interval is estimating the 'sample mean' rather than the population parameter (B16)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.98,
+    "issues": []
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 15.96,
+    "judge_s": 19.6
+  },
+  "created_at": "2026-05-22T08:28:12.485709+00:00"
+}

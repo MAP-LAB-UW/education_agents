@@ -71,6 +71,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 1.0,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5506,
+        "max_similarity": 0.8576,
+        "most_similar_to": "expert_7"
       }
     },
     {
@@ -140,6 +145,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 1.0,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5547,
+        "max_similarity": 0.8432,
+        "most_similar_to": "expert_3"
       }
     },
     {
@@ -215,6 +225,11 @@
           "Option 2 is structurally non-parallel because it does not address the second part of the stem ('and the interpretation of the confidence level'). Students might eliminate it simply because it is incomplete.",
           "The item tests two distinct concepts (properties of the sampling distribution's mean and the interpretation of the confidence level) simultaneously. To be perfectly crossed, Option 2 should pair B13 with A4 so that all combinations of (A3/B13) and (A4/B15) are represented."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.6027,
+        "max_similarity": 0.6735,
+        "most_similar_to": "expert_4"
       }
     },
     {
@@ -284,6 +299,11 @@
         "issues": [
           "Options 2 and 4 both diagnose the exact same misconception (B8) using slightly different phrasing. This creates redundancy and wastes a distractor slot that could be used to diagnose a different misconception, such as B10 or B17."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.6188,
+        "max_similarity": 0.665,
+        "most_similar_to": "expert_4"
       }
     },
     {
@@ -352,6 +372,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 1.0,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5209,
+        "max_similarity": 0.6981,
+        "most_similar_to": "expert_3"
       }
     },
     {
@@ -425,6 +450,11 @@
         "issues": [
           "Facet A7 (relationship between standard error and CI width) is implicitly required whenever students translate the effect of sample size changes into changes in CI width, but the generator omitted it from the keys for opt1 and opt3."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5524,
+        "max_similarity": 0.8575,
+        "most_similar_to": "expert_7"
       }
     },
     {
@@ -493,6 +523,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 1.0,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.573,
+        "max_similarity": 0.6322,
+        "most_similar_to": "expert_7"
       }
     },
     {
@@ -563,6 +598,11 @@
         "issues": [
           "The options are slightly asymmetrical. Option A combines two distinct concepts (purpose of CI and mean of sampling distribution), while B, C, and D generally focus on only one concept each. A student who only knows the correct purpose of a CI might guess A without understanding the sampling distribution component, although this is mitigated by the stem prompting for both."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.625,
+        "max_similarity": 0.6797,
+        "most_similar_to": "expert_4"
       }
     },
     {
@@ -634,6 +674,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 1.0,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5604,
+        "max_similarity": 0.7031,
+        "most_similar_to": "expert_7"
       }
     },
     {
@@ -705,6 +750,11 @@
         "issues": [
           "The options are slightly uneven in structure; some are 'double-barreled' by addressing both the interpretation of the confidence interval and the effect of sample size (e.g., Option 1 and Option 3), while Option 2 only addresses the interpretation of the interval."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5897,
+        "max_similarity": 0.6609,
+        "most_similar_to": "expert_5"
       }
     }
   ],

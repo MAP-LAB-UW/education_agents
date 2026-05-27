@@ -71,6 +71,11 @@
           "Option D is tagged with B17 by the generator, but its text explicitly contradicts the 'more precise estimate' component of B17.",
           "Facet B17 contains two linked concepts (higher confidence = more precise, leading to shorter interval). When options break these concepts apart (like Option A, which has increased width but more precision), it creates slight tagging ambiguity."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.508,
+        "max_similarity": 0.7317,
+        "most_similar_to": "expert_7"
       }
     },
     {
@@ -132,6 +137,11 @@
         "issues": [
           "Option C is incorrectly tagged by the generator as B10. It should be tagged as B9 because it describes the standard error remaining unchanged, rather than becoming more spread out."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5269,
+        "max_similarity": 0.6783,
+        "most_similar_to": "expert_7"
       }
     },
     {
@@ -202,6 +212,11 @@
           "Options C and D are extremely similar in that they both test the exact same specific variant of misconception B16 (estimating the sample mean). The item would be stronger if one of them tested a different misconception, such as B15 (interpreting CI as a probability).",
           "Option A uses the shorthand 'with 95% confidence' rather than testing the frequentist interpretation of confidence level (Goal A4). While acceptable since the item focuses on A5 vs B16, it misses an opportunity to reinforce A4."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.649,
+        "max_similarity": 0.7472,
+        "most_similar_to": "expert_2"
       }
     },
     {
@@ -275,6 +290,11 @@
           "Options A and C are too similar; they both test the exact same misconception (B15) using almost identical phrasing ('probability' vs 'chance'). This reduces the diagnostic value of having both options.",
           "The generator's tag for Option D is incorrect based on its own rationale. It should be tagged as B16 because it conflates estimating the population mean with capturing individual scores/data points."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5598,
+        "max_similarity": 0.7144,
+        "most_similar_to": "expert_6"
       }
     },
     {
@@ -345,6 +365,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 0.95,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5101,
+        "max_similarity": 0.792,
+        "most_similar_to": "expert_3"
       }
     },
     {
@@ -416,6 +441,11 @@
         "issues": [
           "Option D is incorrectly tagged by the generator as B11. It actually reflects B9 (mirrors population distribution) because it states the shape remains the same regardless of sample size, rather than getting closer to the population distribution as n increases."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.4875,
+        "max_similarity": 0.7896,
+        "most_similar_to": "expert_3"
       }
     },
     {
@@ -486,6 +516,11 @@
         "overall_agreement": 0.85,
         "overall_confidence": 0.9,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5525,
+        "max_similarity": 0.716,
+        "most_similar_to": "expert_3"
       }
     },
     {
@@ -559,6 +594,11 @@
           "Option C's text uses the phrase 'more likely to be closer', which is statistically correct, but the generator's rationale claims the option exhibits B14 ('guaranteed closeness'). The option text contradicts the generator's intended misconception.",
           "Option D is tagged with B14 by the generator, but B14 is about sample means always being *closer* with larger samples. Option D argues the sample mean is *farther* and the CI is *wider*, which perfectly matches facet B10 instead."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5141,
+        "max_similarity": 0.6408,
+        "most_similar_to": "expert_3"
       }
     },
     {
@@ -626,6 +666,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 1.0,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5375,
+        "max_similarity": 0.7458,
+        "most_similar_to": "expert_7"
       }
     },
     {
@@ -697,6 +742,11 @@
           "Option B captures an incorrect mean, but the facet B13 specifically says 'depends on sample size'. The option does not explicitly mention sample size affecting the mean, though B13 is the best available fit.",
           "Option D contains both a misconception (B12) and a correct facet (A3). While it functions well as a distractor for those who only partially understand the concepts, tagging should ideally capture the correct facet being affirmed."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5136,
+        "max_similarity": 0.7009,
+        "most_similar_to": "expert_1"
       }
     }
   ],

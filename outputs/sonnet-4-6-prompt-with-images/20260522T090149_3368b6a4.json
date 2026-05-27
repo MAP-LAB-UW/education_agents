@@ -1,0 +1,148 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B8",
+      "B10"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v3"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on how sample size affects the sampling distribution and, by extension, the confidence interval width. A1 (larger sample → smaller standard error → tighter sampling distribution) and A7 (CI width increases with larger standard error) form the correct conceptual chain. B8 (confusing sampling distribution with sample distribution) and B10 (mistakenly believing larger samples spread out the sampling distribution) are common misconceptions that directly oppose A1 and A7. Together these facets support a question that asks students to reason about what happens to a CI when sample size changes, naturally distinguishing correct understanding from two distinct but related misconceptions. This combination has not been used in any prior item and covers B8, which is so far uncovered.",
+  "item": {
+    "stem": "A researcher surveys $n = 16$ students from a university and records their weekly study hours. The data have a sample mean of $\\bar{x} = 20$ hours and a sample standard deviation of $s = 8$ hours. She constructs a $95\\%$ confidence interval and gets $(16.74, 23.26)$.\n\nA colleague suggests replicating the study but surveying $n = 64$ students instead. Assuming the sample mean and standard deviation remain the same ($\\bar{x} = 20$, $s = 8$), what would happen to the width of the $95\\%$ confidence interval in the new study?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The interval would be wider, approximately $(18.04, 21.96)$, because more data points create more variability in the estimate.",
+        "facet_tags": [
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "A student holding misconception B10 believes that a larger sample size leads to a more spread-out sampling distribution, and therefore a wider confidence interval. They might reason that 'more data = more spread,' producing the incorrect wider interval."
+      },
+      {
+        "id": "B",
+        "text": "The interval would be the same width $(16.74, 23.26)$, because the width depends only on the variability within the original sample data, not on how many people you survey.",
+        "facet_tags": [
+          "B8"
+        ],
+        "is_correct": false,
+        "rationale": "A student with misconception B8 confuses the sampling distribution with the single-sample distribution. They think the CI width is determined solely by the spread of scores within the collected dataset, not by the standard error of the sampling distribution, so changing $n$ would have no effect."
+      },
+      {
+        "id": "C",
+        "text": "The interval would be narrower, approximately $(18.04, 21.96)$, because a larger sample size reduces the standard error $SE = \\frac{s}{\\sqrt{n}}$, producing a tighter interval.",
+        "facet_tags": [
+          "A1",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "A student with correct understanding sees that increasing $n$ from 16 to 64 cuts the standard error in half: $SE = \\frac{8}{\\sqrt{64}} = 1.0$ vs. $\\frac{8}{\\sqrt{16}} = 2.0$. Because CI width depends directly on the standard error ($\\text{width} = 2 \\times z^* \\times SE$), halving $SE$ halves the width, producing the narrower interval $(18.04, 21.96)$."
+      },
+      {
+        "id": "D",
+        "text": "The interval would be wider, approximately $(16.74, 23.26)$ or even broader, because a larger sample is more likely to include extreme values, increasing the margin of error.",
+        "facet_tags": [
+          "B10",
+          "B8"
+        ],
+        "is_correct": false,
+        "rationale": "This distractor combines two misconceptions: the student believes larger samples produce more spread (B10) and that the CI reflects the variability of individual scores in the sample rather than the precision of the mean estimate (B8). They reason that more participants means more outliers, which widens the interval."
+      }
+    ],
+    "correct_option_ids": [
+      "C"
+    ],
+    "explanation": "This item targets four facets. Correct option C requires understanding that increasing sample size shrinks the standard error ($SE = s/\\sqrt{n}$), which directly reduces CI width (A1 and A7). Option A targets B10: the misconception that larger samples create more spread in the sampling distribution, leading to a wider interval. Option B targets B8: confusing the sampling distribution with the single sample's distribution, so the student thinks only within-sample variability determines CI width, making $n$ irrelevant. Option D combines B8 and B10, reflecting a student who both conflates sample and sampling distributions and believes larger samples yield more spread. The concrete numerical values in each option make the facet distinctions latent — a student's choice directly reveals their mental model without the item ever naming the underlying concepts.",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B8",
+      "B10"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher surveys n = 16 students from a university and records their weekly study hours...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B10"
+        ],
+        "judge_tags": [
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly expresses the misconception that more data points create more variability in the estimate, which perfectly matches facet B10."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B8"
+        ],
+        "judge_tags": [
+          "B8"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states that the width depends only on the variability within the original sample data and ignores sample size, demonstrating confusion between the sample distribution and the sampling distribution (B8)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A1",
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly articulates that a larger sample size reduces standard error (A1), and directly links this smaller standard error to a narrower confidence interval (A7)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B10",
+          "B8"
+        ],
+        "judge_tags": [
+          "B8",
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "The reasoning focuses on the sample distribution including extreme values (B8, confusing sample data characteristics with sampling distribution of the mean) and concludes that this increases the margin of error/spread (B10)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.98,
+    "issues": [
+      "The 95% confidence interval in the stem is mathematically incorrect. With mean = 20, s = 8, n = 16, the standard error is 2. The margin of error provided is 3.26 (23.26 - 20), implying a critical value of 1.63, which is incorrect for a 95% confidence level (z = 1.96 or t = 2.13).",
+      "Option A contains an internal contradiction: it states the interval would be 'wider' but provides the numerical interval (18.04, 21.96), which has a margin of error of 1.96 and is actually *narrower* than the original interval (16.74, 23.26).",
+      "Option D contains a similar contradiction: it states the interval would be 'wider, approximately (16.74, 23.26)', but this interval is exactly the *same width* as the original interval provided in the stem."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 19.55,
+    "judge_s": 25.01
+  },
+  "created_at": "2026-05-22T09:01:49.121866+00:00"
+}

@@ -1,0 +1,144 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B9",
+      "B13"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v3"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets two distinct but related misconceptions about sampling distributions: B9 (that the sampling distribution mirrors the population distribution, implying its shape and spread are unchanged) and B13 (that the mean of the sampling distribution depends on sample size). These are contrasted against the correct understandings A2 (sampling distribution approaches normality as n increases, regardless of population shape) and A3 (the mean of the sampling distribution equals the population mean, independent of n). This pairing is coherent because both misconceptions stem from confusion about what properties of the sampling distribution are influenced by sample size versus what remains fixed. This combination is novel — while A2, A3, B9, and B13 have appeared individually in prior items, this exact grouping has not been used, and the specific contrast of 'what changes vs. what stays constant in the sampling distribution as n grows' has not been the central diagnostic focus of any prior item.",
+  "item": {
+    "stem": "A researcher studies the annual income of adults in a city. The population distribution of income is right-skewed with a mean of $\\mu = \\$52{,}000$ and a standard deviation of $\\sigma = \\$15{,}000$. A random sample of $n = 100$ adults is drawn.\n\nWhat is the sampling distribution of the sample mean $\\bar{x}$?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Right-skewed with mean $\\$52{,}000$ and standard deviation $\\$15{,}000$",
+        "facet_tags": [
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "A student who believes the sampling distribution mirrors the population distribution would choose a right-skewed shape and keep the standard deviation the same as the population's $\\sigma$, ignoring both the Central Limit Theorem and the effect of sample size on standard error."
+      },
+      {
+        "id": "B",
+        "text": "Right-skewed with mean $\\$52{,}000$ and standard deviation $\\dfrac{\\$15{,}000}{\\sqrt{100}}$",
+        "facet_tags": [
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "A student who correctly applies the standard error formula but still believes the sampling distribution mirrors the population's shape (right-skewed) would select this option. They understand that $SE = \\sigma/\\sqrt{n}$ but have not grasped that the CLT produces a normal sampling distribution regardless of population shape."
+      },
+      {
+        "id": "C",
+        "text": "Approximately normal with mean $\\dfrac{\\$52{,}000}{\\sqrt{100}}$ and standard deviation $\\dfrac{\\$15{,}000}{\\sqrt{100}}$",
+        "facet_tags": [
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "A student who mistakenly believes that the mean of the sampling distribution depends on (and is divided by) the sample size would select this option. They correctly apply the standard error formula but incorrectly scale the mean by $\\sqrt{n}$ as well, revealing the B13 misconception."
+      },
+      {
+        "id": "D",
+        "text": "Approximately normal with mean $\\$52{,}000$ and standard deviation $\\dfrac{\\$15{,}000}{\\sqrt{100}}$",
+        "facet_tags": [
+          "A2",
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "A student with correct understanding selects this option. By the Central Limit Theorem, with $n = 100 \\geq 30$, the sampling distribution of $\\bar{x}$ is approximately normal regardless of the right-skewed population shape (A2). The mean of the sampling distribution equals the population mean $\\mu = \\$52{,}000$ (A3), and the standard deviation is $SE = \\sigma/\\sqrt{n} = \\$15{,}000/\\sqrt{100} = \\$1{,}500$."
+      }
+    ],
+    "correct_option_ids": [
+      "D"
+    ],
+    "explanation": "This item targets four facets. **A2** (the sampling distribution approaches normality with large $n$, not the population shape): the correct answer is approximately normal even though the population is right-skewed, while options A and B trap students who believe the sampling distribution inherits the population's skewed shape (B9). **A3** (the mean of the sampling distribution equals $\\mu$): the correct answer keeps the mean at $\\$52{,}000$, while option C reveals the B13 misconception by dividing the mean by $\\sqrt{n}$. **B9** is probed by options A (wrong shape AND wrong SE) and B (wrong shape but correct SE). **B13** is probed by option C, where a student incorrectly treats both the mean and the standard deviation as divided by $\\sqrt{n}$.",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B9",
+      "B13"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher studies the annual income of adults in a city. The population distribution of income is right-skewed... What is the sampling distribution of the sample mean $\\bar{x}$?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B9"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option perfectly matches facet B9, as the student believes the sampling distribution will mirror the population's shape (right-skewed) and will have the exact same standard deviation ($15,000) as the population."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B9"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The student calculates the standard error correctly but still believes the shape of the sampling distribution mirrors the population distribution (right-skewed). Even though the parenthetical description in B9 mentions the standard deviation staying the same, the core misconception of B9 (mirroring population shape) is the driving force behind this selection."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B13"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "By dividing the population mean by the square root of the sample size, the student demonstrates the misconception that the mean of the sampling distribution is dependent on the sample size (B13)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A2",
+          "A3"
+        ],
+        "judge_tags": [
+          "A2",
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This is the correct answer. The student recognizes that with a sufficiently large sample size, the sampling distribution approaches a normal distribution regardless of the population's skew (A2), and they correctly identify that the mean of the sampling distribution is equal to the population mean (A3)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.97,
+    "issues": [
+      "The facet B9 contains two interconnected misconceptions (mirrored shape and mirrored standard deviation). Option B assesses the mirrored shape but not the mirrored standard deviation. This makes B9 slightly overloaded as a single facet, but the tagging is still accurate under the current facet map.",
+      "The item topic is labeled as 'confidence_intervals', but the item solely assesses 'sampling distributions'. While sampling distributions are foundational to confidence intervals, this item does not explicitly cover any CI-specific concepts."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 16.32,
+    "judge_s": 16.88
+  },
+  "created_at": "2026-05-22T09:14:53.330505+00:00"
+}

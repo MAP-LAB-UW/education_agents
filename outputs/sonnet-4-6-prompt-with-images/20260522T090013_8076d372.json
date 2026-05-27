@@ -1,0 +1,169 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A3",
+      "A4",
+      "B13",
+      "B15"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v3"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the sampling distribution mean and confidence interval interpretation. A3 (mean of sampling distribution equals population mean) and B13 (misconception that the mean depends on sample size) are conceptually linked around what determines the center of the sampling distribution. Pairing these with A4 (correct interpretation of confidence level as a percentage of replications) and B15 (misconception that CI represents a probability for any particular interval) creates a coherent item that probes whether students understand both the fixed nature of the population mean and what the confidence level actually means across repeated samples. This combination has not been used before and covers under-explored facets around sampling distribution center and repeated-sampling interpretation of confidence levels.",
+  "item": {
+    "stem": "A researcher takes repeated random samples of size $n = 40$ from a large population with mean $\\mu = 72$ and standard deviation $\\sigma = 10$. She constructs a 95% confidence interval from each sample. After collecting many such intervals, she makes the following claims. Indicate whether each claim is **True** or **False**.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "The mean of the sampling distribution of $\\bar{x}$ is $72$, regardless of the sample size used.",
+        "facet_tags": [
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "A student who understands that the mean of the sampling distribution always equals the population mean $\\mu$ will correctly mark this True. The sample size does not affect the center of the sampling distribution, only its spread."
+      },
+      {
+        "id": "B",
+        "text": "If the researcher had used $n = 100$ instead of $n = 40$, the mean of the sampling distribution of $\\bar{x}$ would be closer to $72$.",
+        "facet_tags": [
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "A student holding the B13 misconception believes that sample size influences the mean of the sampling distribution. This claim is False because $\\mu_{\\bar{x}} = \\mu = 72$ regardless of sample size; changing $n$ only changes the standard error, not the center."
+      },
+      {
+        "id": "C",
+        "text": "For a specific 95% CI she computed, say $(69.9, 74.1)$, there is a 95% probability that $\\mu$ falls between $69.9$ and $74.1$.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "A student with the B15 misconception treats the confidence level as a probability that the fixed population parameter $\\mu$ lies within a specific already-constructed interval. In reality, $\\mu$ is a fixed (unknown) constant — it either is or is not in the interval. The 95% refers to the long-run behavior of the procedure, not a probability about this particular interval."
+      },
+      {
+        "id": "D",
+        "text": "If the researcher repeats this process many times, about 95% of the confidence intervals she constructs will contain $\\mu = 72$.",
+        "facet_tags": [
+          "A4",
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "A student who correctly understands the confidence level as a long-run frequency property (A4) and recognizes that the intervals are designed to capture the true population mean $\\mu$ (A3) will correctly mark this True. The 95% confidence level means that 95% of all such intervals from repeated sampling will capture the true $\\mu$."
+      },
+      {
+        "id": "E",
+        "text": "For a specific 95% CI she computed, say $(69.9, 74.1)$, there is a 95% probability that the sample mean $\\bar{x}$ falls between $69.9$ and $74.1$.",
+        "facet_tags": [
+          "B15",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "A student conflating B15 (treating CI as a probability statement) and B13 (confusing what the interval captures) might believe the interval is about the sample mean rather than $\\mu$. This is False: the sample mean is always the center of the interval and is already known; the interval is designed to capture $\\mu$, not $\\bar{x}$."
+      }
+    ],
+    "correct_option_ids": [
+      "A",
+      "D"
+    ],
+    "explanation": "This item targets four facets. Facet A3 (mean of sampling distribution equals $\\mu$) is probed by options A and B: option A is correctly True, while option B is False because sample size does not shift the center of the sampling distribution (B13). Facet A4 (correct long-run frequency interpretation of confidence level) is probed by option D, which is correctly True. Facet B15 (treating the confidence level as a probability about a specific interval) is probed by options C and E, both of which are False — once an interval is constructed, $\\mu$ either is or is not inside it, and the 95% refers to the long-run procedure, not to any single realized interval.",
+    "target_facets": [
+      "A3",
+      "A4",
+      "B13",
+      "B15"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher takes repeated random samples of size n = 40 from a large population with mean \\mu = 72...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A3"
+        ],
+        "judge_tags": [
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option directly tests the understanding that the mean of the sampling distribution equals the population mean regardless of sample size, which aligns perfectly with A3."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B13"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This statement claims that changing the sample size will change the mean of the sampling distribution, which is the exact misconception described in B13."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Interpreting a specific, already-computed confidence interval as having a '95% probability' of capturing the population parameter correctly identifies misconception B15."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A4",
+          "A3"
+        ],
+        "judge_tags": [
+          "A4",
+          "A5"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The option tests the long-run frequency interpretation of confidence intervals (A4) and implies the CI captures the population mean (A5). The generator included A3, but this option does not evaluate understanding of the mean of the sampling distribution."
+      },
+      {
+        "option_id": "E",
+        "generator_tags": [
+          "B15",
+          "B13"
+        ],
+        "judge_tags": [
+          "B15",
+          "B16"
+        ],
+        "agreement": "partial",
+        "confidence": 1.0,
+        "reasoning": "The option combines the 'probability' misconception for a specific CI (B15) with the misconception that the CI is meant to capture the sample mean (B16). The generator incorrectly tagged B13, which is about the mean of the sampling distribution depending on sample size, likely confusing the facet definition."
+      }
+    ],
+    "overall_agreement": 0.6,
+    "overall_confidence": 0.95,
+    "issues": [
+      "In Option E, the generator explicitly stated in its rationale that B13 is 'confusing what the interval captures', but according to the provided facet map, B13 is actually 'The mean of the sampling distribution depends on sample size'. The correct facet for confusing the interval's target (sample mean vs. population mean) is B16.",
+      "In Option D, the generator tagged A3 (mean of sampling distribution), but the option text evaluates the interpretation of the confidence level (A4) and what the interval attempts to capture (A5), not the mean of the sampling distribution."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 19.61,
+    "judge_s": 22.99
+  },
+  "created_at": "2026-05-22T09:00:13.584637+00:00"
+}

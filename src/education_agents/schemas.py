@@ -50,6 +50,12 @@ class Option(BaseModel):
     rationale: str
 
 
+class Figure(BaseModel):
+    id: str
+    python_code: str
+    alt_text: str = ""
+
+
 class GeneratedItem(BaseModel):
     stem: str
     response_format: Literal["single_select", "multi_select", "true_false_per_option"]
@@ -57,6 +63,7 @@ class GeneratedItem(BaseModel):
     correct_option_ids: list[str]
     explanation: str
     target_facets: list[str]
+    figures: list[Figure] = []
 
 
 # ---------- Judge report ----------
@@ -88,7 +95,7 @@ class GenerationRequest(BaseModel):
     book_context_mode: Literal["none", "full_tex", "rag"] = "none"
     n_items: int = 1
     exclude_image_examples: bool = True
-    prompt_version: Literal["v1", "v2"] = "v1"
+    prompt_version: Literal["v1", "v2", "v3"] = "v1"
 
     @property
     def auto_select_facets(self) -> bool:
@@ -113,6 +120,7 @@ class EvalScores(BaseModel):
     latency_similarity: float
     latency_bucket: str
     latency_option_details: list[dict] = []
+    figure_necessity: int | None = None
 
 
 class RunArtifact(BaseModel):
@@ -122,5 +130,6 @@ class RunArtifact(BaseModel):
     item: GeneratedItem
     judge_report: JudgeReport
     eval_scores: EvalScores | None = None
+    figure_data: dict[str, str] = {}
     timing: dict[str, float]
     created_at: str

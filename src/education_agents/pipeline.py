@@ -11,8 +11,10 @@ from pathlib import Path
 from .book_context import load_book_context
 from .evaluation.correctness import evaluate_correctness
 from .evaluation.facet_latency import evaluate_facet_latency
+from .evaluation.figure_necessity import evaluate_figure_necessity
 from .evaluation.naturalness import evaluate_naturalness
 from .facets import load_facet_map
+from .figures import execute_figures
 from .generator import DEFAULT_GENERATOR_MODEL, generate_item, select_facets
 from .judge import DEFAULT_JUDGE_MODEL, judge_item
 from .schemas import EvalScores, GenerationRequest, RunArtifact
@@ -64,17 +66,28 @@ def run(
         item = generate_item(current_request, facet_map, book_context, model=gen_model)
         gen_time = time.time() - t0
 
+        figure_data: dict[str, str] = {}
+        if item.figures:
+            figure_data = execute_figures(item.figures)
+            print(
+                f"[{i + 1}/{request.n_items}] rendered {len(figure_data)}/{len(item.figures)} figures"
+            )
+
         t1 = time.time()
-        report = judge_item(item, facet_map, model=jdg_model)
+        report = judge_item(item, facet_map, model=jdg_model, figure_data=figure_data)
         judge_time = time.time() - t1
 
         eval_scores = None
         eval_time = 0.0
         if not skip_eval:
             t2 = time.time()
-            correctness = evaluate_correctness(item, model=evl_model)
-            naturalness = evaluate_naturalness(item, model=evl_model)
+            correctness = evaluate_correctness(item, model=evl_model, figure_data=figure_data)
+            naturalness = evaluate_naturalness(item, model=evl_model, figure_data=figure_data)
             latency = evaluate_facet_latency(item, facet_map)
+            fig_necessity = None
+            if figure_data:
+                fig_nec = evaluate_figure_necessity(item, model=evl_model)
+                fig_necessity = int(fig_nec.is_necessary)
             eval_scores = EvalScores(
                 correctness_pass=correctness.is_correct,
                 correctness_flagged_distractors=correctness.flagged_distractors,
@@ -85,6 +98,7 @@ def run(
                 latency_similarity=latency.mean_similarity,
                 latency_bucket=latency.bucket,
                 latency_option_details=[od.model_dump() for od in latency.option_details],
+                figure_necessity=fig_necessity,
             )
             eval_time = time.time() - t2
 
@@ -110,6 +124,7 @@ def run(
             item=item,
             judge_report=report,
             eval_scores=eval_scores,
+            figure_data=figure_data,
             timing=timing,
             created_at=now.isoformat(),
         )

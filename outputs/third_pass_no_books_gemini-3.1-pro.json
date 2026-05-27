@@ -71,6 +71,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 0.95,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5642,
+        "max_similarity": 0.7484,
+        "most_similar_to": "expert_6"
       }
     },
     {
@@ -142,6 +147,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 1.0,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.4754,
+        "max_similarity": 0.7283,
+        "most_similar_to": "expert_3"
       }
     },
     {
@@ -211,6 +221,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 1.0,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5954,
+        "max_similarity": 0.8398,
+        "most_similar_to": "expert_7"
       }
     },
     {
@@ -280,6 +295,11 @@
         "issues": [
           "Options B and D both diagnose misconception B13. While slight redundancy is acceptable in a true/false per option format (testing an applied example vs. a generalized rule), this limits the breadth of the facets the item could otherwise cover."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.4649,
+        "max_similarity": 0.5554,
+        "most_similar_to": "expert_5"
       }
     },
     {
@@ -347,6 +367,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 1.0,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.4966,
+        "max_similarity": 0.6869,
+        "most_similar_to": "expert_3"
       }
     },
     {
@@ -416,6 +441,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 1.0,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5399,
+        "max_similarity": 0.7125,
+        "most_similar_to": "expert_7"
       }
     },
     {
@@ -487,6 +517,11 @@
         "overall_agreement": 1.0,
         "overall_confidence": 1.0,
         "issues": []
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5532,
+        "max_similarity": 0.7028,
+        "most_similar_to": "expert_7"
       }
     },
     {
@@ -558,6 +593,11 @@
           "Options A and B are mutually exclusive opposites testing the exact same relationship between confidence level and interval width. In a True/False matrix, this is slightly redundant, as knowing the answer to one guarantees knowing the answer to the other.",
           "Similarly, Options C and D contrast the incorrect and correct definitions of confidence levels, making them largely inverse statements."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5702,
+        "max_similarity": 0.697,
+        "most_similar_to": "expert_5"
       }
     },
     {
@@ -633,6 +673,11 @@
         "issues": [
           "Mathematically, Option C also results in a narrower confidence interval. The original interval's margin of error is proportional to 1.96 / sqrt(500) ≈ 0.0876. Option C's margin of error is proportional to 2.576 / sqrt(1000) ≈ 0.0815. Because 0.0815 < 0.0876, Option C guarantees a narrower interval just like Option A. This makes the item have two correct answers if a student calculates the relative effects. To fix this, change Option C's sample size to something smaller that doesn't overpower the z-score increase, such as 'Increase the sample size to 600'."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.565,
+        "max_similarity": 0.7851,
+        "most_similar_to": "expert_7"
       }
     },
     {
@@ -716,6 +761,11 @@
         "issues": [
           "The item is very well-constructed. It successfully isolates three different dimensions of understanding (effect of n on SE, effect of SE on CI width, and the probabilistic vs deterministic nature of sample means) and plausibly mixes them to accurately diagnose specific misconceptions."
         ]
+      },
+      "similarity_with_experts": {
+        "mean_similarity": 0.5435,
+        "max_similarity": 0.6876,
+        "most_similar_to": "expert_7"
       }
     }
   ],

@@ -1,0 +1,138 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "item": {
+    "stem": "A nutritionist conducted a study and calculated a 95% confidence interval for the average daily sodium intake of adults in a specific city. The resulting interval was (2,800 mg, 3,200 mg). Which of the following is the most accurate interpretation of this result?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "If we were to take many samples of the same size and calculate a 95% confidence interval for each, approximately 95% of those intervals would contain the true population mean sodium intake.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies that the 95% confidence level describes the long-run success rate of the interval-creation process (A4) and that the interval aims to capture the population parameter (A5)."
+      },
+      {
+        "id": "opt_2",
+        "text": "There is a 95% probability that the true population mean sodium intake for adults in this city is between 2,800 mg and 3,200 mg.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This distractor reflects the common misconception that the confidence level is the probability that a specific, fixed interval contains the population mean, whereas the mean is either in the interval or it is not (B15)."
+      },
+      {
+        "id": "opt_3",
+        "text": "Approximately 95% of the adults in the original sample have a daily sodium intake between 2,800 mg and 3,200 mg.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This distractor incorrectly suggests that the confidence interval describes the distribution of individual data points or sample statistics rather than estimating the population parameter (B16)."
+      },
+      {
+        "id": "opt_4",
+        "text": "We are 95% confident that if we took another sample, its sample mean would fall between 2,800 mg and 3,200 mg.",
+        "facet_tags": [
+          "B15",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option incorrectly interprets the confidence interval as a prediction for future sample statistics (B16) and uses confidence language as a probability for a future event (B15)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "To correctly interpret a confidence interval, students must recognize that the '95%' refers to the reliability of the estimation procedure across multiple replications (A4) and that the target is the population parameter (A5). Common errors include treating the interval as a probability statement about the parameter (B15) or confusing the population parameter with individual data points or sample means (B16).",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A nutritionist conducted a study and calculated a 95% confidence interval for the average daily sodium intake of adults in a specific city.",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A4",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option correctly describes the replication meaning of confidence levels (A4) and identifies the true population mean as the target parameter being estimated (A5)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option explicitly states that there is a 95% probability of the true population mean falling within the calculated interval, which maps exactly to facet B15."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option misinterprets the confidence interval as a description of the individual data points within the sample, mapping perfectly to B16 (estimating sample data instead of population parameters)."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B15",
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "This option clearly demonstrates B16 by stating the interval predicts the sample mean of a future sample (estimating sample statistics instead of population parameters). The generator's inclusion of B15 is understandable because of the 'confidence' language, but the core error here is about what is being estimated (a sample statistic), not necessarily framing it as a strict probability."
+      }
+    ],
+    "overall_agreement": 0.9,
+    "overall_confidence": 0.95,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 11.19,
+    "judge_s": 18.59
+  },
+  "created_at": "2026-05-07T22:41:16.466138+00:00"
+}

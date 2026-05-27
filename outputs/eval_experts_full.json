@@ -12,7 +12,7 @@
         ],
         "is_correct": true,
         "flagged_distractors": [],
-        "reasoning": "According to the Central Limit Theorem, the sampling distribution of the sample mean approaches a normal distribution as the sample size becomes large, regardless of the population's shape. With a sample size of 40, the sampling distribution will be approximately normal and have a smaller spread (standard error) than the population distribution. Option B accurately depicts this approximately normal, narrower distribution."
+        "reasoning": "The Central Limit Theorem states that as the sample size increases, the sampling distribution of the sample mean approaches a normal distribution, regardless of the shape of the population distribution. With n=40, the sampling distribution will be approximately normal with a narrower spread than the population. Option B shows this correctly."
       },
       "naturalness": {
         "stem_score": 3,
@@ -56,6 +56,12 @@
             ]
           }
         ]
+      },
+      "figure_necessity": 1,
+      "similarity_with_experts": {
+        "mean_similarity": 0.5364,
+        "max_similarity": 0.6901,
+        "most_similar_to": "expert_3"
       }
     },
     {
@@ -118,6 +124,12 @@
             ]
           }
         ]
+      },
+      "figure_necessity": null,
+      "similarity_with_experts": {
+        "mean_similarity": 0.4738,
+        "max_similarity": 0.6468,
+        "most_similar_to": "expert_6"
       }
     },
     {
@@ -173,6 +185,12 @@
             ]
           }
         ]
+      },
+      "figure_necessity": null,
+      "similarity_with_experts": {
+        "mean_similarity": 0.5455,
+        "max_similarity": 0.703,
+        "most_similar_to": "expert_4"
       }
     },
     {
@@ -235,6 +253,12 @@
             ]
           }
         ]
+      },
+      "figure_necessity": null,
+      "similarity_with_experts": {
+        "mean_similarity": 0.5622,
+        "max_similarity": 0.703,
+        "most_similar_to": "expert_3"
       }
     },
     {
@@ -324,6 +348,12 @@
             ]
           }
         ]
+      },
+      "figure_necessity": null,
+      "similarity_with_experts": {
+        "mean_similarity": 0.5498,
+        "max_similarity": 0.6672,
+        "most_similar_to": "expert_6"
       }
     },
     {
@@ -392,6 +422,12 @@
             ]
           }
         ]
+      },
+      "figure_necessity": null,
+      "similarity_with_experts": {
+        "mean_similarity": 0.5239,
+        "max_similarity": 0.6672,
+        "most_similar_to": "expert_5"
       }
     },
     {
@@ -460,6 +496,12 @@
             ]
           }
         ]
+      },
+      "figure_necessity": null,
+      "similarity_with_experts": {
+        "mean_similarity": 0.4464,
+        "max_similarity": 0.5616,
+        "most_similar_to": "expert_6"
       }
     },
     {
@@ -528,6 +570,12 @@
             ]
           }
         ]
+      },
+      "figure_necessity": null,
+      "similarity_with_experts": {
+        "mean_similarity": 0.4661,
+        "max_similarity": 0.6231,
+        "most_similar_to": "expert_4"
       }
     }
   ],
@@ -586,6 +634,7 @@
           "confidence_intervals_3"
         ]
       }
-    }
+    },
+    "figure_fraction": 0.125
   }
 }

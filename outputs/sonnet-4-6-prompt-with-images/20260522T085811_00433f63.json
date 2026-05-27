@@ -1,0 +1,196 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v3"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets the interpretation of confidence intervals, a conceptually rich area that hasn't been covered in the previous item. A4 (correct interpretation of confidence level as a long-run frequency across replications) and A5 (CI captures population parameter, not sample statistics) are paired with B15 (misinterpreting CI as a probability statement about a single interval containing the mean) and B16 (thinking CI estimates sample statistics or sample data rather than population parameters). These four facets are tightly related—they all revolve around what a confidence interval actually means and what it is estimating—making it natural to craft a single item stem that distinguishes correct understanding from common misconceptions about CI interpretation.",
+  "item": {
+    "stem": "A nutritionist takes a random sample of $n = 40$ adults and measures their daily sugar intake. From this sample, she computes $\\bar{x} = 82$ grams and constructs the following 90% confidence interval for the mean daily sugar intake of all adults in the population:\n$$( 76.4, \\ 87.6 )$$\nFor each of the following statements about this confidence interval, decide whether it is **True** or **False**.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "We are 90% confident that the true mean daily sugar intake of all adults in the population is between $76.4$ and $87.6$ grams.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct interpretation. 'We are 90% confident' correctly expresses the confidence level as a long-run frequency property of the procedure (A4), and the interval targets the true population mean $\\mu$, not a sample statistic (A5)."
+      },
+      {
+        "id": "B",
+        "text": "There is a 90% probability that the true mean daily sugar intake of all adults is between $76.4$ and $87.6$ grams.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This statement treats the confidence interval as a probability statement about the fixed (but unknown) population parameter $\\mu$. Once the interval is constructed, $\\mu$ is either inside or outside it — the probability is not 0.90. A student who selects 'True' here is treating the confidence level as a direct probability that this specific interval contains $\\mu$ (B15)."
+      },
+      {
+        "id": "C",
+        "text": "If we repeatedly took samples of $n = 40$ adults and constructed 90% confidence intervals the same way, about 90% of those intervals would contain the true population mean.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct long-run frequency interpretation of a 90% confidence level (A4). It correctly identifies the target as the true population mean (A5). Students who understand both facets should mark this True."
+      },
+      {
+        "id": "D",
+        "text": "We are 90% confident that the mean daily sugar intake of the 40 adults in the sample is between $76.4$ and $87.6$ grams.",
+        "facet_tags": [
+          "A4",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "The sample mean $\\bar{x} = 82$ is a known value computed directly from the data — it is already known with certainty and does not need to be estimated. Saying the CI captures the sample mean confuses the target of inference: CIs are built to capture the unknown population parameter $\\mu$, not the observed sample statistic (B16). A student marking this True is misidentifying what the interval estimates."
+      },
+      {
+        "id": "E",
+        "text": "90% of all adults in the population consume between $76.4$ and $87.6$ grams of sugar per day.",
+        "facet_tags": [
+          "B15",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This statement misidentifies the CI as capturing individual data values in the population rather than the population mean $\\mu$ (B16). It also misreads the confidence level as a statement about what proportion of individuals fall inside the interval (B15). A student selecting 'True' here conflates a confidence interval with a reference range for individual observations."
+      },
+      {
+        "id": "F",
+        "text": "Of 100 confidence intervals constructed using this same method, we would expect approximately 90 of them to contain $\\bar{x} = 82$ grams.",
+        "facet_tags": [
+          "A4",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option correctly invokes the repeated-sampling interpretation of the confidence level (A4 surface language) but directs it at the wrong target: the sample mean $\\bar{x}$ rather than the population mean $\\mu$ (B16). The sample mean is not what CI procedures try to capture across replications; the population mean is. A student who marks this True understands the long-run frequency idea but misidentifies the estimand."
+      }
+    ],
+    "correct_option_ids": [
+      "A",
+      "C"
+    ],
+    "explanation": "This item diagnoses four facets simultaneously through a concrete 90% CI scenario. Options A and C are both correct and require students to recognize (1) that the confidence level describes a long-run frequency property of the procedure (A4) and (2) that the interval targets the unknown population mean $\\mu$, not any sample statistic (A5). Option B targets B15 — the common misconception that the confidence level is a direct probability that this specific realized interval contains the parameter. Options D and F target B16 — the misconception that a CI estimates the sample mean rather than the population mean — while option F also probes whether students can catch a subtle misuse of the correct repeated-sampling language. Option E targets both B15 and B16 simultaneously, representing the misconception that the CI describes a frequency of individual-level data rather than a parameter estimate.",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A nutritionist takes a random sample of n = 40 adults... constructs the following 90% confidence interval... decide whether it is True or False.",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A4",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "The option uses the standard 'we are 90% confident' language, which correctly references the procedure's long-run success rate (A4) and targets the true population mean (A5). It correctly avoids the probability misconception."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "The option directly exhibits the misconception that a confidence level represents the probability of a specific realized interval containing the population parameter, which aligns perfectly with B15."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A4",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This statement is the textbook definition of the repeated-sampling (long-run frequency) interpretation of a confidence interval (A4), and it explicitly targets the true population mean (A5)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A4",
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The option misidentifies the target of the confidence interval as the sample mean rather than the population parameter, perfectly matching B16. While it uses the 'confident' phrasing associated with A4, a student selecting this primarily demonstrates misconception B16."
+      },
+      {
+        "option_id": "E",
+        "generator_tags": [
+          "B15",
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "partial",
+        "confidence": 0.85,
+        "reasoning": "This option expresses the common 'predictive' misconception that the CI contains 90% of the individual population values ('true scores'). This aligns well with B16. While the generator tagged B15 (probability), B16 is a more precise fit for estimating 'true scores or sample data' over parameters."
+      },
+      {
+        "option_id": "F",
+        "generator_tags": [
+          "A4",
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "This statement uses the repeated-sampling framework but incorrectly targets the sample mean (x-bar) instead of the population parameter. A student marking this 'True' demonstrates misconception B16. The presence of A4 is merely surface-level distractor language."
+      }
+    ],
+    "overall_agreement": 0.8,
+    "overall_confidence": 0.9,
+    "issues": [
+      "The generator frequently tags 'A4' on distractor options (D, F) simply because the option borrows valid A4 phrasing as a trap. However, from a diagnostic perspective, a student marking 'True' on these distractors is primarily demonstrating the B16 misconception, not an understanding of A4.",
+      "Option E represents the 'population proportion / individual values' misconception. The facet map's B16 explicitly mentions 'true scores or sample data instead of population parameters', making B16 the primary fit. Tagging B15 here dilutes the definition of B15, which is specifically about parameter probability."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 24.5,
+    "judge_s": 26.12
+  },
+  "created_at": "2026-05-22T08:58:11.736101+00:00"
+}

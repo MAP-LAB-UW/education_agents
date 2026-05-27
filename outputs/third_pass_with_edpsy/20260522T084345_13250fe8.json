@@ -1,0 +1,117 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "B8",
+      "B12"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the conceptual definition and the shape of the sampling distribution. It probes whether students understand that the sampling distribution is a theoretical distribution of a statistic, not a single dataset (B8), and tests their understanding of the Central Limit Theorem by distinguishing between the belief that the distribution is always normal (B12) versus the correct understanding that its normality is dependent on sample size (A2).",
+  "item": {
+    "stem": "A researcher is studying the number of hours of sleep per night for a population of college students. This variable is known to be strongly skewed to the right (most students sleep 6-7 hours, but a few sleep 10-12). The researcher plans to generate a sampling distribution of the mean by drawing many random samples of size $n$ from this population.",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "For a small sample size like $n=4$, the distribution of all possible sample means will follow a perfectly normal curve because the sample mean is a measure of center.",
+        "facet_tags": [
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that the sampling distribution of the mean is always normally distributed, regardless of the population shape or the sample size (B12)."
+      },
+      {
+        "id": "B",
+        "text": "If the researcher draws one large sample of $n=100$, the sampling distribution of the mean is simply the histogram showing how the 100 individual sleep times in that specific dataset are distributed.",
+        "facet_tags": [
+          "B8"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the confusion between a sample distribution (the scores within one dataset) and a sampling distribution (the theoretical distribution of means from many samples) (B8)."
+      },
+      {
+        "id": "C",
+        "text": "The distribution of sample means will still be skewed to the right if the sample size is only $n=4$, but it will look like a normal curve if the sample size is increased to $n=100$.",
+        "facet_tags": [
+          "A2"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct application of the Central Limit Theorem. It recognizes that for a skewed population, the sampling distribution of the mean only approaches normality as the sample size $n$ increases (A2)."
+      }
+    ],
+    "correct_option_ids": [
+      "C"
+    ],
+    "explanation": "This item assesses student understanding of the shape of the sampling distribution of the mean. According to the Central Limit Theorem, the sampling distribution of the mean will approach a normal distribution as the sample size $n$ increases, even if the underlying population is skewed (A2). Students often mistakenly believe that the sampling distribution is always normal regardless of $n$ (B12), or they confuse the distribution of scores within a single sample with the distribution of means across many samples (B8).",
+    "target_facets": [
+      "A2",
+      "B8",
+      "B12"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is studying the number of hours of sleep per night for a population of college students. This variable is known to be strongly skewed to the right...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B12"
+        ],
+        "judge_tags": [
+          "B12"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly states that the distribution of sample means will follow a perfectly normal curve for a small sample size, which aligns perfectly with facet B12 (the misconception that the sampling distribution of the mean is always normal regardless of sample size)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B8"
+        ],
+        "judge_tags": [
+          "B8"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option describes the sampling distribution as the histogram of 100 individual sleep times from one sample, which is a direct reflection of facet B8 (confusing the sampling distribution with the sample distribution from a single dataset)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A2"
+        ],
+        "judge_tags": [
+          "A2"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly describes the Central Limit Theorem: for a skewed population, the sampling distribution is skewed for small samples but becomes closer to a normal curve as the sample size increases. This perfectly demonstrates facet A2."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": [
+      "The item only has three options (A, B, C). It is generally best practice for multiple-choice questions to have at least four options to reduce the likelihood of guessing the correct answer."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 16.58,
+    "judge_s": 13.01
+  },
+  "created_at": "2026-05-22T08:43:45.015416+00:00"
+}

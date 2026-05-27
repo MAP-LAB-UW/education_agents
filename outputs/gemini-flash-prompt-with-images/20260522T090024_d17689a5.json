@@ -1,0 +1,152 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A6",
+      "B10",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v3"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination allows for a diagnostic item that tests a student's ability to identify how different factors influence the width and precision of a confidence interval. It contrasts the correct understanding of sample size effects on standard error (A1 vs B10) with the correct understanding of the trade-off between confidence level and interval width (A6 vs B17). This specific combination has not been used before and targets the logic of interval construction.",
+  "item": {
+    "stem": "A lake scientist calculates a $95\\%$ confidence interval for the mean dissolved oxygen concentration based on a sample of $n = 40$ readings. The resulting interval is $(6.2, 7.8) \\text{ mg/L}$. The scientist is unhappy with the width of this interval and wants to obtain a **shorter** (narrower) confidence interval in a follow-up study. Which of the following combinations of changes is guaranteed to produce a shorter confidence interval than the current one?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Increase the sample size to $n = 100$ and decrease the confidence level to $90\\%$.",
+        "facet_tags": [
+          "A1",
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "The student correctly understands that increasing the sample size reduces the standard error ($A1$) and that decreasing the confidence level reduces the critical value ($A6$). Both of these changes result in a smaller margin of error and thus a narrower (shorter) interval."
+      },
+      {
+        "id": "opt2",
+        "text": "Increase the sample size to $n = 100$ and increase the confidence level to $99\\%$.",
+        "facet_tags": [
+          "A1",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "The student understands that a larger sample size helps reduce width ($A1$), but they hold the misconception that a higher confidence level provides more 'precision' and therefore a shorter interval ($B17$). In fact, increasing confidence increases the critical value, which widens the interval."
+      },
+      {
+        "id": "opt3",
+        "text": "Decrease the sample size to $n = 20$ and decrease the confidence level to $90\\%$.",
+        "facet_tags": [
+          "A6",
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "The student understands that a lower confidence level helps reduce width ($A6$), but they hold the misconception that smaller samples result in a less spread-out sampling distribution ($B10$). In reality, a smaller sample size increases the standard error, which widens the interval."
+      },
+      {
+        "id": "opt4",
+        "text": "Decrease the sample size to $n = 20$ and increase the confidence level to $99\\%$.",
+        "facet_tags": [
+          "B10",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This choice reflects two misconceptions: that smaller sample sizes lead to more 'packed' or less spread-out sampling distributions ($B10$) and that higher confidence levels lead to shorter, more precise intervals ($B17$). Both of these changes actually serve to widen the interval."
+      }
+    ],
+    "correct_option_ids": [
+      "opt1"
+    ],
+    "explanation": "The width of a confidence interval for a mean is given by $2 \\cdot z^* \\cdot \\frac{\\sigma}{\\sqrt{n}}$. To decrease this width, one must decrease the margin of error ($z^* \\cdot \\frac{\\sigma}{\\sqrt{n}}$). This is achieved by either increasing the sample size $n$ (which decreases the standard error, $A1$) or decreasing the confidence level (which decreases the critical value $z^*$, $A6$). Misconceptions include thinking that increasing $n$ makes the distribution more spread out ($B10$) or that higher confidence requirements lead to narrower intervals ($B17$).",
+    "target_facets": [
+      "A1",
+      "A6",
+      "B10",
+      "B17"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A lake scientist calculates a 95% confidence interval for the mean dissolved oxygen concentration...",
+    "option_assessments": [
+      {
+        "option_id": "opt1",
+        "generator_tags": [
+          "A1",
+          "A6"
+        ],
+        "judge_tags": [
+          "A1",
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly applies the rules that increasing sample size decreases standard error (A1) and decreasing confidence level decreases the critical value/width (A6)."
+      },
+      {
+        "option_id": "opt2",
+        "generator_tags": [
+          "A1",
+          "B17"
+        ],
+        "judge_tags": [
+          "A1",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies increasing sample size as a way to reduce width (A1), but wrongly assumes increasing confidence level also reduces width, which maps exactly to B17."
+      },
+      {
+        "option_id": "opt3",
+        "generator_tags": [
+          "A6",
+          "B10"
+        ],
+        "judge_tags": [
+          "A6",
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option correctly uses a lower confidence level (A6) but incorrectly decreases the sample size, implying the misconception that smaller samples have smaller standard errors/are less spread out (B10)."
+      },
+      {
+        "option_id": "opt4",
+        "generator_tags": [
+          "B10",
+          "B17"
+        ],
+        "judge_tags": [
+          "B10",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option combines both misconceptions: that smaller samples reduce width (B10) and that higher confidence levels reduce width (B17)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": [
+      "The item has a severe flaw: Option 2 is mathematically also a correct answer. If we assume constant standard deviation, the original margin of error is proportional to 1.96 / sqrt(40) ≈ 0.310. Option 2's margin of error is proportional to 2.576 / sqrt(100) ≈ 0.258. Since 0.258 < 0.310, the interval in Option 2 is also guaranteed to be shorter. To fix this, change the numbers in the options (e.g., in Option 2, increase sample size to only n=50, which would yield a wider interval) or remove the specific numbers altogether and just ask about the directions of change."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 36.18,
+    "judge_s": 30.07
+  },
+  "created_at": "2026-05-22T09:00:24.605569+00:00"
+}

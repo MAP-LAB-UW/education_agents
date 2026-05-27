@@ -1,0 +1,140 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B9",
+      "B10"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets the relationship between sample size, the standard error of the sampling distribution, and the precision of the resulting confidence interval. It contrasts the correct understanding that increasing sample size decreases standard error and interval width (A1, A7) with misconceptions regarding the spread of the sampling distribution as sample size changes (B9, B10).",
+  "item": {
+    "stem": "A medical researcher knows that the population standard deviation for blood pressure readings is 12 mmHg. She initially calculates a 95% confidence interval for the mean blood pressure using a sample size of 16 patients. She then decides to conduct a larger study with a sample size of 64 patients. How will the standard error (SE) and the width of the 95% confidence interval in the second study compare to the first?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The standard error decreases from 3 mmHg to 1.5 mmHg, resulting in a narrower confidence interval.",
+        "facet_tags": [
+          "A1",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "The student correctly calculates the standard error for both samples (12/√16 = 3 and 12/√64 = 1.5), demonstrating an understanding that increasing sample size reduces standard error (A1) and that a smaller standard error leads to a narrower, more precise confidence interval (A7)."
+      },
+      {
+        "id": "B",
+        "text": "The standard error remains 12 mmHg for both studies, so the width of the confidence interval will stay the same.",
+        "facet_tags": [
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "The student incorrectly assumes that the standard error of the sampling distribution is identical to the population standard deviation (12 mmHg) and does not change based on the sample size."
+      },
+      {
+        "id": "C",
+        "text": "The standard error increases from 3 mmHg to 6 mmHg because the larger sample size introduces more variability, resulting in a wider confidence interval.",
+        "facet_tags": [
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "The student believes that larger samples lead to more spread or variability in the sampling distribution, incorrectly concluding that the standard error and interval width will increase as n increases."
+      },
+      {
+        "id": "D",
+        "text": "The standard error stays at 3 mmHg for both studies because the variability of the mean is a fixed property of the measurement, so the interval width will not change.",
+        "facet_tags": [
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "The student understands that the standard error is smaller than the population SD, but they fail to realize that the standard error is functionally dependent on the sample size, believing it remains constant once a baseline is established."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item assesses the student's understanding of how sample size affects the precision of a confidence interval. To identify the correct answer, the student must apply the standard error formula (SE = σ/√ n). Option A is correct because quadrupling the sample size (from 16 to 64) doubles the square root of n, thereby halving the standard error (from 12/4 to 12/8). This smaller SE directly results in a narrower confidence interval (A1, A7). Option B targets the misconception that the sampling distribution is identical to the population distribution (B9). Option C targets the misconception that larger samples result in more spread-out distributions (B10). Option D targets the idea that the variability of the sampling distribution is independent of the specific sample size used (B9).",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B9",
+      "B10"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A medical researcher knows that the population standard deviation for blood pressure readings is 12 mmHg. She initially calculates a 95% confidence interval for the mean blood pressure using a sample size of 16 patients. She then decides to conduct a larger study with a sample size of 64 patients. How will the standard error (SE) and the width of the 95% confidence interval in the second study compare to the first?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1",
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies that as sample size increases, the standard error decreases (A1), which leads to a narrower confidence interval (A7)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B9"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option aligns perfectly with B9, as the student assumes the standard error of the sampling distribution is identical to the population standard deviation (12 mmHg) and does not change with sample size."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B10"
+        ],
+        "judge_tags": [
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly claims that a larger sample size introduces more variability and increases the standard error, which is the exact definition of B10."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B9"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 0.8,
+        "reasoning": "This option also claims the standard error stays the same regardless of sample size, which maps to the consequence described in B9. However, the student incorrectly anchors on the SE of the first sample (3 mmHg) rather than the population SD (12 mmHg), so it only partially aligns with the 'mirrors population distribution' aspect of B9."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Option D targets B9, but B9 explicitly defines the misconception as 'Sampling distribution mirrors population distribution'. If a student chooses D, they acknowledge the SE is 3 mmHg (which is different from the population SD of 12 mmHg), meaning they do NOT believe it mirrors the population distribution. Thus, D represents an unlisted misconception (that SE is fixed after the first calculation) rather than a clean diagnosis of B9."
+    ]
+  },
+  "timing": {
+    "generator_s": 21.51,
+    "judge_s": 15.04
+  },
+  "created_at": "2026-05-14T22:55:35.159145+00:00"
+}

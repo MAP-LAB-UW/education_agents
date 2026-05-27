@@ -1,0 +1,148 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A6",
+      "B10",
+      "B17"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 3,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "item": {
+    "stem": "A researcher has calculated a 95% confidence interval for the average amount of time spent studying per week by college students. They find the interval is too wide and want to produce a narrower (more precise) interval in their follow-up study. Which of the following strategies will result in a narrower confidence interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "Increase the sample size and decrease the confidence level (e.g., to 90%).",
+        "facet_tags": [
+          "A1",
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "This option is correct because increasing the sample size reduces the standard error (making the sampling distribution more packed), and decreasing the confidence level reduces the critical value, both of which result in a narrower interval."
+      },
+      {
+        "id": "opt2",
+        "text": "Decrease the sample size and decrease the confidence level, because smaller samples result in a less spread out sampling distribution.",
+        "facet_tags": [
+          "A6",
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "While decreasing the confidence level would narrow the interval, this option is incorrect because it relies on the misconception that smaller samples reduce the spread of the sampling distribution (B10), when in fact they increase the standard error."
+      },
+      {
+        "id": "opt3",
+        "text": "Increase the sample size and increase the confidence level (e.g., to 99%), because higher confidence levels provide more precise and shorter intervals.",
+        "facet_tags": [
+          "A1",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "While increasing the sample size would narrow the interval, this option is incorrect because it assumes that higher confidence levels improve precision/shorten the interval (B17), when higher confidence actually requires a larger critical value and thus a wider interval."
+      },
+      {
+        "id": "opt4",
+        "text": "Decrease the sample size and increase the confidence level to maximize precision and minimize the spread of the data.",
+        "facet_tags": [
+          "B10",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This option combines two misconceptions: that smaller samples reduce sampling distribution spread (B10) and that higher confidence levels lead to shorter, more precise intervals (B17)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt1"
+    ],
+    "explanation": "To narrow a confidence interval, one must either decrease the confidence level (which decreases the critical value multiplier) or increase the sample size (which decreases the standard error by making the sampling distribution more packed). Option 1 correctly identifies both mechanisms (A1, A6). Option 2 and 4 test for the misconception that larger samples create more spread (B10). Option 3 and 4 test for the misconception that higher confidence levels result in shorter intervals due to 'higher precision' (B17).",
+    "target_facets": [
+      "A1",
+      "A6",
+      "B10",
+      "B17"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher has calculated a 95% confidence interval for the average amount of time spent studying per week by college students. They find the interval is too wide and want to produce a narrower (more precise) interval in their follow-up study. Which of the following strategies will result in a narrower confidence interval?",
+    "option_assessments": [
+      {
+        "option_id": "opt1",
+        "generator_tags": [
+          "A1",
+          "A6"
+        ],
+        "judge_tags": [
+          "A1",
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The option correctly identifies that increasing the sample size (which relates to A1 and A7, reducing standard error and thus interval width) and decreasing the confidence level (A6) will result in a narrower interval."
+      },
+      {
+        "option_id": "opt2",
+        "generator_tags": [
+          "A6",
+          "B10"
+        ],
+        "judge_tags": [
+          "A6",
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "This option correctly identifies that decreasing the confidence level will narrow the interval (A6) but pairs it with the misconception that smaller samples have less spread out sampling distributions (B10)."
+      },
+      {
+        "option_id": "opt3",
+        "generator_tags": [
+          "A1",
+          "B17"
+        ],
+        "judge_tags": [
+          "A1",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "This option correctly identifies the effect of increasing sample size (A1) but includes the common misconception that higher confidence levels lead to shorter, more precise intervals (B17)."
+      },
+      {
+        "option_id": "opt4",
+        "generator_tags": [
+          "B10",
+          "B17"
+        ],
+        "judge_tags": [
+          "B10",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "This option combines two misconceptions: decreasing sample size to minimize spread (B10) and increasing confidence level to maximize precision (B17)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.9,
+    "issues": [
+      "Option 1 lacks a 'because...' reasoning clause, unlike Options 2 and 3, which makes it structurally inconsistent and could potentially act as a test-wiseness cue.",
+      "In Option 4, the phrase 'spread of the data' technically refers to the sample distribution rather than the sampling distribution, which could inadvertently test facet B8 (confusion between sampling distribution and sample distribution) rather than just B10."
+    ]
+  },
+  "timing": {
+    "generator_s": 19.78,
+    "judge_s": 19.76
+  },
+  "created_at": "2026-05-07T22:28:43.902711+00:00"
+}

@@ -1,0 +1,150 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A2",
+      "B9",
+      "B11"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection focuses on the Central Limit Theorem and the properties of sampling distributions. It evaluates if students understand how sample size affects the spread (A1) and shape (A2) of the sampling distribution, while specifically diagnosing misconceptions that the sampling distribution is identical to the population distribution (B9) or that it converges toward the population's shape as sample size increases (B11).",
+  "item": {
+    "stem": "Household energy usage in a certain region is highly right-skewed, with a population mean of 900 kWh and a population standard deviation of 300 kWh. A researcher creates a sampling distribution of the mean using samples of size n=5. Then, the researcher repeats the process using samples of size n=150. What will be the primary differences in the second sampling distribution (n=150) compared to the first (n=5)?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The sampling distribution will be shaped more like a normal curve, and the sample means will be more tightly clustered around 900 kWh.",
+        "facet_tags": [
+          "A1",
+          "A2"
+        ],
+        "is_correct": true,
+        "rationale": "The student correctly understands that according to the Central Limit Theorem, as the sample size increases, the sampling distribution of the mean becomes more approximately normal (A2) and the standard error decreases, making the distribution more 'packed' or concentrated around the population mean (A1)."
+      },
+      {
+        "id": "B",
+        "text": "The sampling distribution will become more right-skewed to better match the population's shape, and the standard deviation of the means will remain 300 kWh.",
+        "facet_tags": [
+          "B9",
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "The student incorrectly believes that the sampling distribution should reflect the shape of the population distribution more accurately as the sample size grows (B11) and that the standard deviation of the sampling distribution is identical to the population standard deviation regardless of sample size (B9)."
+      },
+      {
+        "id": "C",
+        "text": "The sampling distribution will be shaped more like a normal curve, but the standard deviation of the means will remain 300 kWh.",
+        "facet_tags": [
+          "A2",
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly identifies that the shape becomes more normal (A2) but incorrectly assumes that the spread of the sampling distribution (standard error) is independent of the sample size and stays the same as the population standard deviation (B9)."
+      },
+      {
+        "id": "D",
+        "text": "The sampling distribution will be more concentrated around 900 kWh, but its shape will become more right-skewed to match the actual population distribution.",
+        "facet_tags": [
+          "A1",
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly recognizes that larger sample sizes lead to a smaller standard error (A1) but fails to understand that the sampling distribution of the mean approaches normality; instead, they think it should approach the shape of the population distribution (B11)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item assesses understanding of the Central Limit Theorem and the relationship between sample size and the properties of a sampling distribution. A correct student knows that regardless of the population shape (here, right-skewed), a larger sample size ($n=150$) results in a sampling distribution that is more normally distributed (A2) and has a smaller standard error ($\\\\sigma/\\\\sqrt{n}$), meaning it is more packed around the population mean (A1). Incorrect answers target the confusion between the sampling distribution and the population distribution, specifically the idea that the sampling distribution should mirror the population's shape (B11) or maintain the population's standard deviation (B9).",
+    "target_facets": [
+      "A1",
+      "A2",
+      "B9",
+      "B11"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "Household energy usage in a certain region is highly right-skewed, with a population mean of 900 kWh and a population standard deviation of 300 kWh. A researcher creates a sampling distribution of the mean using samples of size n=5. Then, the researcher repeats the process using samples of size n=150. What will be the primary differences in the second sampling distribution (n=150) compared to the first (n=5)?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1",
+          "A2"
+        ],
+        "judge_tags": [
+          "A1",
+          "A2"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states the shape will be more like a normal curve (A2) and the means will be more tightly clustered around 900 kWh (A1), perfectly matching the goal facets."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B9",
+          "B11"
+        ],
+        "judge_tags": [
+          "B9",
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states the shape will better match the population's shape (B11) and the standard deviation of the means will remain 300 kWh, equal to the population standard deviation (B9)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A2",
+          "B9"
+        ],
+        "judge_tags": [
+          "A2",
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states the shape approaches a normal curve (A2) but incorrectly claims the standard deviation remains 300 kWh (B9)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A1",
+          "B11"
+        ],
+        "judge_tags": [
+          "A1",
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies that the distribution will be more concentrated around the mean (A1) but incorrectly claims the shape will match the actual population distribution (B11)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 13.3,
+    "judge_s": 11.45
+  },
+  "created_at": "2026-05-22T08:41:10.689915+00:00"
+}

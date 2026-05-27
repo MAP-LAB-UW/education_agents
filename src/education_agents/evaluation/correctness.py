@@ -3,12 +3,28 @@
 from __future__ import annotations
 
 import os
+import re
 
 from pydantic import BaseModel
 
+from ..figures import build_multimodal_content
 from ..llm import structured_complete
 from ..schemas import GeneratedItem
 from .schemas import CorrectnessResult
+
+_FIGURE_REF_RE = re.compile(r"\[FIGURE:[^\]]*\]")
+
+
+def parse_selected_ids(raw: str) -> set[str]:
+    """Parse LLM selected_answer into clean option IDs, stripping figure refs."""
+    cleaned = _FIGURE_REF_RE.sub("", raw)
+    ids = set()
+    for part in cleaned.split(","):
+        part = part.strip().rstrip(".")
+        if part:
+            ids.add(part)
+    return ids
+
 
 DEFAULT_EVAL_MODEL = os.getenv(
     "EDU_AGENTS_EVAL_MODEL", "gemini/gemini-3.1-pro-preview"
@@ -33,6 +49,7 @@ Be rigorous. Only flag a distractor if there is a genuine statistical argument f
 def evaluate_correctness(
     item: GeneratedItem,
     model: str | None = None,
+    figure_data: dict[str, str] | None = None,
 ) -> CorrectnessResult:
     model = model or DEFAULT_EVAL_MODEL
 
@@ -54,7 +71,7 @@ def evaluate_correctness(
             "Return them comma-separated as your selected_answer."
         )
 
-    user_msg = (
+    user_text = (
         f"Stem: {item.stem}\n\n"
         f"Options:\n{options_text}"
         f"{format_note}\n\n"
@@ -62,14 +79,16 @@ def evaluate_correctness(
         "distractors that could also be defensibly correct."
     )
 
+    user_content = build_multimodal_content(user_text, figure_data or {})
+
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": user_msg},
+        {"role": "user", "content": user_content},
     ]
 
     result = structured_complete(messages, _LLMAnswer, model=model)
 
-    selected_ids = {s.strip() for s in result.selected_answer.split(",")}
+    selected_ids = parse_selected_ids(result.selected_answer)
     correct_ids = set(item.correct_option_ids)
     is_correct = selected_ids == correct_ids
 

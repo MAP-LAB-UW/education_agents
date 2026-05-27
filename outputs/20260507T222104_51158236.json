@@ -1,0 +1,134 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "B15",
+      "B16"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 1,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "item": {
+    "stem": "A medical researcher reports that a 95% confidence interval for the mean systolic blood pressure of a certain population is (118 mmHg, 126 mmHg). Which of the following is the most accurate interpretation of this result?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "If we repeated the sampling process many times and calculated a 95% confidence interval for each sample, approximately 95% of those intervals would contain the true population mean systolic blood pressure.",
+        "facet_tags": [
+          "A4"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies that the confidence level refers to the long-run success rate of the interval-estimation procedure (frequentist interpretation) across many replications."
+      },
+      {
+        "id": "B",
+        "text": "There is a 95% probability that the true population mean systolic blood pressure is between 118 mmHg and 126 mmHg.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This is a common misconception where students interpret a fixed frequentist interval as a probability statement about the population parameter, which is a fixed (though unknown) value, not a random variable."
+      },
+      {
+        "id": "C",
+        "text": "We are 95% confident that the mean blood pressure of the specific sample used in this study is between 118 mmHg and 126 mmHg.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option incorrectly suggests that the interval is intended to capture the sample statistic. In fact, we are 100% certain of the sample mean's location relative to the interval, as the interval is usually centered on it."
+      },
+      {
+        "id": "D",
+        "text": "There is a 95% probability that a randomly selected individual from this population will have a systolic blood pressure between 118 mmHg and 126 mmHg.",
+        "facet_tags": [
+          "B15",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option combines the probability misconception (B15) with the misconception that confidence intervals provide a range for individual data points or 'true scores' rather than the population parameter (B16)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "The item assesses the student's ability to distinguish between the correct frequentist interpretation of a confidence level (A4) and common misconceptions. Option B addresses the misconception that the confidence level represents a probability for a specific calculated interval (B15). Option C addresses the confusion between population parameters and sample statistics (B16). Option D addresses the confusion between predicting individual data points and estimating a population mean (B15, B16).",
+    "target_facets": [
+      "A4",
+      "B15",
+      "B16"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A medical researcher reports that a 95% confidence interval for the mean systolic blood pressure...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A4"
+        ],
+        "judge_tags": [
+          "A4"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option A correctly describes the frequentist interpretation of a 95% confidence level, which refers to the proportion of intervals that would contain the population mean in repeated sampling. This perfectly matches facet A4."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option B exhibits the misconception that a confidence interval gives a 95% probability of containing the population mean, cleanly matching facet B15."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option C exhibits the misconception that the confidence interval provides an estimate of the sample statistic (the sample mean) rather than the population parameter, which aligns exactly with facet B16."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B15",
+          "B16"
+        ],
+        "judge_tags": [
+          "B15",
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option D treats the interval both as a probability (matching B15) and as an estimate of individual data points / scores (matching B16's 'estimates ... true scores or sample data'). Thus, both tags are accurate."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 7.12,
+    "judge_s": 11.15
+  },
+  "created_at": "2026-05-07T22:21:04.732793+00:00"
+}

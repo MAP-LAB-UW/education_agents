@@ -1,0 +1,173 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets the interpretation of confidence intervals, which is distinct from the previously used Item 1 (which focused on CI width). A4 and A5 represent correct understanding: A4 captures the frequentist replication interpretation of confidence level, and A5 clarifies that CIs estimate population parameters. B15 and B16 represent two common and conceptually related misconceptions — that CIs express probability of capturing the true mean for a single interval (B15), and that CIs estimate sample statistics or sample data rather than population parameters (B16). Together these four facets allow a single item stem to probe whether students correctly understand both what a CI is estimating (population parameter, not sample statistic) and what the confidence level means (long-run frequency, not single-interval probability), making for a rich diagnostic that distinguishes nuanced misunderstandings from correct understanding.",
+  "item": {
+    "stem": "A nutritionist surveys a random sample of 50 adults and constructs a 90% confidence interval for the mean daily sugar intake (in grams) of all adults in the city. The resulting interval is (48.3, 61.7) grams.\n\nFor each statement below, decide whether it is True or False.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "We are 90% confident that the true mean daily sugar intake of all adults in the city is between 48.3 and 61.7 grams.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "A student who understands that a CI is designed to capture the true population parameter (A5) and that the confidence level refers to long-run reliability of the procedure (A4) will correctly identify this as the valid interpretation."
+      },
+      {
+        "id": "B",
+        "text": "There is a 90% probability that the true mean daily sugar intake of all adults in the city is between 48.3 and 61.7 grams.",
+        "facet_tags": [
+          "A5",
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "A student who conflates confidence level with the probability that this specific interval contains the parameter (B15) will mistakenly call this true. The population mean is fixed; the interval either contains it or it does not. The 90% refers to the procedure across repeated samples, not to a probability statement about this one interval."
+      },
+      {
+        "id": "C",
+        "text": "90% of all adults in the city consume between 48.3 and 61.7 grams of sugar per day.",
+        "facet_tags": [
+          "B15",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "A student who thinks the CI describes individual data values rather than the population mean (B16) and who misinterprets the confidence level as a proportion of individuals (B15) would incorrectly mark this as true. The CI estimates where the population mean lies, not the distribution of individual values."
+      },
+      {
+        "id": "D",
+        "text": "We are 90% confident that the mean daily sugar intake of the 50 adults in the sample is between 48.3 and 61.7 grams.",
+        "facet_tags": [
+          "A4",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "A student who believes the CI is estimating the sample mean rather than the population mean (B16) might accept this statement. However, the sample mean is already known and fixed (it is the center of the interval, approximately 55 g); the CI is constructed to estimate the unknown population mean, not the sample statistic."
+      },
+      {
+        "id": "E",
+        "text": "If this procedure were repeated many times with new samples of 50 adults each, approximately 90% of the resulting confidence intervals would contain the true mean daily sugar intake.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "A student who correctly understands confidence level as referring to long-run behavior across repeated replications (A4) and knows the CI targets the true population parameter (A5) will recognize this as an accurate interpretation of what 90% confidence means."
+      }
+    ],
+    "correct_option_ids": [
+      "A",
+      "E"
+    ],
+    "explanation": "This item targets four facets. Options A and E are correct because they reflect the proper interpretation of a confidence interval: the confidence level describes the long-run proportion of intervals (from repeated sampling) that would capture the true population mean (A4), and the interval is designed to estimate that population parameter, not sample statistics or individual values (A5). Option B is incorrect because it assigns a post-hoc probability to a single, already-constructed interval — the 90% is a property of the procedure, not of any one interval (B15). Option C is incorrect because it applies the interval to individual data points rather than the population mean, confusing what the CI estimates (B16) and misreading the confidence level as describing individuals (B15). Option D is incorrect because the sample mean is already known; confidence intervals estimate the unknown population parameter, not sample statistics (B16).",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A nutritionist surveys a random sample of 50 adults and constructs a 90% confidence interval for the mean daily sugar intake (in grams) of all adults in the city. The resulting interval is (48.3, 61.7) grams.",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A5"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "This statement is the standard colloquial interpretation of a confidence interval. It clearly demonstrates understanding that the CI estimates the 'true mean' (population parameter), aligning perfectly with A5. However, it does not explicitly demonstrate an understanding of replications or 'percentage of times', which is the core of A4. A4 is much better addressed by Option E."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A5",
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "partial",
+        "confidence": 0.95,
+        "reasoning": "This option clearly exhibits the B15 misconception by using the word 'probability' to describe a single realized interval. While it does mention the 'true mean' (which relates to A5), the active misconception that makes the statement false is B15. Tagging B15 alone is more appropriate."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B15",
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "partial",
+        "confidence": 0.85,
+        "reasoning": "This option misinterprets the confidence interval as a range containing 90% of the individual values ('true scores or sample data'), which directly matches B16. It is not necessarily interpreting the CI as a probability of capturing a parameter, making B15 less relevant here."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A4",
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "This statement incorrectly applies the confidence interval to the 'mean... of the 50 adults in the sample', which is exactly misconception B16. While it uses the phrase '90% confident' (superficially related to A4), the statement is fundamentally incorrect due to B16. It does not actually demonstrate mastery of A4."
+      },
+      {
+        "option_id": "E",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A4",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This statement is the precise frequentist definition of a confidence interval. It explicitly refers to repeating the procedure many times (A4) and accurately targets the 'true mean' (A5)."
+      }
+    ],
+    "overall_agreement": 0.6,
+    "overall_confidence": 0.9,
+    "issues": [
+      "The item itself is very well-constructed and effectively distinguishes between the correct frequentist interpretation, the colloquial interpretation, and common misconceptions (probability, individual data proportions, and sample statistics)."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 20.04,
+    "judge_s": 20.32
+  },
+  "created_at": "2026-05-22T08:44:33.619297+00:00"
+}

@@ -9,8 +9,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from education_agents.evaluation.correctness import evaluate_correctness
-from education_agents.evaluation.corpus_metrics import evaluate_corpus
+from education_agents.evaluation.corpus_metrics import evaluate_corpus, evaluate_similarity_with_experts
 from education_agents.evaluation.facet_latency import evaluate_facet_latency
+from education_agents.evaluation.figure_necessity import evaluate_figure_necessity
 from education_agents.evaluation.naturalness import evaluate_naturalness
 from education_agents.evaluation.schemas import (
     CorpusEvaluation,
@@ -58,6 +59,10 @@ def print_item_results(results: list[ItemEvaluation]):
         for od in fl.option_details:
             print(f"    {od.option_id}: {od.score}/4 ({od.bucket}, sim={od.similarity:.3f})  tags={od.facet_tags}")
 
+        if r.figure_necessity is not None:
+            label = "essential" if r.figure_necessity == 1 else "decorative"
+            print(f"  Figure Necessity: {r.figure_necessity} ({label})")
+
     # Summary table
     n = len(results)
     n_correct = sum(1 for r in results if r.correctness.is_correct)
@@ -67,12 +72,16 @@ def print_item_results(results: list[ItemEvaluation]):
     mean_latency_score = sum(r.facet_latency.score for r in results) / n
     flagged = sum(len(r.correctness.flagged_distractors) for r in results)
 
+    fig_results = [r for r in results if r.figure_necessity is not None]
+
     print("\n" + "=" * 80)
     print("  ITEM SUMMARY")
     print("=" * 80)
     header = "{:22s} {:>9s} {:>12s} {:>12s} {:>14s}".format(
         "Source", "Correct", "Natural /5", "Latency /4", "Flagged Dist",
     )
+    if fig_results:
+        header += "  {:>6s}".format("Fig")
     print(header)
     print("-" * 80)
     for r in results:
@@ -83,6 +92,8 @@ def print_item_results(results: list[ItemEvaluation]):
             "{}/4 ({})".format(r.facet_latency.score, r.facet_latency.bucket[:7]),
             len(r.correctness.flagged_distractors),
         )
+        if fig_results:
+            row += "  {:>6s}".format(str(r.figure_necessity) if r.figure_necessity is not None else "—")
         print(row)
     print("-" * 80)
 
@@ -91,6 +102,11 @@ def print_item_results(results: list[ItemEvaluation]):
     print("    Naturalness:        {:.1f}/5  (stem={:.1f}, options={:.1f})".format(mean_natural, mean_stem, mean_opts))
     print("    Facet Latency:      {:.1f}/4".format(mean_latency_score))
     print("    Flagged distractors: {} across {} items".format(flagged, n))
+    if fig_results:
+        fig_avg = sum(r.figure_necessity for r in fig_results) / len(fig_results)
+        print("    Figure Necessity:   {:.2f} ({}/{} items with figures)".format(
+            fig_avg, sum(r.figure_necessity for r in fig_results), len(fig_results)
+        ))
 
 
 def print_corpus_results(corpus: CorpusEvaluation):
@@ -126,6 +142,10 @@ def print_corpus_results(corpus: CorpusEvaluation):
     print(f"    Max pairwise stem similarity:  {pd.semantic.max_pairwise_similarity:.3f}")
     if pd.semantic.most_similar_pair:
         print(f"    Most similar pair: {pd.semantic.most_similar_pair}")
+
+    if corpus.figure_fraction is not None:
+        print(f"\n  Figures:")
+        print(f"    Fraction with figures: {corpus.figure_fraction:.0%}")
 
 
 def main():
@@ -178,6 +198,10 @@ def main():
         for i, art in enumerate(artifacts):
             if art.eval_scores:
                 es = art.eval_scores
+                fig_nec = es.figure_necessity
+                if fig_nec is None and art.figure_data:
+                    fn = evaluate_figure_necessity(art.item, model=args.eval_model)
+                    fig_nec = int(fn.is_necessary)
                 item_results.append(ItemEvaluation(
                     source=art.created_at[:19],
                     correctness=CorrectnessResult(
@@ -200,29 +224,50 @@ def main():
                         bucket=es.latency_bucket,
                         option_details=[OptionLatency(**od) for od in es.latency_option_details],
                     ),
+                    figure_necessity=fig_nec,
                 ))
                 skipped += 1
                 continue
 
             print(f"  [{i+1}/{len(artifacts)}] {art.item.stem[:60]}...")
 
-            correctness = evaluate_correctness(art.item, model=args.eval_model)
-            naturalness = evaluate_naturalness(art.item, model=args.eval_model)
+            figure_data = art.figure_data or {}
+            correctness = evaluate_correctness(art.item, model=args.eval_model, figure_data=figure_data)
+            naturalness = evaluate_naturalness(art.item, model=args.eval_model, figure_data=figure_data)
 
             if embed_model is None:
                 from education_agents.evaluation.facet_latency import _get_model
                 embed_model = _get_model()
             latency = evaluate_facet_latency(art.item, facet_map, model=embed_model)
 
+            fig_nec = None
+            if figure_data:
+                fn = evaluate_figure_necessity(art.item, model=args.eval_model)
+                fig_nec = int(fn.is_necessary)
+
             item_results.append(ItemEvaluation(
                 source=art.created_at[:19],
                 correctness=correctness,
                 naturalness=naturalness,
                 facet_latency=latency,
+                figure_necessity=fig_nec,
             ))
 
         if skipped:
             print(f"  Skipped {skipped}/{len(artifacts)} items (eval_scores already present)")
+
+        print("\nComputing similarity with expert examples...")
+        ref_stems = [ex.stem for ex in facet_map.examples]
+        ref_ids = [f"expert_{i+1}" for i in range(len(ref_stems))]
+        stems = [art.item.stem for art in artifacts]
+        source_ids = [art.created_at[:19] for art in artifacts]
+        sem_results = evaluate_similarity_with_experts(
+            stems, source_ids,
+            reference_stems=ref_stems, reference_ids=ref_ids,
+        )
+        for r, sem in zip(item_results, sem_results):
+            r.similarity_with_experts = sem
+
         print_item_results(item_results)
 
     if not args.skip_corpus:

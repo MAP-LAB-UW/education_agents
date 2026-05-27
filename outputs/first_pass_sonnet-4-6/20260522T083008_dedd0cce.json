@@ -1,0 +1,168 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A3",
+      "A4",
+      "B13",
+      "B15"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the sampling distribution mean and confidence interval interpretation—two conceptually linked ideas. A3 (mean of sampling distribution equals population mean) pairs naturally with B13 (misconception that the mean of the sampling distribution depends on sample size), allowing an item to probe whether students understand the fixed relationship between sampling distribution mean and population mean. A4 (correct interpretation of confidence level as percentage of replications) pairs with B15 (misconception that CI represents a probability of including the true mean for a particular interval), which is a classic and important confusion. Together these facets support a scenario-based item where students must reason about what changes (and what stays the same) as sample size varies, and what the confidence level actually means—distinguishing frequency-of-coverage from single-interval probability. This combination has not been used before and covers under-represented facets A3 and B13.",
+  "item": {
+    "stem": "A random sample of 50 students is taken from a university, and a 90% confidence interval for the mean GPA is constructed. Consider the following statements about the sampling distribution of the sample mean and the confidence interval. For each statement, indicate whether it is True or False.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "The mean of the sampling distribution of the sample mean equals the true population mean GPA, regardless of the sample size used.",
+        "facet_tags": [
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "This correctly states that the mean of the sampling distribution equals the population mean (μ), which is a fundamental property unaffected by sample size — directly targeting goal facet A3."
+      },
+      {
+        "id": "B",
+        "text": "The mean of the sampling distribution of the sample mean would be larger if the sample size were increased from 50 to 200.",
+        "facet_tags": [
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "This reflects the misconception that the mean of the sampling distribution depends on sample size (B13). In reality, the mean of the sampling distribution always equals the population mean regardless of n."
+      },
+      {
+        "id": "C",
+        "text": "We are 90% confident that the true population mean GPA falls within the constructed confidence interval.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This is a correct interpretation of a confidence interval — the 90% confidence level refers to the long-run success rate of the procedure in capturing the true population parameter, targeting A4 and A5."
+      },
+      {
+        "id": "D",
+        "text": "There is a 90% probability that the true population mean GPA lies within this specific constructed interval.",
+        "facet_tags": [
+          "A4",
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This is the classic probability-of-a-fixed-interval misconception (B15). Once the interval is constructed, the true mean either is or is not in it; the 90% refers to the long-run proportion of such intervals that would capture the mean, not a probability for this single interval."
+      },
+      {
+        "id": "E",
+        "text": "If we repeated this study 100 times and constructed a 90% confidence interval each time, we would expect about 90 of those intervals to contain the true population mean GPA.",
+        "facet_tags": [
+          "A4"
+        ],
+        "is_correct": true,
+        "rationale": "This correctly interprets the confidence level in terms of long-run replication frequency — the core meaning of A4 — without assigning a probability to any single fixed interval."
+      }
+    ],
+    "correct_option_ids": [
+      "A",
+      "C",
+      "E"
+    ],
+    "explanation": "This item targets four facets. A3 is probed by option A (the mean of the sampling distribution always equals μ) and its foil option B (misconception B13 that sample size changes the mean of the sampling distribution). A4 is probed by options C and E, which correctly express the confidence level as a long-run frequency of intervals capturing the true parameter. B15 is targeted by option D, which incorrectly treats a fixed constructed interval as having a 90% probability of containing μ — a very common student error. Together, the item distinguishes students who understand the invariant mean of the sampling distribution (A3 vs. B13) from those who misinterpret the confidence level as a probability statement about a single interval (A4 vs. B15).",
+    "target_facets": [
+      "A3",
+      "A4",
+      "B13",
+      "B15"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A random sample of 50 students is taken from a university, and a 90% confidence interval for the mean GPA is constructed...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A3"
+        ],
+        "judge_tags": [
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The statement explicitly describes the property that the mean of the sampling distribution equals the true population mean, which perfectly aligns with facet A3."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B13"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The statement claims the mean of the sampling distribution changes when the sample size increases, which is the exact misconception described in facet B13."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A5"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The statement uses the standard shorthand 'we are 90% confident,' which mentions the 'true population mean' (aligning with A5). However, it does not explicitly discuss or test the implications of replications/percentage of times, so it does not clearly assess A4. (Option E is the one that actually tests A4)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A4",
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "partial",
+        "confidence": 0.95,
+        "reasoning": "The statement illustrates the classic misconception that confidence levels represent the probability of a specific interval containing the parameter, which is exactly B15. Tagging the goal facet (A4) alongside the misconception facet is redundant unless the system requires mapping misconceptions to their target goals."
+      },
+      {
+        "option_id": "E",
+        "generator_tags": [
+          "A4"
+        ],
+        "judge_tags": [
+          "A4"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The statement correctly defines the confidence level in terms of repeated sampling and the percentage of those intervals that would capture the parameter, precisely matching A4."
+      }
+    ],
+    "overall_agreement": 0.8,
+    "overall_confidence": 0.95,
+    "issues": [
+      "The item combines two somewhat disjoint concepts (the mean of a sampling distribution and the interpretation of a confidence interval) into a single matrix. While allowable in a true/false format, it lacks thematic cohesion.",
+      "Option C uses standard shorthand ('We are 90% confident...') which is conventionally taught as correct, but it does not deeply probe the student's understanding of replications. Therefore, it shouldn't be tagged with A4. It mostly just checks if students know to refer to the 'population mean' rather than the sample mean (A5)."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 16.0,
+    "judge_s": 17.75
+  },
+  "created_at": "2026-05-22T08:30:08.430074+00:00"
+}

@@ -1,0 +1,165 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A5",
+      "A7",
+      "B8",
+      "B11"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection focuses on the conceptual foundations of constructing and interpreting confidence intervals. It links the goal of estimating population parameters (A5) with the mechanical understanding of how interval width depends on the spread of the sampling distribution (A7). The problematic facets (B8 and B11) are chosen to diagnose whether students confuse the sampling distribution with the observed sample distribution or incorrectly believe that increasing the sample size makes the sampling distribution resemble the population distribution instead of becoming more normal and narrow.",
+  "item": {
+    "stem": "A researcher conducts a study on the wait times at a busy coffee shop. For a random sample of 64 customers, the mean wait time is 15.0 minutes with a standard deviation of 8.0 minutes. Based on this data, the researcher calculates a 95% confidence interval for the mean of (13.04, 16.96) minutes. Which of the following statements about this scenario is correct?",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "We are 95% confident that the average wait time of all customers who visit this coffee shop is between 13.04 and 16.96 minutes.",
+        "facet_tags": [
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This correctly identifies that the confidence interval is used to estimate the population parameter (the mean wait time of all customers) rather than a sample statistic."
+      },
+      {
+        "id": "opt_2",
+        "text": "We are 95% confident that the average wait time of the 64 customers in this specific study is between 13.04 and 16.96 minutes.",
+        "facet_tags": [
+          "B8"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that a confidence interval is used to estimate or describe the sample statistic. The sample mean is already known to be exactly 15.0 minutes."
+      },
+      {
+        "id": "opt_3",
+        "text": "Approximately 95% of the individual wait times recorded in the sample of 64 customers fell between 13.04 and 16.96 minutes.",
+        "facet_tags": [
+          "B8"
+        ],
+        "is_correct": false,
+        "rationale": "This is a common misconception (B8) where the student treats the confidence interval as a range for the sample distribution (the individual data points) rather than an interval for the population mean."
+      },
+      {
+        "id": "opt_4",
+        "text": "If the researcher increased the sample size to 500 customers, the 95% confidence interval would likely get wider because the sampling distribution would become more spread out to mirror the high variability of the population.",
+        "facet_tags": [
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "This option targets the misconception that as sample size increases, the sampling distribution approaches the population distribution (B11), leading the student to incorrectly conclude the interval would widen."
+      },
+      {
+        "id": "opt_5",
+        "text": "If the researcher increased the sample size to 500 customers, the 95% confidence interval would likely get narrower because the standard error of the sampling distribution would decrease.",
+        "facet_tags": [
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "This correctly applies the relationship between sample size, standard error, and interval width (A7). Increasing 'n' decreases standard error, which results in a more precise (narrower) interval."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1",
+      "opt_5"
+    ],
+    "explanation": "This item assesses the student's ability to interpret a confidence interval and predict how it changes with sample size. The first correct option (opt_1) verifies the understanding that CIs estimate population parameters (A5). The second correct option (opt_5) tests the understanding that increasing sample size reduces the standard error, thereby narrowing the interval (A7). Distractors opt_2 and opt_3 address confusion between the sampling distribution, the sample mean, and the individual sample scores (B8). Distractor opt_4 addresses the misconception that the sampling distribution will eventually mirror the population's spread as the sample size grows (B11).",
+    "target_facets": [
+      "A5",
+      "A7",
+      "B8",
+      "B11"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher conducts a study on the wait times at a busy coffee shop. For a random sample of 64 customers, the mean wait time is 15.0 minutes...",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A5"
+        ],
+        "judge_tags": [
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option accurately defines the 95% confidence interval as estimating the population parameter (the average wait time of 'all' customers), which perfectly aligns with A5."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B8"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "mismatch",
+        "confidence": 0.95,
+        "reasoning": "This option incorrectly interprets the CI as an estimate for the sample mean ('the average wait time of the 64 customers'). This is an exact match for B16 (CI estimates sample statistics instead of population parameters), rather than B8 which is specifically about confusing the sampling distribution with the sample distribution."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "B8"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "mismatch",
+        "confidence": 0.95,
+        "reasoning": "This option misinterprets the CI as capturing 95% of the sample data ('individual wait times recorded in the sample'). This directly exhibits B16 (CI estimates sample data instead of population parameters). While it relates to a distribution confusion, B16 explicitly names this exact misconception regarding CI interpretation."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B11"
+        ],
+        "judge_tags": [
+          "B10",
+          "B11"
+        ],
+        "agreement": "partial",
+        "confidence": 1.0,
+        "reasoning": "The option states that the sampling distribution would become 'more spread out' (B10) and 'mirror the high variability of the population' (B11). Both misconceptions are explicitly invoked here to justify a wider CI."
+      },
+      {
+        "option_id": "opt_5",
+        "generator_tags": [
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "partial",
+        "confidence": 1.0,
+        "reasoning": "This option combines two concepts: increasing the sample size decreases the standard error of the sampling distribution (A1), which in turn makes the confidence interval narrower (A7)."
+      }
+    ],
+    "overall_agreement": 0.4,
+    "overall_confidence": 0.98,
+    "issues": [
+      "The generator confused B8 with B16. Options 2 and 3 are classic examples of students misinterpreting a Confidence Interval as estimating sample statistics or capturing sample data, which is explicitly covered by B16, not B8.",
+      "Options 4 and 5 both involve multiple steps of reasoning that hit multiple facets simultaneously (e.g., sample size -> standard error -> interval width). The generator only tagged the final link in the chain, but diagnosing these properly requires noting both relevant facets."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 26.97,
+    "judge_s": 22.23
+  },
+  "created_at": "2026-05-22T08:45:42.841095+00:00"
+}

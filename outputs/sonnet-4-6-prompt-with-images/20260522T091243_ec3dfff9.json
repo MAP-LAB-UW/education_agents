@@ -1,0 +1,175 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B11",
+      "B12"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v3"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the shape and center of the sampling distribution, which are conceptually linked but distinct ideas. A2 (sampling distribution approaches normality as n increases, not population shape) and B12 (misconception that it's always normal regardless of n or population shape) contrast the correct understanding of the Central Limit Theorem with a common over-generalization. A3 (mean of sampling distribution equals population mean) and B11 (misconception that larger samples make the sampling distribution closer to the population distribution in shape) add the center-of-distribution concept and a related shape misconception. Together these facets allow a single item stem to probe whether students truly understand what the CLT says about shape versus what stays constant (the mean), distinguishing nuanced correct knowledge from two distinct but related misconceptions. This combination has not been used in prior items.",
+  "item": {
+    "stem": "A researcher studies the reaction times of adults in a population that is **strongly right-skewed** with mean $\\mu = 320$ ms and standard deviation $\\sigma = 80$ ms. The researcher draws a random sample of $n = 64$ adults and computes the sample mean $\\bar{x}$.\n\nWhich of the following correctly describes the sampling distribution of $\\bar{x}$?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Approximately normal with mean $320$ ms and standard deviation $\\frac{80}{\\sqrt{64}} = 10$ ms",
+        "facet_tags": [
+          "A2",
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "The student correctly applies the Central Limit Theorem: with $n = 64$ (large enough), the sampling distribution of $\\bar{x}$ is approximately normal regardless of the population's skewed shape. They also correctly identify that the mean of the sampling distribution equals $\\mu = 320$ ms and the standard error equals $\\sigma/\\sqrt{n} = 10$ ms."
+      },
+      {
+        "id": "B",
+        "text": "Strongly right-skewed with mean $320$ ms and standard deviation $\\frac{80}{\\sqrt{64}} = 10$ ms",
+        "facet_tags": [
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "A student who believes the sampling distribution mirrors the population distribution in shape would choose this option. They correctly compute the standard error but incorrectly believe the sampling distribution inherits the right-skewed shape of the population, reflecting the misconception that a larger sample makes the sampling distribution look more like the population (B11)."
+      },
+      {
+        "id": "C",
+        "text": "Approximately normal with mean $320$ ms and standard deviation $80$ ms",
+        "facet_tags": [
+          "A2",
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "A student who knows the CLT produces a normal shape (A2) but confuses the standard deviation of the sampling distribution with the population standard deviation $\\sigma$ would select this. They fail to divide by $\\sqrt{n}$, believing the spread of the sampling distribution is the same as the population spread."
+      },
+      {
+        "id": "D",
+        "text": "Approximately normal with mean $320$ ms and standard deviation $80$ ms, because the population is large",
+        "facet_tags": [
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "A student who believes the sampling distribution is always normal regardless of sample size or population shape (B12) might select this and attribute normality to population size rather than the Central Limit Theorem applying due to sufficient sample size. They also fail to correctly apply the standard error formula."
+      },
+      {
+        "id": "E",
+        "text": "Strongly right-skewed with mean $320$ ms and standard deviation $80$ ms",
+        "facet_tags": [
+          "B9",
+          "B11",
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "A student who thinks the sampling distribution always mirrors the population distribution in both shape and spread would choose this. They conflate the sampling distribution with the population distribution entirely, showing misconceptions about both the shape (B11) and the spread (B9) of the sampling distribution."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item targets four facets. A student who correctly understands the Central Limit Theorem (A2) knows that for a large enough sample ($n = 64$), the sampling distribution of $\\bar{x}$ is approximately normal even when the population is strongly right-skewed — the sampling distribution does NOT mirror the population shape. A student who understands (A3) knows the mean of the sampling distribution equals the population mean $\\mu = 320$ ms. Distractors expose misconceptions: option B targets B11 (sampling distribution mirrors population shape), option C targets the belief that the SD of the sampling distribution equals the population SD (B9), and option D targets B12 (always normal regardless of conditions). Option E combines B9, B11, and B12 for students with the deepest confusion between population and sampling distributions.",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B11",
+      "B12"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher studies the reaction times of adults in a population that is strongly right-skewed with mean 320 ms and standard deviation 80 ms...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A2",
+          "A3"
+        ],
+        "judge_tags": [
+          "A2",
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option accurately describes the sampling distribution as normal due to the sufficient sample size (A2) and correctly identifies the mean of the sampling distribution as the population mean (A3)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B11"
+        ],
+        "judge_tags": [
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The option describes the shape as strongly right-skewed, indicating the misconception that the sampling distribution mirrors the shape of the population distribution (B11)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A2",
+          "B9"
+        ],
+        "judge_tags": [
+          "A2",
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The student correctly identifies the normal shape (A2) but fails to compute the standard error, keeping the standard deviation the same as the population (B9)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B12"
+        ],
+        "judge_tags": [
+          "B9",
+          "B12"
+        ],
+        "agreement": "partial",
+        "confidence": 0.85,
+        "reasoning": "The option includes a flawed justification for normality that ignores sample size (aligning with B12), but it also contains the unadjusted standard deviation of 80, which exhibits B9. The generator missed the B9 tag for this option."
+      },
+      {
+        "option_id": "E",
+        "generator_tags": [
+          "B9",
+          "B11",
+          "B12"
+        ],
+        "judge_tags": [
+          "B9",
+          "B11"
+        ],
+        "agreement": "partial",
+        "confidence": 1.0,
+        "reasoning": "The option demonstrates the misconception that both the shape (B11) and the standard deviation (B9) of the sampling distribution mirror the population. The generator's inclusion of B12 is an error, as B12 explicitly states the distribution will 'always follow a normal distribution', which contradicts the 'strongly right-skewed' shape in this option."
+      }
+    ],
+    "overall_agreement": 0.8,
+    "overall_confidence": 0.9,
+    "issues": [
+      "The generator erroneously tagged Option E with B12, which contradicts the option's text (B12 asserts the distribution is always normal, while Option E describes it as strongly right-skewed).",
+      "Options C and D are very similar (both present a normal distribution with mean 320 and SD 80). D merely adds a flawed rationale. This might make the distractor space slightly redundant.",
+      "The generator missed tagging Option D with B9, despite the option exhibiting the exact same incorrect standard deviation as Option C and Option E."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 17.7,
+    "judge_s": 630.01
+  },
+  "created_at": "2026-05-22T09:12:43.802260+00:00"
+}

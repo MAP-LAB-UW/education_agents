@@ -1,0 +1,172 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A3",
+      "A4",
+      "B13",
+      "B15"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "These facets form a coherent cluster around the sampling distribution mean and confidence interval interpretation. A3 (mean of sampling distribution equals population mean) pairs naturally with B13 (misconception that the mean of the sampling distribution depends on sample size), probing whether students understand that the center of the sampling distribution is fixed at the population mean regardless of n. Layering in A4 (correct interpretation of confidence level as percentage of replications) and B15 (misconception that CI is a probability statement about including the true mean for a particular interval) creates a rich item that distinguishes correct frequentist interpretation from probabilistic misreading. This combination has not been used before and covers under-addressed facets around sampling distribution center and CI probability language.",
+  "item": {
+    "stem": "A researcher collects a random sample of 64 college students and measures their daily screen time. The population mean daily screen time is 6.5 hours with a standard deviation of 2.4 hours. The researcher constructs a 95% confidence interval and obtains (5.91, 7.09).\n\nFor each of the following statements, indicate whether it is TRUE or FALSE.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "The mean of the sampling distribution of the sample mean is 6.5 hours, regardless of sample size.",
+        "facet_tags": [
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "A student who correctly understands that the mean of the sampling distribution always equals the population mean (μ = 6.5) — and importantly, that this is not affected by sample size — will mark this TRUE. This directly targets A3."
+      },
+      {
+        "id": "B",
+        "text": "The mean of the sampling distribution would be larger if the researcher had used a sample of 256 students instead of 64.",
+        "facet_tags": [
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "A student holding the B13 misconception believes the mean of the sampling distribution depends on sample size. They would mark this TRUE (incorrectly), thinking a larger n shifts the center of the sampling distribution upward."
+      },
+      {
+        "id": "C",
+        "text": "There is a 95% probability that the population mean daily screen time falls between 5.91 and 7.09 hours.",
+        "facet_tags": [
+          "A5",
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "A student with the B15 misconception treats confidence level as a probability statement about a single fixed interval capturing the population mean. Because μ is a fixed (non-random) value, it either is or is not in this interval — the 95% refers to the long-run procedure, not a probability for this particular interval."
+      },
+      {
+        "id": "D",
+        "text": "If the researcher repeated this study many times and constructed a 95% CI each time, about 95% of those intervals would contain the true population mean of 6.5 hours.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "A student who correctly understands confidence level as a long-run frequency property of the procedure — that 95% of intervals constructed this way would capture the true population mean — will mark this TRUE. This targets A4 directly."
+      },
+      {
+        "id": "E",
+        "text": "There is a 95% probability that the sample mean from a future sample falls between 5.91 and 7.09 hours.",
+        "facet_tags": [
+          "A4",
+          "B15",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "A student with B15 and B16 misconceptions might confuse the CI as a probability statement about future sample means rather than a long-run property of the procedure capturing the fixed population parameter. The CI is about the population mean, not future sample statistics."
+      }
+    ],
+    "correct_option_ids": [
+      "A",
+      "D"
+    ],
+    "explanation": "This item targets four facets. Option A (TRUE) diagnoses A3: the mean of the sampling distribution always equals the population mean regardless of sample size. Option B (FALSE) is the trap for B13: students who think the center of the sampling distribution shifts with sample size will incorrectly mark it TRUE — in reality, only the standard error changes with n, not the mean. Option C (FALSE) targets B15: the 95% confidence level is not a probability that this specific, already-computed interval contains the fixed population mean; it is a property of the repeated procedure. Option D (TRUE) correctly captures A4 by framing confidence level as a long-run frequency over many repetitions of the procedure. Option E (FALSE) combines B15 and B16: the CI does not describe a probability about future sample means, but rather about the fixed population parameter captured by the long-run procedure.",
+    "target_facets": [
+      "A3",
+      "A4",
+      "B13",
+      "B15"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher collects a random sample of 64 college students... The population mean daily screen time is 6.5 hours... The researcher constructs a 95% confidence interval and obtains (5.91, 7.09).",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A3"
+        ],
+        "judge_tags": [
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option directly tests the understanding that the mean of the sampling distribution is equal to the population mean and does not depend on sample size, which aligns perfectly with A3."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B13"
+        ],
+        "judge_tags": [
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly claims that the mean of the sampling distribution depends on (and changes with) the sample size, precisely matching the B13 misconception."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A5",
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "This statement uses the common misconception of interpreting the confidence level as the probability that a specific calculated interval contains the population parameter. It clearly exhibits B15. While it refers to the population mean rather than a sample statistic (which touches on A5), the core misconception being tested is B15."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A4",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "This option correctly describes the frequentist interpretation of a confidence interval (repeated sampling yields intervals that capture the parameter 95% of the time), which matches A4. It also reinforces that the interval captures the true population mean, matching A5."
+      },
+      {
+        "option_id": "E",
+        "generator_tags": [
+          "A4",
+          "B15",
+          "B16"
+        ],
+        "judge_tags": [
+          "B15",
+          "B16"
+        ],
+        "agreement": "partial",
+        "confidence": 0.95,
+        "reasoning": "This option combines two misconceptions: interpreting the confidence level as a probability (B15) and believing the interval is meant to capture future sample statistics rather than the population parameter (B16). Including A4 seems incorrect here since the statement does not demonstrate the correct frequentist interpretation of replications."
+      }
+    ],
+    "overall_agreement": 0.8,
+    "overall_confidence": 0.96,
+    "issues": [
+      "The stem explicitly states the population mean is known ('The population mean daily screen time is 6.5 hours...'). This creates a significant conceptual issue because confidence intervals are used to estimate unknown population parameters. Constructing a CI when the population mean is already known is pedagogically confusing and contradicts the fundamental purpose of inferential statistics."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 17.22,
+    "judge_s": 19.62
+  },
+  "created_at": "2026-05-22T08:45:54.460288+00:00"
+}

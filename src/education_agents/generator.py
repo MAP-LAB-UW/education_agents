@@ -17,6 +17,7 @@ _PROMPT_DIR = Path(__file__).parent / "prompts"
 _PROMPT_TEMPLATES = {
     "v1": (_PROMPT_DIR / "generator.md").read_text(),
     "v2": (_PROMPT_DIR / "generator_v2.md").read_text(),
+    "v3": (_PROMPT_DIR / "generator_v3.md").read_text(),
 }
 
 

@@ -1,0 +1,143 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "A6",
+      "B12",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets two distinct but related conceptual areas: (1) the shape of the sampling distribution and its dependence on sample size (A2 vs. B12 — students should know CLT requires sufficient n, not that normality is guaranteed regardless), and (2) the relationship between confidence level and CI width (A6 vs. B17 — students should know higher confidence yields a wider, less precise interval, not a shorter one). These facets are conceptually coherent because both involve understanding how increasing a quantity (sample size or confidence level) affects a distribution property, making it natural to craft a stem that probes both misconceptions. This combination has not been used before and complements prior items by pairing the CLT/normality misconception with the CI width misconception in a novel pairing.",
+  "item": {
+    "stem": "A researcher collects a sample of n = 10 from a heavily right-skewed population (e.g., household incomes) and computes a 90% confidence interval for the mean. Later, she collects a much larger sample of n = 200 from the same population and computes a 99% confidence interval. A colleague makes the following claims about these two scenarios. For each claim, indicate whether it is TRUE or FALSE.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "With n = 200, the sampling distribution of the sample mean will be approximately normal, even though the population is heavily right-skewed.",
+        "facet_tags": [
+          "A2"
+        ],
+        "is_correct": true,
+        "rationale": "A student who understands the Central Limit Theorem correctly knows that with a sufficiently large sample size (n = 200), the sampling distribution of the sample mean approaches normality regardless of the shape of the population distribution. This correctly applies A2."
+      },
+      {
+        "id": "B",
+        "text": "With n = 10, the sampling distribution of the sample mean will also be approximately normal because sample means are always normally distributed.",
+        "facet_tags": [
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "A student holding misconception B12 believes that the sampling distribution of the sample mean is always normal regardless of sample size or population shape. With n = 10 from a heavily skewed population, the CLT has not yet 'kicked in,' so this claim is false."
+      },
+      {
+        "id": "C",
+        "text": "The 99% confidence interval (n = 200) will be wider than the 90% confidence interval (n = 10), solely because a higher confidence level always produces a wider interval no matter what else changes.",
+        "facet_tags": [
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "A student who correctly understands A6 knows that a higher confidence level requires a larger critical value, which widens the interval. Although the larger n reduces the standard error (which would narrow the interval), the claim specifically attributes width to the confidence level — which is directionally correct as an isolated effect. This statement is TRUE as a statement about the effect of confidence level alone on CI width."
+      },
+      {
+        "id": "D",
+        "text": "Because the 99% CI reflects greater confidence than the 90% CI, the 99% CI gives a more precise (narrower) estimate of the population mean.",
+        "facet_tags": [
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "A student with misconception B17 conflates higher confidence with greater precision. In reality, increasing the confidence level widens the interval, making it less precise. A student who correctly understands A6 would reject this claim."
+      }
+    ],
+    "correct_option_ids": [
+      "A",
+      "C"
+    ],
+    "explanation": "This item probes four facets through a concrete two-scenario setup. Option A targets A2: students must recognize that the CLT guarantees approximate normality of the sampling distribution for large n (n = 200), even when the population is heavily skewed — normality comes from sample size, not population shape. Option B targets B12: students who believe sample means are always normally distributed regardless of n or population shape would incorrectly mark this true; with n = 10 from a skewed population, the CLT does not apply. Option C targets A6: a higher confidence level (99% vs. 90%) requires a larger critical value, directly widening the CI — students must understand this relationship between confidence level and interval width. Option D targets B17: students who think higher confidence yields a more precise (narrower) interval have the relationship backwards; more confidence means a wider, less precise interval.",
+    "target_facets": [
+      "A2",
+      "A6",
+      "B12",
+      "B17"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher collects a sample of n = 10 from a heavily right-skewed population (e.g., household incomes) and computes a 90% confidence interval for the mean. Later, she collects a much larger sample of n = 200...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A2"
+        ],
+        "judge_tags": [
+          "A2"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly assesses facet A2, testing whether the student knows that as sample size increases (n=200), the sampling distribution of the sample mean approaches a normal distribution regardless of the population shape."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B12"
+        ],
+        "judge_tags": [
+          "B12"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option exactly matches the misconception in B12, claiming that the sampling distribution of the sample mean is always normally distributed regardless of sample size."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A6"
+        ],
+        "judge_tags": [
+          "A6",
+          "A7"
+        ],
+        "agreement": "partial",
+        "confidence": 0.95,
+        "reasoning": "The option brings up the relationship between confidence level and interval width (A6), but because the sample size also changes dramatically, it implicitly tests the impact of standard error on width (A7). The item logic is deeply flawed, as discussed in the overall issues."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B17"
+        ],
+        "judge_tags": [
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option explicitly states the misconception described in B17: that a higher confidence interval reflects greater precision, leading to a narrower estimate."
+      }
+    ],
+    "overall_agreement": 0.85,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Option C is fundamentally flawed and factually incorrect in its intended key. The generator asserts this claim is TRUE, but mathematically, the 99% CI with n=200 will be significantly NARROWER than the 90% CI with n=10. The reduction in the standard error (divided by approx. 4.47) overwhelmingly outweighs the larger critical value (approx. 2.576 vs 1.645). A high-performing student who understands both A6 and A7 would correctly mark this claim FALSE, thereby being penalized.",
+      "Option C's phrasing ('solely because... no matter what else changes') asks the student to evaluate a demonstrably false empirical prediction based on a rigid, absolute rule. This creates a confusing paradox for the test-taker."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 17.6,
+    "judge_s": 24.5
+  },
+  "created_at": "2026-05-22T08:49:33.804894+00:00"
+}

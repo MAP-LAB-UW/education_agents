@@ -1,0 +1,153 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A2",
+      "B9",
+      "B10"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "These facets form a coherent cluster around how sample size affects the shape and spread of the sampling distribution. A1 (larger samples → smaller standard error, more packed distribution) and A2 (larger samples → closer to normal, not mirroring population) are the goal understandings, while B9 (sampling distribution mirrors population distribution, so spread stays constant) and B10 (larger samples → more spread out) are two distinct but related misconceptions students commonly hold. A single item stem asking students to reason about what happens to the sampling distribution as sample size increases can naturally distinguish all four facets, and this combination has not been used in previous items.",
+  "item": {
+    "stem": "According to the Central Limit Theorem, as sample size increases, the sampling distribution of the sample mean becomes:",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "More spread out, mirroring the spread of the population distribution.",
+        "facet_tags": [
+          "B9",
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "This option combines two misconceptions: that the sampling distribution mirrors the population distribution (B9) and that it becomes more spread out as sample size increases (B10)."
+      },
+      {
+        "id": "B",
+        "text": "More spread out, regardless of the shape of the population distribution.",
+        "facet_tags": [
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that increasing sample size causes the sampling distribution to become more spread out (B10), which is the opposite of what actually happens."
+      },
+      {
+        "id": "C",
+        "text": "Less spread out, mirroring the shape of the population distribution.",
+        "facet_tags": [
+          "A1",
+          "B9",
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "This option correctly notes that the sampling distribution becomes less spread out (A1) but incorrectly claims it mirrors the shape of the population distribution (B9/B11), conflating the sampling distribution with the population distribution."
+      },
+      {
+        "id": "D",
+        "text": "Less spread out and more approximately normal, regardless of the shape of the population distribution.",
+        "facet_tags": [
+          "A1",
+          "A2"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct answer. As sample size increases, the standard error decreases so the sampling distribution becomes less spread out (A1), and the Central Limit Theorem guarantees it approaches a normal distribution regardless of the population's shape (A2)."
+      }
+    ],
+    "correct_option_ids": [
+      "D"
+    ],
+    "explanation": "This item targets four facets. The correct answer (D) captures A1 (larger sample size → smaller standard error → less spread in the sampling distribution) and A2 (CLT ensures normality regardless of population shape). Distractor A targets B9 (sampling distribution mirrors population) and B10 (more spread out with larger n). Distractor B isolates B10. Distractor C targets A1 correctly but pairs it with B9/B11, exposing students who understand the spread decreases but still confuse the shape of the sampling distribution with the population distribution.",
+    "target_facets": [
+      "A1",
+      "A2",
+      "B9",
+      "B10"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "According to the Central Limit Theorem, as sample size increases, the sampling distribution of the sample mean becomes:",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B9",
+          "B10"
+        ],
+        "judge_tags": [
+          "B9",
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states the distribution becomes 'more spread out' (B10) and 'mirroring the spread of the population distribution' (B9)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B10"
+        ],
+        "judge_tags": [
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option states it becomes 'more spread out' as sample size increases, cleanly aligning with B10."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A1",
+          "B9",
+          "B11"
+        ],
+        "judge_tags": [
+          "A1",
+          "B9",
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "'Less spread out' maps to A1. 'Mirroring the shape of the population distribution' matches B9 and the dynamic misconception B11 (getting closer to population distribution as sample size increases)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A1",
+          "A2"
+        ],
+        "judge_tags": [
+          "A1",
+          "A2"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "'Less spread out' maps to A1, and 'more approximately normal' maps to A2."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.95,
+    "issues": [
+      "The stem erroneously implies that the decreasing spread of the sampling distribution is due to the Central Limit Theorem. The CLT strictly describes the shape of the sampling distribution approaching normality; the decreasing variance is a separate property of the sample mean's variance, independent of the CLT.",
+      "The item assesses prerequisite knowledge (sampling distributions) rather than confidence interval specific facets (e.g., it misses core CI facets like A4, A5, A6, A7)."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 10.48,
+    "judge_s": 20.37
+  },
+  "created_at": "2026-05-22T08:28:48.321885+00:00"
+}

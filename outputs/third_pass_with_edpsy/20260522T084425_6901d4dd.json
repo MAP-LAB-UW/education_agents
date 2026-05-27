@@ -1,0 +1,152 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A6",
+      "B10",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the factors influencing the precision and width of confidence intervals. It requires students to distinguish how increasing sample size (A1) and increasing confidence level (A6) affect the interval width, while specifically targeting misconceptions about sample size increasing spread (B10) and the false belief that higher confidence results in shorter, 'more precise' intervals (B17).",
+  "item": {
+    "stem": "A nutritionist conducted a study on the caffeine consumption of college students and calculated a 95% confidence interval of (180 mg, 240 mg) for the population mean. Finding the 60 mg width of this interval to be too wide for their needs, the nutritionist plans to conduct a new study. Which of the following combinations of changes is guaranteed to produce a narrower confidence interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Increase the sample size and decrease the confidence level to 90%.",
+        "facet_tags": [
+          "A1",
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "The student understands that increasing the sample size reduces the standard error (A1) and that a lower confidence level uses a smaller critical value (z or t multiplier), both of which independently and collectively decrease the width of the interval (A6)."
+      },
+      {
+        "id": "B",
+        "text": "Increase the sample size and increase the confidence level to 99%.",
+        "facet_tags": [
+          "A1",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly understands that larger samples lead to narrower intervals (A1) but incorrectly believes that higher confidence (99% vs 95%) leads to a more precise or shorter interval (B17). In reality, increasing the confidence level increases the width."
+      },
+      {
+        "id": "C",
+        "text": "Decrease the sample size and decrease the confidence level to 90%.",
+        "facet_tags": [
+          "A6",
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "The student correctly understands that lower confidence levels decrease interval width (A6) but holds a misconception that smaller samples result in less spread or more precise estimates (B10). In reality, decreasing the sample size increases the standard error and the interval width."
+      },
+      {
+        "id": "D",
+        "text": "Decrease the sample size and increase the confidence level to 99%.",
+        "facet_tags": [
+          "B10",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "The student incorrectly believes that smaller samples result in narrower distributions (B10) and that higher confidence levels produce more precise (shorter) intervals (B17). Both beliefs are misconceptions; these changes would actually both work to make the interval significantly wider."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "To decrease the width of a confidence interval, one must either decrease the standard error or decrease the critical value (the multiplier). Increasing the sample size ($n$) decreases the standard error because $n$ is in the denominator of the formula (A1). Decreasing the confidence level (e.g., from 95% to 90%) decreases the critical value used in the 'margin of error' calculation (A6). Options involving a decrease in sample size incorrectly assume that smaller samples reduce spread (B10). Options involving an increase in confidence level incorrectly assume that higher confidence equates to higher precision/shorter intervals (B17).",
+    "target_facets": [
+      "A1",
+      "A6",
+      "B10",
+      "B17"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A nutritionist conducted a study on the caffeine consumption of college students and calculated a 95% confidence interval...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1",
+          "A6"
+        ],
+        "judge_tags": [
+          "A1",
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option combines increasing the sample size (which relies on understanding A1: larger sample size reduces standard error and makes the distribution more packed, thus narrowing the interval) and decreasing the confidence level (which relies on A6: confidence interval width decreases as the confidence level decreases)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A1",
+          "B17"
+        ],
+        "judge_tags": [
+          "A1",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option correctly identifies that increasing the sample size makes the interval narrower (A1), but incorrectly suggests that increasing the confidence level to 99% will also narrow the interval, exhibiting the misconception that higher confidence leads to a shorter, more precise interval (B17)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A6",
+          "B10"
+        ],
+        "judge_tags": [
+          "A6",
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option correctly identifies that decreasing the confidence level to 90% narrows the interval (A6). However, by selecting 'decrease the sample size' to narrow the interval, the student exhibits the misconception that smaller samples are less spread out, inversely reflecting B10 (which states that students think larger samples are more spread out)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B10",
+          "B17"
+        ],
+        "judge_tags": [
+          "B10",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option combines two misconceptions: believing that a smaller sample size produces a narrower distribution/interval (B10) and believing that a higher confidence level provides a more precise/shorter interval (B17)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": [
+      "No major issues. The item provides a clear, well-constructed assessment of the impact of sample size and confidence level on confidence interval width."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 11.17,
+    "judge_s": 18.63
+  },
+  "created_at": "2026-05-22T08:44:25.165215+00:00"
+}

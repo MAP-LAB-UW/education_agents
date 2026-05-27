@@ -1,0 +1,143 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "A6",
+      "B15",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets two interrelated misconceptions: B15 (misinterpreting confidence level as probability of including the true mean for a specific interval) and B17 (thinking higher confidence yields a shorter, more precise interval). These are paired with A4 (correct interpretation of confidence level as a long-run frequency across replications) and A6 (understanding that higher confidence level leads to a wider interval). Together they form a coherent item around what 'confidence level' means and its directional effect on interval width. This specific combination has not been used before and differs meaningfully from Items 1, 2, and 5 which touched on some overlapping facets in different groupings.",
+  "item": {
+    "stem": "A researcher calculates a 95% confidence interval and reports: \"We are 95% confident that the true population mean lies within this interval.\" The researcher then decides to recalculate the interval using a 99% confidence level instead of 95%, keeping everything else the same.\n\nFor each of the following statements, indicate whether it is True or False.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "The 99% confidence interval will be wider than the 95% confidence interval.",
+        "facet_tags": [
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "A higher confidence level requires a larger critical value (e.g., z* = 2.576 for 99% vs. 1.96 for 95%), which directly increases the margin of error and thus the width of the interval. This correctly reflects A6."
+      },
+      {
+        "id": "B",
+        "text": "The 99% confidence interval will be narrower because a higher confidence level produces a more precise estimate.",
+        "facet_tags": [
+          "A6",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This reflects the classic B17 misconception that higher confidence leads to a more precise (narrower) interval. In reality, increasing the confidence level increases interval width (A6), the opposite of what this statement claims."
+      },
+      {
+        "id": "C",
+        "text": "There is a 99% probability that the true population mean lies within the newly calculated interval.",
+        "facet_tags": [
+          "A4",
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This statement misinterprets the confidence level as a probability that the true mean lies within one specific interval (B15). The correct interpretation (A4) is that 99% of all intervals constructed this way would capture the true mean across repeated sampling; any single interval either does or does not contain the mean."
+      },
+      {
+        "id": "D",
+        "text": "If the researcher repeated the study many times and calculated a 99% confidence interval each time, about 99% of those intervals would contain the true population mean.",
+        "facet_tags": [
+          "A4"
+        ],
+        "is_correct": true,
+        "rationale": "This correctly interprets the confidence level in terms of the long-run frequency of intervals capturing the true parameter across repeated replications, which is the proper interpretation of A4."
+      }
+    ],
+    "correct_option_ids": [
+      "A",
+      "D"
+    ],
+    "explanation": "This item targets four facets. Option A (correct) and Option B (incorrect) together probe A6 and B17: a higher confidence level widens the interval because the critical value increases, contrary to the misconception that higher confidence yields a more precise, narrower estimate. Option C (incorrect) probes B15 and A4: interpreting the confidence level as the probability that one particular interval contains the true mean is a common error; the correct frequentist interpretation, demonstrated in Option D (correct), is that the stated percentage of all such intervals constructed over repeated sampling would capture the population parameter.",
+    "target_facets": [
+      "A4",
+      "A6",
+      "B15",
+      "B17"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher calculates a 95% confidence interval and reports: 'We are 95% confident that the true population mean lies within this interval.' The researcher then decides to recalculate the interval using a 99% confidence level instead of 95%, keeping everything else the same.",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A6"
+        ],
+        "judge_tags": [
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This statement correctly describes the relationship between the confidence level and the width of the interval, which perfectly aligns with goal facet A6."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A6",
+          "B17"
+        ],
+        "judge_tags": [
+          "B17"
+        ],
+        "agreement": "partial",
+        "confidence": 1.0,
+        "reasoning": "The statement explicitly embodies misconception B17 (higher confidence leads to a more precise/narrower interval). While it is the logical opposite of A6, tagging it primarily with the targeted misconception (B17) is the standard psychometric practice."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A4",
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "partial",
+        "confidence": 1.0,
+        "reasoning": "This statement explicitly reflects misconception B15, interpreting the confidence interval as a probability of containing the true mean. Although it violates goal facet A4, B15 alone is the most precise tag."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A4"
+        ],
+        "judge_tags": [
+          "A4"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The statement provides the correct frequentist interpretation of a confidence interval across repeated sampling, perfectly matching goal facet A4."
+      }
+    ],
+    "overall_agreement": 0.5,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 15.29,
+    "judge_s": 12.25
+  },
+  "created_at": "2026-05-22T08:32:00.843983+00:00"
+}

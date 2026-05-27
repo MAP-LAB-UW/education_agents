@@ -1,0 +1,166 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "A6",
+      "B15",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v3"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the interplay between confidence level interpretation and CI width. A4 (correct interpretation of confidence level as long-run frequency) and A6 (higher confidence level → wider CI) contrast directly with B15 (misinterpreting CI as a probability statement) and B17 (believing higher confidence yields a more precise/shorter interval). Together they form a coherent item that probes whether students understand both what confidence level means AND its directional effect on interval width — a novel pairing not yet used in the batch.",
+  "item": {
+    "stem": "A nutritionist is studying daily sugar intake among adults. After collecting a random sample of $n = 50$ adults and measuring their daily sugar intake (in grams), she computes the following 90% confidence interval for the population mean daily sugar intake: $(42.3, 57.7)$ grams.\n\nFor each of the following statements about this confidence interval, indicate whether it is **True** or **False**.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "There is a 90% probability that the true mean daily sugar intake $\\mu$ falls between $42.3$ and $57.7$ grams.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "A student who treats confidence level as a post-hoc probability about a fixed (but unknown) parameter will mark this True. In reality, $\\mu$ is a fixed value — it either is or is not in this particular interval. The 90% refers to the long-run behavior of the procedure, not the probability that this specific interval contains $\\mu$."
+      },
+      {
+        "id": "B",
+        "text": "If the nutritionist repeated this study many times and constructed a 90% CI each time, about 90% of those intervals would contain the true mean $\\mu$.",
+        "facet_tags": [
+          "A4"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct frequentist interpretation of confidence level: in the long run, 90% of all intervals produced by this procedure will capture the true population mean. A student who understands A4 will recognize this as a valid replication-based interpretation."
+      },
+      {
+        "id": "C",
+        "text": "There is a 90% probability that a randomly selected adult's daily sugar intake falls between $42.3$ and $57.7$ grams.",
+        "facet_tags": [
+          "B15",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "A student confusing confidence level with a probability about individual data values (rather than the population mean) would mark this True. This conflates the CI for a population mean with a prediction interval for individual observations, and also misreads the 90% as a direct probability statement."
+      },
+      {
+        "id": "D",
+        "text": "To obtain a more precise (narrower) interval, the nutritionist should switch to a 95% confidence level while keeping $n = 50$.",
+        "facet_tags": [
+          "A6",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "A student holding the B17 misconception — that higher confidence means more precision — will mark this True. In fact, increasing the confidence level from 90% to 95% requires a larger critical value $z^*$, which widens the interval, not narrows it. This directly contradicts A6, which states that CI width increases with confidence level."
+      },
+      {
+        "id": "E",
+        "text": "To obtain a narrower interval than $(42.3, 57.7)$, the nutritionist could decrease the confidence level to 80% while keeping $n = 50$.",
+        "facet_tags": [
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "A student who understands A6 knows that CI width depends on the critical value $z^*$, and a lower confidence level corresponds to a smaller $z^*$, producing a narrower interval. Decreasing from 90% to 80% confidence would indeed yield a shorter interval at the same sample size."
+      }
+    ],
+    "correct_option_ids": [
+      "B",
+      "E"
+    ],
+    "explanation": "This item targets four facets. **B15** is probed by option A (and also option C): students who interpret the confidence level as a direct probability that the parameter lies in *this specific* interval hold a common misconception — the 90% is a property of the long-run procedure, not a posterior probability for one realized interval. **A4** is probed by option B, the canonical correct interpretation: about 90% of intervals constructed by replication of this procedure would capture $\\mu$. **B16** is probed alongside B15 in option C, where the interval is misread as covering individual observations. **A6** and **B17** are jointly probed by options D and E: option D targets B17 (the false belief that higher confidence = more precision/shorter interval), while option E rewards A6 understanding (that lower confidence level yields a narrower interval via a smaller critical value $z^*$).",
+    "target_facets": [
+      "A4",
+      "A6",
+      "B15",
+      "B17"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A nutritionist is studying daily sugar intake among adults. After collecting a random sample of n = 50 adults and measuring their daily sugar intake...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option directly exhibits facet B15 by presenting the common misconception that a confidence level represents a post-hoc probability for a single realized interval to contain the population mean."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A4"
+        ],
+        "judge_tags": [
+          "A4"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This statement represents the correct frequentist interpretation of a confidence interval (long-run replications), which perfectly aligns with goal facet A4."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B15",
+          "B16"
+        ],
+        "judge_tags": [
+          "B15",
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option uses the '90% probability' framing (B15) and incorrectly states that the interval predicts individual data points / sample data rather than a population parameter (B16)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A6",
+          "B17"
+        ],
+        "judge_tags": [
+          "A6",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Marking this statement as True directly indicates misconception B17 (higher confidence = more precision/shorter interval) and a lack of understanding of A6 (CI width increases as confidence level increases)."
+      },
+      {
+        "option_id": "E",
+        "generator_tags": [
+          "A6"
+        ],
+        "judge_tags": [
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Marking this statement as True shows an understanding of A6: knowing that decreasing the confidence level (and thus the critical value) leads to a narrower interval."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 21.94,
+    "judge_s": 16.36
+  },
+  "created_at": "2026-05-22T09:13:26.570213+00:00"
+}

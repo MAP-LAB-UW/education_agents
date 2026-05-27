@@ -1,0 +1,140 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 1,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection focuses on the conceptual interpretation of confidence intervals. It combines the core goal of understanding CI as a long-run process for capturing population parameters (A4, A5) with the most frequent student errors: interpreting the confidence level as a probability for a specific interval (B15) and confusing the target of the interval as sample statistics rather than population parameters (B16).",
+  "item": {
+    "stem": "A marine biologist calculates a 95% confidence interval for the mean weight of adult green sea turtles based on a random sample of 50 turtles. The resulting interval is (110 kg, 130 kg). Which of the following is the most accurate interpretation of this interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "If we were to repeat the sampling process many times and compute a 95% confidence interval for each sample, approximately 95% of the resulting intervals would capture the true population mean weight.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct frequentist interpretation of a confidence level (A4) and correctly identifies that the interval is intended to capture the population parameter (A5)."
+      },
+      {
+        "id": "opt_2",
+        "text": "There is a 95% probability that the true population mean weight of adult green sea turtles is between 110 kg and 130 kg.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This option incorrectly interprets the confidence level as a probability for a fixed parameter once the interval has been calculated (B15)."
+      },
+      {
+        "id": "opt_3",
+        "text": "Approximately 95% of the individual turtles in the population have a weight that falls between 110 kg and 130 kg.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option incorrectly suggests that the confidence interval describes the distribution of individual data points in the population rather than the population parameter (B16)."
+      },
+      {
+        "id": "opt_4",
+        "text": "There is a 95% probability that the sample mean of another group of 50 turtles will fall between 110 kg and 130 kg.",
+        "facet_tags": [
+          "B15",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option incorrectly treats the confidence interval as a probability statement (B15) and wrongly targets a sample statistic (a future sample mean) instead of the population parameter (B16)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "The item assesses the student's ability to distinguish between the frequentist interpretation of confidence levels (long-run behavior of intervals) and common misconceptions. Option 1 is correct as it identifies the parameter as the target (A5) and uses the frequentist definition (A4). Option 2 fails because it treats the interval as a probability for the parameter (B15). Option 3 fails because it treats the interval as a range for individual scores (B16). Option 4 fails because it combines a probability interpretation (B15) with an estimation of a sample statistic (B16).",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A marine biologist calculates a 95% confidence interval for the mean weight of adult green sea turtles based on a random sample of 50 turtles. The resulting interval is (110 kg, 130 kg). Which of the following is the most accurate interpretation of this interval?",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A4",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly interprets the confidence interval using the frequentist perspective of repeated sampling (A4) and correctly identifies the target of the estimation as the true population mean (A5)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option interprets the confidence interval as a 95% probability of containing the true population parameter for this specific interval, which maps exactly to misconception B15."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "This option claims the confidence interval captures individual data points (individual turtle weights) rather than the population parameter, which aligns with misconception B16."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B15",
+          "B16"
+        ],
+        "judge_tags": [
+          "B15",
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option treats the confidence interval as a probability statement (B15) and incorrectly suggests that the interval is estimating a sample statistic (the sample mean of a future group) rather than the population parameter (B16)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 6.92,
+    "judge_s": 13.85
+  },
+  "created_at": "2026-05-07T22:44:28.681659+00:00"
+}

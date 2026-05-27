@@ -29,7 +29,10 @@
       "Bash(python3 -m http.server 8765)",
       "Bash(echo \"PID: $!\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8765/)",
-      "mcp__playwright__browser_file_upload"
+      "mcp__playwright__browser_file_upload",
+      "Read(//private/tmp/**)",
+      "Read(//Users/kabirahuja/**)",
+      "Bash(python3 *)"
     ]
   }
 }

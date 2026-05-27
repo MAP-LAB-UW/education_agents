@@ -1,0 +1,148 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A6",
+      "A7",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "These three facets form a coherent cluster around CI width and precision. A6 addresses the correct understanding that higher confidence levels produce wider intervals, A7 addresses the correct understanding that larger standard errors also produce wider intervals, and B17 captures the common misconception that higher confidence yields a more precise (narrower) interval. A single item stem—such as asking students to compare interval widths under varying confidence levels and sample sizes—can naturally distinguish students who hold the misconception (B17) from those who correctly understand the directional relationships (A6, A7). This combination is novel in that B17 is directly contradicted by A6, making the distractor logic tight and diagnostically powerful, while A7 adds a second dimension that further separates nuanced understanding from surface-level guessing.",
+  "item": {
+    "stem": "A market researcher constructs a 90% confidence interval for the average monthly spending of customers and gets an interval of ($312, $388). She wants to redesign the study to get a narrower confidence interval. She is considering two changes:\n\n1. Switch from a 90% to a 99% confidence level\n2. Increase the sample size from n = 40 to n = 160\n\nWhich combination of changes will actually produce a narrower interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Make both changes: use the 99% confidence level and increase n to 160.",
+        "facet_tags": [
+          "A1",
+          "A7",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "A student who holds misconception B17 (higher confidence = more precise = shorter interval) would think that switching to 99% confidence narrows the interval. Combined with the correct belief that larger n helps, they would select both changes, not realizing the higher confidence level actually widens the interval and partially or fully offsets the gain from larger n."
+      },
+      {
+        "id": "B",
+        "text": "Make only Change 1: switch to the 99% confidence level, and keep n = 40.",
+        "facet_tags": [
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "A student who only holds misconception B17 would think that higher confidence yields a more precise (shorter) interval and would believe switching to 99% alone is sufficient. This reveals a pure B17 misconception without any correct understanding of sample size effects."
+      },
+      {
+        "id": "C",
+        "text": "Make only Change 2: keep the 90% confidence level and increase n to 160.",
+        "facet_tags": [
+          "A6",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "A student who correctly understands A6 (higher confidence level widens the interval) and A7 (larger sample size reduces standard error and narrows the interval) knows that switching to 99% would widen the interval, and that increasing n shrinks the standard error and thus the interval. Keeping the 90% level and increasing n is the only change that guarantees a narrower interval."
+      },
+      {
+        "id": "D",
+        "text": "Make neither change; the interval width is fixed once the data are collected.",
+        "facet_tags": [
+          "A6",
+          "A7"
+        ],
+        "is_correct": false,
+        "rationale": "A student who does not understand the relationship between confidence level, sample size, and CI width might believe the interval cannot be changed by study design choices. This reveals a lack of understanding of both A6 and A7."
+      }
+    ],
+    "correct_option_ids": [
+      "C"
+    ],
+    "explanation": "This item targets three facets. A6 states that CI width increases as confidence level increases — switching from 90% to 99% would make the interval wider, not narrower. A7 states that CI width increases when standard error increases (and decreases when standard error decreases) — increasing n from 40 to 160 cuts the standard error in half (SE ∝ 1/√n), which narrows the interval. B17 is the misconception that higher confidence produces a shorter, more precise interval. The only correct strategy is to keep the lower (90%) confidence level and increase the sample size, combining a correct understanding of both A6 and A7. Students selecting option A or B are revealing misconception B17; students selecting option D lack understanding of both A6 and A7.",
+    "target_facets": [
+      "A6",
+      "A7",
+      "B17"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A market researcher constructs a 90% confidence interval for the average monthly spending... She wants to redesign the study to get a narrower confidence interval. She is considering two changes: 1. Switch from a 90% to a 99% confidence level. 2. Increase the sample size from n = 40 to n = 160.",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1",
+          "A7",
+          "B17"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The student correctly understands that increasing the sample size reduces the standard error and therefore the CI width (A1, A7) but incorrectly believes that increasing confidence level leads to a narrower interval (B17)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B17"
+        ],
+        "judge_tags": [
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The student solely relies on the misconception that a higher confidence level results in a more precise (narrower) interval."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A6",
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A6",
+          "A7"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The student correctly understands that keeping the confidence level lower prevents the interval from widening (A6), and that increasing sample size decreases standard error (A1), which in turn narrows the interval (A7). The generator misses the A1 connection which is implicit in decreasing standard error via sample size."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A6",
+          "A7"
+        ],
+        "judge_tags": [],
+        "agreement": "mismatch",
+        "confidence": 0.95,
+        "reasoning": "Option D represents an unmapped misconception (believing study design choices cannot change CI width). It is inappropriate to tag an incorrect option with goal facets (A6, A7) simply because the student lacks them; tags should reflect the specific knowledge or misconception actively demonstrated."
+      }
+    ],
+    "overall_agreement": 0.65,
+    "overall_confidence": 0.9,
+    "issues": [
+      "Tagging incorrect options with goal facets to indicate a 'lack of understanding' (as done in Option D) is a poor psychometric practice. Options should be tagged with the facets they actually exhibit (whether goal facets for partial correctness or problematic facets for misconceptions). Option D should be left untagged or mapped to a new misconception facet."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 16.65,
+    "judge_s": 22.25
+  },
+  "created_at": "2026-05-22T08:43:47.237728+00:00"
+}

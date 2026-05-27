@@ -1,0 +1,142 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A6",
+      "B10",
+      "B17"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the parameters that determine the width and precision of a confidence interval. It allows for an item that tests if students understand the mathematical and conceptual trade-offs between sample size and confidence levels. Specifically, it contrasts the correct understanding of how increasing sample size reduces standard error (A1) and how higher confidence levels require wider intervals (A6) with common misconceptions that larger samples increase spread (B10) or that higher confidence necessarily results in a more precise, shorter interval (B17).",
+  "item": {
+    "stem": "A nutritionist calculated a 95% confidence interval for the mean daily calorie intake of a population based on a sample of 64 people. The resulting interval was (1,950, 2,250) calories. She wants to conduct a new study to obtain a narrower (shorter) confidence interval. Which of the following changes would lead to a narrower interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Decrease the confidence level to 90% and increase the sample size to 100 people.",
+        "facet_tags": [
+          "A1",
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "Decreasing the confidence level reduces the critical value, while increasing the sample size reduces the standard error of the mean. Both actions independently work to decrease the margin of error and thus shorten the width of the interval."
+      },
+      {
+        "id": "opt_2",
+        "text": "Increase the confidence level to 99% to make the estimate more precise.",
+        "facet_tags": [
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the common misconception that higher confidence levels equate to 'better' or 'more precise' estimates in terms of width. In reality, increasing confidence requires a larger critical value, which widens the interval."
+      },
+      {
+        "id": "opt_3",
+        "text": "Keep the 95% confidence level but decrease the sample size to 30 people.",
+        "facet_tags": [
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "This option targets the misconception that smaller samples reduce the spread of the sampling distribution. In statistics, a smaller sample size increases the standard error, which results in a wider confidence interval."
+      },
+      {
+        "id": "opt_4",
+        "text": "Increase the confidence level to 99% and decrease the sample size to 30 people.",
+        "facet_tags": [
+          "B10",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This option combines two misconceptions: that higher confidence levels produce narrower intervals and that smaller sample sizes result in less spread/variability in the estimate of the mean."
+      }
+    ],
+    "correct_option_ids": [
+      "opt_1"
+    ],
+    "explanation": "To narrow a confidence interval, one must reduce the margin of error ($m = z^* \\cdot \\frac{\\sigma}{\\sqrt{n}}$). This is achieved by either decreasing the confidence level (which decreases the critical value $z^*$) or increasing the sample size $n$ (which decreases the standard error). Option 1 correctly applies both principles (A1 and A6). Option 2 incorrectly assumes higher confidence leads to shorter intervals (B17). Option 3 incorrectly assumes a smaller sample size reduces the spread of the sampling distribution (B10). Option 4 combines both errors (B10 and B17).",
+    "target_facets": [
+      "A1",
+      "A6",
+      "B10",
+      "B17"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A nutritionist calculated a 95% confidence interval for the mean daily calorie intake of a population based on a sample of 64 people. The resulting interval was (1,950, 2,250) calories. She wants to conduct a new study to obtain a narrower (shorter) confidence interval. Which of the following changes would lead to a narrower interval?",
+    "option_assessments": [
+      {
+        "option_id": "opt_1",
+        "generator_tags": [
+          "A1",
+          "A6"
+        ],
+        "judge_tags": [
+          "A1",
+          "A6",
+          "A7"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The option demonstrates an understanding that increasing the sample size makes the standard error smaller (A1) and that reducing the standard error narrows the confidence interval (A7). It also correctly identifies that decreasing the confidence level narrows the interval (A6)."
+      },
+      {
+        "option_id": "opt_2",
+        "generator_tags": [
+          "B17"
+        ],
+        "judge_tags": [
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option directly exhibits the misconception that higher confidence leads to a more precise estimate and thus a shorter interval (Facet B17)."
+      },
+      {
+        "option_id": "opt_3",
+        "generator_tags": [
+          "B10"
+        ],
+        "judge_tags": [
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "Choosing this option indicates a belief that a smaller sample size results in a narrower interval, stemming from the misconception that larger sample sizes cause the sampling distribution to be more spread out (Facet B10)."
+      },
+      {
+        "option_id": "opt_4",
+        "generator_tags": [
+          "B10",
+          "B17"
+        ],
+        "judge_tags": [
+          "B10",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option combines both misconceptions: believing that a smaller sample size decreases spread (B10) and that a higher confidence level makes the interval narrower (B17)."
+      }
+    ],
+    "overall_agreement": 0.9,
+    "overall_confidence": 0.95,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 8.8,
+    "judge_s": 11.63
+  },
+  "created_at": "2026-05-14T23:01:30.388579+00:00"
+}

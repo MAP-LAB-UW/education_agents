@@ -1,0 +1,134 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "B8",
+      "B12"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This selection focuses on the conceptual properties of the sampling distribution. It contrasts the Central Limit Theorem's requirement for larger sample sizes to achieve normality (A2) with the misconception that normality is always guaranteed (B12), while also addressing the confusion between a sample distribution and a sampling distribution (B8).",
+  "item": {
+    "stem": "A state agency is studying the duration of unemployment benefits, which follows a strongly right-skewed distribution. A researcher takes a random sample of 100 recipients and calculates the mean duration (x-bar). What is the most likely shape of the sampling distribution of the mean for this sample size?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Approximately normal because the large sample size allows the Central Limit Theorem to apply.",
+        "facet_tags": [
+          "A2"
+        ],
+        "is_correct": true,
+        "rationale": "The student correctly understands that for a large sample size, the sampling distribution of the mean will be approximately normal regardless of the shape of the underlying population."
+      },
+      {
+        "id": "B",
+        "text": "Strongly right-skewed because the sampling distribution is identical to the distribution of the 100 individual data points in the researcher's sample.",
+        "facet_tags": [
+          "B8"
+        ],
+        "is_correct": false,
+        "rationale": "The student confuses the sampling distribution of the mean with the distribution of scores within a single sample."
+      },
+      {
+        "id": "C",
+        "text": "Perfectly normal because the sampling distribution of the mean always follows a normal distribution, even if the sample size were as small as n=2.",
+        "facet_tags": [
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "The student ignores the requirement for a large sample size when the population is non-normal, believing the sampling distribution is inherently normal in all cases."
+      },
+      {
+        "id": "D",
+        "text": "Strongly right-skewed because as sample size increases, the sampling distribution will more closely mirror the shape of the population distribution.",
+        "facet_tags": [
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "The student incorrectly assumes that the sampling distribution approaches the population shape as sample size increases, rather than converging toward a normal distribution."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This item assesses the Central Limit Theorem. The correct option (A) reflects the understanding that large samples result in normal sampling distributions (A2). Distractor B targets the confusion between sample distributions and sampling distributions (B8). Distractor C targets the belief that sample means are always normally distributed regardless of n (B12). Distractor D targets the misconception that sampling distributions converge to the population shape (B11).",
+    "target_facets": [
+      "A2",
+      "B8",
+      "B11",
+      "B12"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A state agency is studying the duration of unemployment benefits, which follows a strongly right-skewed distribution. A researcher takes a random sample of 100 recipients and calculates the mean duration (x-bar). What is the most likely shape of the sampling distribution of the mean for this sample size?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A2"
+        ],
+        "judge_tags": [
+          "A2"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option A correctly states that the sampling distribution of the mean is approximately normal due to the large sample size, which aligns perfectly with facet A2."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B8"
+        ],
+        "judge_tags": [
+          "B8"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option B explicitly equates the sampling distribution with the distribution of the individual data points in a single sample, directly reflecting the B8 misconception."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B12"
+        ],
+        "judge_tags": [
+          "B12"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option C claims that the sampling distribution of the mean always follows a normal distribution even for small sample sizes, which perfectly captures facet B12."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B11"
+        ],
+        "judge_tags": [
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option D asserts that the sampling distribution will more closely mirror the population distribution as sample size increases, a clear demonstration of the B11 misconception."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 26.35,
+    "judge_s": 7.91
+  },
+  "created_at": "2026-05-14T22:57:55.827553+00:00"
+}

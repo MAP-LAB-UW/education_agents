@@ -1,0 +1,146 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B8",
+      "B11"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets the relationship between sample size, standard error, and CI width through the lens of misconceptions about what a sampling distribution actually represents. A1 (larger sample → smaller SE) and A7 (CI width increases with larger SE) form the correct conceptual chain. B8 (confusing sampling distribution with a single dataset's distribution) and B11 (thinking larger samples make the sampling distribution look more like the population) are related misconceptions that would lead students astray when reasoning about how increasing sample size affects the spread of the sampling distribution and consequently CI width. This combination has not been used before and covers under-represented facets B8 and B11 while reinforcing the SE-to-CI-width link from a different angle than Items 1 and 3.",
+  "item": {
+    "stem": "A researcher collects a random sample of n = 100 households and measures the number of streaming services each household subscribes to. The population distribution of streaming service subscriptions is right-skewed with mean 3.2 and standard deviation 2.4. The researcher constructs a 95% confidence interval and finds it to be (2.73, 3.67).\n\nThe researcher wants a narrower confidence interval. A colleague suggests: 'Just increase your sample size to n = 400. That will shrink the interval.'\n\nWhich of the following best explains why increasing the sample size to n = 400 would produce a narrower confidence interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Because with n = 400, the sampling distribution will look more like the right-skewed population distribution, reducing uncertainty about the population shape and therefore narrowing the interval.",
+        "facet_tags": [
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "A student who thinks that increasing sample size brings the sampling distribution closer to the population distribution (rather than closer to normal) would select this. This also misidentifies the mechanism for CI width reduction."
+      },
+      {
+        "id": "B",
+        "text": "Because with n = 400, the sampling distribution is built from the larger dataset itself, so the spread of scores in that single sample better represents the population, narrowing the interval.",
+        "facet_tags": [
+          "B8"
+        ],
+        "is_correct": false,
+        "rationale": "A student who confuses the sampling distribution with the sample distribution — thinking the sampling distribution is derived from one dataset rather than from repeated sampling — would select this explanation."
+      },
+      {
+        "id": "C",
+        "text": "Because with n = 400, the standard error (2.4/√400 = 0.12) is smaller than with n = 100 (2.4/√100 = 0.24), which directly reduces the width of the confidence interval.",
+        "facet_tags": [
+          "A1",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "A student who correctly understands that larger sample size reduces the standard error (A1), and that a smaller standard error leads to a narrower confidence interval (A7), will select this. The specific numerical calculation makes the mechanism concrete and verifiable."
+      },
+      {
+        "id": "D",
+        "text": "Because with n = 400, each individual observation is measured more precisely, so the standard deviation of the population decreases from 2.4 to 2.4/√4 = 1.2, which narrows the interval.",
+        "facet_tags": [
+          "B9",
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "A student who conflates the population standard deviation with the standard error, or believes that sampling more changes the population distribution itself, would select this. It reflects confusion about what changes versus what stays fixed when sample size increases."
+      }
+    ],
+    "correct_option_ids": [
+      "C"
+    ],
+    "explanation": "The correct answer (C) requires understanding two linked ideas: (A1) increasing sample size shrinks the standard error because SE = σ/√n, and (A7) a smaller standard error directly produces a narrower confidence interval since CI width = 2 × z* × SE. Distractor A targets B11 — the misconception that larger samples make the sampling distribution look more like the population distribution, confusing the direction of the Central Limit Theorem effect. Distractor B targets B8 — the misconception that the sampling distribution is derived from a single dataset, conflating sample distribution with sampling distribution. Distractor D targets B9 and B11 by suggesting the population standard deviation itself changes with sample size, reflecting confusion between population parameters (fixed) and sampling distribution properties (variable with n). The concrete numerical values in option C (SE dropping from 0.24 to 0.12) make the correct mechanism explicit while the distractors offer plausible-sounding but conceptually flawed explanations that real students with these misconceptions would find compelling.",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B8",
+      "B11"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher collects a random sample of n = 100 households and measures... The researcher wants a narrower confidence interval... Which of the following best explains why increasing the sample size to n = 400 would produce a narrower confidence interval?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B11"
+        ],
+        "judge_tags": [
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option A explicitly states that as sample size increases, the sampling distribution will look more like the right-skewed population distribution, which perfectly aligns with facet B11."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B8"
+        ],
+        "judge_tags": [
+          "B8"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option B explains that the sampling distribution is 'built from the larger dataset itself,' directly mapping to facet B8's description of confusing the sampling distribution with a single sample's distribution."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A1",
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option C accurately reflects that an increase in sample size decreases the standard error (A1) and correctly connects the smaller standard error to a reduced confidence interval width (A7)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B9",
+          "B11"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "Option D conflates the population standard deviation with the standard error of the sampling distribution by asserting that the population standard deviation itself decreases. This falls under the general confusion between population and sampling distributions highlighted in B9. However, it does not mention the sampling distribution becoming closer to the population distribution in shape, so B11 is not an accurate tag for this option."
+      }
+    ],
+    "overall_agreement": 0.85,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Options C and D contain mathematical formulas and calculations, while Options A and B are purely conceptual. This formatting difference could cue test-takers to focus only on the options with math.",
+      "Option D is an excellent distractor conceptually, but it stretches the definition of B9 slightly. B9 explicitly lists the misconception that the sampling distribution's standard deviation stays the same (mirroring the population), whereas Option D suggests the population standard deviation changes (mirroring the sampling distribution's SE). While both are confusions between the two distributions, an explicit facet for 'applying SE properties to population parameters' might be useful."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 19.99,
+    "judge_s": 21.02
+  },
+  "created_at": "2026-05-22T08:47:31.680980+00:00"
+}

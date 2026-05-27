@@ -1,0 +1,153 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A3",
+      "A7",
+      "B13",
+      "B9"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the sampling distribution's mean and spread properties. A3 (mean of sampling distribution equals population mean) and B13 (misconception that the mean depends on sample size) form a natural contrast about what sample size does and does not affect. A7 (CI width increases with larger standard error) and B9 (misconception that sampling distribution mirrors population distribution, so SD stays constant regardless of sample size) extend this into CI implications. Together they create a coherent item around the question of how sample size affects the sampling distribution's center and spread, and downstream effects on CI width — a combination not yet used in the batch.",
+  "item": {
+    "stem": "Heights of adult women in the United States are normally distributed with a mean of 64 inches and a standard deviation of 2.5 inches. A researcher takes a random sample of 100 women.\n\nWhat is the sampling distribution of the sample mean x̄?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Normal with mean 64 and standard deviation 2.5",
+        "facet_tags": [
+          "A3",
+          "B9"
+        ],
+        "is_correct": false,
+        "rationale": "A student choosing this believes the sampling distribution has the same standard deviation as the population (B9), even though they correctly identify the mean as 64 (A3). They do not apply the formula SE = σ/√n."
+      },
+      {
+        "id": "B",
+        "text": "Normal with mean 64 and standard deviation 2.5/√100",
+        "facet_tags": [
+          "A3",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "This is correct. The mean of the sampling distribution equals the population mean of 64 (A3), and the standard error is σ/√n = 2.5/10 = 0.25, which correctly reflects how larger sample sizes reduce variability (A7)."
+      },
+      {
+        "id": "C",
+        "text": "Normal with mean 64/√100 and standard deviation 2.5/√100",
+        "facet_tags": [
+          "A7",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "A student choosing this correctly reduces the standard deviation by √n (A7) but incorrectly also divides the mean by √n (B13), believing that the mean of the sampling distribution depends on sample size."
+      },
+      {
+        "id": "D",
+        "text": "Normal with mean 64/√100 and standard deviation 2.5",
+        "facet_tags": [
+          "B9",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "A student choosing this holds two misconceptions: they believe the mean of the sampling distribution changes with sample size (B13) by dividing by √n, and they retain the population standard deviation unchanged (B9), not recognizing that standard error decreases with larger samples."
+      }
+    ],
+    "correct_option_ids": [
+      "B"
+    ],
+    "explanation": "This item probes four facets through a concrete numerical scenario. The correct answer (B) requires knowing that the mean of the sampling distribution equals the population mean (A3) and that the standard error is σ/√n, reflecting how larger samples reduce spread (A7). Option A isolates the B9 misconception: the student knows the mean is correct but thinks the spread of the sampling distribution is the same as the population's SD. Option C isolates B13: the student applies the √n reduction correctly to SD but wrongly applies it to the mean as well. Option D combines both misconceptions (B9 and B13), scaling the mean by √n while leaving the SD unchanged.",
+    "target_facets": [
+      "A3",
+      "A7",
+      "B13",
+      "B9"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "Heights of adult women in the United States are normally distributed with a mean of 64 inches and a standard deviation of 2.5 inches. A researcher takes a random sample of 100 women. What is the sampling distribution of the sample mean x̄?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A3",
+          "B9"
+        ],
+        "judge_tags": [
+          "A3",
+          "B9"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies the mean of the sampling distribution as the population mean (A3) but incorrectly uses the population standard deviation as the standard deviation of the sampling distribution, mirroring the population distribution's spread (B9)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A3",
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A3"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The option correctly identifies the mean (A3). The generator tagged A7, but A7 is specifically about the relationship between Confidence Interval width and standard error. Since this question has nothing to do with Confidence Intervals, A7 is inappropriate. The calculation of the standard error based on sample size aligns better with A1 (standard errors become smaller as sample size increases, though strictly applying the formula is not explicitly a facet, A1 is the closest match for correctly factoring in 'n')."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A7",
+          "B13"
+        ],
+        "judge_tags": [
+          "A1",
+          "B13"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The option incorrectly divides the mean by the square root of the sample size, reflecting the misconception that the mean of the sampling distribution depends on sample size (B13). It correctly calculates the standard error, which aligns with A1 rather than A7, since A7 is about Confidence Intervals."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B9",
+          "B13"
+        ],
+        "judge_tags": [
+          "B9",
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option divides the mean by the square root of the sample size (B13) and incorrectly keeps the population standard deviation as the sampling distribution's standard deviation (B9)."
+      }
+    ],
+    "overall_agreement": 0.5,
+    "overall_confidence": 0.95,
+    "issues": [
+      "The generator applied facet A7, which specifically refers to Confidence Interval width, to an item that asks only about the sampling distribution and does not mention or assess confidence intervals.",
+      "While the course context mentions 'confidence intervals', this specific item functions purely as a pre-requisite check on sampling distributions and does not assess any CI-specific facets directly."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 13.05,
+    "judge_s": 16.46
+  },
+  "created_at": "2026-05-22T08:50:08.319127+00:00"
+}

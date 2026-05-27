@@ -79,6 +79,7 @@ function summarizeDataset(ds) {
   if (hasItemEval) {
     const correctCount = items.filter(r => r.correctness.is_correct).length;
     const hasLLM = items[0].naturalness.stem_score > 0;
+    const figItems = items.filter(r => r.figure_necessity != null);
     itemMetrics = {
       correctness_pct: correctCount / items.length,
       correctness_count: correctCount,
@@ -88,6 +89,8 @@ function summarizeDataset(ds) {
       naturalness_overall: hasLLM ? items.reduce((s, r) => s + r.naturalness.overall_score, 0) / items.length : null,
       latency_score: items.reduce((s, r) => s + (r.facet_latency.score || 0), 0) / items.length,
       latency_similarity: items.reduce((s, r) => s + (r.facet_latency.mean_similarity || 0), 0) / items.length,
+      figure_items: figItems.length,
+      figure_necessity_avg: figItems.length > 0 ? figItems.reduce((s, r) => s + r.figure_necessity, 0) / figItems.length : null,
     };
   }
 
@@ -195,7 +198,8 @@ function ItemDetailTable({ datasets, summaries }) {
     const items = ds.item_evaluations || [];
     return items.some(it => it.judge) || (ds._artifacts || []).some(a => a.judge_report);
   });
-  const colSpan = hasJudgeData ? 6 : 4;
+  const hasFigNec = datasets.some(ds => (ds.item_evaluations || []).some(it => it.figure_necessity != null));
+  const colSpan = (hasJudgeData ? 6 : 4) + (hasFigNec ? 1 : 0);
 
   const getJudge = (ds, idx) => {
     const items = ds.item_evaluations || [];
@@ -229,6 +233,7 @@ function ItemDetailTable({ datasets, summaries }) {
                   <th style={{ ...thStyle, fontSize: 9 }}>Natural</th>
                   <th style={{ ...thStyle, fontSize: 9 }}>Latency</th>
                   <th style={{ ...thStyle, fontSize: 9 }}>Sim</th>
+                  {hasFigNec && <th style={{ ...thStyle, fontSize: 9 }}>Fig</th>}
                   {hasJudgeData && <th style={{ ...thStyle, fontSize: 9 }}>Agree</th>}
                   {hasJudgeData && <th style={{ ...thStyle, fontSize: 9 }}>Conf</th>}
                 </React.Fragment>
@@ -263,6 +268,11 @@ function ItemDetailTable({ datasets, summaries }) {
                         {item.facet_latency.score}/4
                       </td>
                       <td style={{ ...tdStyle, color: DS.inkMuted, fontSize: 10.5, fontFamily: FM }}>{item.facet_latency.mean_similarity.toFixed(3)}</td>
+                      {hasFigNec && (
+                        <td style={{ ...tdStyle, fontWeight: 600, fontSize: 10.5, fontFamily: FM, color: item.figure_necessity != null ? (item.figure_necessity === 1 ? DS.matchFg : DS.mismatchFg) : DS.inkMuted }}>
+                          {item.figure_necessity != null ? item.figure_necessity : "—"}
+                        </td>
+                      )}
                       {hasJudgeData && (
                         <td style={{ ...tdStyle, color: agr != null ? (agr >= 0.8 ? DS.matchFg : agr >= 0.5 ? DS.partialFg : DS.mismatchFg) : DS.inkMuted, fontWeight: 600, fontSize: 10.5, fontFamily: FM }}>
                           {agr != null ? `${Math.round(agr * 100)}%` : "—"}
@@ -477,6 +487,7 @@ function CompareApp() {
               bucket: a.eval_scores.latency_bucket,
               option_details: a.eval_scores.latency_option_details || [],
             },
+            figure_necessity: a.eval_scores.figure_necessity,
           }));
         }
 
@@ -591,6 +602,9 @@ function CompareApp() {
                     {summaries.some(s => s.itemMetrics) && (
                       <MetricBars label="Mean Embedding Similarity" datasets={datasets} values={summaries.map(s => s.itemMetrics?.latency_similarity)} max={1} unit="" />
                     )}
+                    {summaries.some(s => s.itemMetrics?.figure_necessity_avg != null) && (
+                      <MetricBars label="Figure Necessity" datasets={datasets} values={summaries.map(s => s.itemMetrics?.figure_necessity_avg)} max={1} unit="" />
+                    )}
                     {summaries.some(s => s.corpus) && (
                       <MetricBars label="Facet Uniformity" datasets={datasets} values={summaries.map(s => s.corpus?.facet_coverage?.uniformity)} max={1} unit="" />
                     )}
@@ -676,6 +690,21 @@ function buildComparisonRows(summaries) {
       label: "Embedding Similarity", sublabel: "mean",
       getValue: s => s.itemMetrics ? { display: s.itemMetrics.latency_similarity.toFixed(3), color: DS.ink2 } : null,
     });
+    if (summaries.some(s => s.itemMetrics?.figure_items > 0)) {
+      rows.push({
+        label: "Figure Necessity", sublabel: "avg (1=essential, 0=decorative)",
+        getValue: s => {
+          if (!s.itemMetrics || s.itemMetrics.figure_items === 0) return null;
+          const avg = s.itemMetrics.figure_necessity_avg;
+          return {
+            display: avg.toFixed(2),
+            color: avg >= 0.5 ? DS.matchFg : DS.mismatchFg,
+            bar: { value: avg, max: 1 },
+            sub: `${s.itemMetrics.figure_items} items with figures`,
+          };
+        },
+      });
+    }
   }
 
   // Corpus-level section
@@ -738,6 +767,16 @@ function buildComparisonRows(summaries) {
         color: s.corpus.problem_diversity.semantic.max_pairwise_similarity > 0.9 ? DS.mismatchFg : DS.ink2,
       } : null,
     });
+    if (summaries.some(s => s.corpus?.figure_fraction != null)) {
+      rows.push({
+        label: "Figure Fraction", sublabel: "items with figures",
+        getValue: s => s.corpus?.figure_fraction != null ? {
+          display: `${Math.round(s.corpus.figure_fraction * 100)}%`,
+          color: DS.ink,
+          bar: { value: s.corpus.figure_fraction, max: 1 },
+        } : null,
+      });
+    }
   }
 
   return rows;

@@ -1,0 +1,151 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A6",
+      "A7",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "These three facets form a tight, coherent cluster around CI width and precision. A6 captures the correct understanding that higher confidence levels produce wider intervals, while A7 adds that larger standard errors also widen intervals. B17 represents the common misconception that higher confidence yields a more precise (narrower) interval — directly contradicting A6. A single item stem can present a scenario (e.g., comparing two intervals at different confidence levels or sample sizes) that cleanly separates students who correctly reason about the trade-off between confidence and precision from those who conflate confidence with precision. This combination has not yet been targeted and addresses a practically important misunderstanding about what 'confidence' actually buys you.",
+  "item": {
+    "stem": "A researcher wants to obtain a shorter (more precise) confidence interval. Which of the following changes would achieve this goal?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Increase the confidence level from 90% to 99% and increase the sample size.",
+        "facet_tags": [
+          "A7",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the B17 misconception that higher confidence yields more precision (shorter intervals), when in fact raising the confidence level widens the interval. Increasing sample size would reduce standard error and help narrow the interval (A7), but the effect of raising the confidence level dominates and will widen it overall."
+      },
+      {
+        "id": "B",
+        "text": "Increase the confidence level from 90% to 99% and decrease the sample size.",
+        "facet_tags": [
+          "B17",
+          "A6"
+        ],
+        "is_correct": false,
+        "rationale": "Both changes here widen the CI: increasing the confidence level increases the critical value and thus the width (B17 misconception that higher confidence means more precision; A6 shows the true relationship), and decreasing sample size increases standard error."
+      },
+      {
+        "id": "C",
+        "text": "Decrease the confidence level from 90% to 80% and decrease the sample size.",
+        "facet_tags": [
+          "A6",
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "Decreasing the confidence level correctly narrows the interval (A6), but decreasing sample size increases standard error and thus widens the interval (reflecting a misunderstanding of sample size effects), so this combination does not reliably produce a shorter interval."
+      },
+      {
+        "id": "D",
+        "text": "Decrease the confidence level from 90% to 80% and increase the sample size.",
+        "facet_tags": [
+          "A6",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "This is correct. Decreasing the confidence level reduces the critical value, which narrows the CI (A6). Increasing sample size reduces the standard error, which also narrows the CI (A7). Both changes work together to produce a shorter, more precise interval."
+      }
+    ],
+    "correct_option_ids": [
+      "D"
+    ],
+    "explanation": "A confidence interval's width is determined by two key factors: the critical value (tied to the confidence level) and the standard error (tied to sample size). A6 captures the relationship between CI width and confidence level: a higher confidence level requires a larger critical value, producing a wider interval, while a lower confidence level yields a narrower one. A7 captures the relationship between CI width and standard error: a larger sample size produces a smaller standard error, narrowing the interval. B17 is the common misconception that higher confidence leads to greater precision (a shorter interval), when in fact the opposite is true. The only option that correctly applies both A6 and A7 — lowering confidence level AND increasing sample size — is option D.",
+    "target_facets": [
+      "A6",
+      "A7",
+      "B17"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher wants to obtain a shorter (more precise) confidence interval. Which of the following changes would achieve this goal?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A7",
+          "B17"
+        ],
+        "judge_tags": [
+          "A7",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "Choosing this option indicates the student incorrectly believes that a higher confidence level yields a shorter interval (B17), but correctly understands that increasing the sample size reduces the width of the interval (which is a combination of A1 and A7; A7 is a reasonable shorthand)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B17",
+          "A6"
+        ],
+        "judge_tags": [
+          "B17",
+          "B10"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "Choosing this option shows two misconceptions: that higher confidence leads to a shorter interval (B17) and that a smaller sample size leads to a shorter interval, which implies a misunderstanding of how sample size affects spread (B10). The generator incorrectly tags A6 here; tags for a distractor should reflect the facets a student exhibits by choosing it, not the goal facet they failed to apply."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A6",
+          "B10"
+        ],
+        "judge_tags": [
+          "A6",
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "Choosing this option indicates correct understanding that a lower confidence level yields a shorter interval (A6), but an incorrect belief that decreasing sample size would also shorten the interval (B10)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A6",
+          "A7"
+        ],
+        "judge_tags": [
+          "A6",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "This is the correct answer. The student correctly applies the knowledge that decreasing the confidence level (A6) and increasing the sample size (A7/A1) both work to shorten the confidence interval."
+      }
+    ],
+    "overall_agreement": 0.75,
+    "overall_confidence": 0.9,
+    "issues": [
+      "In Option B, the generator incorrectly included a goal facet (A6) that the student lacks, rather than the misconception (B10) that the student actively exhibits by selecting 'decrease the sample size'.",
+      "Technically, the relationship between sample size and CI width requires both facet A1 (sample size -> standard error) and A7 (standard error -> CI width). The options do not explicitly mention standard error, so applying A7 alone skips the intermediary step described in A1, although it is acceptable in this context."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 20.52,
+    "judge_s": 18.44
+  },
+  "created_at": "2026-05-22T08:27:30.200400+00:00"
+}

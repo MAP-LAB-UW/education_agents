@@ -1,0 +1,166 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A5",
+      "B14",
+      "B16"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v3"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets two distinct but complementary conceptual areas: (1) how sample size affects the sampling distribution (A1) and the misconception that larger samples guarantee a closer sample mean (B14, confusing probabilistic improvement with certainty), and (2) the purpose of a CI to estimate population parameters (A5) versus the misconception that CIs estimate sample statistics (B16). Together these facets support an item stem about a researcher collecting a large sample and constructing a CI, where distractors can probe whether students think the larger sample guarantees closeness to the mean (B14) or that the CI is about the sample mean itself (B16), while correct reasoning requires understanding both reduced standard error (A1) and the population-parameter focus of CIs (A5). This combination has not been used before and spans both the sampling distribution and CI interpretation domains.",
+  "item": {
+    "stem": "A university administrator collects a random sample of $n = 9$ student loan balances and computes a 95% confidence interval of $(\\$18{,}400,\\ \\$23{,}600)$. The administrator then collects a new random sample of $n = 81$ students and computes a 95% confidence interval from this larger sample.\n\nFor each of the following statements, decide whether it is **True** or **False**.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "The 95% confidence interval from the $n = 81$ sample is guaranteed to be closer to the true population mean loan balance than $\\$21{,}000$ (the midpoint of the first interval).",
+        "facet_tags": [
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "A student who thinks larger samples guarantee individual sample means land closer to the population mean will mark this True. In fact, due to sampling variability, the new sample mean could fall anywhere — a larger sample reduces the standard error (narrowing the interval) but does not guarantee the specific sample mean is closer to μ."
+      },
+      {
+        "id": "B",
+        "text": "We can be 95% confident that the true mean loan balance of all students at the university is between $\\$18{,}400$ and $\\$23{,}600$.",
+        "facet_tags": [
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct interpretation of the confidence interval: it targets the unknown population parameter (true mean for all students), not the sample. A student who understands A5 will correctly mark this True."
+      },
+      {
+        "id": "C",
+        "text": "The confidence interval $(\\$18{,}400,\\ \\$23{,}600)$ tells us that 95% of the students in the original sample of $n = 9$ have loan balances between $\\$18{,}400$ and $\\$23{,}600$.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "A student who believes the CI describes or estimates individual data values or the sample itself (rather than the population parameter) will mark this True. The CI is not about where individual observations fall; it is about capturing the population mean."
+      },
+      {
+        "id": "D",
+        "text": "The confidence interval computed from the $n = 81$ sample will be narrower than the interval $(\\$18{,}400,\\ \\$23{,}600)$ from the $n = 9$ sample, because the larger sample produces a smaller standard error.",
+        "facet_tags": [
+          "A1",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "A student who understands A1 (larger $n$ → smaller standard error → narrower CI) will correctly mark this True. The standard error $SE = \\frac{\\sigma}{\\sqrt{n}}$ decreases as $n$ increases from 9 to 81 (by a factor of 3), so the margin of error shrinks and the CI narrows. This also reinforces A5 because the CI width is about estimating the population parameter more precisely."
+      },
+      {
+        "id": "E",
+        "text": "The sample mean from the $n = 81$ sample will definitely be closer to the true population mean than $\\$21{,}000$ was from the $n = 9$ sample.",
+        "facet_tags": [
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "This again targets the B14 misconception: the belief that a larger sample size guarantees the specific sample mean will be closer to μ. While larger samples tend to produce sample means that are closer to μ on average (smaller SE), no individual sample mean is guaranteed to be closer. There is always random variability in any one sample."
+      }
+    ],
+    "correct_option_ids": [
+      "B",
+      "D"
+    ],
+    "explanation": "This item diagnoses four facets through a concrete CI scenario. **A1** is probed by option D: students must recognize that increasing $n$ from 9 to 81 reduces the standard error by a factor of $\\sqrt{81}/\\sqrt{9} = 3$, making the interval narrower — not because we're guaranteed a better point estimate, but because the sampling distribution is more tightly packed. **A5** is probed by options B and D: the correct interpretation of a CI targets the population parameter (true mean for all students), not the sample itself. **B14** is probed by options A and E: students with this misconception believe larger samples guarantee that the specific observed sample mean will be numerically closer to μ, confusing the reduction in standard error (a distributional property) with a deterministic guarantee about any one sample. **B16** is probed by option C: students with this misconception misread the CI as describing the distribution of individual data values in the sample rather than as an estimate of the population mean.",
+    "target_facets": [
+      "A1",
+      "A5",
+      "B14",
+      "B16"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A university administrator collects a random sample of n = 9 student loan balances and computes a 95% confidence interval...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B14"
+        ],
+        "judge_tags": [
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The option explicitly expresses the misconception that a larger sample guarantees the estimate will be closer to the population mean, matching B14."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A5"
+        ],
+        "judge_tags": [
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option presents the correct interpretation of a confidence interval as estimating the true population parameter (mean loan balance of all students), which aligns perfectly with A5."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option claims the CI describes the proportion of sample data falling within the interval, perfectly matching the B16 misconception that CIs estimate sample data rather than population parameters."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A1",
+          "A5"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "The option clearly demonstrates A1 (larger sample size produces a smaller standard error). Furthermore, it explicitly links the smaller standard error to a narrower CI, which directly involves A7. A5 is not strongly present here since the option focuses on the mechanics of the interval's width rather than what parameter it attempts to capture."
+      },
+      {
+        "option_id": "E",
+        "generator_tags": [
+          "B14"
+        ],
+        "judge_tags": [
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Like option A, this statement claims a larger sample size guarantees a sample mean closer to the population mean, which perfectly corresponds to B14."
+      }
+    ],
+    "overall_agreement": 0.8,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Options A and E test the exact same misconception (B14) using highly similar logic. Option A's phrasing ('The 95% confidence interval... is guaranteed to be closer... than $21,000') is somewhat nonsensical because comparing the 'distance' of an entire interval to a point estimate is vague. Option E is much clearer and correctly references the sample mean. Option A should be revised to target a different facet or removed to avoid redundancy.",
+      "The generator missed tagging A7 on Option D, which directly addresses the relationship between CI width and standard error."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 23.1,
+    "judge_s": 16.82
+  },
+  "created_at": "2026-05-22T09:14:14.196452+00:00"
+}

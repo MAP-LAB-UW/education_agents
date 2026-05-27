@@ -1,0 +1,141 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 3,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "item": {
+    "stem": "A researcher calculates a 95% confidence interval for the average height of a certain plant species as (12.4, 15.8) cm. Which of the following is the most accurate interpretation of this result?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "If we were to take many random samples and compute a 95% confidence interval for each, approximately 95% of those intervals would contain the true population mean height.",
+        "facet_tags": [
+          "A4",
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies that the confidence level describes the proportion of intervals that would capture the population parameter over many replications (A4) and correctly identifies the target of the interval as the population mean (A5)."
+      },
+      {
+        "id": "B",
+        "text": "There is a 95% probability that the true population mean height of the plant species is between 12.4 and 15.8 cm.",
+        "facet_tags": [
+          "A5",
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This option correctly identifies the population mean as the target (A5) but incorrectly treats the confidence level as a probability for a specific, already-calculated interval (B15)."
+      },
+      {
+        "id": "C",
+        "text": "We are 95% confident that the sample mean height of the plants we measured is between 12.4 and 15.8 cm.",
+        "facet_tags": [
+          "A4",
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option incorrectly suggests the confidence interval is used to estimate the sample mean (B16), which is already known and always lies at the center of the interval."
+      },
+      {
+        "id": "D",
+        "text": "Approximately 95% of all plants of this species have heights that fall between 12.4 and 15.8 cm.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "This option demonstrates a common misconception where the confidence interval for a mean is interpreted as a range that contains a percentage of the individual data points in the population (B16)."
+      }
+    ],
+    "correct_option_ids": [
+      "A"
+    ],
+    "explanation": "This question diagnoses whether students understand the frequentist definition of confidence intervals. The correct answer identifies the long-run success rate of the interval construction method (A4) and the target parameter (A5). Distractors check for the 'probability' misconception (B15) and the 'sample statistic' or 'individual data' misconceptions (B16).",
+    "target_facets": [
+      "A4",
+      "A5",
+      "B15",
+      "B16"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher calculates a 95% confidence interval for the average height of a certain plant species as (12.4, 15.8) cm. Which of the following is the most accurate interpretation of this result?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A4",
+          "A5"
+        ],
+        "judge_tags": [
+          "A4",
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option perfectly describes the frequentist interpretation of a confidence interval, recognizing both the replication aspect (A4) and that the interval aims to capture the true population mean (A5)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A5",
+          "B15"
+        ],
+        "judge_tags": [
+          "A5",
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "This option correctly identifies the population mean as the target of the interval (A5) but incorrectly applies a probability statement to a specific calculated interval (B15)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A4",
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "This option incorrectly states that the interval is estimating the sample mean (B16). However, it does not explicitly demonstrate a correct understanding of replications (A4), so tagging A4 seems incorrect here."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "This option misinterprets the confidence interval as a range for individual sample data points or population individuals, which aligns with facet B16."
+      }
+    ],
+    "overall_agreement": 0.75,
+    "overall_confidence": 0.95,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 16.53,
+    "judge_s": 10.62
+  },
+  "created_at": "2026-05-07T22:28:00.773108+00:00"
+}

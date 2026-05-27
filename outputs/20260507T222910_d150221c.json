@@ -1,0 +1,145 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B11",
+      "B13"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 3,
+    "exclude_image_examples": true
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "item": {
+    "stem": "A researcher is studying a highly skewed population with a known mean of 50. If the researcher repeatedly takes random samples of size n from this population to create a sampling distribution of the sample mean, what happens as the sample size n increases?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "opt1",
+        "text": "The sampling distribution becomes more bell-shaped (normal) and its mean remains equal to 50.",
+        "facet_tags": [
+          "A2",
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct application of the Central Limit Theorem. As n increases, the sampling distribution of the mean approaches a normal distribution (A2), and the expected value (mean) of the sampling distribution is always the population mean (A3)."
+      },
+      {
+        "id": "opt2",
+        "text": "The sampling distribution becomes more skewed to match the population distribution, and its mean remains equal to 50.",
+        "facet_tags": [
+          "B11",
+          "A3"
+        ],
+        "is_correct": false,
+        "rationale": "This option correctly identifies that the mean remains constant (A3), but incorrectly suggests that the sampling distribution mirrors the population shape (B11) rather than becoming normal as sample size increases."
+      },
+      {
+        "id": "opt3",
+        "text": "The sampling distribution becomes more bell-shaped (normal), but the mean of the sampling distribution increases as n increases.",
+        "facet_tags": [
+          "A2",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "While this option correctly identifies the shift toward normality (A2), it incorrectly assumes that the center of the sampling distribution depends on the sample size (B13)."
+      },
+      {
+        "id": "opt4",
+        "text": "The sampling distribution becomes more skewed to match the population distribution, and the mean of the sampling distribution is calculated as 50 divided by n.",
+        "facet_tags": [
+          "B11",
+          "B13"
+        ],
+        "is_correct": false,
+        "rationale": "This option contains two misconceptions: that the sampling distribution looks like the population (B11) and that the mean of the sampling distribution changes based on the sample size (B13)."
+      }
+    ],
+    "correct_option_ids": [
+      "opt1"
+    ],
+    "explanation": "This item tests the student's understanding of the Central Limit Theorem and the properties of sampling distributions. According to the CLT, as the sample size (n) increases, the sampling distribution of the sample mean will approach a normal distribution (A2), regardless of the shape of the population. Furthermore, a fundamental property of the sampling distribution of the mean is that its mean is always equal to the population mean (A3). Common misconceptions include thinking the sampling distribution will eventually look like the population distribution (B11) or thinking that the mean of the sampling distribution is somehow adjusted or scaled by the sample size (B13).",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B11",
+      "B13"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is studying a highly skewed population with a known mean of 50. If the researcher repeatedly takes random samples of size n from this population to create a sampling distribution of the sample mean, what happens as the sample size n increases?",
+    "option_assessments": [
+      {
+        "option_id": "opt1",
+        "generator_tags": [
+          "A2",
+          "A3"
+        ],
+        "judge_tags": [
+          "A2",
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that the sampling distribution becomes more normal as n increases (A2) and correctly states that its mean stays equal to the population mean (A3)."
+      },
+      {
+        "option_id": "opt2",
+        "generator_tags": [
+          "B11",
+          "A3"
+        ],
+        "judge_tags": [
+          "B11",
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option exhibits the misconception that increasing sample size makes the sampling distribution look more like the population distribution (B11) while correctly stating the mean remains equal to 50 (A3)."
+      },
+      {
+        "option_id": "opt3",
+        "generator_tags": [
+          "A2",
+          "B13"
+        ],
+        "judge_tags": [
+          "A2",
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly notes the shift toward a normal distribution (A2) but exhibits the misconception that the mean of the sampling distribution depends on the sample size (B13)."
+      },
+      {
+        "option_id": "opt4",
+        "generator_tags": [
+          "B11",
+          "B13"
+        ],
+        "judge_tags": [
+          "B11",
+          "B13"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option combines two misconceptions: that increasing sample size makes the sampling distribution mirror the population (B11) and that its mean is dependent on the sample size (B13)."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "timing": {
+    "generator_s": 6.85,
+    "judge_s": 11.29
+  },
+  "created_at": "2026-05-07T22:29:10.467178+00:00"
+}

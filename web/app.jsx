@@ -35,6 +35,66 @@ const FS = "'Source Serif 4', 'Source Serif Pro', Georgia, serif";
 const FN = "'Inter', -apple-system, BlinkMacSystemFont, sans-serif";
 const FM = "'JetBrains Mono', ui-monospace, Menlo, monospace";
 
+/* ── LaTeX + Figure rendering ──────────────────────────────────── */
+
+function renderLatex(text) {
+  if (typeof katex === "undefined") return text;
+  const parts = [];
+  const regex = /\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$/g;
+  let last = 0;
+  let match;
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > last) parts.push(text.slice(last, match.index));
+    const expr = match[1] || match[2];
+    const displayMode = !!match[1];
+    try {
+      parts.push(katex.renderToString(expr, { throwOnError: false, displayMode }));
+    } catch {
+      parts.push(match[0]);
+    }
+    last = regex.lastIndex;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts.join("");
+}
+
+function splitTextAndFigures(text, figureData) {
+  if (!figureData || Object.keys(figureData).length === 0) {
+    return [{ type: "text", value: text }];
+  }
+  const regex = /\[FIGURE:([^\]]+)\]/g;
+  const segments = [];
+  let last = 0;
+  let match;
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > last) segments.push({ type: "text", value: text.slice(last, match.index) });
+    segments.push({ type: "figure", id: match[1] });
+    last = regex.lastIndex;
+  }
+  if (last < text.length) segments.push({ type: "text", value: text.slice(last) });
+  return segments;
+}
+
+function RichText({ text, figureData, style, as: Tag = "span" }) {
+  const segments = splitTextAndFigures(text, figureData);
+  return (
+    <Tag style={style}>
+      {segments.map((seg, i) => {
+        if (seg.type === "figure") {
+          const data = figureData?.[seg.id];
+          if (!data) return <span key={i} style={{ color: DS.inkMuted, fontFamily: FM, fontSize: 11 }}>[Figure {seg.id} not available]</span>;
+          return (
+            <img key={i} src={`data:image/png;base64,${data}`} alt={seg.id}
+              style={{ display: "block", maxWidth: "100%", margin: "12px auto", borderRadius: DS.rlg, border: `1px solid ${DS.rule}` }} />
+          );
+        }
+        const html = renderLatex(seg.value);
+        return <span key={i} dangerouslySetInnerHTML={{ __html: html }} />;
+      })}
+    </Tag>
+  );
+}
+
 /* ── Primitives ─────────────────────────────────────────────────── */
 
 function FacetTag({ id, selected = true, onClick, tip = true, small = false, dimmed = false }) {
@@ -338,7 +398,7 @@ function ItemRow({ result, index, selected, onClick }) {
           fontSize: 10, fontWeight: 600, fontFamily: FM, letterSpacing: "0.04em",
         }}>{index + 1}</span>
         <div style={{ flex: 1, fontSize: 12.5, lineHeight: 1.4, color: DS.ink2, fontFamily: FS, fontStyle: "italic", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-          {item.stem.slice(0, 85)}…
+          <RichText text={item.stem.slice(0, 85) + "…"} />
         </div>
         {isAuto && (
           <span style={{ fontSize: 9, fontFamily: FM, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: DS.accent, background: DS.accentSoft, padding: "1px 5px", borderRadius: DS.r, flexShrink: 0 }}>auto</span>
@@ -412,7 +472,7 @@ function ItemDetail({ result }) {
             {/* Stem */}
             <div style={{ background: DS.paper, border: `1px solid ${DS.ruleStrong}`, borderRadius: DS.rlg, padding: "18px 20px" }}>
               <MonoLabel action={<TagRow tags={item.target_facets} />}>Stem</MonoLabel>
-              <p style={{ fontSize: 16, lineHeight: 1.7, color: DS.ink, fontFamily: FS, margin: 0 }}>{item.stem}</p>
+              <RichText as="p" text={item.stem} figureData={result.figure_data} style={{ fontSize: 16, lineHeight: 1.7, color: DS.ink, fontFamily: FS, margin: 0 }} />
             </div>
 
             {/* Options */}
@@ -435,7 +495,7 @@ function ItemDetail({ result }) {
                         display: "flex", alignItems: "center", justifyContent: "center",
                         fontSize: 10, fontWeight: 600, fontFamily: FM, letterSpacing: "0.04em",
                       }}>{opt.id}</span>
-                      <span style={{ fontSize: 14, lineHeight: 1.65, color: DS.ink, fontFamily: FS }}>{opt.text}</span>
+                      <RichText text={opt.text} figureData={result.figure_data} style={{ fontSize: 14, lineHeight: 1.65, color: DS.ink, fontFamily: FS }} />
                     </div>
                     <div style={{ paddingLeft: 30, display: "flex", gap: 6, flexWrap: "wrap", alignItems: "flex-start" }}>
                       <TagRow tags={opt.facet_tags} />
@@ -448,7 +508,7 @@ function ItemDetail({ result }) {
 
             <div style={{ background: DS.paper, border: `1px solid ${DS.ruleStrong}`, borderRadius: DS.rlg, padding: "14px 20px" }}>
               <MonoLabel>Explanation</MonoLabel>
-              <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.75, color: DS.ink2, fontFamily: FS, fontStyle: "italic" }}>{item.explanation}</p>
+              <RichText as="p" text={item.explanation} figureData={result.figure_data} style={{ margin: 0, fontSize: 13.5, lineHeight: 1.75, color: DS.ink2, fontFamily: FS, fontStyle: "italic" }} />
             </div>
           </>
         )}
@@ -482,7 +542,7 @@ function ItemDetail({ result }) {
                     <div style={{ display: "flex", gap: 12, alignItems: "flex-start", paddingTop: i > 0 ? 14 : 0 }}>
                       <span style={{ width: 20, height: 20, borderRadius: 2, flexShrink: 0, background: DS.paper3, color: DS.inkMuted, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 600, fontFamily: FM, letterSpacing: "0.04em" }}>{oa.option_id}</span>
                       <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 7 }}>
-                        <p style={{ margin: 0, fontSize: 13.5, color: DS.ink2, fontFamily: FS, fontStyle: "italic", lineHeight: 1.5 }}>{opt?.text}</p>
+                        <RichText as="p" text={opt?.text || ""} figureData={result.figure_data} style={{ margin: 0, fontSize: 13.5, color: DS.ink2, fontFamily: FS, fontStyle: "italic", lineHeight: 1.5 }} />
                         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
                           <AgreeBadge v={oa.agreement} />
                           <div style={{ display: "flex", gap: 5, alignItems: "center" }}>
@@ -560,7 +620,7 @@ function ItemDetail({ result }) {
                           <div style={{ display: "flex", gap: 12, alignItems: "flex-start", paddingTop: i > 0 ? 10 : 0 }}>
                             <span style={{ width: 20, height: 20, borderRadius: 2, flexShrink: 0, background: DS.paper3, color: DS.inkMuted, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 600, fontFamily: FM }}>{od.option_id}</span>
                             <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 6 }}>
-                              <p style={{ margin: 0, fontSize: 13, color: DS.ink2, fontFamily: FS, fontStyle: "italic", lineHeight: 1.5 }}>{opt?.text}</p>
+                              <RichText as="p" text={opt?.text || ""} figureData={result.figure_data} style={{ margin: 0, fontSize: 13, color: DS.ink2, fontFamily: FS, fontStyle: "italic", lineHeight: 1.5 }} />
                               <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                                 <span style={{
                                   padding: "2px 7px", borderRadius: DS.r,
@@ -886,7 +946,7 @@ function VariationA() {
                       <div style={{ padding: "11px 18px", display: "flex", gap: 12, alignItems: "center" }}>
                         <span style={{ width: 18, height: 18, borderRadius: 2, flexShrink: 0, background: DS.paper3, color: DS.inkMuted, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 600, fontFamily: FM, letterSpacing: "0.04em" }}>{i + 1}</span>
                         <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{ fontSize: 12.5, color: DS.ink2, fontFamily: FS, fontStyle: "italic", marginBottom: 6, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{r.item.stem.slice(0, 90)}…</div>
+                          <RichText as="div" text={r.item.stem.slice(0, 90) + "…"} style={{ fontSize: 12.5, color: DS.ink2, fontFamily: FS, fontStyle: "italic", marginBottom: 6, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} />
                           <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
                             <div style={{ minWidth: 110 }}><div style={{ fontSize: 10.5, color: DS.inkMuted, fontFamily: FM, letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 3 }}>Agreement</div><ScoreBar value={r.judge_report.overall_agreement} color={DS.matchFg} /></div>
                             <div style={{ minWidth: 110 }}><div style={{ fontSize: 10.5, color: DS.inkMuted, fontFamily: FM, letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 3 }}>Confidence</div><ScoreBar value={r.judge_report.overall_confidence} color={DS.goalFg} /></div>

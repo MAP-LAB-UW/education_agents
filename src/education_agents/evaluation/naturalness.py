@@ -6,6 +6,7 @@ import os
 
 from pydantic import BaseModel
 
+from ..figures import build_multimodal_content
 from ..llm import structured_complete
 from ..schemas import GeneratedItem
 from .schemas import NaturalnessResult
@@ -48,6 +49,7 @@ Provide a brief reasoning for each score (1–2 sentences)."""
 def evaluate_naturalness(
     item: GeneratedItem,
     model: str | None = None,
+    figure_data: dict[str, str] | None = None,
 ) -> NaturalnessResult:
     model = model or DEFAULT_EVAL_MODEL
 
@@ -55,16 +57,18 @@ def evaluate_naturalness(
         f"  {o.id}. {o.text}" for o in item.options
     )
 
-    user_msg = (
+    user_text = (
         f"Rate the naturalness of this item.\n\n"
         f"Format: {item.response_format}\n\n"
         f"Stem: {item.stem}\n\n"
         f"Options:\n{options_text}"
     )
 
+    user_content = build_multimodal_content(user_text, figure_data or {})
+
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": user_msg},
+        {"role": "user", "content": user_content},
     ]
 
     result = structured_complete(messages, _NaturalnessRating, model=model)

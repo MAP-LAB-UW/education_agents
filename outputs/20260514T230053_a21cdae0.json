@@ -1,0 +1,139 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A7",
+      "B11",
+      "B12",
+      "B14"
+    ],
+    "response_format": "single_select",
+    "num_options": 4,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This set of facets examines the theoretical foundations of confidence intervals by linking the interval width to the standard error (A7). It addresses misconceptions regarding the nature of the sampling distribution as sample size increases, specifically the mistaken belief that it approaches the population distribution shape (B11) or is always normal regardless of sample size (B12). Additionally, it challenges the deterministic misunderstanding that larger samples must always result in a mean closer to the population parameter (B14), which is a common fallacy when interpreting the randomness inherent in sampling distributions.",
+  "item": {
+    "stem": "A researcher is studying the time spent on social media by teenagers. The population distribution of daily usage time is known to be highly skewed to the right, with a mean (μ) of 140 minutes and a standard deviation (σ) of 60 minutes. The researcher plans to collect a random sample of teenagers and construct a 95% confidence interval for the population mean. Which of the following is true?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "1",
+        "text": "A sample size of n=100 will result in a narrower 95% confidence interval than a sample size of n=36 because the larger sample size results in a smaller standard error.",
+        "facet_tags": [
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "The student correctly understands that as sample size increases, the standard error decreases (SE = σ/√n). Since the margin of error is a function of the standard error, a smaller standard error leads to a narrower confidence interval."
+      },
+      {
+        "id": "2",
+        "text": "As the researcher increases the sample size from n=36 to n=100, the shape of the sampling distribution of the mean will become more right-skewed to better mirror the actual population distribution of teenagers.",
+        "facet_tags": [
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "The student incorrectly believes that the sampling distribution approaches the shape of the population distribution as sample size increases, whereas the Central Limit Theorem states it will approach a normal distribution."
+      },
+      {
+        "id": "3",
+        "text": "Regardless of whether the researcher chooses a sample of n=5 or n=100, the sampling distribution of the sample mean will follow a normal distribution because sample means are always normally distributed.",
+        "facet_tags": [
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "The student assumes that the sampling distribution of the mean is always normal, failing to recognize that for a skewed population, a sufficiently large sample size is required for the sampling distribution to become approximately normal."
+      },
+      {
+        "id": "4",
+        "text": "If the researcher takes a sample of n=100, the resulting sample mean is guaranteed to be closer to 140 minutes than if they had only taken a sample of n=36.",
+        "facet_tags": [
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "The student interprets the Law of Large Numbers deterministically, believing that a larger sample size ensures a more accurate point estimate in every single case, rather than just on average."
+      }
+    ],
+    "correct_option_ids": [
+      "1"
+    ],
+    "explanation": "This item evaluates students' understanding of the relationships between sample size, standard error, and confidence interval width (A7). It also diagnoses misconceptions regarding the shape of the sampling distribution—specifically the belief that it mirrors the population (B11) or is always normal regardless of size (B12)—and the deterministic misunderstanding of sampling variability in larger samples (B14).",
+    "target_facets": [
+      "A7",
+      "B11",
+      "B12",
+      "B14"
+    ]
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher is studying the time spent on social media by teenagers. The population distribution of daily usage time is known to be highly skewed to the right... Which of the following is true?",
+    "option_assessments": [
+      {
+        "option_id": "1",
+        "generator_tags": [
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "partial",
+        "confidence": 0.95,
+        "reasoning": "The option explicitly connects two concepts: that a larger sample size results in a smaller standard error (Facet A1) and that a smaller standard error results in a narrower confidence interval (Facet A7). The generator missed A1, but both are central to the option's statement."
+      },
+      {
+        "option_id": "2",
+        "generator_tags": [
+          "B11"
+        ],
+        "judge_tags": [
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option describes the misconception that increasing the sample size causes the sampling distribution to better mirror the skewed population distribution, which is exactly Facet B11."
+      },
+      {
+        "option_id": "3",
+        "generator_tags": [
+          "B12"
+        ],
+        "judge_tags": [
+          "B12"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option clearly demonstrates Facet B12, the misconception that the sampling distribution is always normal regardless of the sample size or the underlying population shape."
+      },
+      {
+        "option_id": "4",
+        "generator_tags": [
+          "B14"
+        ],
+        "judge_tags": [
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option perfectly captures Facet B14 by claiming that a larger sample size guarantees the resulting sample mean will be closer to the population mean, ignoring sampling variability for any single sample."
+      }
+    ],
+    "overall_agreement": 0.88,
+    "overall_confidence": 0.99,
+    "issues": [
+      "Option 1 represents a composite of two facets (A1 and A7) to form a complete logical chain. The generator only tagged one of them, but this is a minor issue as the option serves as an excellent correct answer.",
+      "Overall, the item is exceptionally well-written, with highly plausible distractors that precisely isolate distinct, documented misconceptions."
+    ]
+  },
+  "timing": {
+    "generator_s": 30.67,
+    "judge_s": 15.82
+  },
+  "created_at": "2026-05-14T23:00:53.224514+00:00"
+}

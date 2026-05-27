@@ -1,0 +1,139 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B11",
+      "B12"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the shape and center of the sampling distribution—two closely related but distinct concepts. A2 (sampling distribution approaches normal as n increases, not the population shape) and B11 (misconception that larger samples make the sampling distribution look more like the population distribution) are natural contrasts. Adding A3 (mean of sampling distribution equals population mean) and B12 (misconception that sampling distribution is always normal regardless of n or population shape) rounds out the item by probing whether students truly understand when normality applies versus assuming it always holds. This combination is novel (not previously used), tests conceptually related ideas about sampling distribution shape and center, and targets a common cluster of confusions students have when first learning the Central Limit Theorem.",
+  "item": {
+    "stem": "Which of the following statements about the sampling distribution of the sample mean (x̄) are TRUE? Select all that apply.",
+    "response_format": "multi_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "As sample size increases, the sampling distribution of x̄ becomes more approximately normal, regardless of the shape of the population distribution.",
+        "facet_tags": [
+          "A2"
+        ],
+        "is_correct": true,
+        "rationale": "This correctly states the Central Limit Theorem: increasing sample size causes the sampling distribution to approach normality, independent of the population's shape. This maps to goal facet A2."
+      },
+      {
+        "id": "B",
+        "text": "The mean of the sampling distribution of x̄ equals the population mean μ.",
+        "facet_tags": [
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "This is a fundamental property of the sampling distribution: its mean always equals the population mean μ, regardless of sample size. This maps to goal facet A3."
+      },
+      {
+        "id": "C",
+        "text": "As sample size increases, the sampling distribution of x̄ will look more and more like the population distribution.",
+        "facet_tags": [
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "This is a common misconception. The sampling distribution does not converge toward the population distribution; it converges toward a normal distribution (CLT). This maps to problematic facet B11."
+      },
+      {
+        "id": "D",
+        "text": "The sampling distribution of x̄ always follows a normal distribution, no matter how small the sample size or how skewed the population.",
+        "facet_tags": [
+          "B12"
+        ],
+        "is_correct": false,
+        "rationale": "This is incorrect. The sampling distribution only approximates normality for sufficiently large sample sizes (by CLT). With small samples from a non-normal population, the sampling distribution may not be normal. This maps to problematic facet B12."
+      }
+    ],
+    "correct_option_ids": [
+      "A",
+      "B"
+    ],
+    "explanation": "This item targets four facets. Options A and B represent correct understandings: A2 (the CLT ensures the sampling distribution approaches normality as n increases, not that it mirrors the population) and A3 (the mean of the sampling distribution always equals the population mean μ). Options C and D represent common misconceptions: B11 (confusing the sampling distribution converging to normality with it converging to the population distribution) and B12 (believing the sampling distribution is always normal regardless of sample size or population shape). Together, these options distinguish students who understand the Central Limit Theorem and properties of the sampling distribution from those who hold these specific misconceptions.",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B11",
+      "B12"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "Which of the following statements about the sampling distribution of the sample mean (x̄) are TRUE? Select all that apply.",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A2"
+        ],
+        "judge_tags": [
+          "A2"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option directly states that as sample size increases, the sampling distribution approaches normality, which is the exact definition of facet A2."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A3"
+        ],
+        "judge_tags": [
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option accurately describes facet A3, which posits that the mean of the sampling distribution equals the population mean."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B11"
+        ],
+        "judge_tags": [
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option expresses the common misconception that an increasing sample size makes the sampling distribution resemble the population distribution, perfectly matching facet B11."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B12"
+        ],
+        "judge_tags": [
+          "B12"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option claims the sampling distribution is always normal regardless of sample size or population shape, which is exactly the misconception defined in B12."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 11.17,
+    "judge_s": 9.54
+  },
+  "created_at": "2026-05-22T08:33:13.572278+00:00"
+}

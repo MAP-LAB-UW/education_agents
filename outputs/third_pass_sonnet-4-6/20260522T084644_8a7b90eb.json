@@ -1,0 +1,166 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A5",
+      "A6",
+      "B16",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets a coherent cluster around what a confidence interval estimates and how confidence level affects its width. A5 (CI captures population parameter) and B16 (misconception that CI estimates sample statistics) probe whether students correctly identify the target of inference. A6 (higher confidence → wider interval) and B17 (misconception that higher confidence → shorter/more precise interval) probe whether students understand the trade-off between confidence level and precision. Together these facets allow a single item stem—e.g., comparing two CIs at different confidence levels—to simultaneously reveal whether students know what is being estimated and whether they correctly reason about the direction of width change. This combination differs from all previously used sets and covers the under-used pairing of B16 with B17.",
+  "item": {
+    "stem": "A researcher calculates a 90% confidence interval for the average commute time (in minutes) of city employees and obtains (22.4, 31.6). She wants a shorter confidence interval. A colleague suggests: ",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "The interval (22.4, 31.6) estimates the true average commute time of all city employees.",
+        "facet_tags": [
+          "A5"
+        ],
+        "is_correct": true,
+        "rationale": "A student who understands that a CI is designed to capture the true population parameter (not sample statistics) will correctly identify this as true."
+      },
+      {
+        "id": "B",
+        "text": "The interval (22.4, 31.6) estimates the average commute time of the employees in the sample.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "A student who confuses the target of a CI — thinking it estimates the sample mean rather than the population mean — would incorrectly mark this as true."
+      },
+      {
+        "id": "C",
+        "text": "Switching to a 99% confidence level will produce a shorter interval.",
+        "facet_tags": [
+          "B17",
+          "A6"
+        ],
+        "is_correct": false,
+        "rationale": "A student holding the misconception that higher confidence yields a more precise (shorter) interval would mark this true. In reality, a higher confidence level requires a larger critical value, which widens the interval."
+      },
+      {
+        "id": "D",
+        "text": "Switching to an 80% confidence level will produce a shorter interval.",
+        "facet_tags": [
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "A student who correctly understands the relationship between confidence level and CI width knows that decreasing the confidence level reduces the critical value and therefore narrows the interval."
+      },
+      {
+        "id": "E",
+        "text": "The interval (22.4, 31.6) tells us that 90% of city employees have commute times between 22.4 and 31.6 minutes.",
+        "facet_tags": [
+          "B16"
+        ],
+        "is_correct": false,
+        "rationale": "A student who thinks the CI describes the distribution of individual sample data (rather than estimating the population mean) would incorrectly mark this as true."
+      }
+    ],
+    "correct_option_ids": [
+      "A",
+      "D"
+    ],
+    "explanation": "This item targets four facets. Options A and B together probe whether students understand that a CI estimates a population parameter (A5) versus a sample statistic (B16): option A is the correct target of the CI, while option B misidentifies the sample mean as the target, and option E misidentifies individual data values as the target. Options C and D together probe the relationship between confidence level and interval width (A6) versus the misconception that higher confidence yields a shorter interval (B17): option C reflects the B17 misconception (increasing confidence shortens the interval), while option D correctly applies A6 (decreasing confidence level narrows the interval).",
+    "target_facets": [
+      "A5",
+      "A6",
+      "B16",
+      "B17"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher calculates a 90% confidence interval for the average commute time (in minutes) of city employees and obtains (22.4, 31.6). She wants a shorter confidence interval. A colleague suggests: ",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A5"
+        ],
+        "judge_tags": [
+          "A5"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states that the confidence interval is used to estimate the true population parameter (true average commute time of all city employees), matching facet A5."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option incorrectly states that the interval estimates the sample statistic (the average commute time of employees in the sample), which is a classic B16 misconception."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B17",
+          "A6"
+        ],
+        "judge_tags": [
+          "A6",
+          "B17"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option targets the relationship between confidence level and interval width. Agreeing with it indicates the B17 misconception (higher confidence leads to shorter interval). Evaluating it as false requires the A6 understanding."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A6"
+        ],
+        "judge_tags": [
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option correctly applies the relationship between confidence level and interval width (decreasing confidence narrows the interval), exhibiting understanding of A6."
+      },
+      {
+        "option_id": "E",
+        "generator_tags": [
+          "B16"
+        ],
+        "judge_tags": [
+          "B16"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "This option incorrectly interprets the confidence interval as describing the distribution of individual data points (commute times) rather than the population parameter, aligning with the 'sample data instead of population parameters' aspect of B16."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 0.98,
+    "issues": [
+      "The stem ends with 'A colleague suggests:', which only makes grammatical and logical sense for options C and D. Options A, B, and E are statements about interpreting the existing interval, not suggestions for how to get a shorter one.",
+      "The stem needs to be revised to remove 'A colleague suggests:' or the item should be split into two separate questions (one about interpreting the interval, one about changing its width)."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 13.87,
+    "judge_s": 30.84
+  },
+  "created_at": "2026-05-22T08:46:44.740989+00:00"
+}

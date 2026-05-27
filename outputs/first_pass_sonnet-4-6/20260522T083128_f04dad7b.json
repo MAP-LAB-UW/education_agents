@@ -1,0 +1,146 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B8",
+      "B11"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the nature and properties of the sampling distribution itself. A2 (sampling distribution approaches normality with larger n, not mirroring the population) and A3 (mean of sampling distribution equals population mean) represent key correct understandings, while B8 (confusing sampling distribution with sample distribution from a single dataset) and B11 (believing sampling distribution converges toward the population distribution as n increases) are conceptually related misconceptions. Together these facets allow a single item stem—for example, describing what happens to the sampling distribution of the sample mean as sample size grows—that can cleanly distinguish students who understand the Central Limit Theorem and the role of repeated sampling from those who conflate the sampling distribution with either the sample data or the population distribution. This combination has not been used in any prior item.",
+  "item": {
+    "stem": "Which of the following statements about the sampling distribution of the sample mean is correct?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The sampling distribution of the sample mean mirrors the shape of the population distribution, regardless of sample size.",
+        "facet_tags": [
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that the sampling distribution simply mirrors the population distribution (B11), ignoring the central limit theorem's assurance that the sampling distribution approaches normality as n increases."
+      },
+      {
+        "id": "B",
+        "text": "The sampling distribution of the sample mean is derived from a single dataset and reflects the spread of scores in that one sample.",
+        "facet_tags": [
+          "B8"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that the sampling distribution comes from a single dataset or is the same as the sample distribution (B8), confusing the sampling distribution with the sample distribution."
+      },
+      {
+        "id": "C",
+        "text": "As sample size increases, the sampling distribution of the sample mean becomes closer to a normal distribution, and its mean equals the population mean.",
+        "facet_tags": [
+          "A2",
+          "A3"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct statement. It correctly identifies that the sampling distribution approaches normality as n increases (A2, the central limit theorem) and that the mean of the sampling distribution equals the population mean (A3)."
+      },
+      {
+        "id": "D",
+        "text": "As sample size increases, the sampling distribution of the sample mean becomes more similar in shape to the population distribution, and its mean equals the population mean.",
+        "facet_tags": [
+          "A3",
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "This option correctly states that the mean of the sampling distribution equals the population mean (A3), but incorrectly claims that the sampling distribution becomes more like the population distribution as n increases (B11), conflating two ideas to form a plausible but incorrect distractor."
+      }
+    ],
+    "correct_option_ids": [
+      "C"
+    ],
+    "explanation": "This item targets four facets. The correct answer (C) reflects A2 (sampling distribution approaches normality with larger n, not the shape of the population) and A3 (mean of sampling distribution equals population mean). Distractor B targets B8 (confusion between sampling distribution and sample distribution from a single dataset). Distractor A targets B11 (misconception that sampling distribution mirrors population distribution). Distractor D is a sophisticated distractor combining A3 (correct) with B11 (incorrect), designed to catch students who understand the mean property but still hold the misconception about shape.",
+    "target_facets": [
+      "A2",
+      "A3",
+      "B8",
+      "B11"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "Which of the following statements about the sampling distribution of the sample mean is correct?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B11"
+        ],
+        "judge_tags": [
+          "B9"
+        ],
+        "agreement": "mismatch",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly states that the distribution mirrors the population distribution 'regardless of sample size', which directly aligns with facet B9 (Sampling distribution mirrors population distribution... regardless of sample size). Facet B11 describes the misconception that the sampling distribution becomes closer to the population distribution *as sample size increases*."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B8"
+        ],
+        "judge_tags": [
+          "B8"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option clearly states that the sampling distribution is 'derived from a single dataset', which perfectly matches the misconception detailed in facet B8."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A2",
+          "A3"
+        ],
+        "judge_tags": [
+          "A2",
+          "A3"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly combines the facts that the sampling distribution approaches normality as sample size increases (A2) and that its mean equals the population mean (A3)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A3",
+          "B11"
+        ],
+        "judge_tags": [
+          "A3",
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option accurately applies the correct understanding of the mean (A3) but embeds the misconception that the shape becomes more like the population distribution as sample size increases (B11)."
+      }
+    ],
+    "overall_agreement": 0.75,
+    "overall_confidence": 1.0,
+    "issues": [
+      "Option A was mis-tagged by the generator as B11, but its text ('regardless of sample size') clearly reflects B9 rather than the sample size-dependent change described in B11."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 11.54,
+    "judge_s": 23.34
+  },
+  "created_at": "2026-05-22T08:31:28.202768+00:00"
+}

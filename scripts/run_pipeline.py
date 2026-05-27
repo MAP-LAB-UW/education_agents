@@ -55,9 +55,9 @@ def main():
     )
     parser.add_argument(
         "--prompt-version",
-        default="v1",
-        choices=["v1", "v2"],
-        help="Generator prompt version: v1 (original) or v2 (latent-facet, scenario-based)",
+        default="v2",
+        choices=["v1", "v2", "v3"],
+        help="Generator prompt version: v1 (original), v2 (latent-facet), v3 (LaTeX + figures)",
     )
     parser.add_argument(
         "--generator-model",

@@ -1,0 +1,153 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A6",
+      "A7",
+      "B17"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v3"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "These three facets cluster tightly around CI width and precision. A6 addresses the correct understanding that higher confidence levels produce wider intervals, A7 addresses the correct understanding that larger standard errors also produce wider intervals, and B17 captures the common misconception that higher confidence yields a more precise (narrower) interval. An item can present a scenario where a student must reason about what happens to CI width when confidence level is raised, directly distinguishing learners who correctly understand the width-confidence tradeoff (A6) from those holding the B17 misconception, while also probing whether they understand the role of standard error (A7) in determining width. This combination has not yet been used and targets a cohesive conceptual space around interval width determinants.",
+  "item": {
+    "stem": "A researcher computes a $95\\%$ confidence interval for the mean resting heart rate (in bpm) of adults using a random sample of $n = 40$ participants. The resulting interval is $(68.2, 74.6)$, giving a width of $6.4$ bpm. The researcher wants to reduce the width of the interval in a follow-up study. Which of the following changes would achieve a shorter confidence interval?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "Increase the confidence level to $99\\%$ and increase the sample size to $n = 100$.",
+        "facet_tags": [
+          "A1",
+          "A7",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "A student holding the B17 misconception believes higher confidence yields more precision (shorter interval), so they accept the confidence level increase. They also correctly know larger $n$ reduces SE, but the net effect is still a wider interval because the larger critical value from $99\\%$ dominates. This option conflates the beneficial effect of larger $n$ with the misconception that higher confidence gives a shorter interval."
+      },
+      {
+        "id": "B",
+        "text": "Increase the confidence level to $99\\%$ and keep the sample size at $n = 40$.",
+        "facet_tags": [
+          "A7",
+          "B17"
+        ],
+        "is_correct": false,
+        "rationale": "A student with the B17 misconception believes that higher confidence means more precision, producing a narrower interval. They do not change the sample size, so the standard error stays the same, and the larger critical value from $99\\%$ makes the interval even wider. This directly diagnoses the B17 misconception in isolation."
+      },
+      {
+        "id": "C",
+        "text": "Decrease the confidence level to $90\\%$ and increase the sample size to $n = 100$.",
+        "facet_tags": [
+          "A6",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "This is correct. Decreasing the confidence level from $95\\%$ to $90\\%$ reduces the critical value $z^*$, making the margin of error smaller (A6). Increasing $n$ from $40$ to $100$ reduces the standard error $SE = \\sigma/\\sqrt{n}$, which also shrinks the margin of error (A7). Both changes work together to produce a shorter interval."
+      },
+      {
+        "id": "D",
+        "text": "Decrease the confidence level to $90\\%$ and decrease the sample size to $n = 20$.",
+        "facet_tags": [
+          "A6",
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "A student who correctly understands that lowering the confidence level shortens the interval (A6) but mistakenly believes that a smaller sample size also helps (perhaps confusing a larger spread with a smaller interval, or simply ignoring the effect of $n$ on SE) would choose this. In reality, decreasing $n$ increases the standard error, which widens the interval and partially or fully offsets the benefit of the lower confidence level."
+      }
+    ],
+    "correct_option_ids": [
+      "C"
+    ],
+    "explanation": "This item targets three interrelated facets about CI width. Facet A6 states that CI width depends on the confidence level — a higher confidence level requires a larger critical value $z^*$, producing a wider interval, while a lower confidence level produces a narrower one. Facet A7 states that CI width depends on the standard error — since $SE = \\sigma/\\sqrt{n}$, increasing $n$ decreases $SE$ and narrows the interval. Facet B17 is the misconception that higher confidence yields more precision (a shorter interval), which is exactly backwards. Option C (correct) applies both A6 and A7 correctly: lower confidence level reduces $z^*$ and larger $n$ reduces $SE$, both shrinking the margin of error $ME = z^* \\cdot \\frac{s}{\\sqrt{n}}$. Option B isolates the B17 misconception — a student who thinks $99\\%$ confidence gives a shorter interval selects it. Option A combines B17 with a correct understanding of $n$'s role, but the net result is still a wider interval. Option D correctly applies A6 but incorrectly assumes that a smaller $n$ is either neutral or helpful, revealing confusion about how sample size affects SE.",
+    "target_facets": [
+      "A6",
+      "A7",
+      "B17"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher computes a 95% confidence interval for the mean resting heart rate (in bpm) of adults using a random sample of n = 40 participants...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1",
+          "A7",
+          "B17"
+        ],
+        "judge_tags": [
+          "A7",
+          "B17"
+        ],
+        "agreement": "partial",
+        "confidence": 0.95,
+        "reasoning": "The generator tags A1, A7, and B17. A7 (CI width and SE) and B17 (higher confidence = shorter interval) capture the student's presumed intent if they conceptually guess. However, the generator failed to perform the math: changing from 95% to 99% increases the z* value by a factor of ~1.31 (1.96 to 2.576), but changing n=40 to n=100 decreases the SE by a factor of ~1.58. The SE decrease heavily dominates, making the interval in Option A actually *shorter* (~83% of original width). Thus, Option A is factually a correct answer."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A7",
+          "B17"
+        ],
+        "judge_tags": [
+          "B17"
+        ],
+        "agreement": "partial",
+        "confidence": 0.9,
+        "reasoning": "This option purely isolates the B17 misconception (believing 99% yields a shorter interval than 95%). Tag A7 shouldn't be included as a facet the student *exhibits*, because by keeping n=40 instead of increasing it, the student is failing to apply A7."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A6",
+          "A7"
+        ],
+        "judge_tags": [
+          "A6",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option correctly applies A6 (decreasing confidence level shortens the interval) and A7 (increasing sample size shortens the interval)."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A6",
+          "B10"
+        ],
+        "judge_tags": [
+          "A6",
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 0.9,
+        "reasoning": "The student correctly applies A6 (decreasing confidence level reduces width) but falsely believes that decreasing sample size reduces the width, which aligns with misconception B10 (misunderstanding how sample size impacts spread/error)."
+      }
+    ],
+    "overall_agreement": 0.5,
+    "overall_confidence": 0.95,
+    "issues": [
+      "Option A is mathematically a correct answer, meaning the item has two correct options (A and C). The standard error reduction from n=40 to n=100 (a factor of ~1.58) completely outpaces the critical value increase from 95% to 99% (a factor of ~1.31). The resulting margin of error is smaller.",
+      "To fix the item, change the sample size in Option A to something smaller, like n=50. At n=50, the SE reduction (factor of ~1.12) is entirely eclipsed by the critical value increase (factor of ~1.31), ensuring the interval is genuinely wider and fixing the distractor.",
+      "The generator tagged Option B with A7, but selecting Option B implies the student ignores or does not understand the effect of sample size on CI width, so the goal facet A7 is incorrectly attributed."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 19.92,
+    "judge_s": 31.55
+  },
+  "created_at": "2026-05-22T08:57:16.336341+00:00"
+}

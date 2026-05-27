@@ -1,0 +1,141 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A4",
+      "B14",
+      "B15"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets two distinct but complementary areas: (1) understanding how sample size affects the sampling distribution (A1) and the misconception that larger samples always yield a sample mean closer to the true mean (B14), and (2) correctly interpreting the confidence level in terms of repeated sampling (A4) versus the common error of treating CI as a probability statement about any particular interval (B15). These facets are conceptually linked because both involve understanding what happens across repeated samples — a core idea in inference — yet span sampling distribution behavior and CI interpretation. This combination has not been used before and covers B14, which has not yet appeared in any prior item.",
+  "item": {
+    "stem": "A researcher takes repeated random samples of size n = 4 from a large population and records the sample mean each time. She then repeats the entire process using samples of size n = 64. Consider the following statements about what happens when she switches from n = 4 to n = 64.\n\nFor each statement below, decide whether it is True or False.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "The standard deviation of the sampling distribution of the sample mean will be smaller when n = 64 than when n = 4.",
+        "facet_tags": [
+          "A1"
+        ],
+        "is_correct": true,
+        "rationale": "A student who understands that increasing sample size reduces the standard error (SE = σ/√n) will recognize that going from n=4 to n=64 cuts the standard deviation of the sampling distribution by half (dividing by √64=8 vs. √4=2), making it smaller. This reflects goal facet A1."
+      },
+      {
+        "id": "B",
+        "text": "If she takes a single sample of size n = 64, that sample mean is guaranteed to be closer to the population mean than a single sample mean from n = 4.",
+        "facet_tags": [
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "A student with misconception B14 believes that a larger sample always produces a sample mean that is closer to the population mean. In reality, while larger samples reduce variability on average, any individual sample mean can still land far from the population mean due to random chance. This option is false."
+      },
+      {
+        "id": "C",
+        "text": "There is a 95% probability that the population mean falls inside any particular 95% confidence interval constructed from these samples.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "A student holding misconception B15 treats the confidence level as the probability that the true population mean is inside a specific, already-constructed interval. In reality, the population mean is fixed; once an interval is constructed, it either contains the mean or it does not. The 95% refers to the long-run proportion of intervals that capture the population mean, not the probability for any single interval."
+      },
+      {
+        "id": "D",
+        "text": "If she constructs 95% confidence intervals from 200 samples of size n = 64, she should expect approximately 190 of those intervals to contain the true population mean.",
+        "facet_tags": [
+          "A4"
+        ],
+        "is_correct": true,
+        "rationale": "A student who correctly interprets confidence level as a long-run frequency (goal facet A4) will recognize that 95% of 200 intervals = 190 intervals are expected to capture the true population mean. This reflects the replication-based meaning of confidence level, not a probability statement about any single interval."
+      }
+    ],
+    "correct_option_ids": [
+      "A",
+      "D"
+    ],
+    "explanation": "This item targets four facets. Option A tests A1: students must recognize that larger samples produce a smaller standard error (σ/√n), so the sampling distribution becomes more tightly packed around the population mean. Option B targets misconception B14: although larger samples produce less variable estimates on average, any single sample mean from n=64 can still deviate substantially from the population mean — the guarantee that a larger sample is always closer is false. Option C targets misconception B15: treating a 95% CI as carrying a 95% probability for a specific interval is incorrect; the population mean is a fixed (though unknown) value, and a computed interval either captures it or not. Option D tests A4: confidence level is correctly understood as the long-run proportion of intervals (across many replications) that contain the true population parameter, so about 190 out of 200 intervals are expected to succeed.",
+    "target_facets": [
+      "A1",
+      "A4",
+      "B14",
+      "B15"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher takes repeated random samples of size n = 4... Consider the following statements about what happens when she switches from n = 4 to n = 64.",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1"
+        ],
+        "judge_tags": [
+          "A1"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option directly tests whether the student understands that increasing the sample size decreases the standard deviation of the sampling distribution (standard error), which is the definition of facet A1."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B14"
+        ],
+        "judge_tags": [
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option explicitly states the misconception that a larger sample size guarantees a sample mean closer to the population mean for any particular sample, mapping perfectly to facet B14."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option captures the common misconception that a confidence level represents the probability of a specific interval containing the population parameter, which aligns with facet B15."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A4"
+        ],
+        "judge_tags": [
+          "A4"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option correctly applies the long-run frequency interpretation of confidence levels (95% of 200 replications is 190), directly assessing facet A4."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": [
+      "There is a structural mismatch between the stem and Options C and D. The stem asks students to consider 'what happens when she switches from n = 4 to n = 64', but Options C and D do not address this change; they are standalone statements about confidence intervals."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 17.87,
+    "judge_s": 15.04
+  },
+  "created_at": "2026-05-22T08:48:45.914765+00:00"
+}

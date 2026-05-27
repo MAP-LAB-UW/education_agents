@@ -1,0 +1,152 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A2",
+      "B9",
+      "B10"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "These facets cluster around how sample size affects the shape and spread of the sampling distribution. A1 (larger n → smaller SE, more packed distribution) and A2 (larger n → closer to normal, not mirroring population) are the correct understandings to reinforce, while B9 (sampling distribution mirrors population distribution, so spread stays constant) and B10 (larger n → more spread out) are the two most common opposing misconceptions. Together they allow a single item stem — e.g., asking what happens to the sampling distribution as n increases — to naturally distinguish all four facets. This combination has not been used in prior items and complements the previously covered topics of CI width/confidence level and CI interpretation.",
+  "item": {
+    "stem": "A large urban hospital records that the length of patient stays is right-skewed, with a mean of 4.5 days and a standard deviation of 3.2 days. A researcher first takes random samples of size n = 10 and records the sample means, then repeats the process with random samples of size n = 100.\n\nCompared to the sampling distribution of x̄ when n = 10, what is true about the sampling distribution of x̄ when n = 100?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "It will be more spread out (larger standard error) and will more closely resemble the right-skewed population distribution.",
+        "facet_tags": [
+          "B10",
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "A student who believes larger samples produce more spread in the sampling distribution (B10) and that the sampling distribution converges toward the population shape rather than normality (B11) would select this option. Both parts of this answer reflect misconceptions."
+      },
+      {
+        "id": "B",
+        "text": "It will be more tightly packed (smaller standard error) and will more closely resemble the right-skewed population distribution.",
+        "facet_tags": [
+          "A1",
+          "B11"
+        ],
+        "is_correct": false,
+        "rationale": "A student who correctly understands that larger n reduces the standard error (A1) but incorrectly believes the sampling distribution moves toward the population distribution shape rather than toward normality (B11) would choose this. It gets the spread right but gets the shape wrong."
+      },
+      {
+        "id": "C",
+        "text": "It will be more spread out (larger standard error) and will look more like a normal distribution.",
+        "facet_tags": [
+          "B9",
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "A student who thinks larger samples cause the sampling distribution to spread out more (B10) but also recognizes (perhaps via rote memorization of CLT) that normality is involved might pick this. Alternatively, a student confusing sampling distribution spread with population spread (B9) would be drawn here."
+      },
+      {
+        "id": "D",
+        "text": "It will be more tightly packed (smaller standard error) and will look more like a normal distribution.",
+        "facet_tags": [
+          "A1",
+          "A2"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct answer. As n increases from 10 to 100, the standard error shrinks (SE = 3.2/√n), so the sampling distribution becomes more concentrated around the mean (A1). Additionally, by the Central Limit Theorem, the sampling distribution of x̄ approaches normality regardless of the right-skewed population shape (A2). A student who understands both principles arrives here."
+      }
+    ],
+    "correct_option_ids": [
+      "D"
+    ],
+    "explanation": "This item targets four facets simultaneously through a single concrete comparison. Facet A1 concerns how increasing sample size reduces the standard error (SE = σ/√n), making the sampling distribution more tightly concentrated — the SE drops from 3.2/√10 ≈ 1.01 to 3.2/√100 = 0.32. Facet A2 concerns how the sampling distribution approaches normality as n grows, regardless of the population's right-skewed shape — this is the Central Limit Theorem. Misconception B9 is that the sampling distribution mirrors the population distribution (same SD, same shape), so students holding this belief would expect the spread to stay the same or expect right-skewedness to persist. Misconception B10 is that larger samples produce more spread in the sampling distribution (confusing sample variability with standard error behavior). Options A, B, and C each combine one correct and one incorrect element or two incorrect elements, so only students who correctly understand both A1 and A2 can identify option D.",
+    "target_facets": [
+      "A1",
+      "A2",
+      "B9",
+      "B10"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A large urban hospital records that the length of patient stays is right-skewed... Compared to the sampling distribution of x̄ when n = 10, what is true about the sampling distribution of x̄ when n = 100?",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B10",
+          "B11"
+        ],
+        "judge_tags": [
+          "B10",
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option explicitly states the distribution will be 'more spread out' (B10) and 'more closely resemble the right-skewed population distribution' (B11)."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A1",
+          "B11"
+        ],
+        "judge_tags": [
+          "A1",
+          "B11"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly identifies that it will be 'more tightly packed' (A1) but incorrectly states it will 'more closely resemble the right-skewed population distribution' (B11)."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B9",
+          "B10"
+        ],
+        "judge_tags": [
+          "A2",
+          "B10"
+        ],
+        "agreement": "partial",
+        "confidence": 0.95,
+        "reasoning": "The option states it will be 'more spread out' (B10) and 'look more like a normal distribution' (A2). The generator included B9, but B9 implies the distribution mirrors the population (right-skewed and same spread), which contradicts this option's claim of resembling a normal distribution. The student who selects this shows misconception B10 but a correct understanding of facet A2."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A1",
+          "A2"
+        ],
+        "judge_tags": [
+          "A1",
+          "A2"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly states it will be 'more tightly packed' (A1) and 'look more like a normal distribution' (A2)."
+      }
+    ],
+    "overall_agreement": 0.75,
+    "overall_confidence": 0.98,
+    "issues": [
+      "The generator's tag for Option C includes B9, which is a mismatch. B9 corresponds to the belief that the sampling distribution mirrors the population distribution. Because the population is right-skewed, choosing 'will look more like a normal distribution' explicitly contradicts B9 and correctly exhibits A2."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 18.27,
+    "judge_s": 15.35
+  },
+  "created_at": "2026-05-22T08:45:12.386874+00:00"
+}

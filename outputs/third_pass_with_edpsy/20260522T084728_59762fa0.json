@@ -1,0 +1,139 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A4",
+      "B10",
+      "B15"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination assesses students' understanding of how sample size affects confidence intervals by linking the physical change in sampling distribution spread to the conceptual interpretation of the result. It contrasts the correct reduction of standard error (A1) with the common misconception that more data increases spread in the sampling distribution (B10), while also testing the frequentist interpretation of the confidence level (A4) against the common probability misconception (B15).",
+  "item": {
+    "stem": "A biologist is estimating the mean weight of a specific species of fish in a large lake. The population standard deviation of the fish weights is known to be σ = 3.0 kg. Two researchers, Alice and Bob, decide to conduct separate studies. Alice selects a random sample of n = 36 fish, while Bob selects a random sample of n = 144 fish. Both researchers calculate a 95% confidence interval for the population mean μ. For each of the following statements about their studies, determine if it is true or false.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "Bob’s sampling distribution of the mean will be more concentrated around the population mean, with a standard error (0.25 kg) that is smaller than Alice’s (0.50 kg).",
+        "facet_tags": [
+          "A1"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly identifies that the standard error of the mean (σ/√n) decreases as sample size increases, resulting in a more 'packed' or concentrated sampling distribution. For Bob, the standard error is 3/√144 = 0.25, while for Alice it is 3/√36 = 0.50."
+      },
+      {
+        "id": "B",
+        "text": "Because Bob’s sample size (n = 144) is much larger than Alice’s (n = 36), his sampling distribution of the mean will be more spread out to reflect the greater diversity of weights found in larger samples.",
+        "facet_tags": [
+          "B10"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that a larger sample size leads to a more spread-out sampling distribution. The student likely confuses the property of the sample itself (where a larger sample may show more of the population's range) with the sampling distribution of the mean, which actually becomes narrower with more data."
+      },
+      {
+        "id": "C",
+        "text": "Once Alice calculates her specific 95% confidence interval (e.g., 12.1 kg to 13.1 kg), there is a 95% probability that the true population mean weight μ is between 12.1 and 13.1.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "This option targets the misconception that the confidence level describes the probability that the parameter lies within one specific, already-computed interval. In frequentist statistics, once the bounds are fixed, the probability is either 0 or 1; the '95%' refers to the reliability of the method over many samples."
+      },
+      {
+        "id": "D",
+        "text": "If Bob repeats his sampling process many times, taking different samples of n = 144 each time and calculating a 95% confidence interval for each, he should expect approximately 95% of those intervals to capture the true population mean μ.",
+        "facet_tags": [
+          "A4"
+        ],
+        "is_correct": true,
+        "rationale": "This option correctly interprets the 95% confidence level as a long-run frequency, meaning that if the entire estimation process were repeated many times, 95% of the resulting intervals would be expected to contain the true parameter."
+      }
+    ],
+    "correct_option_ids": [
+      "A",
+      "D"
+    ],
+    "explanation": "This diagnostic item tests the relationship between sample size and the precision of the sampling distribution, as well as the conceptual interpretation of confidence levels. Option A confirms understanding of the standard error's inverse relationship with the square root of the sample size (A1). Option B diagnoses the misconception that larger samples create more variability in the sampling distribution (B10). Option C identifies students who incorrectly apply probability to a single realized interval (B15), while Option D assesses the correct long-run frequency interpretation of confidence (A4).",
+    "target_facets": [
+      "A1",
+      "A4",
+      "B10",
+      "B15"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A biologist is estimating the mean weight of a specific species of fish in a large lake...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1"
+        ],
+        "judge_tags": [
+          "A1"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option A correctly states that the sampling distribution becomes more concentrated (packed) and the standard error decreases as sample size increases, which perfectly matches facet A1."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B10"
+        ],
+        "judge_tags": [
+          "B10"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option B explicitly describes the misconception that a larger sample size results in a more spread out sampling distribution, perfectly matching facet B10."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option C describes interpreting a specific, calculated confidence interval as having a 95% probability of containing the true population mean, which perfectly aligns with the misconception in facet B15."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A4"
+        ],
+        "judge_tags": [
+          "A4"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "Option D correctly defines the confidence level in terms of the long-run expected frequency of capturing the population mean across repeated samples, completely matching facet A4."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 58.77,
+    "judge_s": 9.58
+  },
+  "created_at": "2026-05-22T08:47:28.757778+00:00"
+}

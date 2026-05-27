@@ -1,0 +1,156 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B10",
+      "B14"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "none",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v1"
+  },
+  "models": {
+    "generator": "anthropic/claude-sonnet-4-6",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination focuses on the relationship between sample size, standard error, and CI width. A1 (larger sample → smaller SE) and A7 (larger SE → wider CI) form the correct reasoning chain, while B10 (misconception that larger sample → more spread out sampling distribution) and B14 (misconception that a larger sample always yields a sample mean closer to the true mean) are natural distractors. This pairing has not been used before and targets a coherent cluster of ideas about how sample size affects variability and inference precision, distinct from the confidence-level-width items (Items 1, 4) and the sampling distribution shape items (Item 3).",
+  "item": {
+    "stem": "A researcher collects a random sample of size n = 25 from a population and constructs a 95% confidence interval for the mean. She then collects a second, independent random sample of size n = 100 from the same population. Which of the following best describes what we expect when moving from the smaller sample to the larger sample?",
+    "response_format": "single_select",
+    "options": [
+      {
+        "id": "A",
+        "text": "The standard error will decrease, producing a narrower confidence interval, and the sample mean from the larger sample is guaranteed to be closer to the population mean.",
+        "facet_tags": [
+          "A1",
+          "A7",
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "This option correctly identifies that the standard error decreases (A1) and the CI narrows (A7), but incorrectly claims the larger sample mean is guaranteed to be closer to the population mean, reflecting misconception B14 about randomness in sample means."
+      },
+      {
+        "id": "B",
+        "text": "The standard error will increase because a larger sample captures more variability, producing a wider confidence interval.",
+        "facet_tags": [
+          "B10",
+          "A7"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects B10 (larger sample size leads to a more spread-out sampling distribution) and misapplies A7 by concluding the CI widens as a result."
+      },
+      {
+        "id": "C",
+        "text": "The standard error will decrease, producing a narrower confidence interval, and the sample mean from the larger sample is expected to be closer to the population mean on average, but any individual sample mean could still be far away.",
+        "facet_tags": [
+          "A1",
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "This is the correct answer. The larger sample reduces standard error (A1), which narrows the CI (A7), and correctly acknowledges that while larger samples tend to yield means closer to the population mean on average, no individual sample mean is guaranteed to be close, appropriately addressing B14 without endorsing it."
+      },
+      {
+        "id": "D",
+        "text": "The standard error will stay the same because the population variability has not changed, so the confidence interval width will also remain unchanged.",
+        "facet_tags": [
+          "B10",
+          "A7"
+        ],
+        "is_correct": false,
+        "rationale": "This option reflects the misconception that standard error is unaffected by sample size (related to B10/B9 confusion) and consequently misapplies A7 by concluding the CI width stays the same."
+      }
+    ],
+    "correct_option_ids": [
+      "C"
+    ],
+    "explanation": "A1 and A7 together establish that increasing sample size reduces standard error, which in turn narrows the confidence interval. B10 is the misconception that larger samples spread out the sampling distribution (and hence widen the CI). B14 is the misconception that a larger sample guarantees a sample mean closer to the population mean. Option C is correct because it accurately states that standard error decreases (A1), the CI narrows (A7), and that larger samples tend—but do not guarantee—to produce means closer to μ. Option A lures students who understand A1 and A7 but fall into B14. Option B targets B10. Option D targets the belief that population variability alone determines standard error, leaving CI width unchanged.",
+    "target_facets": [
+      "A1",
+      "A7",
+      "B10",
+      "B14"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A researcher collects a random sample of size n = 25 from a population and constructs a 95% confidence interval for the mean. She then collects a second, independent random sample of size n = 100...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "A1",
+          "A7",
+          "B14"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7",
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "The option correctly connects an increase in sample size to a decreased standard error (A1) and a narrower CI (A7). However, it falsely claims the sample mean is guaranteed to be closer to the population mean, reflecting the B14 misconception."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "B10",
+          "A7"
+        ],
+        "judge_tags": [
+          "B10",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 0.95,
+        "reasoning": "The option exhibits the B10 misconception by claiming standard error increases with a larger sample. It correctly applies the A7 principle that a larger standard error leads to a wider confidence interval."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "A1",
+          "A7"
+        ],
+        "judge_tags": [
+          "A1",
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This is the correct answer and correctly demonstrates the A1 and A7 facets. It also addresses the randomness of sample means correctly (the opposite of B14), but since there is no 'goal' facet specifically for 'understanding randomness in sample means apart from replications', tagging A1 and A7 is appropriate."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "B10",
+          "A7"
+        ],
+        "judge_tags": [
+          "B9",
+          "A7"
+        ],
+        "agreement": "partial",
+        "confidence": 0.95,
+        "reasoning": "The option states that the standard error will 'stay the same' because population variability hasn't changed. This is an exact manifestation of misconception B9 (standard deviation of the sampling distribution stays the same regardless of sample size). The generator erroneously tagged this as B10, which refers to the distribution becoming *more* spread out. It correctly applies A7 to conclude CI width remains unchanged."
+      }
+    ],
+    "overall_agreement": 0.75,
+    "overall_confidence": 0.97,
+    "issues": [
+      "The generator incorrectly tagged option D with misconception B10 (sampling distribution gets more spread out) instead of B9 (sampling distribution standard deviation stays the same). Option D explicitly states standard error stays the same, aligning with B9.",
+      "Otherwise, the item is well-constructed and effectively distinguishes between students who understand standard error and sample randomness versus those who hold specific misconceptions."
+    ]
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 15.4,
+    "judge_s": 18.18
+  },
+  "created_at": "2026-05-22T08:30:47.383551+00:00"
+}

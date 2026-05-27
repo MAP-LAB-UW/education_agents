@@ -18,6 +18,7 @@ from .schemas import (
     FacetCoverageResult,
     ProblemDiversityResult,
     SemanticDiversityResult,
+    SimilarityWithExpertsResult,
     StructuralDiversityResult,
 )
 
@@ -186,6 +187,55 @@ def evaluate_semantic_diversity(
     )
 
 
+def evaluate_similarity_with_experts(
+    stems: list[str],
+    source_ids: list[str],
+    reference_stems: list[str] | None = None,
+    reference_ids: list[str] | None = None,
+    embed_model: SentenceTransformer | None = None,
+) -> list[SimilarityWithExpertsResult]:
+    """Compute per-item similarity against a reference set.
+
+    If reference_stems is None, compares within stems (leave-one-out).
+    """
+    embed_model = embed_model or _get_model()
+
+    if reference_stems is None:
+        reference_stems = stems
+        reference_ids = source_ids
+        self_compare = True
+    else:
+        self_compare = False
+
+    if not reference_stems:
+        return [SimilarityWithExpertsResult(
+            mean_similarity=0.0, max_similarity=0.0, most_similar_to="",
+        ) for _ in stems]
+
+    query_emb = embed_model.encode(stems)
+    ref_emb = embed_model.encode(reference_stems) if not self_compare else query_emb
+
+    results = []
+    for i in range(len(stems)):
+        sims = []
+        max_sim = -1.0
+        max_j = 0
+        for j in range(len(reference_stems)):
+            if self_compare and i == j:
+                continue
+            sim = _cosine_sim(query_emb[i], ref_emb[j])
+            sims.append(sim)
+            if sim > max_sim:
+                max_sim = sim
+                max_j = j
+        results.append(SimilarityWithExpertsResult(
+            mean_similarity=round(float(np.mean(sims)), 4) if sims else 0.0,
+            max_similarity=round(max_sim, 4) if sims else 0.0,
+            most_similar_to=reference_ids[max_j] if sims else "",
+        ))
+    return results
+
+
 # ── Combined ─────────────────────────────────────────────────────────────────
 
 def evaluate_corpus(
@@ -201,6 +251,9 @@ def evaluate_corpus(
     structural = evaluate_structural_diversity(artifacts, model=eval_model)
     semantic = evaluate_semantic_diversity(artifacts, embed_model=embed_model)
 
+    items_with_figures = sum(1 for a in artifacts if a.item.figures)
+    fig_frac = items_with_figures / len(artifacts) if artifacts else 0.0
+
     return CorpusEvaluation(
         facet_coverage=coverage,
         facet_combination_diversity=combination,
@@ -208,4 +261,5 @@ def evaluate_corpus(
             structural=structural,
             semantic=semantic,
         ),
+        figure_fraction=round(fig_frac, 4),
     )

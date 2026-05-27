@@ -1,0 +1,139 @@
+{
+  "request": {
+    "topic": "confidence_intervals",
+    "target_facets": [
+      "A6",
+      "A7",
+      "B14",
+      "B15"
+    ],
+    "response_format": null,
+    "num_options": null,
+    "book_context_mode": "full_tex",
+    "n_items": 10,
+    "exclude_image_examples": true,
+    "prompt_version": "v2"
+  },
+  "models": {
+    "generator": "gemini/gemini-3-flash-preview",
+    "judge": "gemini/gemini-3.1-pro-preview"
+  },
+  "facet_selection_reasoning": "This combination targets both the mechanics and the conceptual interpretation of confidence intervals. By pairing A6 and A7, the item evaluates a student's ability to predict how changes in confidence levels and sample size (affecting standard error) influence interval width. The inclusion of B14 explores a common misconception regarding the deterministic versus probabilistic nature of larger samples, while B15 addresses the standard misinterpretation of confidence levels as simple probabilities for a single calculated interval.",
+  "item": {
+    "stem": "A nutritionist is studying the average sodium content in a specific brand of soup. Based on a random sample of 25 cans, they find a sample mean of 485 mg and a sample standard deviation of 60 mg, resulting in a 95% confidence interval of (460.2 mg, 509.8 mg). Evaluate each of the following statements about this study.",
+    "response_format": "true_false_per_option",
+    "options": [
+      {
+        "id": "A",
+        "text": "There is a 95% probability that the true average sodium content for all cans of this soup is between 460.2 mg and 509.8 mg.",
+        "facet_tags": [
+          "B15"
+        ],
+        "is_correct": false,
+        "rationale": "A student picking 'True' here incorrectly interprets the confidence level as a probability for a specific, calculated interval. In frequentist statistics, the population mean is a fixed constant, and the interval either contains it or it does not; the probability refers to the long-run process of interval construction."
+      },
+      {
+        "id": "B",
+        "text": "If the nutritionist recalculated the interval using a 90% confidence level instead of 95% using the same sample of 25 cans, the resulting interval would be narrower than (460.2 mg, 509.8 mg).",
+        "facet_tags": [
+          "A6"
+        ],
+        "is_correct": true,
+        "rationale": "A student picking 'True' correctly understands that the width of a confidence interval is dependent on the critical value. A 90% confidence level uses a smaller critical value than a 95% level, which decreases the margin of error and produces a narrower, more precise interval."
+      },
+      {
+        "id": "C",
+        "text": "If the nutritionist repeats the study with a larger sample of 100 cans, the new sample mean is guaranteed to be closer to the true population mean than the current mean of 485 mg.",
+        "facet_tags": [
+          "B14"
+        ],
+        "is_correct": false,
+        "rationale": "A student picking 'True' misunderstands the role of randomness in sampling. While a larger sample size generally produces a sample mean closer to the population mean on average, any single sample mean is still a random variable and could, by chance, be further from the parameter than a mean from a smaller sample."
+      },
+      {
+        "id": "D",
+        "text": "If a new sample of 25 cans showed more variation in sodium levels (a higher standard deviation) than the original 60 mg, the 95% confidence interval derived from that new sample would be wider.",
+        "facet_tags": [
+          "A7"
+        ],
+        "is_correct": true,
+        "rationale": "A student picking 'True' correctly understands that the margin of error is directly proportional to the standard error. Since standard error is calculated by dividing the sample standard deviation by the square root of the sample size, a higher standard deviation increases the standard error and therefore increases the width of the interval."
+      }
+    ],
+    "correct_option_ids": [
+      "B",
+      "D"
+    ],
+    "explanation": "This diagnostic item tests whether students can distinguish between the frequentist interpretation of confidence (long-run process) versus the misconception of fixed-interval probability (B15), and whether they can correctly identify how changing the confidence level (A6) or the standard error (A7) affects the precision of the interval. It also probes for the belief that larger samples remove randomness from individual point estimates (B14).",
+    "target_facets": [
+      "A6",
+      "A7",
+      "B14",
+      "B15"
+    ],
+    "figures": []
+  },
+  "judge_report": {
+    "item_stem_preview": "A nutritionist is studying the average sodium content in a specific brand of soup. Based on a random sample of 25 cans...",
+    "option_assessments": [
+      {
+        "option_id": "A",
+        "generator_tags": [
+          "B15"
+        ],
+        "judge_tags": [
+          "B15"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option explicitly presents the common misconception that a calculated 95% confidence interval has a 95% probability of containing the true population mean, which perfectly aligns with facet B15."
+      },
+      {
+        "option_id": "B",
+        "generator_tags": [
+          "A6"
+        ],
+        "judge_tags": [
+          "A6"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option tests the student's understanding of the relationship between confidence level and interval width (lower confidence level results in a narrower interval), which directly measures facet A6."
+      },
+      {
+        "option_id": "C",
+        "generator_tags": [
+          "B14"
+        ],
+        "judge_tags": [
+          "B14"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option presents the misconception that a larger sample size guarantees the resulting sample mean will be closer to the population mean, reflecting a misunderstanding of randomness as described in facet B14."
+      },
+      {
+        "option_id": "D",
+        "generator_tags": [
+          "A7"
+        ],
+        "judge_tags": [
+          "A7"
+        ],
+        "agreement": "match",
+        "confidence": 1.0,
+        "reasoning": "This option correctly associates higher sample standard deviation (which increases standard error) with a wider confidence interval, perfectly targeting facet A7."
+      }
+    ],
+    "overall_agreement": 1.0,
+    "overall_confidence": 1.0,
+    "issues": []
+  },
+  "eval_scores": null,
+  "figure_data": {},
+  "timing": {
+    "generator_s": 37.11,
+    "judge_s": 11.09
+  },
+  "created_at": "2026-05-22T08:49:47.942442+00:00"
+}
