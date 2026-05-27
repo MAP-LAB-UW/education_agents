@@ -199,6 +199,7 @@ cython_debug/
 !outputs/third_pass_no_books_gemini-*.json
 !docs/*.md
 !docs/screenshots/*.png
+!docs/figures/expert_review/*.png
 !README.md
 !data/facets/**
 
