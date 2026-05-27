@@ -1,7 +1,6 @@
 # Diagnostic Assessment Copilot
 
-An LLM-powered pipeline for generating high-quality multiple-choice diagnostic assessment items aligned to learning goals and misconception facets. Built for the **EDPSY 490 — Applied Statistics** course, currently focused on the **confidence intervals** topic.
-
+An LLM-powered pipeline for generating high-quality multiple-choice diagnostic assessment items aligned to learning goals and misconception facets. 
 ## What This Does
 
 The pipeline takes a **facet map** (learning goals + common misconceptions) and generates diagnostic MC items where:
@@ -50,7 +49,7 @@ The web dashboard provides an interactive way to explore generated items and com
 
 1. **Clone the repo and navigate to it:**
    ```bash
-   git clone <repo-url>
+   git clone https://github.com/MAP-LAB-UW/education_agents.git
    cd education_agents
    ```
 
