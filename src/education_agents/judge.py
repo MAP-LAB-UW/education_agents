@@ -11,7 +11,7 @@ from .llm import structured_complete
 from .schemas import FacetMap, GeneratedItem, JudgeReport
 
 DEFAULT_JUDGE_MODEL = os.getenv(
-    "EDU_AGENTS_JUDGE_MODEL", "gemini/gemini-3.1-pro-preview"
+    "EDU_AGENTS_JUDGE_MODEL", "anthropic/claude-sonnet-4-6"
 )
 
 _PROMPT_TEMPLATE = (

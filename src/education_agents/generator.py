@@ -10,7 +10,7 @@ from .llm import structured_complete
 from .schemas import FacetMap, FacetSelection, GeneratedItem, GenerationRequest
 
 DEFAULT_GENERATOR_MODEL = os.getenv(
-    "EDU_AGENTS_GENERATOR_MODEL", "gemini/gemini-3-flash-preview"
+    "EDU_AGENTS_GENERATOR_MODEL", "anthropic/claude-sonnet-4-6"
 )
 
 _PROMPT_DIR = Path(__file__).parent / "prompts"
@@ -19,6 +19,22 @@ _PROMPT_TEMPLATES = {
     "v2": (_PROMPT_DIR / "generator_v2.md").read_text(),
     "v3": (_PROMPT_DIR / "generator_v3.md").read_text(),
 }
+
+# Appended to the user message when this item is selected to carry a figure.
+# It demands a *load-bearing* figure (passing the deletion test), not a
+# decorative one — otherwise the figure-necessity rubric would flag it.
+FIGURE_REQUIRED_DIRECTIVE = (
+    "\n\nFIGURE REQUIRED FOR THIS ITEM: This item must include at least one "
+    "figure, and the figure must be load-bearing — design the item around it so "
+    "it cannot be solved from the text alone. Move the essential quantitative "
+    "information (values, bounds, distribution shape, spread, interval "
+    "endpoints) into the figure only, and do NOT restate those values in the "
+    "stem, so that deleting the figure would make the item unanswerable or "
+    "ambiguous. Choose a scenario and facet framing where a graph is genuinely "
+    "diagnostic (e.g. reading a sampling distribution, comparing the overlap of "
+    "two confidence intervals, interpreting a histogram). Do not add a "
+    "decorative figure whose information is already in the text."
+)
 
 
 def select_facets(
@@ -122,6 +138,7 @@ def generate_item(
     facet_map: FacetMap,
     book_context: str | None = None,
     model: str | None = None,
+    force_figure: bool = False,
 ) -> GeneratedItem:
     model = model or DEFAULT_GENERATOR_MODEL
     system_prompt = _build_system_prompt(request, facet_map, book_context)
@@ -147,6 +164,9 @@ def generate_item(
             f"Generate an item diagnosing facets: {facets_str}. "
             f"Choose the best response format and number of options."
         )
+
+    if force_figure:
+        user_content += FIGURE_REQUIRED_DIRECTIVE
 
     messages = [
         {"role": "system", "content": system_prompt},

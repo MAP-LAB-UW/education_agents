@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import time
+from collections.abc import Iterator
 from datetime import datetime, timezone
 from hashlib import sha256
 from pathlib import Path
@@ -12,6 +13,7 @@ from .book_context import load_book_context
 from .evaluation.correctness import evaluate_correctness
 from .evaluation.facet_latency import evaluate_facet_latency
 from .evaluation.figure_necessity import evaluate_figure_necessity
+from .evaluation.figure_spoiler import evaluate_figure_spoiler
 from .evaluation.naturalness import evaluate_naturalness
 from .facets import load_facet_map
 from .figures import execute_figures
@@ -22,17 +24,39 @@ from .schemas import EvalScores, GenerationRequest, RunArtifact
 OUTPUTS_DIR = Path(__file__).resolve().parents[2] / "outputs"
 
 
-DEFAULT_EVAL_MODEL = "gemini/gemini-2.5-flash"
+DEFAULT_EVAL_MODEL = "anthropic/claude-sonnet-4-6"
 
 
-def run(
+def _forced_figure_indices(n_items: int, frac: float) -> set[int]:
+    """Pick round(n_items * frac) item indices, spread evenly across the batch.
+
+    Spreading (rather than taking the first k) keeps figure-required items
+    interleaved with free ones, which matters because auto facet-selection
+    accumulates history per item.
+    """
+    if frac <= 0 or n_items <= 0:
+        return set()
+    k = min(n_items, round(n_items * frac))
+    if k <= 0:
+        return set()
+    return {round(j * n_items / k) for j in range(k)}
+
+
+def run_stream(
     request: GenerationRequest,
     generator_model: str | None = None,
     judge_model: str | None = None,
     eval_model: str | None = None,
     output_dir: Path | None = None,
     skip_eval: bool = False,
-) -> list[RunArtifact]:
+    skip_judge: bool = False,
+) -> Iterator[RunArtifact]:
+    """Generate, judge, and (optionally) evaluate items one at a time.
+
+    Yields each ``RunArtifact`` as soon as it is produced and written to disk,
+    so callers (e.g. the web dashboard) can surface items incrementally rather
+    than waiting for the whole batch to finish.
+    """
     gen_model = generator_model or DEFAULT_GENERATOR_MODEL
     jdg_model = judge_model or DEFAULT_JUDGE_MODEL
     evl_model = eval_model or DEFAULT_EVAL_MODEL
@@ -42,10 +66,13 @@ def run(
     facet_map = load_facet_map(request.topic)
     book_context = load_book_context(request.book_context_mode)
 
-    artifacts: list[RunArtifact] = []
     previously_used_facets: list[list[str]] = []
+    forced_figure_idx = _forced_figure_indices(
+        request.n_items, request.min_frac_with_figures
+    )
 
     for i in range(request.n_items):
+        force_figure = i in forced_figure_idx
         current_request = request
         selection_reasoning = None
         if request.auto_select_facets:
@@ -63,7 +90,19 @@ def run(
             )
 
         t0 = time.time()
-        item = generate_item(current_request, facet_map, book_context, model=gen_model)
+        item = generate_item(
+            current_request, facet_map, book_context, model=gen_model,
+            force_figure=force_figure,
+        )
+        # A figure-required item that came back figure-less gets one retry —
+        # the model occasionally ignores the instruction.
+        if force_figure and not item.figures:
+            print(f"[{i + 1}/{request.n_items}] figure required but none "
+                  f"produced — retrying once")
+            item = generate_item(
+                current_request, facet_map, book_context, model=gen_model,
+                force_figure=True,
+            )
         gen_time = time.time() - t0
 
         figure_data: dict[str, str] = {}
@@ -73,9 +112,12 @@ def run(
                 f"[{i + 1}/{request.n_items}] rendered {len(figure_data)}/{len(item.figures)} figures"
             )
 
-        t1 = time.time()
-        report = judge_item(item, facet_map, model=jdg_model, figure_data=figure_data)
-        judge_time = time.time() - t1
+        report = None
+        judge_time = 0.0
+        if not skip_judge:
+            t1 = time.time()
+            report = judge_item(item, facet_map, model=jdg_model, figure_data=figure_data)
+            judge_time = time.time() - t1
 
         eval_scores = None
         eval_time = 0.0
@@ -85,9 +127,12 @@ def run(
             naturalness = evaluate_naturalness(item, model=evl_model, figure_data=figure_data)
             latency = evaluate_facet_latency(item, facet_map)
             fig_necessity = None
+            fig_spoiler = None
             if figure_data:
                 fig_nec = evaluate_figure_necessity(item, model=evl_model)
                 fig_necessity = int(fig_nec.is_necessary)
+                fig_spl = evaluate_figure_spoiler(item, figure_data, model=evl_model)
+                fig_spoiler = int(fig_spl.gives_away_answer)
             eval_scores = EvalScores(
                 correctness_pass=correctness.is_correct,
                 correctness_flagged_distractors=correctness.flagged_distractors,
@@ -99,6 +144,7 @@ def run(
                 latency_bucket=latency.bucket,
                 latency_option_details=[od.model_dump() for od in latency.option_details],
                 figure_necessity=fig_necessity,
+                figure_spoiler=fig_spoiler,
             )
             eval_time = time.time() - t2
 
@@ -110,10 +156,9 @@ def run(
 
         previously_used_facets.append(current_request.target_facets)
 
-        timing = {
-            "generator_s": round(gen_time, 2),
-            "judge_s": round(judge_time, 2),
-        }
+        timing = {"generator_s": round(gen_time, 2)}
+        if not skip_judge:
+            timing["judge_s"] = round(judge_time, 2)
         if not skip_eval:
             timing["eval_s"] = round(eval_time, 2)
 
@@ -128,7 +173,6 @@ def run(
             timing=timing,
             created_at=now.isoformat(),
         )
-        artifacts.append(artifact)
 
         out_path = out_dir / f"{timestamp}_{short_hash}.json"
         out_path.write_text(
@@ -141,11 +185,37 @@ def run(
                 f", natural={eval_scores.naturalness_overall}/5"
                 f", latency={eval_scores.latency_score}/4"
             )
+        judge_info = (
+            f", judge={judge_time:.1f}s, agreement={report.overall_agreement:.0%}"
+            if report is not None else ", judge=skipped"
+        )
         print(
             f"[{i + 1}/{request.n_items}] saved {out_path.name}  "
-            f"(gen={gen_time:.1f}s, judge={judge_time:.1f}s"
-            f"{', eval=' + f'{eval_time:.1f}s' if not skip_eval else ''}, "
-            f"agreement={report.overall_agreement:.0%}{eval_info})"
+            f"(gen={gen_time:.1f}s{judge_info}"
+            f"{', eval=' + f'{eval_time:.1f}s' if not skip_eval else ''})"
         )
 
-    return artifacts
+        yield artifact
+
+
+def run(
+    request: GenerationRequest,
+    generator_model: str | None = None,
+    judge_model: str | None = None,
+    eval_model: str | None = None,
+    output_dir: Path | None = None,
+    skip_eval: bool = False,
+    skip_judge: bool = False,
+) -> list[RunArtifact]:
+    """Generate and judge a batch of items, returning all artifacts at once."""
+    return list(
+        run_stream(
+            request,
+            generator_model=generator_model,
+            judge_model=judge_model,
+            eval_model=eval_model,
+            output_dir=output_dir,
+            skip_eval=skip_eval,
+            skip_judge=skip_judge,
+        )
+    )

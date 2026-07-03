@@ -753,20 +753,43 @@ function buildComparisonRows(summaries) {
         sub: Object.entries(s.corpus.problem_diversity.structural.style_distribution).map(([k,v]) => `${k.slice(0,6)}:${v}`).join(" "),
       } : null,
     });
+    // Diversity = 1 − similarity. Mean diversity from mean sim; min diversity
+    // (least distinct / most similar pair) from max sim — the near-duplicate
+    // flag. Low diversity = items too alike → red.
     rows.push({
-      label: "Semantic Similarity", sublabel: "mean pairwise stem",
-      getValue: s => s.corpus?.problem_diversity ? {
-        display: s.corpus.problem_diversity.semantic.mean_pairwise_similarity.toFixed(3),
-        color: s.corpus.problem_diversity.semantic.mean_pairwise_similarity > 0.85 ? DS.mismatchFg : DS.ink,
-      } : null,
+      label: "Semantic Diversity", sublabel: "mean pairwise",
+      getValue: s => s.corpus?.problem_diversity ? (d => ({
+        display: d.toFixed(3),
+        color: d < 0.15 ? DS.mismatchFg : DS.ink,
+      }))(1 - s.corpus.problem_diversity.semantic.mean_pairwise_similarity) : null,
     });
     rows.push({
-      label: "Max Stem Similarity", sublabel: "most similar pair",
-      getValue: s => s.corpus?.problem_diversity ? {
-        display: s.corpus.problem_diversity.semantic.max_pairwise_similarity.toFixed(3),
-        color: s.corpus.problem_diversity.semantic.max_pairwise_similarity > 0.9 ? DS.mismatchFg : DS.ink2,
-      } : null,
+      label: "Min Stem Diversity", sublabel: "most similar pair",
+      getValue: s => {
+        const sem = s.corpus?.problem_diversity?.semantic;
+        if (!sem) return null;
+        const d = 1 - sem.max_pairwise_similarity;
+        return { display: d.toFixed(3), color: d < 0.1 ? DS.mismatchFg : DS.ink2 };
+      },
     });
+    if (summaries.some(s => s.corpus?.problem_diversity?.facet_qmatrix)) {
+      rows.push({
+        label: "Q-matrix Diversity", sublabel: "mean pairwise facet",
+        getValue: s => s.corpus?.problem_diversity?.facet_qmatrix ? (d => ({
+          display: d.toFixed(3),
+          color: d < 0.15 ? DS.mismatchFg : DS.ink,
+        }))(1 - s.corpus.problem_diversity.facet_qmatrix.mean_pairwise_similarity) : null,
+      });
+      rows.push({
+        label: "Min Q-matrix Diversity", sublabel: "most similar pair",
+        getValue: s => {
+          const q = s.corpus?.problem_diversity?.facet_qmatrix;
+          if (!q) return null;
+          const d = 1 - q.max_pairwise_similarity;
+          return { display: d.toFixed(3), color: d < 0.1 ? DS.mismatchFg : DS.ink2 };
+        },
+      });
+    }
     if (summaries.some(s => s.corpus?.figure_fraction != null)) {
       rows.push({
         label: "Figure Fraction", sublabel: "items with figures",

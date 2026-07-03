@@ -5,17 +5,17 @@
     {
       "id": "A1",
       "type": "goal",
-      "text": "Students understand that as sample size increases, standard errors of sampling distribution become smaller, sampling distribution will become more packed"
+      "text": "Students understand that as sample size increases, standard errors of sampling distribution become smaller, sampling distribution will become more packed (students can correctly compute the standard error as SD/√n)"
     },
     {
       "id": "A2",
       "type": "goal",
-      "text": "Students understand that as sample size increases, sampling distribution will be closer to normal distribution (it does not mirror population distribution)"
+      "text": "Students understand that when sample size is sufficient, sampling distribution will be close to normal distribution (it does not mirror population distribution)"
     },
     {
       "id": "A3",
       "type": "goal",
-      "text": "Students understand that the mean of a sampling distribution equals population mean"
+      "text": "Students understand that the mean of a sampling distribution equals population mean, regardless of sample size"
     },
     {
       "id": "A4",
@@ -35,7 +35,7 @@
     {
       "id": "A7",
       "type": "goal",
-      "text": "Students understand the relationship between CI width and standard error: CI width increases when standard error gets larger"
+      "text": "Students understand the relationship between CI width and standard error: CI width increases when standard error gets larger; students can calculate CI correctly without the formula provided in the item stem (tip: assign both A6 and A1 when students understand that as sample sizes increase, CI width shortens)"
     },
     {
       "id": "B8",
@@ -45,7 +45,7 @@
     {
       "id": "B9",
       "type": "problematic",
-      "text": "Sampling distribution mirrors population distribution (hence the standard deviation of the sampling distribution stays the same regardless of sample size; confusion about sampling distribution vs. population distribution)"
+      "text": "Sampling distribution mirrors population distribution (mirrors the shape visually; mirrors the property in terms of mean and SD/variance)"
     },
     {
       "id": "B10",
@@ -55,7 +55,7 @@
     {
       "id": "B11",
       "type": "problematic",
-      "text": "As sample size increases, sampling distribution will be closer to population distribution"
+      "text": "As sample size increases, sampling distribution will be closer to population distribution (the item should contain two different sample sizes)"
     },
     {
       "id": "B12",
@@ -70,7 +70,7 @@
     {
       "id": "B14",
       "type": "problematic",
-      "text": "For any particular sample, sample mean from a larger sample size will always be closer to mean (misunderstand the randomness in sample means)"
+      "text": "For any particular sample, sample mean from a larger sample size will always be closer to population mean (misunderstand the randomness in sample means)"
     },
     {
       "id": "B15",
@@ -85,7 +85,7 @@
     {
       "id": "B17",
       "type": "problematic",
-      "text": "Higher confidence leads to more precise estimate, and hence shorter interval"
+      "text": "Higher confidence leads to more precise estimate, and hence shorter interval (higher confidence understood as more certain/accurate, therefore a shorter interval with less margin of error; or higher confidence confused with a stronger estimate of the parameter itself)"
     }
   ],
   "examples": [

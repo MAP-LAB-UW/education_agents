@@ -14,6 +14,7 @@ from education_agents.evaluation.correctness import evaluate_correctness
 from education_agents.evaluation.corpus_metrics import evaluate_corpus, evaluate_similarity_with_experts
 from education_agents.evaluation.facet_latency import _get_model, evaluate_facet_latency
 from education_agents.evaluation.figure_necessity import evaluate_figure_necessity
+from education_agents.evaluation.figure_spoiler import evaluate_figure_spoiler
 from education_agents.evaluation.naturalness import evaluate_naturalness
 from education_agents.evaluation.schemas import ItemEvaluation
 from education_agents.facets import load_facet_map
@@ -188,10 +189,18 @@ def print_corpus_results(corpus):
         print(f"      {style}: {count}")
 
     print(f"\n  Problem Diversity (Semantic):")
-    print(f"    Mean pairwise stem similarity: {pd.semantic.mean_pairwise_similarity:.3f}")
-    print(f"    Max pairwise stem similarity:  {pd.semantic.max_pairwise_similarity:.3f}")
+    print(f"    Mean pairwise diversity: {1 - pd.semantic.mean_pairwise_similarity:.3f}")
+    print(f"    Min pairwise diversity:  {1 - pd.semantic.max_pairwise_similarity:.3f}")
     if pd.semantic.most_similar_pair:
-        print(f"    Most similar pair: {pd.semantic.most_similar_pair}")
+        print(f"    Least diverse pair: {pd.semantic.most_similar_pair}")
+
+    if pd.facet_qmatrix is not None:
+        qm = pd.facet_qmatrix
+        print(f"\n  Problem Diversity (Facet Q-matrix):")
+        print(f"    Mean pairwise diversity: {1 - qm.mean_pairwise_similarity:.3f}")
+        print(f"    Min pairwise diversity:  {1 - qm.max_pairwise_similarity:.3f}")
+        if qm.most_similar_pair:
+            print(f"    Least diverse pair: {qm.most_similar_pair}")
 
     if corpus.figure_fraction is not None:
         print(f"\n  Figures:")
@@ -260,10 +269,15 @@ def main():
             latency = evaluate_facet_latency(item, facet_map, model=embed_model)
 
             fig_nec = None
+            fig_spoiler = None
             if fig_data:
                 fn = evaluate_figure_necessity(item, model=args.eval_model)
                 fig_nec = int(fn.is_necessary)
                 print(f"    figure_necessity: {fig_nec} ({'essential' if fn.is_necessary else 'decorative'}, {fn.n_correct}/{fn.n_trials} correct without figure)")
+                if not args.skip_llm:
+                    fs = evaluate_figure_spoiler(item, fig_data, model=args.eval_model)
+                    fig_spoiler = int(fs.gives_away_answer)
+                    print(f"    figure_spoiler: {fig_spoiler} ({'gives away answer' if fs.gives_away_answer else 'clean'}, {fs.n_giveaway}/{fs.n_trials} judged giveaway)")
 
             item_results.append(ItemEvaluation(
                 source=f"expert_{i+1}",
@@ -271,6 +285,7 @@ def main():
                 naturalness=naturalness or _dummy_naturalness(),
                 facet_latency=latency,
                 figure_necessity=fig_nec,
+                figure_spoiler=fig_spoiler,
             ))
 
             if correctness and naturalness:
@@ -281,8 +296,11 @@ def main():
 
         print("\nComputing per-item similarity with other experts...")
         stems = [item.stem for item in items]
+        options = [[o.text for o in item.options] for item in items]
         source_ids = [f"expert_{i+1}" for i in range(len(items))]
-        sem_results = evaluate_similarity_with_experts(stems, source_ids, embed_model=embed_model)
+        sem_results = evaluate_similarity_with_experts(
+            stems, source_ids, options=options, embed_model=embed_model
+        )
         for r, sem in zip(item_results, sem_results):
             r.similarity_with_experts = sem
 

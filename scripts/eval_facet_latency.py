@@ -138,7 +138,7 @@ Return your matches and selected answer."""
 def measure_surface_matching(
     items: list[dict],
     facet_lookup: dict[str, str],
-    model: str = "gemini/gemini-2.5-flash",
+    model: str = "anthropic/claude-sonnet-4-6",
 ) -> list[dict]:
     facet_defs = "\n".join(f"- {fid}: {text}" for fid, text in facet_lookup.items())
     results = []
@@ -270,7 +270,7 @@ def main():
     )
     parser.add_argument(
         "--surface-model",
-        default="gemini/gemini-2.5-flash",
+        default="anthropic/claude-sonnet-4-6",
         help="Model for surface matching approach",
     )
     args = parser.parse_args()

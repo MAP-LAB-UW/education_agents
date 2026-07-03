@@ -10,7 +10,7 @@ from .correctness import _LLMAnswer, SYSTEM_PROMPT, parse_selected_ids
 from .schemas import FigureNecessityResult, FigureNecessityTrial
 
 DEFAULT_EVAL_MODEL = os.getenv(
-    "EDU_AGENTS_EVAL_MODEL", "gemini/gemini-3.1-pro-preview"
+    "EDU_AGENTS_EVAL_MODEL", "anthropic/claude-sonnet-4-6"
 )
 
 N_TRIALS = 5

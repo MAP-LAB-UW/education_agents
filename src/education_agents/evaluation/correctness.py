@@ -26,8 +26,36 @@ def parse_selected_ids(raw: str) -> set[str]:
     return ids
 
 
+def canonicalize_ids(raw_ids, option_ids: list[str]) -> set[str]:
+    """Map loosely-formatted picked ids onto the item's actual option ids.
+
+    Models echo option ids inconsistently — ``opt_1`` (positional) vs ``A``
+    (letter), ``opt_A`` vs ``A``, different case. This resolves each picked
+    token to one of ``option_ids`` so hit detection is robust to formatting.
+    Unresolvable tokens are passed through unchanged.
+    """
+    lower = {o.lower(): o for o in option_ids}
+    out: set[str] = set()
+    for token in raw_ids:
+        s = token.strip().lower().rstrip(".")
+        if s.startswith("opt_"):
+            s = s[4:]
+        elif s.startswith("opt"):
+            s = s[3:]
+        if s in lower:
+            out.add(lower[s]); continue
+        if ("opt_" + s) in lower:
+            out.add(lower["opt_" + s]); continue
+        if s.isdigit() and 0 <= int(s) - 1 < len(option_ids):
+            out.add(option_ids[int(s) - 1]); continue
+        if len(s) == 1 and s.isalpha() and 0 <= ord(s) - ord("a") < len(option_ids):
+            out.add(option_ids[ord(s) - ord("a")]); continue
+        out.add(token)
+    return out
+
+
 DEFAULT_EVAL_MODEL = os.getenv(
-    "EDU_AGENTS_EVAL_MODEL", "gemini/gemini-3.1-pro-preview"
+    "EDU_AGENTS_EVAL_MODEL", "anthropic/claude-sonnet-4-6"
 )
 
 

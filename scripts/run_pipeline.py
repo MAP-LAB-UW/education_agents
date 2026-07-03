@@ -62,17 +62,17 @@ def main():
     parser.add_argument(
         "--generator-model",
         default=None,
-        help="Override generator model (default: gemini/gemini-3-flash-preview)",
+        help="Override generator model (default: anthropic/claude-sonnet-4-6)",
     )
     parser.add_argument(
         "--judge-model",
         default=None,
-        help="Override judge model (default: gemini/gemini-3.1-pro-preview)",
+        help="Override judge model (default: anthropic/claude-sonnet-4-6)",
     )
     parser.add_argument(
         "--eval-model",
         default=None,
-        help="Override eval model (default: gemini/gemini-3.1-pro-preview)",
+        help="Override eval model (default: anthropic/claude-sonnet-4-6)",
     )
     parser.add_argument(
         "--skip-eval",

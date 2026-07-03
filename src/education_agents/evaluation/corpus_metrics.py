@@ -7,6 +7,7 @@ from itertools import combinations
 
 import numpy as np
 from pydantic import BaseModel
+from scipy.optimize import linear_sum_assignment
 from sentence_transformers import SentenceTransformer
 
 from ..llm import structured_complete
@@ -16,6 +17,7 @@ from .schemas import (
     CorpusEvaluation,
     FacetCombinationDiversityResult,
     FacetCoverageResult,
+    FacetQMatrixDiversityResult,
     ProblemDiversityResult,
     SemanticDiversityResult,
     SimilarityWithExpertsResult,
@@ -23,7 +25,7 @@ from .schemas import (
 )
 
 DEFAULT_EVAL_MODEL = os.getenv(
-    "EDU_AGENTS_EVAL_MODEL", "gemini/gemini-3.1-pro-preview"
+    "EDU_AGENTS_EVAL_MODEL", "anthropic/claude-sonnet-4-6"
 )
 
 
@@ -152,14 +154,84 @@ def _cosine_sim(a: np.ndarray, b: np.ndarray) -> float:
     return float(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b) + 1e-9))
 
 
+# Weight on the stem in the combined item similarity; the remainder (1 - w) goes
+# to the permutation-invariant options match.
+DEFAULT_STEM_WEIGHT = 0.5
+
+
+def _encode_items(
+    stems: list[str],
+    options: list[list[str]] | None,
+    embed_model: SentenceTransformer,
+) -> tuple[np.ndarray, list[np.ndarray]]:
+    """Embed stems and (optionally) per-item option texts in batched calls.
+
+    Returns (stem_embeddings [n, d], per_item_option_embeddings [n][k_i, d]).
+    If options is None, every item gets an empty option matrix and similarity
+    falls back to stem-only.
+    """
+    stem_emb = np.asarray(embed_model.encode(stems))
+    dim = stem_emb.shape[1] if stem_emb.size else 0
+
+    if options is None:
+        return stem_emb, [np.empty((0, dim)) for _ in stems]
+
+    flat: list[str] = []
+    spans: list[tuple[int, int]] = []
+    for opts in options:
+        spans.append((len(flat), len(flat) + len(opts)))
+        flat.extend(opts)
+
+    flat_emb = (
+        np.asarray(embed_model.encode(flat)) if flat else np.empty((0, dim))
+    )
+    opt_embs = [flat_emb[s:e] for s, e in spans]
+    return stem_emb, opt_embs
+
+
+def _pi_item_similarity(
+    stem_a: np.ndarray,
+    opts_a: np.ndarray,
+    stem_b: np.ndarray,
+    opts_b: np.ndarray,
+    stem_weight: float = DEFAULT_STEM_WEIGHT,
+) -> float:
+    """Permutation-invariant similarity between two items.
+
+    sim_pi(A, B) = w * cos(stem_A, stem_B)
+                 + (1 - w) * max over permutations p of mean_i cos(a_i, b_p(i))
+
+    The options term is a maximum-weight bipartite matching (solved exactly via
+    the Hungarian algorithm), so each option of A is paired with a *distinct*
+    option of B. Unequal option counts match min(k_A, k_B) pairs. With no
+    options on either side it reduces to stem cosine similarity.
+    """
+    stem_sim = _cosine_sim(stem_a, stem_b)
+    if len(opts_a) == 0 or len(opts_b) == 0:
+        return stem_sim
+
+    a = opts_a / (np.linalg.norm(opts_a, axis=1, keepdims=True) + 1e-9)
+    b = opts_b / (np.linalg.norm(opts_b, axis=1, keepdims=True) + 1e-9)
+    m = a @ b.T  # [k_A, k_B] pairwise cosine similarities
+    row, col = linear_sum_assignment(-m)  # optimal one-to-one pairing
+    opt_sim = float(m[row, col].mean())
+
+    return stem_weight * stem_sim + (1.0 - stem_weight) * opt_sim
+
+
 def evaluate_semantic_diversity(
     artifacts: list[RunArtifact],
     embed_model: SentenceTransformer | None = None,
+    stem_weight: float = DEFAULT_STEM_WEIGHT,
 ) -> SemanticDiversityResult:
     embed_model = embed_model or _get_model()
 
     stems = [art.item.stem for art in artifacts]
-    source_ids = [art.request.topic + "_" + str(i) for i, art in enumerate(artifacts)]
+    options = [[o.text for o in art.item.options] for art in artifacts]
+    source_ids = [
+        f"{getattr(getattr(art, 'request', None), 'topic', 'item')}_{i}"
+        for i, art in enumerate(artifacts)
+    ]
 
     if len(stems) < 2:
         return SemanticDiversityResult(
@@ -168,13 +240,15 @@ def evaluate_semantic_diversity(
             most_similar_pair=[],
         )
 
-    embeddings = embed_model.encode(stems)
+    stem_emb, opt_embs = _encode_items(stems, options, embed_model)
 
     max_sim = -1.0
     max_pair: list[str] = []
     sims = []
     for i, j in combinations(range(len(stems)), 2):
-        sim = _cosine_sim(embeddings[i], embeddings[j])
+        sim = _pi_item_similarity(
+            stem_emb[i], opt_embs[i], stem_emb[j], opt_embs[j], stem_weight
+        )
         sims.append(sim)
         if sim > max_sim:
             max_sim = sim
@@ -190,19 +264,25 @@ def evaluate_semantic_diversity(
 def evaluate_similarity_with_experts(
     stems: list[str],
     source_ids: list[str],
+    options: list[list[str]] | None = None,
     reference_stems: list[str] | None = None,
     reference_ids: list[str] | None = None,
+    reference_options: list[list[str]] | None = None,
     embed_model: SentenceTransformer | None = None,
+    stem_weight: float = DEFAULT_STEM_WEIGHT,
 ) -> list[SimilarityWithExpertsResult]:
-    """Compute per-item similarity against a reference set.
+    """Compute per-item permutation-invariant similarity against a reference set.
 
     If reference_stems is None, compares within stems (leave-one-out).
+    Pass `options` / `reference_options` (per-item option texts) to fold the
+    answer choices into the representation; omit them for stem-only similarity.
     """
     embed_model = embed_model or _get_model()
 
     if reference_stems is None:
         reference_stems = stems
         reference_ids = source_ids
+        reference_options = options
         self_compare = True
     else:
         self_compare = False
@@ -212,8 +292,11 @@ def evaluate_similarity_with_experts(
             mean_similarity=0.0, max_similarity=0.0, most_similar_to="",
         ) for _ in stems]
 
-    query_emb = embed_model.encode(stems)
-    ref_emb = embed_model.encode(reference_stems) if not self_compare else query_emb
+    query_stem, query_opts = _encode_items(stems, options, embed_model)
+    if self_compare:
+        ref_stem, ref_opts = query_stem, query_opts
+    else:
+        ref_stem, ref_opts = _encode_items(reference_stems, reference_options, embed_model)
 
     results = []
     for i in range(len(stems)):
@@ -223,7 +306,9 @@ def evaluate_similarity_with_experts(
         for j in range(len(reference_stems)):
             if self_compare and i == j:
                 continue
-            sim = _cosine_sim(query_emb[i], ref_emb[j])
+            sim = _pi_item_similarity(
+                query_stem[i], query_opts[i], ref_stem[j], ref_opts[j], stem_weight
+            )
             sims.append(sim)
             if sim > max_sim:
                 max_sim = sim
@@ -234,6 +319,92 @@ def evaluate_similarity_with_experts(
             most_similar_to=reference_ids[max_j] if sims else "",
         ))
     return results
+
+
+# ── Problem Diversity: Facet Q-matrix ────────────────────────────────────────
+
+def _item_qmatrix(art: RunArtifact, facet_ids: list[str]) -> np.ndarray:
+    """Binary (n_options x n_facets) Q-matrix for one item.
+
+    Q[i, j] = 1 iff option i is tagged with facet_ids[j]. Facet tags not present
+    in the map are ignored so every item shares the same column space.
+    """
+    col = {fid: j for j, fid in enumerate(facet_ids)}
+    q = np.zeros((len(art.item.options), len(facet_ids)), dtype=float)
+    for i, opt in enumerate(art.item.options):
+        for tag in opt.facet_tags:
+            j = col.get(tag)
+            if j is not None:
+                q[i, j] = 1.0
+    return q
+
+
+def _row_jaccard(q_a: np.ndarray, q_b: np.ndarray) -> np.ndarray:
+    """Pairwise Jaccard similarity between the rows of two binary matrices.
+
+    Returns a [k_A, k_B] matrix. Two all-zero rows (options that probe no
+    mapped facet) count as identical (similarity 1.0), matching the convention
+    in `_jaccard_distance` that an empty union has zero distance.
+    """
+    inter = q_a @ q_b.T  # [k_A, k_B] shared-facet counts
+    size_a = q_a.sum(axis=1, keepdims=True)  # [k_A, 1]
+    size_b = q_b.sum(axis=1, keepdims=True)  # [k_B, 1]
+    union = size_a + size_b.T - inter
+    with np.errstate(divide="ignore", invalid="ignore"):
+        sim = np.where(union > 0, inter / union, 1.0)
+    return sim
+
+
+def _pi_qmatrix_similarity(q_a: np.ndarray, q_b: np.ndarray) -> float:
+    """Permutation-invariant similarity between two Facet Q-matrices.
+
+    sim(A, B) = max over one-to-one option pairings of mean_i jaccard(a_i, b_p(i))
+
+    The pairing is a maximum-weight bipartite matching solved via the Hungarian
+    algorithm, so each option of A is matched to a *distinct* option of B and
+    the score is invariant to option ordering. Unequal option counts match
+    min(k_A, k_B) rows.
+    """
+    if q_a.shape[0] == 0 or q_b.shape[0] == 0:
+        return 0.0
+    sim = _row_jaccard(q_a, q_b)
+    row, col = linear_sum_assignment(-sim)
+    return float(sim[row, col].mean())
+
+
+def evaluate_facet_qmatrix_diversity(
+    artifacts: list[RunArtifact],
+    facet_map: FacetMap,
+) -> FacetQMatrixDiversityResult:
+    facet_ids = [f.id for f in facet_map.facets]
+    qmats = [_item_qmatrix(art, facet_ids) for art in artifacts]
+    source_ids = [
+        f"{getattr(getattr(art, 'request', None), 'topic', 'item')}_{i}"
+        for i, art in enumerate(artifacts)
+    ]
+
+    if len(qmats) < 2:
+        return FacetQMatrixDiversityResult(
+            mean_pairwise_similarity=0.0,
+            max_pairwise_similarity=0.0,
+            most_similar_pair=[],
+        )
+
+    max_sim = -1.0
+    max_pair: list[str] = []
+    sims = []
+    for i, j in combinations(range(len(qmats)), 2):
+        sim = _pi_qmatrix_similarity(qmats[i], qmats[j])
+        sims.append(sim)
+        if sim > max_sim:
+            max_sim = sim
+            max_pair = [source_ids[i], source_ids[j]]
+
+    return FacetQMatrixDiversityResult(
+        mean_pairwise_similarity=round(float(np.mean(sims)), 4),
+        max_pairwise_similarity=round(max_sim, 4),
+        most_similar_pair=max_pair,
+    )
 
 
 # ── Combined ─────────────────────────────────────────────────────────────────
@@ -250,6 +421,7 @@ def evaluate_corpus(
     combination = evaluate_facet_combination_diversity(artifacts)
     structural = evaluate_structural_diversity(artifacts, model=eval_model)
     semantic = evaluate_semantic_diversity(artifacts, embed_model=embed_model)
+    facet_qmatrix = evaluate_facet_qmatrix_diversity(artifacts, facet_map)
 
     items_with_figures = sum(1 for a in artifacts if a.item.figures)
     fig_frac = items_with_figures / len(artifacts) if artifacts else 0.0
@@ -260,6 +432,7 @@ def evaluate_corpus(
         problem_diversity=ProblemDiversityResult(
             structural=structural,
             semantic=semantic,
+            facet_qmatrix=facet_qmatrix,
         ),
         figure_fraction=round(fig_frac, 4),
     )

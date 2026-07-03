@@ -12,7 +12,7 @@ from ..schemas import GeneratedItem
 from .schemas import NaturalnessResult
 
 DEFAULT_EVAL_MODEL = os.getenv(
-    "EDU_AGENTS_EVAL_MODEL", "gemini/gemini-3.1-pro-preview"
+    "EDU_AGENTS_EVAL_MODEL", "anthropic/claude-sonnet-4-6"
 )
 
 
