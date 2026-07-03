@@ -28,71 +28,97 @@ If you just want to look at the generated items and evaluation results:
 | [Facet Map](workflow/facets.md) | The 17 facets (7 goals + 10 misconceptions) for confidence intervals |
 | [System Design](workflow/design.md) | Full pipeline architecture, schemas, and module layout |
 
-## Running the Web Dashboard
+## Generate Items in the Dashboard
 
-The web dashboard provides an interactive way to explore generated items and compare evaluation results. It runs entirely in the browser (no build step needed).
-
-**Item Explorer** — browse generated items, judge reports, and evaluation scores:
+The quickest way to use this project is the web dashboard: configure a run in the
+sidebar, click **Generate**, and review items as they stream in — each with a
+judge report, optional evaluation rubrics, and a misconception **student
+simulator**. Items can be exported as JSON, Markdown, or LaTeX so collaborators
+can review them without touching code.
 
 ![Item Explorer Dashboard](docs/screenshots/item_explorer.png)
 
-**Evaluation Comparison** — side-by-side rubric metrics across runs:
+### Setup
 
-![Evaluation Comparison Dashboard](docs/screenshots/eval_comparison.png)
+```bash
+git clone https://github.com/MAP-LAB-UW/education_agents.git
+cd education_agents
+conda create -n education-env python=3.11 && conda activate education-env
+pip install -e .
+```
 
-### Prerequisites
+### Open the dashboard
 
-- Python 3.11+ with a local HTTP server (or any static file server)
-- A modern web browser (Chrome, Firefox, Safari, Edge)
-- The `outputs/` directory with generated artifacts (JSON files)
+```bash
+conda run -n education-env python scripts/serve_dashboard.py
+```
 
-### Steps
+This serves the dashboard and its generation backend and opens
+<http://localhost:8000/web/index.html> automatically.
 
-1. **Clone the repo and navigate to it:**
-   ```bash
+Generation calls Claude, so the backend needs an `ANTHROPIC_API_KEY`. The
+dashboard **prompts for one on first launch** if it isn't set — paste a key into
+the dialog (optionally saved to `.env` for next time), or click the **🔑** button
+in the top-left to set or replace it anytime. You can also set it beforehand:
+
+```bash
+echo "ANTHROPIC_API_KEY=your-key-here" >> .env
+```
+
+### On Windows
+
+The whole stack is cross-platform, so Windows works the same way — just run the
+commands from the **Anaconda Prompt** so `conda` is on your `PATH`:
+
+1. **Install Miniconda.** Download the Windows installer from
+   <https://www.anaconda.com/download/success> (Miniconda is the smaller option;
+   full Anaconda works too) and run it. Accept the defaults — you do **not** need
+   to add conda to your system `PATH`; the Anaconda Prompt handles that for you.
+2. **Open the Anaconda Prompt.** Press the Start key, type *Anaconda Prompt*, and
+   open it. It launches with conda ready to use. (Plain PowerShell or Command
+   Prompt also work, but only after running `conda init` once.)
+3. **Run the setup commands**, one per line — don't paste them as a single block,
+   and skip the `&&` from the example above:
+
+   ```bat
    git clone https://github.com/MAP-LAB-UW/education_agents.git
    cd education_agents
+   conda create -n education-env python=3.11
+   conda activate education-env
+   pip install -e .
+   ```
+4. **Start the dashboard:**
+
+   ```bat
+   conda run -n education-env python scripts/serve_dashboard.py
    ```
 
-2. **Start a local file server from the repo root:**
-   ```bash
-   python3 -m http.server 8000
-   ```
+   Your browser opens the dashboard automatically. On first launch it prompts for
+   an `ANTHROPIC_API_KEY` — paste your key into that dialog (it saves to `.env`
+   for next time). This is the most reliable way to set the key on Windows.
 
-3. **Open the Item Explorer dashboard:**
+### Generate items
 
-   Navigate to [http://localhost:8000/web/index.html](http://localhost:8000/web/index.html)
+In the sidebar:
 
-   This dashboard lets you browse individual generated items with their judge reports and evaluation scores.
+- **Target facets** — leave **Auto-select facets** on (default) to let the model choose diverse goal + misconception combinations per item, or pick specific facets.
+- **Response format**, **Options**, and the **Items** slider (1–50).
+- **Min. with figures** — force a fraction of the batch to include a load-bearing figure.
+- **Generator / Judge** models — default **Opus** generator, **Sonnet** judge.
+- **Skip judge** — skip the independent judge pass for speed (auto-enabled above 10 items).
+- **Run evaluation rubrics** — optionally score correctness / naturalness / facet latency as items are generated.
 
-   **Loading data:** Click "Load Folder" and select one of the artifact directories:
-   - `outputs/first_pass_no_books/` — V1 prompt, single-select
-   - `outputs/second_pass_no_books/` — V2 prompt, single-select
-   - `outputs/third_pass_no_books/` — V2 prompt, dynamic format (Gemini 3 Flash)
-   - `outputs/first_pass_with_edpsy/` — V1 prompt with textbook context
-   - `outputs/third_pass_no_books_gemini-3.1-flash-lite/` — V2 prompt (Gemini 3.1 Flash Lite)
-   - `outputs/third_pass_no_books_gemini-3.1-pro/` — V2 prompt (Gemini 3.1 Pro)
+Click **Generate**. Items stream into the Item Explorer and are saved to
+`outputs/web_generated/`, so you can reload them later with **Load Folder**.
 
-   You can also drag-and-drop JSON files or folders onto the dashboard.
+### Review, simulate, and export
 
-4. **Open the Evaluation Comparison dashboard:**
+- Each item has tabs for the **Generated Item**, **Judge Report**, **Evaluation**, and **Students** (the misconception simulator).
+- **Evaluate** (top bar) runs the evaluation rubrics over the loaded items; corpus-level metrics appear in the **Aggregate** view.
+- **Simulate Students** runs a control student plus one student per keyed misconception, and reports whether each distractor actually attracts the misconception it targets.
+- **Download** the loaded items as **JSON**, **Markdown**, or **LaTeX** — Markdown and LaTeX are formatted for non-technical reviewers.
 
-   Navigate to [http://localhost:8000/web/compare.html](http://localhost:8000/web/compare.html)
-
-   This dashboard shows side-by-side rubric metrics across multiple runs. Load eval result JSON files:
-   - `outputs/eval_first_pass.json`
-   - `outputs/eval_second_pass.json`
-   - `outputs/eval_third_pass.json`
-   - `outputs/third_pass_no_books_gemini-3.1-flash-lite.json`
-   - `outputs/third_pass_no_books_gemini-3.1-pro.json`
-
-   Or load artifact directories directly — the dashboard will compute summary metrics from individual item files.
-
-### Troubleshooting
-
-- **"No valid artifact JSON files found"** — Make sure you're selecting a directory that contains `.json` artifact files (the ones with timestamps in their names), not the eval summary files.
-- **Dashboard doesn't load** — The HTML files are gitignored by default. If they're missing, you may need to check them out or recreate them. The core files needed are `web/index.html`, `web/compare.html`, `web/app.jsx`, `web/compare.jsx`, and `web/mock-data.js`.
-- **Browser blocks file loading** — Some browsers restrict file access from `file://` URLs. Use the Python HTTP server as described above.
+Server options: `--port` (default `8000`), `--host` (default `127.0.0.1`), `--no-open`.
 
 ## Facet Map
 
@@ -127,7 +153,7 @@ The current facet map covers 17 dimensions of student understanding about confid
 
 ### Setup
 
-> **Note:** The pipeline is currently configured to use the **Gemini API** exclusively. You will need a valid `GEMINI_API_KEY` to run generation, judging, and LLM-based evaluation. Without it, the pipeline will not work.
+> **Note:** The pipeline uses the **Anthropic API** by default (Claude for generation, judging, and LLM-based evaluation). You will need a valid `ANTHROPIC_API_KEY`. Without it, the pipeline will not work.
 
 ```bash
 # Create and activate conda environment
@@ -138,7 +164,7 @@ conda activate education-env
 pip install -e .
 
 # Set up API keys in .env
-echo "GEMINI_API_KEY=your-key-here" > .env
+echo "ANTHROPIC_API_KEY=your-key-here" > .env
 ```
 
 ### Generate Items
@@ -214,7 +240,7 @@ education_agents/
 
 | Role | Default Model |
 |------|---------------|
-| Generator | `gemini/gemini-3-flash-preview` |
-| Judge | `gemini/gemini-3.1-pro-preview` |
-| Evaluation (LLM rubrics) | `gemini/gemini-3.1-pro-preview` |
+| Generator | `anthropic/claude-sonnet-4-6` |
+| Judge | `anthropic/claude-sonnet-4-6` |
+| Evaluation (LLM rubrics) | `anthropic/claude-sonnet-4-6` |
 | Evaluation (embeddings) | `Qwen/Qwen3-Embedding-0.6B` |
