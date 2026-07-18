@@ -1291,10 +1291,13 @@ function loadJsonFiles(fileList) {
         reader.onerror = reject;
         reader.readAsText(f);
       }))
-  ).then(items =>
-    items
+  ).then(parsed =>
+    parsed
+      // A file may hold a single result object, or an array of them (the shape
+      // produced by "Download → assessment_items.json"). Flatten either way.
+      .flatMap(p => (Array.isArray(p) ? p : [p]))
       // judge_report may be absent (judging skipped) — only the item is required.
-      .filter(item => item.item)
+      .filter(item => item && item.item)
       .sort((a, b) => (a.created_at || "").localeCompare(b.created_at || ""))
   );
 }
