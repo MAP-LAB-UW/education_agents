@@ -189,6 +189,13 @@ class DashboardHandler(SimpleHTTPRequestHandler):
     # SimpleHTTPRequestHandler is instantiated per-request; `directory` is bound
     # via functools.partial in `main`.
 
+    def end_headers(self) -> None:  # noqa: N802 (stdlib naming)
+        # The dashboard's app.jsx / index.html change during development and are
+        # fetched fresh by the in-browser Babel loader. Without this, browsers
+        # cache app.jsx aggressively and keep running a stale build after edits.
+        self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+        super().end_headers()
+
     def _send_json(self, status: int, obj: dict) -> None:
         body = json.dumps(obj).encode("utf-8")
         self.send_response(status)
@@ -200,7 +207,6 @@ class DashboardHandler(SimpleHTTPRequestHandler):
     def _start_ndjson(self) -> None:
         self.send_response(200)
         self.send_header("Content-Type", "application/x-ndjson")
-        self.send_header("Cache-Control", "no-cache")
         self.end_headers()
 
     def _write_frame(self, frame: dict) -> None:

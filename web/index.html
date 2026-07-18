@@ -11,7 +11,9 @@
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" crossorigin="anonymous"></script>
   <script src="mock-data.js"></script>
-  <script type="text/babel" src="app.jsx"></script>
+  <!-- ?v= is a cache-buster: bump it whenever app.jsx changes so browsers
+       (and Babel's XHR loader) fetch the new build instead of a stale cache. -->
+  <script type="text/babel" src="app.jsx?v=2"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body, #root { height: 100%; width: 100%; }
